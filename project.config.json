@@ -32,9 +32,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/showPerson/index",
+					"id": 0,
+					"name": "用户信息展示页",
 					"pathName": "pages/showPerson/index",
+					"query": "",
 					"scene": null
 				}
 			]
