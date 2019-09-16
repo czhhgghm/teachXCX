@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
-import { AtButton  } from 'taro-ui'
+import { AtAvatar, AtIcon, AtButton } from 'taro-ui'
 
 export default class Index extends Component {
 
@@ -22,10 +22,25 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <Text>首页在这里编辑</Text>
-        <AtButton>按钮文案</AtButton>
-        <AtButton type='primary'>按钮文案</AtButton>
-        <AtButton type='secondary'>按钮文案</AtButton>
+        <View className='at-row at-row__align--center header'>
+          <View className='at-col at-col-2'>
+            <AtAvatar circle size='large' text='头'></AtAvatar>
+          </View>
+          <View className='at-col at-col-5'>
+            <View>张学友</View>
+            <View>
+              <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
+              <View className='afterIcon-font'>高三</View>
+            </View>
+          </View>
+          <View className='at-col at-col-5'>
+            <AtButton size='normal'>
+              <View className='beforeIcon-font'>编辑学员</View>
+              <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
+            </AtButton>
+          </View>
+
+        </View>
       </View>
     )
   }

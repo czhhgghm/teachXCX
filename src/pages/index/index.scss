@@ -1,2 +1,22 @@
+@import "~taro-ui/dist/style/components/avatar.scss";
+@import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/button.scss";
 @import "~taro-ui/dist/style/components/loading.scss";
+
+.header {
+    
+    padding: 20px;
+        
+    .afterIcon-font {
+        display: inline-block;
+        font-size: 25px;
+        color: #ccc;
+        margin-left: 10px;
+    }
+    
+    .beforeIcon-font {
+        display: inline-block;
+    }
+    
+}
