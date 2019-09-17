@@ -3,6 +3,9 @@ import { View, Text } from '@tarojs/components'
 import './index.scss'
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props);
+  };
 
   config = {
     navigationBarTitleText: '用户信息'

@@ -4,15 +4,24 @@
 @import "~taro-ui/dist/style/components/button.scss";
 @import "~taro-ui/dist/style/components/loading.scss";
 
-.header {
-    
+.header-outer {
     padding: 20px;
-        
+}
+.header {
+
+    .header-middle {
+        padding-left: 20px;
+    }
+
     .afterIcon-font {
         display: inline-block;
         font-size: 25px;
         color: #ccc;
         margin-left: 10px;
+    }
+
+    .editBtn {
+        border: none;
     }
     
     .beforeIcon-font {
