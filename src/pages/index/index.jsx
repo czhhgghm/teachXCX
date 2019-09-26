@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import './index.scss'
-import { AtAvatar, AtIcon, AtButton, AtGrid } from 'taro-ui'
+import { AtIcon, AtButton, AtGrid } from 'taro-ui'
+import personPng from '../../assets/images/personal.png'
 
 export default class Index extends Component {
 
@@ -35,7 +36,7 @@ export default class Index extends Component {
         <View className='header-outer'>
           <View className='at-row at-row__align--center header'>
             <View className='at-col at-col-2'>
-              <AtAvatar circle size='large' text='头'></AtAvatar>
+              <Image className='header-Img' src={personPng} />
             </View>
             <View className='at-col at-col-7 header-middle'>
               <View>张学友</View>
