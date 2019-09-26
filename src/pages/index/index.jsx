@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtAvatar, AtIcon, AtButton } from 'taro-ui'
+import { AtAvatar, AtIcon, AtButton, AtGrid } from 'taro-ui'
 
 export default class Index extends Component {
 
@@ -25,6 +25,10 @@ export default class Index extends Component {
     })
   }
 
+  jumpPages = e => {
+    this.navigateToPage(e.url)
+  }
+
   render () {
     return (
       <View className='index'>
@@ -33,14 +37,14 @@ export default class Index extends Component {
             <View className='at-col at-col-2'>
               <AtAvatar circle size='large' text='头'></AtAvatar>
             </View>
-            <View className='at-col at-col-5 header-middle'>
+            <View className='at-col at-col-7 header-middle'>
               <View>张学友</View>
               <View>
                 <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                 <View className='afterIcon-font'>高三</View>
               </View>
             </View>
-            <View className='at-col at-col-5'>
+            <View className='at-col at-col-3'>
               <AtButton 
                 size='normal' 
                 className='editBtn'
@@ -55,7 +59,46 @@ export default class Index extends Component {
             </View>
           </View>
         </View>
-        
+        <View>
+          <View className='service'>服务档案</View>
+          <AtGrid 
+            className='main'
+            onClick={this.jumpPages}
+            data={
+            [
+              {
+                image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                value: '课程表',
+                url: '/pages/schedule/index'
+              },
+              {
+                image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+                value: '课堂反馈',
+                url: '/pages/studentFeedback/index'
+              },
+              {
+                image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                value: '个人档案',
+                url: '/pages/personalProfile/index'
+              },
+              {
+                image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                value: '新用户报名',
+                url: '/pages/signUp/index'
+              },
+              {
+                image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                value: '更多功能',
+                url: '/pages/schedule/index'
+              },
+              {
+                image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                value: '更多功能',
+                url: '/pages/schedule/index'
+              }
+            ]
+          } />
+        </View>
       </View>
     )
   }

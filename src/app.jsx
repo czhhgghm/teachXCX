@@ -15,6 +15,10 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/showPerson/index',
+      'pages/schedule/index',
+      'pages/studentFeedback/index',
+      'pages/personalProfile/index',
+      'pages/signUp/index'
     ],
     window: {
       backgroundTextStyle: 'light',

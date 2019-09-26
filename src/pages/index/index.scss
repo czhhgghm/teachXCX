@@ -3,29 +3,46 @@
 @import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/button.scss";
 @import "~taro-ui/dist/style/components/loading.scss";
+@import "~taro-ui/dist/style/components/grid.scss";
+
+page{
+    height:100%;
+    background:#f6f7f9;
+}
 
 .header-outer {
-    padding: 20px;
+    padding: 25px;
+
+    .header {
+        .header-middle {
+            padding-left: 20px;
+        }
+    
+        .afterIcon-font {
+            display: inline-block;
+            font-size: 25px;
+            color: #ccc;
+            margin-left: 10px;
+        }
+    
+        .editBtn {
+            border: none;
+        }
+        
+        .beforeIcon-font {
+            display: inline-block;
+        }
+    }
 }
-.header {
 
-    .header-middle {
-        padding-left: 20px;
-    }
 
-    .afterIcon-font {
-        display: inline-block;
-        font-size: 25px;
-        color: #ccc;
-        margin-left: 10px;
-    }
+.service {
+    background-color: #fff;
+    padding: 25px 30px;
+    font-size: 30px;
+    border-left: 10px solid red;
 
-    .editBtn {
-        border: none;
-    }
-    
-    .beforeIcon-font {
-        display: inline-block;
-    }
-    
+}
+.main {
+    padding: 0px 25px 25px 25px; 
 }
