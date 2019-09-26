@@ -3,6 +3,7 @@ import { View, Image } from '@tarojs/components'
 import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
+import schedulePng from '../../assets/images/schedule.png'
 
 export default class Index extends Component {
 
@@ -33,7 +34,7 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <View className='header-outer'>
+        <View className='outer'>
           <View className='at-row at-row__align--center header'>
             <View className='at-col at-col-2'>
               <Image className='header-Img' src={personPng} />
@@ -61,7 +62,9 @@ export default class Index extends Component {
           </View>
         </View>
         <View>
-          <View className='service'>服务档案</View>
+          <View className='outer'>
+            <View className='service'>服务档案</View>
+          </View>
           <AtGrid 
             className='main'
             onClick={this.jumpPages}

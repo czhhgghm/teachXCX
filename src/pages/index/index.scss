@@ -9,43 +9,48 @@ page{
     background:#f6f7f9;
 }
 
-.header-outer {
+.outer {
     padding: 20px;
+}
+.header {
+    .header-middle {
+        padding-left: 20px;
+    }
 
-    .header {
-        .header-middle {
-            padding-left: 20px;
-        }
-    
-        .afterIcon-font {
-            display: inline-block;
-            font-size: 25px;
-            color: #ccc;
-            margin-left: 10px;
-        }
+    .afterIcon-font {
+        display: inline-block;
+        font-size: 25px;
+        color: #ccc;
+        margin-left: 10px;
+    }
 
-        .header-Img {
-            width: 125px;
-            height: 125px;
-        }
+    .header-Img {
+        width: 125px;
+        height: 125px;
+    }
+
+    .editBtn {
+        border: none;
+    }
     
-        .editBtn {
-            border: none;
-        }
-        
-        .beforeIcon-font {
-            display: inline-block;
-        }
+    .beforeIcon-font {
+        display: inline-block;
     }
 }
-
-
 .service {
-    background-color: #fff;
-    padding: 25px 30px;
     font-size: 30px;
-    border-left: 10px solid red;
-
+    position: relative;
+    margin-left: 10px;
+    padding-left: 25px;
+}
+.service::before {
+    content: '';
+    width: 10px;
+    height: 30px;
+    background-color: black;
+    position: absolute;
+    top: 5px;
+    left: 0px;
 }
 .main {
     padding: 0px 25px 25px 25px; 

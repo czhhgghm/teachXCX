@@ -8,7 +8,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: '课程表页'
+    navigationBarTitleText: 'schedule'
   }
 
   componentWillMount () { }
@@ -24,7 +24,14 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <Text>课程表页面在这里编辑</Text>
+        <View className='head'>
+          <View className='head-outer'>
+            <View className='head-schedule'>我的课表</View>
+            <View className='head-time'>2019-09-26</View>
+          </View>
+        </View>
+        <View className='week'>第4周</View>
+        <View>下面内容</View>
       </View>
     )
   }
