@@ -6,52 +6,57 @@
 
 page{
     height:100%;
-    background:#f6f7f9;
+    background:#f6f6f6;
 }
 
-.outer {
+.header-outer {
     padding: 20px;
-}
-.header {
-    .header-middle {
-        padding-left: 20px;
-    }
 
-    .afterIcon-font {
-        display: inline-block;
-        font-size: 25px;
-        color: #ccc;
-        margin-left: 10px;
-    }
-
-    .header-Img {
-        width: 125px;
-        height: 125px;
-    }
-
-    .editBtn {
-        border: none;
-    }
+    .header {
+        background-color: #fff;
+        border-radius: 20px;
+        .header-middle {
+            padding-left: 20px;
+        }
     
-    .beforeIcon-font {
-        display: inline-block;
+        .afterIcon-font {
+            display: inline-block;
+            font-size: 25px;
+            color: #ccc;
+            margin-left: 10px;
+        }
+    
+        .header-Img {
+            width: 125px;
+            height: 125px;
+            display: flex;
+        }
+    
+        .editBtn {
+            border: none;
+        }
+        
+        .beforeIcon-font {
+            display: inline-block;
+        }
     }
 }
-.service {
-    font-size: 30px;
-    position: relative;
-    margin-left: 10px;
-    padding-left: 25px;
-}
-.service::before {
-    content: '';
-    width: 10px;
-    height: 30px;
-    background-color: black;
-    position: absolute;
-    top: 5px;
-    left: 0px;
-}
-.main {
-    padding: 0px 25px 25px 25px; 
+
+.service-outer {
+    padding: 0px 20px 20px 20px;
+
+    .title {
+        border-radius: 20px 20px 0px 0px;
+        background-color: #fff;
+        border-bottom: 1px solid #f6f6f6;
+        line-height: 70px;
+        padding-left: 20px;
+        font-size: 30px;
+    }
+
+    .main {
+        overflow: hidden;
+        border-radius: 0px 0px 20px 20px;
+        background-color: #fff;
+    }
 }

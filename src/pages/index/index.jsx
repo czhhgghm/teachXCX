@@ -34,7 +34,7 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <View className='outer'>
+        <View className='header-outer'>
           <View className='at-row at-row__align--center header'>
             <View className='at-col at-col-2'>
               <Image className='header-Img' src={personPng} />
@@ -61,13 +61,12 @@ export default class Index extends Component {
             </View>
           </View>
         </View>
-        <View>
-          <View className='outer'>
-            <View className='service'>服务档案</View>
-          </View>
+        <View className='service-outer'>
+          <View className='title'>服务档案</View>
           <AtGrid 
             className='main'
             onClick={this.jumpPages}
+            hasBorder={false}
             data={
             [
               {
