@@ -3,7 +3,6 @@ import { View, Image } from '@tarojs/components'
 import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
-import schedulePng from '../../assets/images/schedule.png'
 
 export default class Index extends Component {
 
@@ -55,7 +54,7 @@ export default class Index extends Component {
                   '/pages/showPerson/index'
                 )}
               >
-                <View className='beforeIcon-font'>编辑学员</View>
+                <View className='beforeIcon-font'>个人信息</View>
                 <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
               </AtButton>
             </View>
