@@ -1,3 +1,4 @@
+@import "~taro-ui/dist/style/components/tabs.scss";
 
 page{
     height:100%;
@@ -29,6 +30,14 @@ page{
     color: #1ccc22;
     font-size: 35px;
     padding: 20px 0;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     font-weight: 550;
+}
+.main-schedule {
+    background-color: #fff;
+
+    .current-schedule {
+        padding: 20px;
+        font-size: 35px;
+    }
 }
