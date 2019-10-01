@@ -46,6 +46,12 @@ export default class Index extends Component {
     })
   }
 
+  navigateToPage = url => {
+    Taro.navigateTo({
+      url,
+    })
+  }
+
   render () {
     return (
       <View className='index'>
@@ -71,7 +77,12 @@ export default class Index extends Component {
           ]}
           onClick={this.handleClick.bind(this)}>
           <AtTabsPane current={this.state.current} index={0}>
-            <View className='current-schedule'>星期一的课程</View>
+            <View 
+              className='current-schedule' 
+              onClick={this.navigateToPage.bind(
+                  this,
+                  '/pages/studentFeedback/index'
+            )}>星期一的课程</View>
             <View className='current-schedule'>星期一的课程</View>
             <View className='current-schedule'>星期一的课程</View>
           </AtTabsPane>

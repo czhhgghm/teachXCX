@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -42,6 +42,13 @@
 					"id": -1,
 					"name": "课程表",
 					"pathName": "pages/schedule/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "学生课堂反馈页",
+					"pathName": "pages/studentFeedback/index",
 					"scene": null
 				}
 			]
