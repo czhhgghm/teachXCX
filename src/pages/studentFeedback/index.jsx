@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
 import { AtRate, AtButton, AtTextarea } from 'taro-ui'
 
@@ -58,7 +58,7 @@ export default class Index extends Component {
             value={this.state.inputValue}
             onChange={this.handleChange.bind(this)}
             maxLength={200}
-            placeholder='请留下您的宝贵意见或建议，我们将努力改进~'
+            placeholder='请留下您对于当天课程的反馈，我们将努力改进~'
           />
         <AtButton type='secondary' className='btn'>提交</AtButton>
       </View>

@@ -29,26 +29,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
-					"id": 0,
-					"name": "用户信息展示页",
-					"pathName": "pages/showPerson/index",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
-					"name": "课程表",
-					"pathName": "pages/schedule/index",
+					"name": "新用户报名页面",
+					"pathName": "pages/signUp/index",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "学生课堂反馈页",
-					"pathName": "pages/studentFeedback/index",
 					"scene": null
 				}
 			]
