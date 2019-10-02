@@ -18,11 +18,12 @@ class App extends Component {
       'pages/schedule/index',
       'pages/studentFeedback/index',
       'pages/personalProfile/index',
-      'pages/signUp/index'
+      'pages/signUp/index',
+      'pages/advice/index',
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#289ff0',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     }

@@ -74,19 +74,19 @@ export default class Index extends Component {
                 url: '/pages/schedule/index'
               },
               {
-                image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
-                value: '课堂反馈',
-                url: '/pages/studentFeedback/index'
-              },
-              {
                 image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
                 value: '个人档案',
                 url: '/pages/personalProfile/index'
               },
               {
                 image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-                value: '新用户报名',
+                value: '推荐新用户',
                 url: '/pages/signUp/index'
+              },
+              {
+                image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+                value: '提供建议',
+                url: '/pages/advice/index'
               },
               {
                 image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',

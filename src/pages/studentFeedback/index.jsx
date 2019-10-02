@@ -32,7 +32,7 @@ export default class Index extends Component {
     })
   }
 
-  handleChange (event) {
+  handleChangeText (event) {
     this.setState({
       inputValue: event.target.value
     })
@@ -55,11 +55,11 @@ export default class Index extends Component {
           
         </View>
         <AtTextarea
-            value={this.state.inputValue}
-            onChange={this.handleChange.bind(this)}
-            maxLength={200}
-            placeholder='请留下您对于当天课程的反馈，我们将努力改进~'
-          />
+          value={this.state.inputValue}
+          onChange={this.handleChangeText.bind(this)}
+          maxLength={200}
+          placeholder='请留下您对本堂课程的反馈，我们将努力改进~'
+        />
         <AtButton type='secondary' className='btn'>提交</AtButton>
       </View>
     )
