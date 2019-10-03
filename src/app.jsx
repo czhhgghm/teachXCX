@@ -20,6 +20,7 @@ class App extends Component {
       'pages/personalProfile/index',
       'pages/signUp/index',
       'pages/advice/index',
+      'pages/changeInformation/index',
     ],
     window: {
       backgroundTextStyle: 'light',

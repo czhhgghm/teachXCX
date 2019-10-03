@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
 import { AtInput, AtForm, AtButton } from 'taro-ui'
 
@@ -63,7 +63,7 @@ export default class Index extends Component {
             border={false}
             title='手机号码'
             type='phone'
-            placeholder='请输入学生家长手机号码'
+            placeholder='请输入家长手机号码'
             value={this.state.otherPhone}
             onChange={this.handleChange.bind(this)}
           />

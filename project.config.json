@@ -40,8 +40,9 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/advice/index",
-					"pathName": "pages/advice/index",
+					"name": "pages/showPerson/index",
+					"pathName": "pages/showPerson/index",
+					"query": "",
 					"scene": null
 				}
 			]

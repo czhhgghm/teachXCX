@@ -39,7 +39,7 @@ export default class Index extends Component {
               <Image className='header-Img' src={personPng} />
             </View>
             <View className='at-col at-col-7 header-middle'>
-              <View>张学友</View>
+              <View>马天骅</View>
               <View>
                 <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                 <View className='afterIcon-font'>高三</View>
