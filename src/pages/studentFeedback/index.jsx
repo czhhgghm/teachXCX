@@ -67,7 +67,7 @@ export default class Index extends Component {
       <View className='index'>
         <View className='grade at-row'>
           <View className='at-col at-col-3 gradeFont'>满意度评分:</View>
-          <View className='at-col'>
+          <View className='at-col at-col-9'>
             <AtRate
               size={18}
               value={gradeValue}

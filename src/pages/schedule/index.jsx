@@ -16,11 +16,11 @@ export default class Index extends Component {
     navigationBarTitleText: 'schedule'
   }
 
-  componentWillMount () {}
-
-  componentDidMount () {
+  componentWillMount () {
     this.getCurrentTime()
   }
+
+  componentDidMount () {}
 
   componentWillUnmount () { }
 
