@@ -7,7 +7,10 @@ export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      name: '马天骅',
+      grade: '高三',
+      perPhone: 10086,
+      parentPhone: 10086886
     }
   };
 
@@ -33,32 +36,33 @@ export default class Index extends Component {
   }
 
   render () {
+    const {name,grade,perPhone,parentPhone} = this.state
     return (
       <View className='index'>
         <AtList>
           <AtListItem
             arrow='right'
             title='姓名'
-            extraText='马天骅'
-            onClick={this.changeDetail.bind(this,'/pages/changeInformation/index')}
+            extraText={name}
+            onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=姓名&value=${name}`)}
           />
           <AtListItem
             arrow='right'
             title='年级'
-            extraText='高三'
-            onClick={this.changeDetail.bind(this,'/pages/changeInformation/index')}
+            extraText={grade}
+            onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=年级&value=${grade}`)}
           />
           <AtListItem
             arrow='right'
             title='学生电话'
-            extraText='10086'
-            onClick={this.changeDetail.bind(this,'/pages/changeInformation/index')}
+            extraText={perPhone}
+            onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=学生电话&value=${perPhone}`)}
           />
           <AtListItem
             arrow='right'
             title='家长电话'
-            extraText='10086886'
-            onClick={this.changeDetail.bind(this,'/pages/changeInformation/index')}
+            extraText={parentPhone}
+            onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=家长电话&value=${parentPhone}`)}
           />
         </AtList>
       </View>

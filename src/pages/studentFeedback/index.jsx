@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtRate, AtButton, AtTextarea } from 'taro-ui'
 
@@ -65,15 +65,14 @@ export default class Index extends Component {
     const {gradeValue,inputValue} = this.state
     return (
       <View className='index'>
-        <View className='grade at-row'>
-          <View className='at-col at-col-3 gradeFont'>满意度评分:</View>
-          <View className='at-col at-col-9'>
-            <AtRate
-              size={18}
-              value={gradeValue}
-              onChange={this.handleChangeGrade.bind(this)}
-            />
-          </View>
+        <View className='grade'>
+          <Text className='gradeFont'>满意度评分:</Text>
+          <AtRate
+            className='stars'
+            size={18}
+            value={gradeValue}
+            onChange={this.handleChangeGrade.bind(this)}
+          />
         </View>
         <AtTextarea
           value={inputValue}

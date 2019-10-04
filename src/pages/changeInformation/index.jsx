@@ -4,14 +4,19 @@ import './index.scss'
 
 export default class Index extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state={
+      
+    }
   };
 
   config = {
     navigationBarTitleText: '修改个人信息'
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    console.log(this.$router.params)
+  }
 
   componentDidMount () { }
 
@@ -24,7 +29,8 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <Text>修改个人信息</Text>
+        <Text>{this.$router.params.key}</Text>
+        <Text>{this.$router.params.value}</Text>
       </View>
     )
   }
