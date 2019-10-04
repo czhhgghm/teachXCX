@@ -5,6 +5,12 @@ import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
 
 export default class Index extends Component {
+  constructor() {
+    this.state = {
+      userName: '马天骅',
+      grade: '高三',
+    }
+  }
 
   config = {
     navigationBarTitleText: '首页'
@@ -31,6 +37,7 @@ export default class Index extends Component {
   }
 
   render () {
+    const {userName,grade} = this.state;
     return (
       <View className='index'>
         <View className='header-outer'>
@@ -39,10 +46,10 @@ export default class Index extends Component {
               <Image className='header-Img' src={personPng} />
             </View>
             <View className='at-col at-col-7 header-middle'>
-              <View>马天骅</View>
+              <View>{userName}</View>
               <View>
                 <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                <View className='afterIcon-font'>高三</View>
+                <View className='afterIcon-font'>{grade}</View>
               </View>
             </View>
             <View className='at-col at-col-3'>

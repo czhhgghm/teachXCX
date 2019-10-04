@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { AtTextarea, AtButton } from 'taro-ui'
+import { AtTextarea, AtButton, AtForm } from 'taro-ui'
 
 export default class Index extends Component {
   constructor(props) {
@@ -30,16 +30,38 @@ export default class Index extends Component {
       inputValue: event.target.value
     })
   }
+
+  submitHandle() {
+    if(this.state.inputValue == '') {
+      Taro.showToast({
+        title: '输入内容不能为空',
+        icon: 'none',
+      })
+    }
+    else {
+      Taro.showToast({
+        title: '提交成功'
+      },Taro.redirectTo({
+          url: '../../pages/index/index',
+        })
+      )
+    }
+  }
+
   render () {
     return (
       <View className='index'>
-        <AtTextarea
-          value={this.state.inputValue}
-          onChange={this.handleChangeText.bind(this)}
-          maxLength={200}
-          placeholder='请留下您的宝贵意见或者建议，我们将努力改进！'
-        />
-        <AtButton type='secondary' className='btn'>提交</AtButton>
+        <AtForm
+            onSubmit={this.submitHandle.bind(this)}
+        >
+          <AtTextarea
+            value={this.state.inputValue}
+            onChange={this.handleChangeText.bind(this)}
+            maxLength={200}
+            placeholder='请留下您的宝贵意见或者建议，我们将努力改进！'
+          />
+          <AtButton type='secondary' className='btn' formType='submit'>提交</AtButton>
+        </AtForm>
       </View>
     )
   }
