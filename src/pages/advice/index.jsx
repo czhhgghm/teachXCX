@@ -34,7 +34,7 @@ export default class Index extends Component {
   submitHandle() {
     if(this.state.inputValue == '') {
       Taro.showToast({
-        title: '输入内容不能为空',
+        title: '输入内容为空,请留下您的宝贵建议',
         icon: 'none',
       })
     }

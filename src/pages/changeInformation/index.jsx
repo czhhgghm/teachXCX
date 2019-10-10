@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
+import { AtInput, AtForm, AtButton } from 'taro-ui'
 
 export default class Index extends Component {
   constructor(props) {
@@ -26,11 +27,34 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
+  submitHandle () {
+    Taro.showToast({
+      title: '保存成功'
+    },Taro.redirectTo({
+        url: '../../pages/index/index',
+      })
+    )
+  }
+  handleChange = e => {
+    console.log(e)
+  }
   render () {
+    const {key,value} = this.$router.params
     return (
       <View className='index'>
-        <Text>{this.$router.params.key}</Text>
-        <Text>{this.$router.params.value}</Text>
+        <AtForm
+            onSubmit={this.submitHandle.bind(this)}
+        >
+          <AtInput
+            name='value'
+            title={key}
+            type='text'
+            placeholder='更改个人信息'
+            value={value}
+            onChange={this.handleChange.bind(this)}
+          />
+          <AtButton type='secondary' className='btn' formType='submit'>保存</AtButton>
+        </AtForm>
       </View>
     )
   }

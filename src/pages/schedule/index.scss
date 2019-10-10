@@ -7,7 +7,7 @@ page{
 }
 
 .head {
-    padding: 120px 0;
+    padding: 80px 0;
     background-color: #fff;
 
     .head-outer {
@@ -35,6 +35,11 @@ page{
 }
 .main-schedule {
     background-color: #fff;
+
+    .current-schedule-title {
+        background-color: rgba(50, 50, 50, 0.200);
+        font-weight: 700;
+    }
 
     .current-schedule {
         padding: 30px 0;

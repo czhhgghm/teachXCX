@@ -78,15 +78,12 @@ export default class Index extends Component {
           onClick={this.handleClick.bind(this)}>
           <AtTabsPane current={this.state.current} index={0}>
             <View 
-              className='current-schedule at-row' 
-              onClick={this.navigateToPage.bind(
-                  this,
-                  '/pages/studentFeedback/index'
-            )}>
-                <View className='at-col  at-col-2'>语文</View>
-                <View className='at-col  at-col-4'>13:00-15:00期间</View>
-                <View className='at-col  at-col-3'>易中天</View>
-                <View className='at-col  at-col-3'>广东省白云区</View>
+              className='current-schedule at-row current-schedule-title' 
+            >
+              <View className='at-col  at-col-2'>科目</View>
+              <View className='at-col  at-col-4'>时间</View>
+              <View className='at-col  at-col-3'>教师</View>
+              <View className='at-col  at-col-3'>上课地点</View>
             </View>
             <View 
               className='current-schedule at-row' 
@@ -94,10 +91,10 @@ export default class Index extends Component {
                   this,
                   '/pages/studentFeedback/index'
             )}>
-                <View className='at-col  at-col-2'>数学</View>
-                <View className='at-col  at-col-4'>15:30-17:30期间</View>
-                <View className='at-col  at-col-3'>毛不易</View>
-                <View className='at-col  at-col-3'>广东省天河区</View>
+              <View className='at-col  at-col-2'>语文</View>
+              <View className='at-col  at-col-4'>13:00-15:00期间</View>
+              <View className='at-col  at-col-3'>易中天</View>
+              <View className='at-col  at-col-3'>广东省白云区</View>
             </View>
             <View 
               className='current-schedule at-row' 
@@ -105,10 +102,21 @@ export default class Index extends Component {
                   this,
                   '/pages/studentFeedback/index'
             )}>
-                <View className='at-col  at-col-2'>英语</View>
-                <View className='at-col  at-col-4'>18:00-20:00期间</View>
-                <View className='at-col  at-col-3'>草匠中</View>
-                <View className='at-col  at-col-3'>广东省番禺区</View>
+              <View className='at-col  at-col-2'>数学</View>
+              <View className='at-col  at-col-4'>15:30-17:30期间</View>
+              <View className='at-col  at-col-3'>毛不易</View>
+              <View className='at-col  at-col-3'>广东省天河区</View>
+            </View>
+            <View 
+              className='current-schedule at-row' 
+              onClick={this.navigateToPage.bind(
+                  this,
+                  '/pages/studentFeedback/index'
+            )}>
+              <View className='at-col  at-col-2'>英语</View>
+              <View className='at-col  at-col-4'>18:00-20:00期间</View>
+              <View className='at-col  at-col-3'>草匠中</View>
+              <View className='at-col  at-col-3'>广东省番禺区</View>
             </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>

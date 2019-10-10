@@ -18,7 +18,25 @@ export default class Index extends Component {
 
   componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    const accountInfo = accountInfo ? accountInfo:wx.getAccountInfoSync();
+    // wx.login({
+    //   success (res) {
+    //     if (res.code) {
+    //       //发起网络请求
+    //       wx.request({
+    //         url: 'https://test.com/onLogin',
+    //         data: {
+    //           code: res.code
+    //         }
+    //       })
+    //     } else {
+    //       console.log('登录失败！' + res.errMsg)
+    //     }
+    //   }
+    // })
+    console.log('appId:',accountInfo.miniProgram.appId) // 小程序 appId
+  }
 
   componentWillUnmount () { }
 
@@ -97,12 +115,12 @@ export default class Index extends Component {
               },
               {
                 image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
-                value: '更多功能',
+                value: '待完善功能',
                 url: '/pages/schedule/index'
               },
               {
                 image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
-                value: '更多功能',
+                value: '待完善功能',
                 url: '/pages/schedule/index'
               }
             ]
