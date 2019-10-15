@@ -21,6 +21,10 @@ class App extends Component {
       'pages/signUp/index',
       'pages/advice/index',
       'pages/changeInformation/index',
+      'pages/coachingProgram/index',
+      'pages/reviewProgram/index',
+      'pages/showClassFB/index',
+      'pages/usersManage/index',
     ],
     window: {
       backgroundTextStyle: 'light',
