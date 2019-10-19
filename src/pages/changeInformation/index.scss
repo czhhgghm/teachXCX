@@ -2,3 +2,21 @@
 @import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/button.scss";
 @import "~taro-ui/dist/style/components/loading.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+.at-input {
+    margin-left: 0px;
+    padding: 24px 32px;
+}
+
+.at-input::after {
+    border: none;
+}
+
+.at-input__title {
+    width: 190px;
+}
