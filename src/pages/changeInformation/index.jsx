@@ -135,7 +135,7 @@ export default class Index extends Component {
   
     Taro.showToast({
       title: '保存成功'
-    },Taro.redirectTo({
+    },wx.reLaunch({
         url: '../../pages/index/index',
       })
     )

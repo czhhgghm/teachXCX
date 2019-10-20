@@ -54,7 +54,7 @@ export default class Index extends Component {
     else {
       Taro.showToast({
         title: '提交成功'
-      },Taro.redirectTo({
+      },wx.reLaunch({
           url: '../../pages/index/index',
         })
       )

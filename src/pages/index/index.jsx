@@ -5,6 +5,7 @@ import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
 
+
 @connect(({ common }) => ({
   appId: common.appId,
   userName: common.userName,
@@ -14,7 +15,8 @@ import personPng from '../../assets/images/personal.png'
 export default class Index extends Component {
   constructor() {
     this.state = {
-      identityId: 0,
+      code: '',
+      identityId: 0
     }
   }
 
@@ -22,10 +24,41 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  async componentWillMount () {
+
+  }
 
   async componentDidMount () {
-    
+    const {dispatch} =this.props
+    wx.login({
+      success: res => {
+        //保存得到的code
+        dispatch({
+          type: 'common/getSthing',
+          payload: {
+            code: res.code
+          }
+        })
+        this.setState({
+          code: res.code
+        })
+      }
+    })
+
+    //获取用户授权情况
+    wx.getSetting({
+      success (res){
+        if (res.authSetting['scope.userInfo']) {
+          Taro.getUserInfo({
+            success: function(res) {
+              console.log('用户已经授权,得到信息:',res)
+            }
+          })
+        }else {
+          console.log('用户还没有授权')
+        }
+      }
+    })
   }
 
   componentWillUnmount () { }
@@ -275,6 +308,8 @@ export default class Index extends Component {
           :
           <View>游客请登录</View>
         }
+        {/* <Button openType="getUserInfo" onGetUserInfo={() => getUserAuthor(this)} form-type="submit">按钮</Button> */}
+        
         <View style={{padding:'20px'}}>
           <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长</AtButton>

@@ -1,4 +1,4 @@
-import {  } from './service'
+import {getSthing} from './service'
 
 export default {
     namespace: 'common',
@@ -24,6 +24,9 @@ export default {
                     appId: accountInfo.miniProgram.appId
                 }
             }) 
+        },
+        *getSthing({payload},{call,put}) {
+            const response = yield call(getSthing,payload);
         }
     },
 

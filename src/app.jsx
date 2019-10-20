@@ -44,6 +44,7 @@ class App extends Component {
 
   async componentDidMount () {
     const {dispatch} = store
+
     await dispatch({
       type: 'common/getAppId'
     })
