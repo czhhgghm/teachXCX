@@ -1,10 +1,10 @@
 import Taro from '@tarojs/taro'
 import { noConsole } from '../config'
 
-const request_data = {
-  platform: 'wap',
-  rent_mode: 2
-}
+// const request_data = {
+//   platform: 'wap',
+//   rent_mode: 2
+// }
 
 export default (
   options = {
@@ -23,7 +23,7 @@ export default (
   return Taro.request({
     url: options.url,
     data: {
-      ...request_data,
+      // ...request_data,
       ...options.data
     },
     header: {

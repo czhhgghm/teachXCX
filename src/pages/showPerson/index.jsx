@@ -12,7 +12,8 @@ import { AtList, AtListItem } from "taro-ui"
   beginProject: common.beginProject,
   classTime: common.classTime,
   classPlace: common.classPlace,
-  studySituation: common.studySituation,
+  studySituation: common.studySituation
+  
 }))
 
 export default class Index extends Component {
@@ -30,6 +31,7 @@ export default class Index extends Component {
   componentWillMount () { }
 
   componentDidMount () {
+    
   }
 
   componentWillUnmount () { }

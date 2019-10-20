@@ -7,16 +7,15 @@ import personPng from '../../assets/images/personal.png'
 
 
 @connect(({ common }) => ({
-  appId: common.appId,
   userName: common.userName,
   grade: common.grade,
+  userInfo: common.userInfo
 }))
 
 export default class Index extends Component {
   constructor() {
     this.state = {
-      code: '',
-      identityId: 0
+      identityId: 0,
     }
   }
 
@@ -39,9 +38,6 @@ export default class Index extends Component {
             code: res.code
           }
         })
-        this.setState({
-          code: res.code
-        })
       }
     })
 
@@ -51,11 +47,14 @@ export default class Index extends Component {
         if (res.authSetting['scope.userInfo']) {
           Taro.getUserInfo({
             success: function(res) {
-              console.log('用户已经授权,得到信息:',res)
+              // console.log('用户已经授权,得到信息:',res)
             }
           })
         }else {
           console.log('用户还没有授权')
+          Taro.reLaunch({
+            url: '../../pages/authorize/index',
+          })
         }
       }
     })
@@ -103,7 +102,7 @@ export default class Index extends Component {
 
   render () {
     const {identityId} = this.state
-    const {userName,grade} = this.props
+    const {userName,grade,userInfo} = this.props
     return (
       <View>
         {
@@ -112,7 +111,7 @@ export default class Index extends Component {
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
                 <View className='at-col at-col-2'>
-                  <Image className='header-Img' src={personPng} />
+                  <Image className='header-Img' src={userInfo.avatarUrl?userInfo.avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
                   <View>{userName}</View>
@@ -183,7 +182,7 @@ export default class Index extends Component {
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
                 <View className='at-col at-col-2'>
-                  <Image className='header-Img' src={personPng} />
+                  <Image className='header-Img' src={userInfo.avatarUrl?userInfo.avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
                   <View>{userName}</View>
@@ -254,7 +253,7 @@ export default class Index extends Component {
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
                 <View className='at-col at-col-2'>
-                  <Image className='header-Img' src={personPng} />
+                  <Image className='header-Img' src={userInfo.avatarUrl?userInfo.avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
                   <View>{userName}</View>
