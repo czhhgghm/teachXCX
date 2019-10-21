@@ -1,0 +1,27 @@
+.lineCenter {
+    margin: 20px auto;
+    display: block;
+}
+
+.authorize_info{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+
+    .authorize_title{
+      line-height: 3;
+    }
+    .authorize_description{
+      color: #A6A6A6;
+      font-size: 30px;
+      text-align: center;
+    }
+    .btn_authorize_wrap{
+      margin-top: 80px;
+      .btn_authorize{
+        height: 85px;
+        font-size: 35px;
+        line-height: 2.5;
+      }
+    }
+  }

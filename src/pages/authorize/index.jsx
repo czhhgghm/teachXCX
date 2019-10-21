@@ -1,6 +1,6 @@
-import { View, Button } from "@tarojs/components"
+import { View, Button, Image } from "@tarojs/components"
 import Taro, { Component } from '@tarojs/taro'
-
+import nullJPG from '../../assets/images/null.jpg'
 import "./index.scss"
 import { connect } from '@tarojs/redux'
 
@@ -26,10 +26,12 @@ export default class Authorize extends Component {
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
         //同时把 res.userInfo 保存到model中备用
+        console.log('授权后得到的用户信息:',res.userInfo)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
-            userInfo:res.userInfo
+            userName: res.userInfo.nickName,
+            avatarUrl: res.userInfo.avatarUrl
           }
         })
         //重定向到首页
@@ -123,9 +125,21 @@ export default class Authorize extends Component {
   render() {
     return (
       <View>
-        <Button openType='getUserInfo' onGetUserInfo={this.getUserInfo} type='primary' lang='zh_CN'>
-          授权登录
-        </Button>
+        <Image src={nullJPG} mode='scaleToFill' className="lineCenter"></Image>
+        <View className='authorize_info'>
+          <View className='authorize_title'>
+            小程序申请获取一下权限
+          </View>
+          <Text className='authorize_description'>
+            获得你的公开信息（昵称、头像、地区等）
+          </Text>
+          <View className='btn_authorize_wrap'>
+            <Button className='btn_authorize' openType='getUserInfo' onGetUserInfo={this.getUserInfo} type='primary' lang='zh_CN'>
+              授权登录
+            </Button>
+          </View>
+        </View>
+        
       </View>
     )
   }

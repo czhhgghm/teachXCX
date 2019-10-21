@@ -49,6 +49,36 @@ class App extends Component {
     await dispatch({
       type: 'common/getAppId'
     })
+
+    wx.login({
+      success: res => {
+        //保存得到的code
+        dispatch({
+          type: 'common/getSthing',
+          payload: {
+            code: res.code
+          }
+        })
+      }
+    })
+
+    //获取用户授权情况
+    wx.getSetting({
+      success (res){
+        if (res.authSetting['scope.userInfo']) {
+          Taro.getUserInfo({
+            success: function(res) {
+              console.log('用户已经授权,得到信息:',res)
+            }
+          })
+        }else {
+          console.log('用户还没有授权')
+          Taro.reLaunch({
+            url: '../../pages/authorize/index',
+          })
+        }
+      }
+    })
   }
 
   componentDidShow () {}

@@ -4,8 +4,8 @@ export default {
     namespace: 'common',
     state: {
         appId: '',
-        userInfo: {},
-        userName: '刘德华',
+        avatarUrl: '',
+        userName: '姓名',
         grade: '高三',
         perPhone: '10086',
         parentPhone: '10086886',
@@ -40,10 +40,11 @@ export default {
             }
         },
         saveUserInfo(state, { payload }) {
-            const { userInfo }=payload;
+            const { userName, avatarUrl }=payload;
             return {
               ...state,
-              userInfo
+              userName,
+              avatarUrl
             }
         },
         changeUserName(state,{payload}) {
