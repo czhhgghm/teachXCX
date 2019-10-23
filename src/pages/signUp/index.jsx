@@ -98,6 +98,7 @@ export default class Index extends Component {
             type='text'
             placeholder='请输入新用户姓名'
             value={name}
+            maxLength='6'
             onChange={this.handleChangeName.bind(this)}
           />
           <AtInput

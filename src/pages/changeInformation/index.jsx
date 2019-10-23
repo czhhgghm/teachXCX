@@ -19,8 +19,11 @@ export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state={
-      key: '',
-      value: ''
+      key: '姓名',
+      value: '姓名',
+      type: 'text',
+      maxLength: '6',
+      select: ''
     }
   };
 
@@ -35,16 +38,6 @@ export default class Index extends Component {
   componentDidMount () {
     const {params} = this.$router
     const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace,studySituation} = this.props
-    let value = 
-      params.key == 'userName'? userName
-      :params.key == 'perPhone'? perPhone
-      :params.key == 'parentPhone'? parentPhone
-      :params.key == 'coachingCourse'? coachingCourse
-      :params.key == 'classTime'? classTime
-      :params.key == 'beginProject'? beginProject
-      :params.key == 'classPlace'? classPlace
-      :params.key == 'studySituation'? studySituation
-      :''
     let key = 
       params.key == 'userName'? '姓名'
       :params.key == 'perPhone'? '学生电话'
@@ -55,9 +48,43 @@ export default class Index extends Component {
       :params.key == 'classPlace'? '上课地区'
       :params.key == 'studySituation'? '学科学习情况'
       : ''
+    let value = 
+      params.key == 'userName'? userName
+      :params.key == 'perPhone'? perPhone
+      :params.key == 'parentPhone'? parentPhone
+      :params.key == 'coachingCourse'? coachingCourse
+      :params.key == 'classTime'? classTime
+      :params.key == 'beginProject'? beginProject
+      :params.key == 'classPlace'? classPlace
+      :params.key == 'studySituation'? studySituation
+      :''
+    let type = 
+      params.key == 'userName'? 'text'
+      :params.key == 'perPhone'? 'phone'
+      :params.key == 'parentPhone'? 'phone'
+      :params.key == 'coachingCourse'? 'text'
+      :params.key == 'beginProject'? 'text'
+      :params.key == 'classTime'? 'text'
+      :params.key == 'classPlace'? 'text'
+      :params.key == 'studySituation'? 'text'
+      : ''
+    let maxLength = 
+      params.key == 'userName'? '6'
+      :params.key == 'perPhone'? '11'
+      :params.key == 'parentPhone'? '11'
+      :params.key == 'coachingCourse'? '6'
+      :params.key == 'beginProject'? '7'
+      :params.key == 'classTime'? '9'
+      :params.key == 'classPlace'? '6'
+      :params.key == 'studySituation'? '6'
+      : ''
+
     this.setState({
       value,
-      key
+      key,
+      type,
+      maxLength,
+      select: params.key  //保存标识
     })
 
   }
@@ -71,68 +98,91 @@ export default class Index extends Component {
   submitHandle () {
     //点击提交按钮,把key和最新值发送给后台,同时在前端进行相应
     //此时还没后台,直接在前端响应
+    const {select,value} = this.state
+    const {dispatch} = this.props
+    let phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
-    const {params} = this.$router
-    const {dispatch} = this.props    
-    params.key == 'userName'? 
-    dispatch({
-      type: 'common/changeUserName',
-      payload: {
-        userName: this.state.value
-      }
-    })
-    :params.key == 'perPhone'?
-    dispatch({
-      type: 'common/changePerPhone',
-      payload: {
-        perPhone: this.state.value
-      }
-    })
-    :params.key == 'parentPhone'?
-    dispatch({
-      type: 'common/changeParentPhone',
-      payload: {
-        parentPhone: this.state.value
-      }
-    })
-    :params.key == 'coachingCourse'?
+    select == 'userName'?(
+      dispatch({
+        type: 'common/changeUserName',
+        payload: {
+          userName: value
+        }
+      },this.jumpTab())
+    )
+    :select == 'perPhone'?(
+      phoneReg.test(value)?(
+        dispatch({
+          type: 'common/changePerPhone',
+          payload: {
+            perPhone: value
+          }
+        },this.jumpTab())
+      ):
+      Taro.showToast({
+        title: '输入手机号码格式不正确',
+        icon: 'none'
+      })
+    )
+    
+    :select == 'parentPhone'?(
+      phoneReg.test(value)?(
+        dispatch({
+          type: 'common/changeParentPhone',
+          payload: {
+            parentPhone: value
+          }
+        },this.jumpTab())
+      ):
+      Taro.showToast({
+        title: '输入手机号码格式不正确',
+        icon: 'none'
+      })
+    )
+    :select == 'coachingCourse'?
     dispatch({
       type: 'common/changeCoachingCourse',
       payload: {
-        coachingCourse: this.state.value
+        coachingCourse: value
       }
-    })
-    :params.key == 'beginProject'?
+    },this.jumpTab())
+    :select == 'beginProject'?
     dispatch({
       type: 'common/changeBeginProject',
       payload: {
-        beginProject: this.state.value
+        beginProject: value
       }
-    })
-    :params.key == 'classTime'?
+    },this.jumpTab())
+    :select == 'classTime'?
     dispatch({
       type: 'common/changeClassTime',
       payload: {
-        classTime: this.state.value
+        classTime: value
       }
-    })
-    :params.key == 'classPlace'?
+    },this.jumpTab())
+    :select == 'classPlace'?
     dispatch({
       type: 'common/changeClassPlace',
       payload: {
-        classPlace: this.state.value
+        classPlace: value
       }
-    })
-    :params.key == 'studySituation'?
+    },this.jumpTab())
+    :select == 'studySituation'?
     dispatch({
       type: 'common/changeStudySituation',
       payload: {
-        studySituation: this.state.value
+        studySituation: value
       }
-    })
-    : ''
+    },this.jumpTab()): ''
+  }
 
-  
+  handleChange = e => {
+    this.setState({
+      value: e
+    })
+  }
+
+  jumpTab() {
     Taro.showToast({
       title: '保存成功'
     },wx.reLaunch({
@@ -140,13 +190,8 @@ export default class Index extends Component {
       })
     )
   }
-  handleChange = e => {
-    this.setState({
-      value: e
-    })
-  }
   render () {
-    const {key,value} = this.state
+    const {key,value,type,maxLength} = this.state
     return (
       <View className='index'>
         <AtForm
@@ -155,9 +200,10 @@ export default class Index extends Component {
           <AtInput
             name='value'
             title={key}
-            type='text'
+            type={type}
             placeholder='更改个人信息'
             value={value}
+            maxLength={maxLength}
             onChange={this.handleChange.bind(this)}
           />
           <AtButton type='secondary' className='btn' formType='submit'>保存</AtButton>

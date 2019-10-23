@@ -26,7 +26,7 @@ export default class Authorize extends Component {
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
         //同时把 res.userInfo 保存到model中备用
-        console.log('授权后得到的用户信息:',res.userInfo)
+        // console.log('授权后得到的用户信息:',res.userInfo)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -55,72 +55,8 @@ export default class Authorize extends Component {
         }
       })
     }
-    // if (e.detail.userInfo) {
-    //   //用户按了允许授权按钮,则获取用户信息
-    //   Taro.getUserInfo().then(res=>{
-    //     // 缓存用户信息
-    //     if(res){
-    //       wx.cloud.callFunction({
-    //         // 要调用的云函数名称
-    //         name: 'login',
-    //         // 传递给云函数的event参数
-    //         data: res.userInfo
-    //       }).then(res_login => {
-    //         // output: res.result === 3
-    //         const { openid,appid,unionid }=res_login.result
-    //         const userInfo={ ...res.userInfo,openid,appid,unionid }
-    //         try {
-    //           Taro.setStorage({
-    //             key: 'userInfo',
-    //             data:userInfo
-    //           }).then(()=>{
-    //             dispatch({
-    //               type:'authorize/saveUserInfo',
-    //               payload:{
-    //                 userInfo:res.userInfo
-    //               }
-    //             })
-    //           })
-    //         } catch (err) { console.log(err) }
+  }
 
-    //       }).catch(err_login => {
-    //         // handle error
-    //         console.log(err_login)
-    //       })
-    //       // Taro.setStorage({
-    //       //   key: 'appInfo',
-    //       //   data: res
-    //       // }).then(()=>{
-    //       //   dispatch({
-    //       //     type:'authorize/saveAppInfo',
-    //       //     payload:{
-    //       //       appInfo:res
-    //       //     }
-    //       //   });
-    //       // })
-    //     }
-    //   }).then(()=>{
-    //     //跳转到首页
-    //     Taro.switchTab({
-    //       url:'/pages/home/index'
-    //     })
-    //   }).catch(err=>{
-    //     console.log(err)
-    //   })
-    // } else {
-    //   //用户按了拒绝按钮
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '您拒绝了授权，将无法使用小程序，请授权后进入',
-    //     showCancel: false,
-    //     confirmText: '返回授权',
-    //     success: function(res) {
-    //       if (res.confirm) {
-    //       }
-    //     }
-    //   })
-    // }
-  };
 
   render() {
     return (
@@ -128,7 +64,7 @@ export default class Authorize extends Component {
         <Image src={nullJPG} mode='scaleToFill' className="lineCenter"></Image>
         <View className='authorize_info'>
           <View className='authorize_title'>
-            小程序申请获取一下权限
+            小程序申请获取权限
           </View>
           <Text className='authorize_description'>
             获得你的公开信息（昵称、头像、地区等）

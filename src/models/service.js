@@ -1,8 +1,8 @@
 //执行异步请求
-import Request  from "../utils/get";
+import request  from "../utils/get";
 
 export async function getSthing(data) {
-    return Request({
+    return request({
         url: 'https://m-school.mynatapp.cc/user/login',
         method: 'GET',
         data,
