@@ -4,7 +4,6 @@ import { connect } from '@tarojs/redux'
 import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
-import { toASCII } from 'punycode';
 
 
 @connect(({ common }) => ({
@@ -323,7 +322,7 @@ export default class Index extends Component {
             </View>
           </View>
           :
-          <View>到时跳转到"推荐新用户页面"</View>
+          <View>到时跳转到"新用户报名页面"</View>
         }
         {/* 用于测试 */}
         <View style={{padding:'20px'}}>

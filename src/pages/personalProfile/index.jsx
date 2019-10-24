@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtSearchBar } from 'taro-ui'
+import { AtList, AtListItem } from "taro-ui"
 
 export default class Index extends Component {
   constructor(props) {
@@ -26,24 +26,38 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
-  onChangeCheck (value) {
-    this.setState({
-      value: value
+  changeDetail = url => {
+    Taro.navigateTo({
+      url,
     })
   }
-
-  onActionClick () {
-    console.log(this.state.value)
-  }
+  
   render () {
     return (
       <View className='index'>
-        <AtSearchBar
-          value={this.state.value}
-          placeholder='请输入查询科目'
-          onChange={this.onChangeCheck.bind(this)}
-          onActionClick={this.onActionClick.bind(this)}
-        />
+        <AtList>
+          <AtListItem
+            arrow='right'
+            note='2019/3--2019/9'
+            title='语文'
+            extraText='王芳'
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}
+          />
+          <AtListItem
+            arrow='right'
+            note='2019/1--2019/3'
+            title='数学'
+            extraText='李强'
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}
+          />
+          <AtListItem
+            arrow='right'
+            note='2018/5--2018/12'
+            title='英语'
+            extraText='张杨'
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}            
+          />
+        </AtList>
       </View>
     )
   }

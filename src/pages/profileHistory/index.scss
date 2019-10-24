@@ -1,0 +1,14 @@
+@import "~taro-ui/dist/style/components/load-more.scss";
+@import "~taro-ui/dist/style/components/activity-indicator.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/card.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+.cardStyle {
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
+    margin-top: 20px;
+}

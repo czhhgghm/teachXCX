@@ -35,6 +35,8 @@ class App extends Component {
       'pages/reviewProgram/index',
       'pages/showClassFB/index',
       'pages/usersManage/index',
+      'pages/writeCoachingProgram/index',
+      'pages/profileHistory/index',
     ],
     window: {
       backgroundTextStyle: 'light',

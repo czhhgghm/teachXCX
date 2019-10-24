@@ -1,12 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { AtList, AtListItem } from 'taro-ui'
 import './index.scss'
 
 export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
     }
   };
 
@@ -24,20 +25,36 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
-  onChangeCheck (value) {
-    this.setState({
-      value: value
+  changeDetail = url => {
+    Taro.navigateTo({
+      url,
     })
   }
 
-  onActionClick () {
-    console.log(this.state.value)
-  }
+
+
   render () {
     return (
-      <View className='index'>
-        辅导方案
-      </View>
+      <AtList>
+        <AtListItem
+          arrow='right'
+          title='张三'
+          extraText='语文'
+          onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
+        />
+        <AtListItem
+          arrow='right'
+          title='李四'
+          extraText='数学'
+          onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
+        />
+        <AtListItem
+          arrow='right'
+          title='王五'
+          extraText='英语'
+          onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
+        />
+      </AtList>
     )
   }
 }
