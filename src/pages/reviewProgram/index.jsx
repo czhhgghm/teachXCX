@@ -11,7 +11,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: 'review Profile'
+    navigationBarTitleText: '审批方案页面'
   }
 
   componentWillMount () { }

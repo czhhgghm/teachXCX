@@ -1,0 +1,35 @@
+@import "~taro-ui/dist/style/components/tag.scss";
+@import "~taro-ui/dist/style/components/search-bar.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/list.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+.tagStyle {
+    width: 50%;
+}
+
+.at-tag {
+    font-size: 35px;
+    border-radius: 0;
+    background-color: #fff;
+    height: auto;
+    padding: 10px 32px;
+    border: 1PX solid #fff;
+
+}
+
+.at-tag--active {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1PX solid #78A4F4;
+}
+
+.at-search-bar::after {    
+    border: none;
+}

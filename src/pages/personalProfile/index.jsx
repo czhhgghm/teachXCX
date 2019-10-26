@@ -7,7 +7,8 @@ export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
+      name: '李阳'
     }
   };
 
@@ -33,6 +34,7 @@ export default class Index extends Component {
   }
   
   render () {
+    const {name} = this.state
     return (
       <View className='index'>
         <AtList>
@@ -40,22 +42,22 @@ export default class Index extends Component {
             arrow='right'
             note='2019/3--2019/9'
             title='语文'
-            extraText='王芳'
-            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}
+            extraText={name}
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}
           />
           <AtListItem
             arrow='right'
             note='2019/1--2019/3'
             title='数学'
-            extraText='李强'
-            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}
+            extraText={name}
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}
           />
           <AtListItem
             arrow='right'
             note='2018/5--2018/12'
             title='英语'
-            extraText='张杨'
-            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=111`)}            
+            extraText={name}
+            onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}            
           />
         </AtList>
       </View>

@@ -29,23 +29,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
-			"list": [
-				{
-					"id": -1,
-					"name": "新用户报名页面",
-					"pathName": "pages/signUp/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/showPerson/index",
-					"pathName": "pages/showPerson/index",
-					"query": "",
-					"scene": null
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }

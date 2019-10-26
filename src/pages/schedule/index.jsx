@@ -80,10 +80,10 @@ export default class Index extends Component {
             <View 
               className='current-schedule at-row current-schedule-title' 
             >
-              <View className='at-col  at-col-2'>科目</View>
-              <View className='at-col  at-col-4'>时间</View>
+              <View className='at-col  at-col-3'>科目</View>
+              <View className='at-col  at-col-2'>时间</View>
               <View className='at-col  at-col-3'>教师</View>
-              <View className='at-col  at-col-3'>上课地点</View>
+              <View className='at-col  at-col-4'>上课地点</View>
             </View>
             <View 
               className='current-schedule at-row' 
@@ -91,10 +91,10 @@ export default class Index extends Component {
                   this,
                   '/pages/studentFeedback/index'
             )}>
-              <View className='at-col  at-col-2'>语文</View>
-              <View className='at-col  at-col-4'>13:00-15:00期间</View>
+              <View className='at-col  at-col-3'>语文</View>
+              <View className='at-col  at-col-2'>上午</View>
               <View className='at-col  at-col-3'>易中天</View>
-              <View className='at-col  at-col-3'>广东省白云区</View>
+              <View className='at-col  at-col-4'>广东省白云区</View>
             </View>
             <View 
               className='current-schedule at-row' 
@@ -102,10 +102,10 @@ export default class Index extends Component {
                   this,
                   '/pages/studentFeedback/index'
             )}>
-              <View className='at-col  at-col-2'>数学</View>
-              <View className='at-col  at-col-4'>15:30-17:30期间</View>
+              <View className='at-col  at-col-3'>数学</View>
+              <View className='at-col  at-col-2'>下午</View>
               <View className='at-col  at-col-3'>毛不易</View>
-              <View className='at-col  at-col-3'>广东省天河区</View>
+              <View className='at-col  at-col-4'>广东省天河区</View>
             </View>
             <View 
               className='current-schedule at-row' 
@@ -113,29 +113,71 @@ export default class Index extends Component {
                   this,
                   '/pages/studentFeedback/index'
             )}>
-              <View className='at-col  at-col-2'>英语</View>
-              <View className='at-col  at-col-4'>18:00-20:00期间</View>
+              <View className='at-col  at-col-3'>英语</View>
+              <View className='at-col  at-col-2'>晚上</View>
               <View className='at-col  at-col-3'>草匠中</View>
-              <View className='at-col  at-col-3'>广东省番禺区</View>
+              <View className='at-col  at-col-4'>广东省番禺区</View>
             </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            <View className='current-schedule'>星期二的课程</View>
+            <View 
+                className='current-schedule at-row current-schedule-title' 
+              >
+                <View className='at-col  at-col-3'>科目</View>
+                <View className='at-col  at-col-2'>时间</View>
+                <View className='at-col  at-col-3'>教师</View>
+                <View className='at-col  at-col-4'>上课地点</View>
+              </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            <View className='current-schedule'>星期三的课程</View>
+            <View 
+                className='current-schedule at-row current-schedule-title' 
+              >
+                <View className='at-col  at-col-3'>科目</View>
+                <View className='at-col  at-col-2'>时间</View>
+                <View className='at-col  at-col-3'>教师</View>
+                <View className='at-col  at-col-4'>上课地点</View>
+              </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-            <View className='current-schedule'>星期四的课程</View>
+          <View 
+              className='current-schedule at-row current-schedule-title' 
+            >
+              <View className='at-col  at-col-3'>科目</View>
+              <View className='at-col  at-col-2'>时间</View>
+              <View className='at-col  at-col-3'>教师</View>
+              <View className='at-col  at-col-4'>上课地点</View>
+            </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={4}>
-            <View className='current-schedule'>星期五的课程</View>
+          <View 
+              className='current-schedule at-row current-schedule-title' 
+            >
+              <View className='at-col  at-col-3'>科目</View>
+              <View className='at-col  at-col-2'>时间</View>
+              <View className='at-col  at-col-3'>教师</View>
+              <View className='at-col  at-col-4'>上课地点</View>
+            </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={5}>
-            <View className='current-schedule'>星期六的课程</View>
+          <View 
+              className='current-schedule at-row current-schedule-title' 
+            >
+              <View className='at-col  at-col-3'>科目</View>
+              <View className='at-col  at-col-2'>时间</View>
+              <View className='at-col  at-col-3'>教师</View>
+              <View className='at-col  at-col-4'>上课地点</View>
+            </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={6}>
-            <View className='current-schedule'>星期日的课程</View>
+          <View 
+              className='current-schedule at-row current-schedule-title' 
+            >
+              <View className='at-col  at-col-3'>科目</View>
+              <View className='at-col  at-col-2'>时间</View>
+              <View className='at-col  at-col-3'>教师</View>
+              <View className='at-col  at-col-4'>上课地点</View>
+            </View>
           </AtTabsPane>
         </AtTabs>
       </View>
