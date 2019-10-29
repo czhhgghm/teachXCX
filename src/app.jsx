@@ -26,7 +26,7 @@ class App extends Component {
       'pages/authorize/index',
       'pages/showPerson/index',
       'pages/schedule/index',
-      'pages/studentFeedback/index',
+      'pages/classFeedback/index',
       'pages/personalProfile/index',
       'pages/signUp/index',
       'pages/advice/index',
@@ -37,6 +37,8 @@ class App extends Component {
       'pages/usersManage/index',
       'pages/writeCoachingProgram/index',
       'pages/profileHistory/index',
+      'pages/viewNewUsers/index',
+      'pages/showAdvice/index',
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -1,5 +1,7 @@
 @import "~taro-ui/dist/style/components/tabs.scss";
 @import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/divider.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
 
 page{
     height:100%;
@@ -46,4 +48,19 @@ page{
         text-align: center;
         font-size: 30px;
     }
+
+}
+
+.at-tabs__item {
+    color: #888;
+    font-weight: 700;
+}
+
+.at-divider__content {
+    font-weight: 500;
+}
+
+.at-divider__line {
+    width: 70%;
+    left: 15%;
 }

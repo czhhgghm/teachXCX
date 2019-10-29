@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtDivider } from 'taro-ui'
 
 export default class Index extends Component {
   constructor(props) {
@@ -89,7 +89,7 @@ export default class Index extends Component {
               className='current-schedule at-row' 
               onClick={this.navigateToPage.bind(
                   this,
-                  '/pages/studentFeedback/index'
+                  '/pages/classFeedback/index'
             )}>
               <View className='at-col  at-col-3'>语文</View>
               <View className='at-col  at-col-2'>上午</View>
@@ -100,7 +100,7 @@ export default class Index extends Component {
               className='current-schedule at-row' 
               onClick={this.navigateToPage.bind(
                   this,
-                  '/pages/studentFeedback/index'
+                  '/pages/classFeedback/index'
             )}>
               <View className='at-col  at-col-3'>数学</View>
               <View className='at-col  at-col-2'>下午</View>
@@ -111,7 +111,7 @@ export default class Index extends Component {
               className='current-schedule at-row' 
               onClick={this.navigateToPage.bind(
                   this,
-                  '/pages/studentFeedback/index'
+                  '/pages/classFeedback/index'
             )}>
               <View className='at-col  at-col-3'>英语</View>
               <View className='at-col  at-col-2'>晚上</View>
@@ -120,64 +120,22 @@ export default class Index extends Component {
             </View>
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            <View 
-                className='current-schedule at-row current-schedule-title' 
-              >
-                <View className='at-col  at-col-3'>科目</View>
-                <View className='at-col  at-col-2'>时间</View>
-                <View className='at-col  at-col-3'>教师</View>
-                <View className='at-col  at-col-4'>上课地点</View>
-              </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={2}>
-            <View 
-                className='current-schedule at-row current-schedule-title' 
-              >
-                <View className='at-col  at-col-3'>科目</View>
-                <View className='at-col  at-col-2'>时间</View>
-                <View className='at-col  at-col-3'>教师</View>
-                <View className='at-col  at-col-4'>上课地点</View>
-              </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={3}>
-          <View 
-              className='current-schedule at-row current-schedule-title' 
-            >
-              <View className='at-col  at-col-3'>科目</View>
-              <View className='at-col  at-col-2'>时间</View>
-              <View className='at-col  at-col-3'>教师</View>
-              <View className='at-col  at-col-4'>上课地点</View>
-            </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={4}>
-          <View 
-              className='current-schedule at-row current-schedule-title' 
-            >
-              <View className='at-col  at-col-3'>科目</View>
-              <View className='at-col  at-col-2'>时间</View>
-              <View className='at-col  at-col-3'>教师</View>
-              <View className='at-col  at-col-4'>上课地点</View>
-            </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={5}>
-          <View 
-              className='current-schedule at-row current-schedule-title' 
-            >
-              <View className='at-col  at-col-3'>科目</View>
-              <View className='at-col  at-col-2'>时间</View>
-              <View className='at-col  at-col-3'>教师</View>
-              <View className='at-col  at-col-4'>上课地点</View>
-            </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={6}>
-          <View 
-              className='current-schedule at-row current-schedule-title' 
-            >
-              <View className='at-col  at-col-3'>科目</View>
-              <View className='at-col  at-col-2'>时间</View>
-              <View className='at-col  at-col-3'>教师</View>
-              <View className='at-col  at-col-4'>上课地点</View>
-            </View>
+            <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
         </AtTabs>
       </View>

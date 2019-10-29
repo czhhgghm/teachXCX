@@ -1,14 +1,24 @@
 //执行异步请求
-import request  from "../utils/get";
+import getRequest from "../utils/get";
+import postRrequest from "../utils/request";
 
-export async function getSthing(data) {
-    return request({
+export async function getSessionId(data) {
+    return getRequest({
         url: 'https://m-school.mynatapp.cc/user/login',
         method: 'GET',
         data,
     }) 
 }
 
+export async function getPhone(data) {
+    return postRrequest({
+        url: '/user/phone',
+        method: 'POST',
+        data,
+    }) 
+}
+
 export default {
-    getSthing
+    getSessionId,
+    getPhone
 }

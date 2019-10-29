@@ -1,10 +1,12 @@
-import {getSthing} from './service'
+import {getSessionId,getPhone} from './service'
+import Taro from '@tarojs/taro'
 
 export default {
     namespace: 'common',
     state: {
         appId: '',
         avatarUrl: '',
+        phone: '',
         userName: '姓名',
         grade: '高三',
         perPhone: '15626097908',
@@ -26,14 +28,34 @@ export default {
                 }
             }) 
         },
-        *getSthing({payload},{call,put}) {
-            //将code发送给服务端，服务端拿它与微信服务端做交互获取openid和sessionkey。
-            //服务器A拿到session_key后，生成一个随机数我们叫3rd_session,将它返回给客户端,我要缓存到storage
-            const response = yield call(getSthing,payload);
-        }
+        *getSessionId({payload},{call,put}) {
+            // console.log('用于请求sessionKey的数据',payload)
+            const response = yield call(getSessionId,payload);
+            // console.log('发送code得到的响应',response)
+            Taro.setStorage({ key: 'sessionKey', data: response.data })
+        },
+        *getPhone({payload},{call,put}) {
+            console.log('用于请求电话的数据',payload)
+            const response = yield call(getPhone,payload);
+            console.log('获取的电话数据',response)
+            yield put({
+                type: 'savePhone',
+                payload: {
+                    phone: response.data
+                }
+            }) 
+        },
+
     },
 
     reducers: {
+        savePhone(state, {payload}) {
+            const {phone} = payload
+            return {
+                ...state,
+                phone
+            }
+        },
         saveAppId(state, {payload}) {
             const {appId} = payload
             return {

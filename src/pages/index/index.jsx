@@ -9,7 +9,8 @@ import personPng from '../../assets/images/personal.png'
 @connect(({ common }) => ({
   userName: common.userName,
   grade: common.grade,
-  avatarUrl: common.avatarUrl
+  avatarUrl: common.avatarUrl,
+  phone: common.phone,
 }))
 
 export default class Index extends Component {
@@ -20,34 +21,55 @@ export default class Index extends Component {
   }
 
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '行之'
   }
 
   async componentWillMount () {
-    
+    console.log()
   }
 
   async componentDidMount () {
     const {dispatch,avatarUrl} = this.props
-    wx.login({
-      success: res => {
-        //保存得到的code
-        dispatch({
-          type: 'common/getSthing',
-          payload: {
-            code: res.code
+    wx.checkSession({
+      success () {
+        //session_key 未过期，并且在本生命周期一直有效
+        console.log('已经登录过了')
+      },
+      fail () {
+        // session_key 已经失效，需要重新执行登录流程
+        wx.login({
+          success: res => {
+            //用得到的code,换取服务端rdSessionId,保存到Storage里面了
+            dispatch({
+              type: 'common/getSessionId',
+              payload: {
+                code: res.code
+              }
+            })
           }
         })
       }
     })
 
     //获取用户授权情况
-    wx.getSetting({
+    await wx.getSetting({
       success (res){
         if (res.authSetting['scope.userInfo']) {
           Taro.getUserInfo({
             success: function(res) {
-              // console.log('getUserInfo的res',res)
+              //取出storage的sessionKey,带上其他两个条件去换取电话
+              Taro.getStorage({ key: 'sessionKey' })
+                .then(storage => (
+                  dispatch({
+                    type:'common/getPhone',
+                    payload:{
+                      sessionKey: storage.data,
+                      encryptedData: res.encryptedData,
+                      iv:res.iv
+                    }
+                  })
+                ))
+              //解决因为缓存,导致用户姓名和头像加载不出来的问题
               if(avatarUrl == '') {
                 dispatch({
                   type:'common/saveUserInfo',
@@ -60,7 +82,6 @@ export default class Index extends Component {
             }
           })
         }else {
-          console.log('用户还没有授权')
           Taro.reLaunch({
             url: '../../pages/authorize/index',
           })
@@ -309,13 +330,28 @@ export default class Index extends Component {
                   },
                   {
                     image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-                    value: '查看反馈',
+                    value: '师生反馈',
                     url: '/pages/showClassFB/index'
                   },
                   {
                     image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
                     value: '用户管理',
                     url: '/pages/usersManage/index'
+                  },
+                  {
+                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    value: '新用户信息',
+                    url: '/pages/viewNewUsers/index'
+                  },
+                  {
+                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    value: '用户反馈',
+                    url: '/pages/showAdvice/index'
+                  },
+                  {
+                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    value: '更多功能',
+                    url: ''
                   }
                 ]
               } />
@@ -325,7 +361,9 @@ export default class Index extends Component {
           <View>到时跳转到"新用户报名页面"</View>
         }
         {/* 用于测试 */}
+        <View>phone: {this.props.phone?this.props.phone:'null'}</View>
         <View style={{padding:'20px'}}>
+          <AtButton type='secondary' size='normal' onClick={this.componentDidMount.bind(this)}>获取电话</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF2.bind(this)}>老师</AtButton>
