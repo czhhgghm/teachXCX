@@ -51,6 +51,8 @@ export default class Index extends Component {
       btnLoading: true
     })
   }
+
+  // Taro.startPullDownRefresh(params).then(...)
   
   render () {
     const {userName} = this.props

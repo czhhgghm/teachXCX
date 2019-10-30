@@ -183,7 +183,7 @@ export default class Index extends Component {
                 [
                   {
                     image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-                    value: '课程表',
+                    value: '我的课表',
                     url: '/pages/schedule/index'
                   },
                   {
@@ -254,7 +254,7 @@ export default class Index extends Component {
                 [
                   {
                     image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-                    value: '课程表',
+                    value: '我的课表',
                     url: '/pages/schedule/index'
                   },
                   {
@@ -324,16 +324,6 @@ export default class Index extends Component {
                 data={
                 [
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-                    value: '审批方案',
-                    url: '/pages/reviewProgram/index'
-                  },
-                  {
-                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-                    value: '师生反馈',
-                    url: '/pages/showClassFB/index'
-                  },
-                  {
                     image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
                     value: '用户管理',
                     url: '/pages/usersManage/index'
@@ -344,9 +334,19 @@ export default class Index extends Component {
                     url: '/pages/viewNewUsers/index'
                   },
                   {
+                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                    value: '师生课堂反馈',
+                    url: '/pages/showClassFB/index'
+                  },
+                  {
                     image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-                    value: '用户反馈',
+                    value: '用户建议',
                     url: '/pages/showAdvice/index'
+                  },
+                  {
+                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                    value: '审批方案',
+                    url: '/pages/reviewProgram/index'
                   },
                   {
                     image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',

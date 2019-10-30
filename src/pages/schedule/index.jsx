@@ -8,7 +8,7 @@ export default class Index extends Component {
     super(props);
     this.state = {
       currentDay: '',
-      current: 0,
+      currentNum: 0,
     }
   };
 
@@ -42,7 +42,7 @@ export default class Index extends Component {
 
   handleClick = value => {
     this.setState({
-      current: value
+      currentNum: value
     })
   }
 
@@ -53,19 +53,20 @@ export default class Index extends Component {
   }
 
   render () {
+    const {currentNum,currentDay} = this.state
     return (
       <View className='index'>
         <View className='head'>
           <View className='head-outer'>
             <View className='head-schedule'>我的课表</View>
-            <View className='head-time'>{this.state.currentDay}</View>
+            <View className='head-time'>{currentDay}</View>
           </View>
         </View>
         <View className='week'>本周课表</View>
         <AtTabs
           className='main-schedule'
           animated={false}
-          current={this.state.current}
+          current={currentNum}
           tabList={[
             { title: '一' },
             { title: '二' },
@@ -73,10 +74,10 @@ export default class Index extends Component {
             { title: '四' },
             { title: '五' },
             { title: '六' },
-            { title: '日' }
+            { title: '日' },
           ]}
           onClick={this.handleClick.bind(this)}>
-          <AtTabsPane current={this.state.current} index={0}>
+          <AtTabsPane current={currentNum} index={0}>
             <View 
               className='current-schedule at-row current-schedule-title' 
             >
@@ -119,22 +120,22 @@ export default class Index extends Component {
               <View className='at-col  at-col-4'>广东省番禺区</View>
             </View>
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={1}>
+          <AtTabsPane current={currentNum} index={1}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={2}>
+          <AtTabsPane current={currentNum} index={2}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={3}>
+          <AtTabsPane current={currentNum} index={3}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={4}>
+          <AtTabsPane current={currentNum} index={4}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={5}>
+          <AtTabsPane current={currentNum} index={5}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={6}>
+          <AtTabsPane current={currentNum} index={6}>
             <AtDivider content='暂无课表' fontColor='#999' lineColor='#e5e5e5' />
           </AtTabsPane>
         </AtTabs>

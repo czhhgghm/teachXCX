@@ -1,7 +1,11 @@
 @import "~taro-ui/dist/style/components/accordion.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/list.scss";
-@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/pagination.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/search-bar.scss";
+
+
 
 page{
     height:100%;
@@ -9,5 +13,15 @@ page{
 }
 
 .at-list {
+    background-color: #f6f6f6;
+}
+
+.at-pagination {
+    margin: 0 0 0 20px;
+    border-bottom: 1PX solid #d6e4ef;
+    padding: 10px 10px 10px 0;
+}
+
+.at-search-bar {
     background-color: #f6f6f6;
 }
