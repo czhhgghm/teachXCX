@@ -4,10 +4,11 @@ import Taro from '@tarojs/taro'
 export default {
     namespace: 'common',
     state: {
-        appId: '',
         avatarUrl: '',
-        phone: '',
         userName: '姓名',
+        iv: '',
+        encryptedData: '',
+        phone: '',
         grade: '高三',
         perPhone: '15626097908',
         parentPhone: '15699999999',
@@ -19,25 +20,12 @@ export default {
     },
     
     effects: {
-        *getAppId({payload},{call,put}) {
-            const accountInfo = accountInfo ? accountInfo:wx.getAccountInfoSync();
-            yield put({
-                type: 'saveAppId',
-                payload: {
-                    appId: accountInfo.miniProgram.appId
-                }
-            }) 
-        },
         *getSessionId({payload},{call,put}) {
-            // console.log('用于请求sessionKey的数据',payload)
             const response = yield call(getSessionId,payload);
-            // console.log('发送code得到的响应',response)
             Taro.setStorage({ key: 'sessionKey', data: response.data })
         },
         *getPhone({payload},{call,put}) {
-            console.log('用于请求电话的数据',payload)
             const response = yield call(getPhone,payload);
-            console.log('获取的电话数据',response)
             yield put({
                 type: 'savePhone',
                 payload: {
@@ -56,11 +44,12 @@ export default {
                 phone
             }
         },
-        saveAppId(state, {payload}) {
-            const {appId} = payload
+        saveGetPhoneDatas(state, {payload}) {
+            const {iv,encryptedData} = payload
             return {
                 ...state,
-                appId
+                iv,
+                encryptedData
             }
         },
         saveUserInfo(state, { payload }) {

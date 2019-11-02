@@ -15,18 +15,21 @@ export default class Authorize extends Component {
   };
   constructor(props) {
     super(props)
+    this.state={
+      showFirst: 0
+    }
   }
 
   componentDidMount = () => {
     
   };
 
+  //点击授权登录按钮,
   getUserInfo = (e) => {
     const { dispatch }=this.props
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
-        //同时把 res.userInfo 保存到model中备用
-        // console.log('授权后得到的用户信息:',res.userInfo)
+        //把 微信用户名userName和头像地址avatarUrl 存储到model里面
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -34,24 +37,46 @@ export default class Authorize extends Component {
             avatarUrl: res.userInfo.avatarUrl
           }
         })
-        //重定向到首页
-        Taro.reLaunch({
-          url: '../../pages/index/index',
+        this.setState({
+          showFirst: 1
         })
-        //要把 res.userInfo 和 openid appid unionid同时保存到 Taro.setStorage中
-        
       })
     }else {
       //用户按了拒绝按钮
       wx.showModal({
         title: '提示',
-        content: '您拒绝了授权，将无法使用小程序，请授权后进入',
+        content: '您拒绝了登录授权，将无法使用小程序，请授权后进入',
         showCancel: false,
         confirmText: '返回授权',
         success: function(res) {
-          console.log('点击返回授权时打印',res)
-          if (res.confirm) {
-          }
+          
+        }
+      })
+    }
+  }
+
+  handleGetPhone = e => {
+    const { dispatch }=this.props
+    if(e.detail.encryptedData) {
+      dispatch({
+        type:'common/saveGetPhoneDatas',
+        payload:{
+          iv: e.detail.iv,
+          encryptedData: e.detail.encryptedData
+        }
+      })
+      //重定向到首页
+      Taro.reLaunch({
+        url: '../../pages/index/index',
+      })
+    }else {
+      wx.showModal({
+        title: '提示',
+        content: '您拒绝了电话授权，将无法使用小程序，请授权后进入',
+        showCancel: false,
+        confirmText: '返回授权',
+        success: function(res) {
+          
         }
       })
     }
@@ -66,16 +91,31 @@ export default class Authorize extends Component {
           <View className='authorize_title'>
             小程序申请获取权限
           </View>
-          <Text className='authorize_description'>
-            获得你的公开信息（昵称、头像、地区等）
-          </Text>
-          <View className='btn_authorize_wrap'>
-            <Button className='btn_authorize' openType='getUserInfo' onGetUserInfo={this.getUserInfo} type='primary' lang='zh_CN'>
-              授权登录
-            </Button>
-          </View>
+          {
+            showFirst == 0?
+            <View>
+              <Text className='authorize_description'>
+                获得你的公开信息（昵称、头像、地区及性别等）
+              </Text>
+              <View className='btn_authorize_wrap'>
+                <Button className='btn_authorize' openType='getUserInfo' onGetUserInfo={this.getUserInfo} type='primary' lang='zh_CN'>
+                  授权登录
+                </Button>
+              </View>
+            </View>
+            :
+            <View>
+              <Text className='authorize_description'>
+                获得你的电话信息
+              </Text>
+              <View className='btn_authorize_wrap'>
+                <Button className='btn_authorize' openType='getPhoneNumber' type='primary' lang='zh_CN' onGetPhoneNumber={this.handleGetPhone.bind(this)}>
+                  获取电话
+                </Button>
+              </View>
+            </View>
+          }
         </View>
-        
       </View>
     )
   }

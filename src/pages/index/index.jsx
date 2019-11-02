@@ -10,7 +10,8 @@ import personPng from '../../assets/images/personal.png'
   userName: common.userName,
   grade: common.grade,
   avatarUrl: common.avatarUrl,
-  phone: common.phone,
+  iv: common.iv,
+  encryptedData: common.encryptedData,
 }))
 
 export default class Index extends Component {
@@ -25,18 +26,17 @@ export default class Index extends Component {
   }
 
   async componentWillMount () {
-    console.log()
   }
 
   async componentDidMount () {
-    const {dispatch,avatarUrl} = this.props
+    const {dispatch,avatarUrl,encryptedData,iv} = this.props
     wx.checkSession({
       success () {
         //session_key 未过期，并且在本生命周期一直有效
-        console.log('已经登录过了')
+        
       },
       fail () {
-        // session_key 已经失效，需要重新执行登录流程
+        // 没有登录过,或者 session_key 已经失效，需要重新执行登录流程
         wx.login({
           success: res => {
             //用得到的code,换取服务端rdSessionId,保存到Storage里面了
@@ -54,7 +54,7 @@ export default class Index extends Component {
     //获取用户授权情况
     await wx.getSetting({
       success (res){
-        if (res.authSetting['scope.userInfo']) {
+        if (res.authSetting['scope.userInfo'] && encryptedData!=='') {
           Taro.getUserInfo({
             success: function(res) {
               //取出storage的sessionKey,带上其他两个条件去换取电话
@@ -64,8 +64,8 @@ export default class Index extends Component {
                     type:'common/getPhone',
                     payload:{
                       sessionKey: storage.data,
-                      encryptedData: res.encryptedData,
-                      iv:res.iv
+                      encryptedData: encryptedData,
+                      iv:iv
                     }
                   })
                 ))
@@ -361,9 +361,7 @@ export default class Index extends Component {
           <View>到时跳转到"新用户报名页面"</View>
         }
         {/* 用于测试 */}
-        <View>phone: {this.props.phone?this.props.phone:'null'}</View>
         <View style={{padding:'20px'}}>
-          <AtButton type='secondary' size='normal' onClick={this.componentDidMount.bind(this)}>获取电话</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长</AtButton>
           <AtButton type='secondary' size='normal' onClick={this.changeSF2.bind(this)}>老师</AtButton>
