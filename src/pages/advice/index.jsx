@@ -55,6 +55,7 @@ export default class Index extends Component {
             onSubmit={this.submitHandle.bind(this)}
         >
           <AtTextarea
+            height='200'            
             value={this.state.inputValue}
             onChange={this.handleChangeText.bind(this)}
             maxLength={200}

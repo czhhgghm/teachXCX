@@ -76,6 +76,7 @@ export default class Index extends Component {
         </View>
         <AtTextarea
           value={inputValue}
+          height='200'
           onChange={this.handleChangeText.bind(this)}
           maxLength={200}
           placeholder='请留下您对本堂课程的反馈，我们将努力改进~'

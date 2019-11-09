@@ -8,12 +8,19 @@ page{
     background:#f6f6f6;
 }
 
-.cardStyle {
-    box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
-    margin-top: 20px;
-}
+.index {
+    margin-bottom: 20px;
 
-.bottom-btn {
-    top: 50px;
-    width: 200px;
+    .cardStyle {
+        box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
+        margin-top: 20px;
+    }
+
+    .separate {
+        margin-top: 20px;
+
+        .bottom-btn {
+            width: 200px;
+        }
+    }
 }

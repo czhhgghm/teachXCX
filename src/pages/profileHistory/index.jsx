@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtCard, AtModal,AtButton } from 'taro-ui'
+import { AtCard, AtModal, AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
@@ -14,7 +14,8 @@ export default class Index extends Component {
     this.state = {
       isOpened: true,
       isCircle: true,
-      btnLoading: false
+      btnLoading: false,
+      btnDisabled: false
     }
   };
 
@@ -50,13 +51,19 @@ export default class Index extends Component {
     this.setState({
       btnLoading: true
     })
-  }
 
-  // Taro.startPullDownRefresh(params).then(...)
+    setTimeout(() => {
+      //当没有数据了,将按钮禁用
+      this.setState({
+        btnLoading: false,
+        btnDisabled: true
+      })
+    }, 2000);
+  }
   
   render () {
     const {userName} = this.props
-    const {isOpened,btnLoading,isCircle} = this.state
+    const {isOpened,btnLoading,isCircle,btnDisabled} = this.state
     const name = this.$router.params.key
     return (
       <View className='index'>
@@ -105,15 +112,50 @@ export default class Index extends Component {
         >
           感觉老师的上课速度偏快,有点跟不上节奏
         </AtCard>
-        <AtButton 
-          type='secondary' 
-          className="bottom-btn" 
-          size='small'
-          circle={isCircle}
-          onClick={this.getMoreProfile.bind(this)}
-          loading={btnLoading}
-        >查看更多
-        </AtButton>
+        <AtCard
+          note='2019/09/26'
+          extra={userName}
+          title='评分:4'
+          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          className="cardStyle"
+        >
+          感觉老师的上课速度偏快,有点跟不上节奏
+        </AtCard>
+        <AtCard
+          note='2019/09/26'
+          extra={userName}
+          title='评分:4'
+          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          className="cardStyle"
+        >
+          感觉老师的上课速度偏快,有点跟不上节奏
+        </AtCard>
+        <View className="separate">
+        {
+          btnDisabled==false?
+          <AtButton 
+            type='secondary' 
+            className="bottom-btn" 
+            size='small'
+            disabled={btnDisabled}
+            circle={isCircle}
+            onClick={this.getMoreProfile.bind(this)}
+            loading={btnLoading}
+          >查看更多
+          </AtButton>
+          :
+          <AtButton 
+            type='secondary' 
+            className="bottom-btn" 
+            size='small'
+            disabled={btnDisabled}
+            circle={isCircle}
+            onClick={this.getMoreProfile.bind(this)}
+            loading={btnLoading}
+          >没有更多了
+          </AtButton>
+        }
+        </View>
       </View>
     )
   }

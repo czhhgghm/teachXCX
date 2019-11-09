@@ -117,7 +117,7 @@ export default class Index extends Component {
             value={otherPhone}
             onChange={this.handleChangeOtherPhone.bind(this)}
           />
-          <AtButton type='secondary' formType='submit'>提交</AtButton>
+          <AtButton type='primary' formType='submit'>提交</AtButton>
         </AtForm>
       </View>
     )
