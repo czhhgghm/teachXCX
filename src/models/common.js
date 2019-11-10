@@ -16,7 +16,6 @@ export default {
         beginProject: '2019-10',
         classTime: '周日上午',
         classPlace: '高要',
-        studySituation: '补基础'
     },
     
     effects: {
@@ -107,13 +106,6 @@ export default {
             return {
                 ...state,
                 classPlace
-            }
-        },
-        changeStudySituation(state,{payload}) {
-            const {studySituation} = payload
-            return {
-                ...state,
-                studySituation
             }
         },
     }

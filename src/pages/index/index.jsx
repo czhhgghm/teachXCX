@@ -362,10 +362,10 @@ export default class Index extends Component {
         }
         {/* 用于测试 */}
         <View style={{padding:'20px'}}>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF2.bind(this)}>老师</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF3.bind(this)}>游客</AtButton>
+          <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员模式</AtButton>
+          <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长模式</AtButton>
+          <AtButton type='secondary' size='normal' onClick={this.changeSF2.bind(this)}>老师模式</AtButton>
+          <AtButton type='secondary' size='normal' onClick={this.changeSF3.bind(this)}>游客模式</AtButton>
         </View>
       </View>
       

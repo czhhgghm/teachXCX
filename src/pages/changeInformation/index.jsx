@@ -12,7 +12,6 @@ import { AtInput, AtForm, AtButton } from 'taro-ui'
   beginProject: common.beginProject,
   classTime: common.classTime,
   classPlace: common.classPlace,
-  studySituation: common.studySituation,
 }))
 
 export default class Index extends Component {
@@ -37,7 +36,7 @@ export default class Index extends Component {
 
   componentDidMount () {
     const {params} = this.$router
-    const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace,studySituation} = this.props
+    const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace} = this.props
     let key = 
       params.key == 'userName'? '姓名'
       :params.key == 'perPhone'? '学生电话'
@@ -46,7 +45,6 @@ export default class Index extends Component {
       :params.key == 'beginProject'? '开始上课时间'
       :params.key == 'classTime'? '上课时段'
       :params.key == 'classPlace'? '上课地区'
-      :params.key == 'studySituation'? '学科学习情况'
       : ''
     let value = 
       params.key == 'userName'? userName
@@ -56,7 +54,6 @@ export default class Index extends Component {
       :params.key == 'classTime'? classTime
       :params.key == 'beginProject'? beginProject
       :params.key == 'classPlace'? classPlace
-      :params.key == 'studySituation'? studySituation
       :''
     let type = 
       params.key == 'userName'? 'text'
@@ -66,7 +63,6 @@ export default class Index extends Component {
       :params.key == 'beginProject'? 'text'
       :params.key == 'classTime'? 'text'
       :params.key == 'classPlace'? 'text'
-      :params.key == 'studySituation'? 'text'
       : ''
     let maxLength = 
       params.key == 'userName'? '6'
@@ -76,7 +72,6 @@ export default class Index extends Component {
       :params.key == 'beginProject'? '7'
       :params.key == 'classTime'? '9'
       :params.key == 'classPlace'? '6'
-      :params.key == 'studySituation'? '6'
       : ''
 
     this.setState({
@@ -166,14 +161,7 @@ export default class Index extends Component {
       payload: {
         classPlace: value
       }
-    },this.jumpTab())
-    :select == 'studySituation'?
-    dispatch({
-      type: 'common/changeStudySituation',
-      payload: {
-        studySituation: value
-      }
-    },this.jumpTab()): ''
+    },this.jumpTab()):''
   }
 
   handleChange = e => {

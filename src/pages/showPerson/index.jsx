@@ -12,7 +12,6 @@ import { AtList, AtListItem } from "taro-ui"
   beginProject: common.beginProject,
   classTime: common.classTime,
   classPlace: common.classPlace,
-  studySituation: common.studySituation
 }))
 
 export default class Index extends Component {
@@ -47,7 +46,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace,studySituation} = this.props
+    const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace} = this.props
     return (
       <View className='index'>
         <AtList>
@@ -73,13 +72,11 @@ export default class Index extends Component {
             arrow='right'
             title='辅导学科'
             extraText={coachingCourse}
-            // onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=coachingCourse`)}
           />
           <AtListItem
             arrow='right'
             title='开始上课时间'
             extraText={beginProject}
-            // onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=beginProject`)}
           />
           <AtListItem
             arrow='right'
@@ -92,12 +89,6 @@ export default class Index extends Component {
             title='上课地区'
             extraText={classPlace}
             onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=classPlace`)}
-          />
-          <AtListItem
-            arrow='right'
-            title='学科学习情况'
-            extraText={studySituation}
-            onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=studySituation`)}
           />
         </AtList>
       </View>

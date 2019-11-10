@@ -75,7 +75,7 @@ export default class ShowClassFB extends Component {
             active={studentActive}
             onClick={this.studentOnClick.bind(this)}
           >
-            学生信息
+            学生反馈信息
           </AtTag>
           <AtTag
             className="tagStyle"
@@ -83,7 +83,7 @@ export default class ShowClassFB extends Component {
             active={teacherActive}
             onClick={this.teacherOnClick.bind(this)}
           >
-            老师信息
+            老师反馈信息
           </AtTag>
         </View>
         <View>

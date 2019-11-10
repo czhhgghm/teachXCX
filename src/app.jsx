@@ -39,6 +39,7 @@ class App extends Component {
       'pages/profileHistory/index',
       'pages/viewNewUsers/index',
       'pages/showAdvice/index',
+      'pages/addUsers/index',
     ],
     window: {
       backgroundTextStyle: 'light',
