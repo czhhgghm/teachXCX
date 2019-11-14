@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtAccordion, AtList, AtListItem, AtPagination, AtSearchBar } from 'taro-ui'
+import { AtAccordion, AtList, AtListItem, AtPagination, AtSearchBar, AtModal } from 'taro-ui'
 
 export default class Index extends Component {
   constructor(props) {
@@ -9,7 +9,9 @@ export default class Index extends Component {
     this.state = {
       toView: false,
       viewed: false,
-      searchValue: ''
+      searchValue: '',
+      showPreModal: false,
+      showModaled: false,
     }
   };
 
@@ -63,6 +65,51 @@ export default class Index extends Component {
   onActionClick() {
     console.log('点击搜索')
   }
+
+  selectPreItem = value => {
+    this.setState({
+      showPreModal: true
+    })
+  }
+
+  handleClosePreModal() {
+    console.log('点击了屏幕外,弹框消失即可')
+    this.setState({
+      showPreModal: false
+    })
+  }
+
+  handleCancelPreModal() {
+    console.log('执行"等候处理"的请求')
+    this.setState({
+      showPreModal: false
+    })
+  }
+
+  handleConfirmPreModal() {
+    console.log('执行"已处理"的请求')
+    this.setState({
+      showPreModal: false
+    })
+  }
+
+  selectItemed() {
+    this.setState({
+      showModaled: true
+    })
+  }
+
+  handleCloseModaled() {
+    this.setState({
+      showModaled: false
+    })
+  }
+
+  handleConfirmModaled() {
+    this.setState({
+      showModaled: false
+    })
+  }
   
   render () {
     return (
@@ -77,16 +124,19 @@ export default class Index extends Component {
               title='新用户'
               extraText='2019/10/31'
               arrow='right'
+              onClick={this.selectPreItem.bind(this,'1')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/25'
               arrow='right'
+              onClick={this.selectPreItem.bind(this,'2')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/24'
               arrow='right'
+              onClick={this.selectPreItem.bind(this,'3')}
             />
           </AtList>
         </AtAccordion>
@@ -105,46 +155,55 @@ export default class Index extends Component {
               title='新用户'
               extraText='2019/10/31'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/30'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/28'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/25'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/22'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/21'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/20'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/18'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
             <AtListItem
               title='新用户'
               extraText='2019/10/15'
               arrow='right'
+              onClick={this.selectItemed.bind(this,'4')}
             />
           </AtList>
           <AtPagination 
@@ -155,7 +214,24 @@ export default class Index extends Component {
           >
           </AtPagination>
         </AtAccordion>
-        
+        <AtModal
+          isOpened={this.state.showPreModal}
+          title='新用户信息'
+          cancelText='等候处理'
+          confirmText='处理完成'
+          onClose={ this.handleClosePreModal.bind(this) }
+          onCancel={ this.handleCancelPreModal.bind(this) }
+          onConfirm={ this.handleConfirmPreModal.bind(this) }
+          content='学生姓名:李云龙/n/r学生电话:13354687155/n/r家长电话:15623865478'
+        />
+        <AtModal
+          isOpened={this.state.showModaled}
+          title='新用户信息'
+          confirmText='确定'
+          onClose={ this.handleCloseModaled.bind(this) }
+          onConfirm={ this.handleConfirmModaled.bind(this) }
+          content='欢迎加入京东凹凸实验室\n\r欢迎加入京东凹凸实验室'
+        />
       </View>
     )
   }

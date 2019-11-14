@@ -133,8 +133,8 @@ export default class Index extends Component {
   }
 
   changeSF3() {
-    this.setState({
-      identityId: 3,
+    Taro.navigateTo({
+      url: '/pages/signUp/index'
     })
   }
 
@@ -152,7 +152,7 @@ export default class Index extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View>{userName}</View>
+                  <View className='header-name'>{userName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{grade}</View>
@@ -223,7 +223,7 @@ export default class Index extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View>{userName}</View>
+                  <View className='header-name'>{userName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{grade}</View>
@@ -294,7 +294,7 @@ export default class Index extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View>{userName}</View>
+                  <View className='header-name'>{userName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{grade}</View>
@@ -329,7 +329,7 @@ export default class Index extends Component {
                     url: '/pages/usersManage/index'
                   },
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: 'https://img11.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
                     value: '新用户信息',
                     url: '/pages/viewNewUsers/index'
                   },
@@ -339,7 +339,7 @@ export default class Index extends Component {
                     url: '/pages/showClassFB/index'
                   },
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: 'https://img13.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
                     value: '用户建议',
                     url: '/pages/showAdvice/index'
                   },
@@ -358,7 +358,7 @@ export default class Index extends Component {
             </View>
           </View>
           :
-          <View>到时跳转到"新用户报名页面"</View>
+          ''
         }
         {/* 用于测试 */}
         <View style={{padding:'20px'}}>
@@ -368,7 +368,6 @@ export default class Index extends Component {
           <AtButton type='secondary' size='normal' onClick={this.changeSF3.bind(this)}>游客模式</AtButton>
         </View>
       </View>
-      
     )
   }
 }
