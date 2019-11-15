@@ -7,6 +7,7 @@ import personPng from '../../assets/images/personal.png'
 
 
 @connect(({ common }) => ({
+  identityId: common.identityId,
   userName: common.userName,
   grade: common.grade,
   avatarUrl: common.avatarUrl,
@@ -17,7 +18,7 @@ import personPng from '../../assets/images/personal.png'
 export default class Index extends Component {
   constructor() {
     this.state = {
-      identityId: 0,
+      // identityId: 0,
     }
   }
 
@@ -115,20 +116,32 @@ export default class Index extends Component {
   }
 
   changeSF0() {
-    this.setState({
-      identityId: 0,
+    const {dispatch} = this.props
+    dispatch({
+      type:'common/changeIdentityId',
+      payload:{
+        identityId: 0,
+      }
     })
   }
 
   changeSF1() {
-    this.setState({
-      identityId: 1,
+    const {dispatch} = this.props
+    dispatch({
+      type:'common/changeIdentityId',
+      payload:{
+        identityId: 1,
+      }
     })
   }
 
   changeSF2() {
-    this.setState({
-      identityId: 2,
+    const {dispatch} = this.props
+    dispatch({
+      type:'common/changeIdentityId',
+      payload:{
+        identityId: 2,
+      }
     })
   }
 
@@ -139,12 +152,83 @@ export default class Index extends Component {
   }
 
   render () {
-    const {identityId} = this.state
+    const {identityId} = this.props
     const {userName,grade,avatarUrl} = this.props
     return (
       <View>
         {
-          identityId == 1 ? 
+          identityId == 0 ? 
+          <View className='index'>
+            <View className='header-outer'>
+              <View className='at-row at-row__align--center header'>
+                <View className='at-col at-col-2'>
+                  <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
+                </View>
+                <View className='at-col at-col-7 header-middle'>
+                  <View className='header-name'>{userName}</View>
+                  <View>
+                    <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
+                    <View className='afterIcon-font'>{grade}</View>
+                  </View>
+                </View>
+                <View className='at-col at-col-3'>
+                  <AtButton 
+                    size='normal' 
+                    className='editBtn'
+                    onClick={this.navigateToPage.bind(
+                      this,
+                      '/pages/showPerson/index'
+                    )}
+                  >
+                    <View className='beforeIcon-font'>个人信息</View>
+                    <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
+                  </AtButton>
+                </View>
+              </View>
+            </View>
+            <View className='service-outer'>
+              <View className='title'>服务档案</View>
+              <AtGrid 
+                className='main'
+                onClick={this.jumpPages}
+                hasBorder={false}
+                data={
+                [
+                  {
+                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    value: '用户管理',
+                    url: '/pages/usersManage/index'
+                  },
+                  {
+                    image: 'https://img11.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    value: '新用户信息',
+                    url: '/pages/viewNewUsers/index'
+                  },
+                  {
+                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                    value: '师生课堂反馈',
+                    url: '/pages/showClassFB/index'
+                  },
+                  {
+                    image: 'https://img13.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    value: '用户建议',
+                    url: '/pages/showAdvice/index'
+                  },
+                  {
+                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                    value: '审批方案',
+                    url: '/pages/reviewProgram/index'
+                  },
+                  {
+                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    value: '更多功能',
+                    url: ''
+                  }
+                ]
+              } />
+            </View>
+          </View>
+          :identityId == 1 ? 
           <View className='index'>
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
@@ -286,79 +370,7 @@ export default class Index extends Component {
               } />
             </View>
           </View>
-          : identityId == 0 ? 
-          <View className='index'>
-            <View className='header-outer'>
-              <View className='at-row at-row__align--center header'>
-                <View className='at-col at-col-2'>
-                  <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
-                </View>
-                <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{userName}</View>
-                  <View>
-                    <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                    <View className='afterIcon-font'>{grade}</View>
-                  </View>
-                </View>
-                <View className='at-col at-col-3'>
-                  <AtButton 
-                    size='normal' 
-                    className='editBtn'
-                    onClick={this.navigateToPage.bind(
-                      this,
-                      '/pages/showPerson/index'
-                    )}
-                  >
-                    <View className='beforeIcon-font'>个人信息</View>
-                    <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
-                  </AtButton>
-                </View>
-              </View>
-            </View>
-            <View className='service-outer'>
-              <View className='title'>服务档案</View>
-              <AtGrid 
-                className='main'
-                onClick={this.jumpPages}
-                hasBorder={false}
-                data={
-                [
-                  {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-                    value: '用户管理',
-                    url: '/pages/usersManage/index'
-                  },
-                  {
-                    image: 'https://img11.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-                    value: '新用户信息',
-                    url: '/pages/viewNewUsers/index'
-                  },
-                  {
-                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-                    value: '师生课堂反馈',
-                    url: '/pages/showClassFB/index'
-                  },
-                  {
-                    image: 'https://img13.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-                    value: '用户建议',
-                    url: '/pages/showAdvice/index'
-                  },
-                  {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-                    value: '审批方案',
-                    url: '/pages/reviewProgram/index'
-                  },
-                  {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
-                    value: '更多功能',
-                    url: ''
-                  }
-                ]
-              } />
-            </View>
-          </View>
-          :
-          ''
+          :''
         }
         {/* 用于测试 */}
         <View style={{padding:'20px'}}>

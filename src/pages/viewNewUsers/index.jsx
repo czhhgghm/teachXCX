@@ -112,6 +112,7 @@ export default class Index extends Component {
   }
   
   render () {
+    const content = '学生姓名:李云龙'+'\n'+'学生电话:13354687155'+'\n'+'家长电话:15623865478'
     return (
       <View className='index'>
         <AtAccordion
@@ -222,7 +223,7 @@ export default class Index extends Component {
           onClose={ this.handleClosePreModal.bind(this) }
           onCancel={ this.handleCancelPreModal.bind(this) }
           onConfirm={ this.handleConfirmPreModal.bind(this) }
-          content='学生姓名:李云龙/n/r学生电话:13354687155/n/r家长电话:15623865478'
+          content={content}
         />
         <AtModal
           isOpened={this.state.showModaled}
@@ -230,7 +231,7 @@ export default class Index extends Component {
           confirmText='确定'
           onClose={ this.handleCloseModaled.bind(this) }
           onConfirm={ this.handleConfirmModaled.bind(this) }
-          content='欢迎加入京东凹凸实验室\n\r欢迎加入京东凹凸实验室'
+          content={content}
         />
       </View>
     )

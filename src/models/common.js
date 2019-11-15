@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro'
 export default {
     namespace: 'common',
     state: {
+        identityId: 0,
         avatarUrl: '',
         userName: '姓名',
         iv: '',
@@ -36,6 +37,13 @@ export default {
     },
 
     reducers: {
+        changeIdentityId(state, {payload}) {
+            const {identityId} = payload
+            return {
+                ...state,
+                identityId
+            }
+        },
         savePhone(state, {payload}) {
             const {phone} = payload
             return {
@@ -59,13 +67,6 @@ export default {
               avatarUrl
             }
         },
-        changeUserName(state,{payload}) {
-            const {userName} = payload
-            return {
-                ...state,
-                userName
-            }
-        },
         changePerPhone(state,{payload}) {
             const {perPhone} = payload
             return {
@@ -78,20 +79,6 @@ export default {
             return {
                 ...state,
                 parentPhone
-            }
-        },
-        changeCoachingCourse(state,{payload}) {
-            const {coachingCourse} = payload
-            return {
-                ...state,
-                coachingCourse
-            }
-        },
-        changeBeginProject(state,{payload}) {
-            const {beginProject} = payload
-            return {
-                ...state,
-                beginProject
             }
         },
         changeClassTime(state,{payload}) {

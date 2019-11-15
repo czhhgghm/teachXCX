@@ -5,21 +5,18 @@ import './index.scss'
 import { AtInput, AtForm, AtButton } from 'taro-ui'
 
 @connect(({ common }) => ({
-  userName: common.userName,
   perPhone: common.perPhone,
   parentPhone: common.parentPhone,
-  coachingCourse: common.coachingCourse,
-  beginProject: common.beginProject,
   classTime: common.classTime,
   classPlace: common.classPlace,
 }))
 
-export default class Index extends Component {
+export default class ChangeInformation extends Component {
   constructor(props) {
     super(props)
     this.state={
-      key: '姓名',
-      value: '姓名',
+      key: '',
+      value: '',
       type: 'text',
       maxLength: '6',
       select: ''
@@ -36,40 +33,28 @@ export default class Index extends Component {
 
   componentDidMount () {
     const {params} = this.$router
-    const {userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace} = this.props
+    const {perPhone,parentPhone,classTime,classPlace} = this.props
     let key = 
-      params.key == 'userName'? '姓名'
-      :params.key == 'perPhone'? '学生电话'
+      params.key == 'perPhone'? '学生电话'
       :params.key == 'parentPhone'? '家长电话'
-      :params.key == 'coachingCourse'? '辅导学科'
-      :params.key == 'beginProject'? '开始上课时间'
       :params.key == 'classTime'? '上课时段'
       :params.key == 'classPlace'? '上课地区'
       : ''
     let value = 
-      params.key == 'userName'? userName
-      :params.key == 'perPhone'? perPhone
+      params.key == 'perPhone'? perPhone
       :params.key == 'parentPhone'? parentPhone
-      :params.key == 'coachingCourse'? coachingCourse
       :params.key == 'classTime'? classTime
-      :params.key == 'beginProject'? beginProject
       :params.key == 'classPlace'? classPlace
       :''
     let type = 
-      params.key == 'userName'? 'text'
-      :params.key == 'perPhone'? 'phone'
+      params.key == 'perPhone'? 'phone'
       :params.key == 'parentPhone'? 'phone'
-      :params.key == 'coachingCourse'? 'text'
-      :params.key == 'beginProject'? 'text'
       :params.key == 'classTime'? 'text'
       :params.key == 'classPlace'? 'text'
       : ''
     let maxLength = 
-      params.key == 'userName'? '6'
-      :params.key == 'perPhone'? '11'
+      params.key == 'perPhone'? '11'
       :params.key == 'parentPhone'? '11'
-      :params.key == 'coachingCourse'? '6'
-      :params.key == 'beginProject'? '7'
       :params.key == 'classTime'? '9'
       :params.key == 'classPlace'? '6'
       : ''
@@ -97,15 +82,7 @@ export default class Index extends Component {
     const {dispatch} = this.props
     let phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
-    select == 'userName'?(
-      dispatch({
-        type: 'common/changeUserName',
-        payload: {
-          userName: value
-        }
-      },this.jumpTab())
-    )
-    :select == 'perPhone'?(
+    select == 'perPhone'?(
       phoneReg.test(value)?(
         dispatch({
           type: 'common/changePerPhone',
@@ -119,7 +96,6 @@ export default class Index extends Component {
         icon: 'none'
       })
     )
-    
     :select == 'parentPhone'?(
       phoneReg.test(value)?(
         dispatch({
@@ -134,20 +110,6 @@ export default class Index extends Component {
         icon: 'none'
       })
     )
-    :select == 'coachingCourse'?
-    dispatch({
-      type: 'common/changeCoachingCourse',
-      payload: {
-        coachingCourse: value
-      }
-    },this.jumpTab())
-    :select == 'beginProject'?
-    dispatch({
-      type: 'common/changeBeginProject',
-      payload: {
-        beginProject: value
-      }
-    },this.jumpTab())
     :select == 'classTime'?
     dispatch({
       type: 'common/changeClassTime',
