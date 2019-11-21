@@ -7,8 +7,6 @@ export default {
         identityId: 0,
         avatarUrl: '',
         userName: '姓名',
-        iv: '',
-        encryptedData: '',
         phone: '',
         grade: '高三',
         perPhone: '15626097908',
@@ -22,7 +20,9 @@ export default {
     effects: {
         *getSessionId({payload},{call,put}) {
             const response = yield call(getSessionId,payload);
-            Taro.setStorage({ key: 'sessionKey', data: response.data })
+            wx.setStorageSync('sessionKey', response.data.sessionKey)
+            wx.setStorageSync('openid', response.data.openid)
+            console.log('用得到的code,换取服务端rdSessionId,保存到Storage里面了')
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
@@ -31,7 +31,7 @@ export default {
                 payload: {
                     phone: response.data
                 }
-            }) 
+            })
         },
 
     },
@@ -49,14 +49,6 @@ export default {
             return {
                 ...state,
                 phone
-            }
-        },
-        saveGetPhoneDatas(state, {payload}) {
-            const {iv,encryptedData} = payload
-            return {
-                ...state,
-                iv,
-                encryptedData
             }
         },
         saveUserInfo(state, { payload }) {

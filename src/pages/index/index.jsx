@@ -4,21 +4,29 @@ import { connect } from '@tarojs/redux'
 import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
 import personPng from '../../assets/images/personal.png'
+import schedulePng from '../../assets/images/schedule.png'
+import archivesPng from '../../assets/images/archives.png'
+import userManagementPng from '../../assets/images/userManagement.png'
+import addUserPng from '../../assets/images/addUser.png'
+import advicePng from '../../assets/images/advice.png'
+import morePng from '../../assets/images/more.png'
+import tutoringPng from '../../assets/images/tutoring.png'
+import checkPng from '../../assets/images/check.png'
+import checkClassPng from '../../assets/images/checkClass.png'
+import userInformationPng from '../../assets/images/userInformation.png'
 
 
 @connect(({ common }) => ({
   identityId: common.identityId,
-  userName: common.userName,
   grade: common.grade,
+  userName: common.userName,
   avatarUrl: common.avatarUrl,
-  iv: common.iv,
-  encryptedData: common.encryptedData,
 }))
 
 export default class Index extends Component {
   constructor() {
     this.state = {
-      // identityId: 0,
+
     }
   }
 
@@ -27,20 +35,22 @@ export default class Index extends Component {
   }
 
   async componentWillMount () {
+    
   }
 
   async componentDidMount () {
-    const {dispatch,avatarUrl,encryptedData,iv} = this.props
+    const {dispatch} = this.props
+    const openid = wx.getStorageSync('openid')?wx.getStorageSync('openid'):''
+    
+    //检查是否登录过???
     wx.checkSession({
       success () {
         //session_key 未过期，并且在本生命周期一直有效
-        
       },
       fail () {
         // 没有登录过,或者 session_key 已经失效，需要重新执行登录流程
         wx.login({
           success: res => {
-            //用得到的code,换取服务端rdSessionId,保存到Storage里面了
             dispatch({
               type: 'common/getSessionId',
               payload: {
@@ -52,43 +62,23 @@ export default class Index extends Component {
       }
     })
 
-    //获取用户授权情况
-    await wx.getSetting({
-      success (res){
-        if (res.authSetting['scope.userInfo'] && encryptedData!=='') {
-          Taro.getUserInfo({
-            success: function(res) {
-              //取出storage的sessionKey,带上其他两个条件去换取电话
-              Taro.getStorage({ key: 'sessionKey' })
-                .then(storage => (
-                  dispatch({
-                    type:'common/getPhone',
-                    payload:{
-                      sessionKey: storage.data,
-                      encryptedData: encryptedData,
-                      iv:iv
-                    }
-                  })
-                ))
-              //解决因为缓存,导致用户姓名和头像加载不出来的问题
-              if(avatarUrl == '') {
-                dispatch({
-                  type:'common/saveUserInfo',
-                  payload:{
-                    userName: res.userInfo.nickName,
-                    avatarUrl: res.userInfo.avatarUrl
-                  }
-                })
-              }
-            }
-          })
-        }else {
-          Taro.reLaunch({
-            url: '../../pages/authorize/index',
-          })
+    if(openid) {
+      const userName = wx.getStorageSync('userName')
+      const avatarUrl = wx.getStorageSync('avatarUrl')
+      dispatch({
+        type:'common/saveUserInfo',
+        payload:{
+          userName,
+          avatarUrl
         }
-      }
-    })
+      })
+    }
+    //没有登录过的,跳登录页面
+    else {
+      Taro.reLaunch({
+        url: '../../pages/authorize/index',
+      })
+    }
   }
 
   componentWillUnmount () { }
@@ -152,8 +142,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {identityId} = this.props
-    const {userName,grade,avatarUrl} = this.props
+    const {identityId,grade,userName,avatarUrl} = this.props
     return (
       <View>
         {
@@ -195,32 +184,32 @@ export default class Index extends Component {
                 data={
                 [
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: `${userManagementPng}`,
                     value: '用户管理',
                     url: '/pages/usersManage/index'
                   },
                   {
-                    image: 'https://img11.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: `${userInformationPng}`,
                     value: '新用户信息',
                     url: '/pages/viewNewUsers/index'
                   },
                   {
-                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                    image: `${checkClassPng}`,
                     value: '师生课堂反馈',
                     url: '/pages/showClassFB/index'
                   },
                   {
-                    image: 'https://img13.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: `${advicePng}`,
                     value: '用户建议',
                     url: '/pages/showAdvice/index'
                   },
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                    image: `${checkPng}`,
                     value: '审批方案',
                     url: '/pages/reviewProgram/index'
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${morePng}`,
                     value: '更多功能',
                     url: ''
                   }
@@ -266,32 +255,32 @@ export default class Index extends Component {
                 data={
                 [
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                    image: `${schedulePng}`,
                     value: '我的课表',
                     url: '/pages/schedule/index'
                   },
                   {
-                    image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                    image: `${archivesPng}`,
                     value: '个人档案',
                     url: '/pages/personalProfile/index'
                   },
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: `${addUserPng}`,
                     value: '推荐新用户',
                     url: '/pages/signUp/index'
                   },
                   {
-                    image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+                    image: `${advicePng}`,
                     value: '提供建议',
                     url: '/pages/advice/index'
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${morePng}`,
                     value: '更多功能',
                     url: ''
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${morePng}`,
                     value: '更多功能',
                     url: ''
                   }
@@ -337,32 +326,32 @@ export default class Index extends Component {
                 data={
                 [
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                    image: `${schedulePng}`,
                     value: '我的课表',
                     url: '/pages/schedule/index'
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${tutoringPng}`,
                     value: '辅导方案',
                     url: '/pages/coachingProgram/index'
                   },
                   {
-                    image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+                    image: `${addUserPng}`,
                     value: '推荐新用户',
                     url: '/pages/signUp/index'
                   },
                   {
-                    image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+                    image: `${advicePng}`,
                     value: '提供建议',
                     url: '/pages/advice/index'
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${morePng}`,
                     value: '更多功能',
                     url: ''
                   },
                   {
-                    image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
+                    image: `${morePng}`,
                     value: '更多功能',
                     url: ''
                   }

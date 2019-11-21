@@ -29,7 +29,9 @@ export default class Authorize extends Component {
     const { dispatch }=this.props
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
-        //把 微信用户名userName和头像地址avatarUrl 存储到model里面
+        //把 微信用户名userName和头像地址avatarUrl 缓存到本地
+        wx.setStorageSync('userName', res.userInfo.nickName,)
+        wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl,)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -58,11 +60,13 @@ export default class Authorize extends Component {
   handleGetPhone = e => {
     const { dispatch }=this.props
     if(e.detail.encryptedData) {
+      const sessionKey = wx.getStorageSync('sessionKey')
       dispatch({
-        type:'common/saveGetPhoneDatas',
+        type:'common/getPhone',
         payload:{
-          iv: e.detail.iv,
-          encryptedData: e.detail.encryptedData
+          sessionKey: sessionKey,
+          encryptedData: e.detail.encryptedData,
+          iv:e.detail.iv
         }
       })
       //重定向到首页
@@ -76,7 +80,6 @@ export default class Authorize extends Component {
         showCancel: false,
         confirmText: '返回授权',
         success: function(res) {
-          
         }
       })
     }
