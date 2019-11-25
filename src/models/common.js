@@ -1,4 +1,4 @@
-import {getSessionId,getPhone} from './service'
+import { getSessionId, getPhone, loginWithOpenid, loginWithPhone } from './service'
 import Taro from '@tarojs/taro'
 
 export default {
@@ -22,18 +22,20 @@ export default {
             const response = yield call(getSessionId,payload);
             wx.setStorageSync('sessionKey', response.data.sessionKey)
             wx.setStorageSync('openid', response.data.openid)
-            console.log('用得到的code,换取服务端rdSessionId,保存到Storage里面了')
+            console.log('用得到的code,换取服务端rdSessionId和openid,保存到Storage里面了')
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
+            wx.setStorageSync('phone', response.data)
+            console.log('getPhone接口得到的结果:',response)
+            console.log('getPhone接口得到的结果可能都需要保存到本地,或者后续重新请求这个结果')
             yield put({
-                type: 'savePhone',
+                type: 'savePhoneAndLogin',
                 payload: {
-                    phone: response.data
+                    phone: response.data,
                 }
             })
         },
-
     },
 
     reducers: {
@@ -44,11 +46,11 @@ export default {
                 identityId
             }
         },
-        savePhone(state, {payload}) {
+        savePhoneAndLogin(state, {payload}) {
             const {phone} = payload
             return {
                 ...state,
-                phone
+                phone,
             }
         },
         saveUserInfo(state, { payload }) {

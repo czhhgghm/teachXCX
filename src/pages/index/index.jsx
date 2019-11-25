@@ -20,7 +20,7 @@ import userInformationPng from '../../assets/images/userInformation.png'
   identityId: common.identityId,
   grade: common.grade,
   userName: common.userName,
-  avatarUrl: common.avatarUrl,
+  avatarUrl: common.avatarUrl
 }))
 
 export default class Index extends Component {
@@ -39,8 +39,8 @@ export default class Index extends Component {
   }
 
   async componentDidMount () {
-    const {dispatch} = this.props
-    const openid = wx.getStorageSync('openid')?wx.getStorageSync('openid'):''
+    const { dispatch } = this.props
+    const phone = wx.getStorageSync('phone')
     
     //检查是否登录过???
     wx.checkSession({
@@ -62,14 +62,22 @@ export default class Index extends Component {
       }
     })
 
-    if(openid) {
+    if(phone) {
       const userName = wx.getStorageSync('userName')
       const avatarUrl = wx.getStorageSync('avatarUrl')
+      const openid = wx.getStorageSync('openid')
       dispatch({
         type:'common/saveUserInfo',
         payload:{
           userName,
           avatarUrl
+        }
+      })
+      dispatch({
+        type:'common/loginWithOpenid',
+        payload:{
+          openid,
+          phone
         }
       })
     }

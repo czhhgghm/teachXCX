@@ -2,11 +2,12 @@
 
 // import index from '../pages/index/model'
 // import audit from '../pages/audit/model'
-// import leave from '../pages/leave/model'
+import addUsers from '../pages/addUsers/model'
 import common from '../models/common'
 
 export default [
-    common
+    common,
+    addUsers
 ]
 
 // export default [

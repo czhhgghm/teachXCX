@@ -12,7 +12,7 @@ export async function getSessionId(data) {
 
 export async function getPhone(data) {
     return postRrequest({
-        url: '/user/phone',
+        url: '/user/phoneAndLogin',
         method: 'POST',
         data,
     }) 

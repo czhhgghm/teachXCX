@@ -5,7 +5,7 @@ import "./index.scss"
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
-  ...common
+  phone: common.phone,
 }))
 
 
@@ -61,18 +61,22 @@ export default class Authorize extends Component {
     const { dispatch }=this.props
     if(e.detail.encryptedData) {
       const sessionKey = wx.getStorageSync('sessionKey')
+      const openid = wx.getStorageSync('openid')
       dispatch({
         type:'common/getPhone',
         payload:{
           sessionKey: sessionKey,
           encryptedData: e.detail.encryptedData,
-          iv:e.detail.iv
+          iv:e.detail.iv,
+          openid
         }
       })
-      //重定向到首页
-      Taro.reLaunch({
-        url: '../../pages/index/index',
-      })
+      setTimeout(() => {
+        //重定向到首页
+        Taro.reLaunch({
+          url: '../../pages/index/index',
+        })
+      }, 0);
     }else {
       wx.showModal({
         title: '提示',
@@ -84,7 +88,6 @@ export default class Authorize extends Component {
       })
     }
   }
-
 
   render() {
     return (
