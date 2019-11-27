@@ -5,7 +5,7 @@ import "./index.scss"
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
-  phone: common.phone,
+  ...common
 }))
 
 
@@ -20,9 +20,44 @@ export default class Authorize extends Component {
     }
   }
 
-  componentDidMount = () => {
-    
+  componentDidMount() {
+    const { dispatch } = this.props
+
+    wx.checkSession({
+      success () {
+        const sessionKey = wx.getStorageSync('sessionKey')
+        if(!sessionKey) {
+          console.log('执行了success方法')
+          console.log('但是之前没保存到sessionKey,还是需要login一次')
+          wx.login({
+            success: res => {
+              dispatch({
+                type: 'common/getSessionId',
+                payload: {
+                  code: res.code
+                }
+              })
+            }
+          })
+        }
+      },
+      fail () {
+        // 没有登录过,或者 session_key 已经失效，需要重新执行登录流程
+        console.log('执行了fail方法,去换取新的sessionKey和openid')
+        wx.login({
+          success: res => {
+            dispatch({
+              type: 'common/getSessionId',
+              payload: {
+                code: res.code
+              }
+            })
+          }
+        })
+      }
+    })
   };
+
 
   //点击授权登录按钮,
   getUserInfo = (e) => {
@@ -30,8 +65,8 @@ export default class Authorize extends Component {
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
         //把 微信用户名userName和头像地址avatarUrl 缓存到本地
-        wx.setStorageSync('userName', res.userInfo.nickName,)
-        wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl,)
+        wx.setStorageSync('userName', res.userInfo.nickName)
+        wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -57,27 +92,31 @@ export default class Authorize extends Component {
     }
   }
 
-  handleGetPhone = e => {
+  handleGetPhone = async(e) => {
     const { dispatch }=this.props
     if(e.detail.encryptedData) {
       const sessionKey = wx.getStorageSync('sessionKey')
       const openid = wx.getStorageSync('openid')
-      dispatch({
+      await dispatch({
         type:'common/getPhone',
         payload:{
           sessionKey: sessionKey,
           encryptedData: e.detail.encryptedData,
           iv:e.detail.iv,
-          openid
+          openid: openid
         }
       })
-      setTimeout(() => {
-        //重定向到首页
-        Taro.reLaunch({
-          url: '../../pages/index/index',
-        })
-      }, 0);
-    }else {
+      Taro.reLaunch({
+        url: '../../pages/index/index',
+      })  
+      // setTimeout(() => {
+      //   console.log('执行setTimeout')
+      //   Taro.reLaunch({
+      //     url: '../../pages/index/index',
+      //   })
+      // }, 1000)
+    }
+    else {
       wx.showModal({
         title: '提示',
         content: '您拒绝了电话授权，将无法使用小程序，请授权后进入',

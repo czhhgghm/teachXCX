@@ -3,7 +3,7 @@ import { View, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import './index.scss'
 import { AtIcon, AtButton, AtGrid } from 'taro-ui'
-import personPng from '../../assets/images/personal.png'
+import personPng from '../../assets/images/person.png'
 import schedulePng from '../../assets/images/schedule.png'
 import archivesPng from '../../assets/images/archives.png'
 import userManagementPng from '../../assets/images/userManagement.png'
@@ -20,7 +20,8 @@ import userInformationPng from '../../assets/images/userInformation.png'
   identityId: common.identityId,
   grade: common.grade,
   userName: common.userName,
-  avatarUrl: common.avatarUrl
+  avatarUrl: common.avatarUrl,
+  loginCode: common.loginCode,
 }))
 
 export default class Index extends Component {
@@ -39,52 +40,25 @@ export default class Index extends Component {
   }
 
   async componentDidMount () {
-    const { dispatch } = this.props
-    const phone = wx.getStorageSync('phone')
-    
-    //检查是否登录过???
-    wx.checkSession({
-      success () {
-        //session_key 未过期，并且在本生命周期一直有效
-      },
-      fail () {
-        // 没有登录过,或者 session_key 已经失效，需要重新执行登录流程
-        wx.login({
-          success: res => {
-            dispatch({
-              type: 'common/getSessionId',
-              payload: {
-                code: res.code
-              }
-            })
-          }
-        })
-      }
-    })
+    const { dispatch, loginCode } = this.props
+    console.log('首页查看loginCode',loginCode)
 
-    if(phone) {
+    //没有登录过的,跳登录页面
+    if(loginCode == -1) {
+      Taro.reLaunch({
+        url: '../../pages/authorize/index',
+      })
+      
+    }
+    else {
       const userName = wx.getStorageSync('userName')
       const avatarUrl = wx.getStorageSync('avatarUrl')
-      const openid = wx.getStorageSync('openid')
       dispatch({
         type:'common/saveUserInfo',
         payload:{
           userName,
           avatarUrl
         }
-      })
-      dispatch({
-        type:'common/loginWithOpenid',
-        payload:{
-          openid,
-          phone
-        }
-      })
-    }
-    //没有登录过的,跳登录页面
-    else {
-      Taro.reLaunch({
-        url: '../../pages/authorize/index',
       })
     }
   }
