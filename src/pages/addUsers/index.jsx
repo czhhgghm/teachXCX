@@ -13,16 +13,13 @@ export default class Index extends Component {
     super(props)
     this.state={
       optionValue: '',
-
       perName: '',
       perPhone: '',
-
       studentName: '',
       studentPhone: '',
       beginDate: '',
       endDate: '',
       classPlace: '',
-
       parentName: '',
       parentPhone: '',
     }
@@ -101,13 +98,14 @@ export default class Index extends Component {
     })
   }
 
-  addNumbers() {
+  async addNumbers() {
     const {dispatch} = this.props
     const {optionValue,beginDate,endDate,studentName,studentPhone,classPlace,parentName,parentPhone,perName,perPhone} = this.state
     let phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
+
     if(optionValue == 'student') {
       phoneReg.test(studentPhone)?(
-        dispatch({
+        await dispatch({
           type:'addUsers/addStudent',
           payload:{
             beginDate,
@@ -116,7 +114,12 @@ export default class Index extends Component {
             phone: studentPhone,
             place: classPlace
           }
-        })
+        },
+          Taro.showToast({
+            title: '添加成功',
+            icon: 'success'
+          })
+        )
       )
       :Taro.showToast({
         title: '输入手机号码格式不正确',
@@ -126,7 +129,7 @@ export default class Index extends Component {
     else if(optionValue == 'parent') {
       phoneReg.test(parentPhone)?(
         phoneReg.test(studentPhone)?(
-          dispatch({
+          await dispatch({
             type:'addUsers/addFamily',
             payload:{
               childName: studentName,
@@ -134,7 +137,12 @@ export default class Index extends Component {
               name: parentName,
               phone: parentPhone
             }
-          })
+          },
+            Taro.showToast({
+              title: '添加成功',
+              icon: 'success'
+            })
+          )
         )
         :Taro.showToast({
           title: '学生手机号码格式不正确',
@@ -149,25 +157,36 @@ export default class Index extends Component {
     }
     else if(optionValue == 'teacher') {
       phoneReg.test(perPhone)?(
-        dispatch({
+        await dispatch({
           type:'addUsers/addTeacher',
           payload:{
             name: perName,
             phone: perPhone,
           }
-        })
+        },
+          Taro.showToast({
+            title: '添加成功',
+            icon: 'success'
+          })
+        )
       )
       :Taro.showToast({
         title: '输入手机号码格式不正确',
         icon: 'none'
       })
     }
-    // Taro.showToast({
-    //   title: '添加成功'
-    // },wx.reLaunch({
-    //     url: '../../pages/index/index',
-    //   })
-    // )
+    this.setState({
+      optionValue: '',
+      perName: '',
+      perPhone: '',
+      studentName: '',
+      studentPhone: '',
+      beginDate: '',
+      endDate: '',
+      classPlace: '',
+      parentName: '',
+      parentPhone: ''
+    })
   }
 
   render () {

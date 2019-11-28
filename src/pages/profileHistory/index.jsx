@@ -5,7 +5,7 @@ import { AtCard, AtModal, AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
-  userName: common.userName
+  ...common
 }))
 
 export default class Index extends Component {
@@ -62,7 +62,6 @@ export default class Index extends Component {
   }
   
   render () {
-    const {userName} = this.props
     const {isOpened,btnLoading,isCircle,btnDisabled} = this.state
     const name = this.$router.params.key
     return (
@@ -79,7 +78,7 @@ export default class Index extends Component {
         <AtCard
           className="cardStyle"
           note='2019/10/17'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
         >
@@ -87,7 +86,7 @@ export default class Index extends Component {
         </AtCard>
         <AtCard
           note='2019/10/10'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
           className="cardStyle"
@@ -96,7 +95,7 @@ export default class Index extends Component {
         </AtCard>
         <AtCard
           note='2019/10/03'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
           className="cardStyle"
@@ -105,7 +104,7 @@ export default class Index extends Component {
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
           className="cardStyle"
@@ -114,7 +113,7 @@ export default class Index extends Component {
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
           className="cardStyle"
@@ -123,7 +122,7 @@ export default class Index extends Component {
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra={userName}
+          extra='李阳'
           title='评分:4'
           thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
           className="cardStyle"

@@ -3,18 +3,19 @@ import { getSessionId, getPhone } from './service'
 export default {
     namespace: 'common',
     state: {
-        identityId: 0,
+        authen: '管理员',
         avatarUrl: '',
-        userName: '姓名',
-        personDetails: {},
+        netName: '网名',
+        personName: '真实姓名',
+        id: -1,
         loginCode: -1,
         grade: '高三',
-        perPhone: '15626097908',
-        parentPhone: '15699999999',
+        perPhone: '15612345678',
+        parentPhone: '13312345678',
         coachingCourse: '语文数学英语',
-        beginProject: '2019-10',
+        beginProject: '2019-01-01',
         classTime: '周日上午',
-        classPlace: '高要',
+        classPlace: '广州',
     },
     
     effects: {
@@ -26,37 +27,43 @@ export default {
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
+            const result = response.data
+            console.log('getPhone接口的结果',result)
             yield put({
                 type: 'savePersonDetails',
                 payload: {
-                    personDetails: response.data,
-                    loginCode: response.code
+                    loginCode: response.code,
+                    id: result.id,
+                    authen: result.authen,
+                    personName: result.name
                 }
             })
         },
     },
 
     reducers: {
-        changeIdentityId(state, {payload}) {
-            const {identityId} = payload
+        changeAuthen(state, {payload}) {
+            const {authen} = payload
             return {
                 ...state,
-                identityId
+                authen
             }
         },
         savePersonDetails(state, {payload}) {
-            const {personDetails,loginCode} = payload
+            const {id,loginCode,authen,personName} = payload
             return {
                 ...state,
-                personDetails,
-                loginCode
+                id,
+                loginCode,
+                authen,
+                personName
             }
         },
         saveUserInfo(state, { payload }) {
-            const { userName, avatarUrl }=payload;
+            const { netName, avatarUrl }=payload;
             return {
               ...state,
-              userName,
+              netName,
               avatarUrl
             }
         },

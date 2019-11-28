@@ -40,13 +40,17 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/showPerson/index",
-					"pathName": "pages/showPerson/index",
+					"name": "pages/usersManage/index",
+					"pathName": "pages/usersManage/index",
 					"query": "",
 					"scene": null
 				}

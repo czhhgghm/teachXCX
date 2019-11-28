@@ -2,14 +2,20 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtFab, AtTag, AtSearchBar, AtList, AtListItem } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+
+@connect(({ usersManage }) => ({
+  studentList: usersManage.studentList,
+  familyList: usersManage.familyList,
+  teacherList: usersManage.teacherList,
+  managerList: usersManage.managerList,
+}))
 
 export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      managerActive: true,
-      studentActive: false,
-      teacherActive: false,
+      select: 'managerActive',
       searchValue: ''
     }
   };
@@ -20,7 +26,13 @@ export default class Index extends Component {
 
   componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/getManagersList',
+      payload:{}
+    })
+  }
 
   componentWillUnmount () { }
 
@@ -34,27 +46,47 @@ export default class Index extends Component {
     })
   }
 
-  studentOnClick() {
+  async studentOnClick() {
+    const {dispatch} = this.props
+    await dispatch({
+      type:'usersManage/getStudentsList',
+      payload:{}
+    })
     this.setState({
-      studentActive: true,
-      teacherActive: false,
-      managerActive: false
+      select: 'studentActive'
     })
   }
 
-  teacherOnClick() {
+  familyOnClick = async() => {
+    const {dispatch} = this.props
+    await dispatch({
+      type:'usersManage/getFamilyList',
+      payload:{}
+    })
     this.setState({
-      studentActive: false,
-      teacherActive: true,
-      managerActive: false
+      select: 'familyActive'
     })
   }
 
-  managerOnClick() {
+  async teacherOnClick() {
+    const {dispatch} = this.props
+    await dispatch({
+      type:'usersManage/getTeachersList',
+      payload:{}
+    })
     this.setState({
-      studentActive: false,
-      teacherActive: false,
-      managerActive: true
+      select: 'teacherActive'
+    })
+  }
+
+  async managerOnClick() {
+    const {dispatch} = this.props
+    await dispatch({
+      type:'usersManage/getManagersList',
+      payload:{}
+    })
+    this.setState({
+      select: 'managerActive'
     })
   }
 
@@ -69,18 +101,20 @@ export default class Index extends Component {
     console.log('点击搜索')
   }
 
-  changeDetail() {
+  handleChangeUser(e) {
+    console.log(e)
   }
   
   render () {
-    const {managerActive,studentActive,teacherActive} = this.state
+    const {select} = this.state
+    const {studentList,familyList,teacherList,managerList} = this.props
     return (
       <View className='index'>
         <View>
           <AtTag
             className="tagStyle"
             name='manager' 
-            active={managerActive}
+            active={select=='managerActive'?true:false}
             onClick={this.managerOnClick.bind(this)}
           >
             管理员
@@ -88,15 +122,23 @@ export default class Index extends Component {
           <AtTag
             className="tagStyle"
             name='student' 
-            active={studentActive}
+            active={select=='studentActive'?true:false}
             onClick={this.studentOnClick.bind(this)}
           >
-            学生/家长
+            学生
+          </AtTag>
+          <AtTag
+            className="tagStyle"
+            name='family' 
+            active={select=='familyActive'?true:false}
+            onClick={this.familyOnClick.bind(this)}
+          >
+            家长
           </AtTag>
           <AtTag
             className="tagStyle"
             name='teacher' 
-            active={teacherActive}
+            active={select=='teacherActive'?true:false}
             onClick={this.teacherOnClick.bind(this)}
           >
             老师
@@ -109,120 +151,99 @@ export default class Index extends Component {
         />
         
         <View>
-        {
-          managerActive?
           <AtList>
-            <AtListItem
-              arrow='right'
-              title='管理员A'
-              note='15622286923'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-            <AtListItem
-              arrow='right'
-              title='管理员B'
-              note='13352719939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='管理员C'
-              note='13343819939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='管理员D'
-              note='15622286923'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-            <AtListItem
-              arrow='right'
-              title='管理员E'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
+          {
+            select == 'managerActive'?(
+              managerList == []?(
+                <AtListItem
+                  arrow='right'
+                  title='管理员用例'
+                  note='123456789'
+                />
+              )
+              :(
+                managerList.map((item)=>{
+                  return(
+                    <AtListItem
+                      arrow='right'
+                      key={item.id}
+                      title={item.name}
+                      note={item.phone}
+                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                    />
+                  )
+                })
+              )
+            )
+            :select == 'studentActive'?(
+              studentList == []?(
+                <AtListItem
+                  arrow='right'
+                  title='学生用例'
+                  note='123456789'
+                />
+              )
+              :(
+                studentList.map((item)=>{
+                  return(
+                    <AtListItem
+                      arrow='right'
+                      key={item.id}
+                      title={item.name}
+                      note={item.phone}
+                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                    />
+                  )
+                })
+              )
+            )
+            :select == 'teacherActive'?(
+              teacherList == []?(
+                <AtListItem
+                  arrow='right'
+                  title='老师用例'
+                  note='123456789'
+                />
+              )
+              :(
+                teacherList.map((item)=>{
+                  return(
+                    <AtListItem
+                      arrow='right'
+                      key={item.id}
+                      title={item.name}
+                      note={item.phone}
+                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                    />
+                  )
+                })
+              )
+            )
+            :select == 'familyActive'?(
+              familyList == []?(
+                <AtListItem
+                  arrow='right'
+                  title='家长用例'
+                  note='123456789'
+                />
+              )
+              :(
+                familyList.map((item)=>{
+                  return(
+                    <AtListItem
+                      arrow='right'
+                      key={item.id}
+                      title={item.name}
+                      note={item.phone}
+                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                    />
+                  )
+                })
+              )
+            )
+            :<Text>获取数据异常</Text>
+          }
           </AtList>
-          :studentActive?
-          <AtList>
-            <AtListItem
-              arrow='right'
-              title='小明'
-              note='13352719939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='小红'
-              note='13343819939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='小王'
-              note='15622286923'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-            <AtListItem
-              arrow='right'
-              title='小明'
-              note='13352719939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='小红'
-              note='13343819939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='李强'
-              note='13352719939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='王东'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='张宇'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-          </AtList>
-          :teacherActive?
-          <AtList>
-            <AtListItem
-              arrow='right'
-              title='老师A'
-              note='13352719939'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='老师B'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='老师C'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-            <AtListItem
-              arrow='right'
-              title='老师D'
-              note='13329945878'
-              onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=$'{name}'`)}            
-            />
-          </AtList>
-          :'系统出错'
-        }
         </View>
         <AtFab onClick={this.onButtonClick.bind(this)}>
           <Text className='at-fab__icon at-icon at-icon-add' ></Text>

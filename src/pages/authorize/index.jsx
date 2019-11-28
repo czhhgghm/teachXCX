@@ -43,7 +43,6 @@ export default class Authorize extends Component {
       },
       fail () {
         // 没有登录过,或者 session_key 已经失效，需要重新执行登录流程
-        console.log('执行了fail方法,去换取新的sessionKey和openid')
         wx.login({
           success: res => {
             dispatch({
@@ -64,14 +63,13 @@ export default class Authorize extends Component {
     const { dispatch }=this.props
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
-        //把 微信用户名userName和头像地址avatarUrl 缓存到本地
-        wx.setStorageSync('userName', res.userInfo.nickName)
-        wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl)
+        //把 微信用户名netName和头像地址avatarUrl 缓存到本地
+        const result = res.userInfo
         dispatch({
           type:'common/saveUserInfo',
           payload:{
-            userName: res.userInfo.nickName,
-            avatarUrl: res.userInfo.avatarUrl
+            netName: result.nickName,
+            avatarUrl: result.avatarUrl
           }
         })
         this.setState({
@@ -94,27 +92,22 @@ export default class Authorize extends Component {
 
   handleGetPhone = async(e) => {
     const { dispatch }=this.props
-    if(e.detail.encryptedData) {
+    const result = e.detail
+    if(result.encryptedData) {
       const sessionKey = wx.getStorageSync('sessionKey')
       const openid = wx.getStorageSync('openid')
       await dispatch({
         type:'common/getPhone',
         payload:{
           sessionKey: sessionKey,
-          encryptedData: e.detail.encryptedData,
-          iv:e.detail.iv,
+          encryptedData: result.encryptedData,
+          iv:result.iv,
           openid: openid
         }
       })
       Taro.reLaunch({
         url: '../../pages/index/index',
-      })  
-      // setTimeout(() => {
-      //   console.log('执行setTimeout')
-      //   Taro.reLaunch({
-      //     url: '../../pages/index/index',
-      //   })
-      // }, 1000)
+      })
     }
     else {
       wx.showModal({
@@ -151,7 +144,7 @@ export default class Authorize extends Component {
             :
             <View>
               <Text className='authorize_description'>
-                获得你的电话信息
+                提示:如果长时间获取不到电话,则无法登陆,请清空缓存后重新尝试登陆
               </Text>
               <View className='btn_authorize_wrap'>
                 <Button className='btn_authorize' openType='getPhoneNumber' type='primary' lang='zh_CN' onGetPhoneNumber={this.handleGetPhone.bind(this)}>

@@ -17,9 +17,9 @@ import userInformationPng from '../../assets/images/userInformation.png'
 
 
 @connect(({ common }) => ({
-  identityId: common.identityId,
+  authen: common.authen,
   grade: common.grade,
-  userName: common.userName,
+  netName: common.netName,
   avatarUrl: common.avatarUrl,
   loginCode: common.loginCode,
 }))
@@ -40,26 +40,18 @@ export default class Index extends Component {
   }
 
   async componentDidMount () {
-    const { dispatch, loginCode } = this.props
+    const { loginCode } = this.props
     console.log('首页查看loginCode',loginCode)
 
-    //没有登录过的,跳登录页面
     if(loginCode == -1) {
+      //没有登录过的,跳登录页面
       Taro.reLaunch({
         url: '../../pages/authorize/index',
       })
       
     }
     else {
-      const userName = wx.getStorageSync('userName')
-      const avatarUrl = wx.getStorageSync('avatarUrl')
-      dispatch({
-        type:'common/saveUserInfo',
-        payload:{
-          userName,
-          avatarUrl
-        }
-      })
+      //登录成功,可以发送各种请求
     }
   }
 
@@ -90,9 +82,9 @@ export default class Index extends Component {
   changeSF0() {
     const {dispatch} = this.props
     dispatch({
-      type:'common/changeIdentityId',
+      type:'common/changeAuthen',
       payload:{
-        identityId: 0,
+        authen: '管理员',
       }
     })
   }
@@ -100,9 +92,9 @@ export default class Index extends Component {
   changeSF1() {
     const {dispatch} = this.props
     dispatch({
-      type:'common/changeIdentityId',
+      type:'common/changeAuthen',
       payload:{
-        identityId: 1,
+        authen: '学生',
       }
     })
   }
@@ -110,9 +102,9 @@ export default class Index extends Component {
   changeSF2() {
     const {dispatch} = this.props
     dispatch({
-      type:'common/changeIdentityId',
+      type:'common/changeAuthen',
       payload:{
-        identityId: 2,
+        authen: '老师',
       }
     })
   }
@@ -124,11 +116,11 @@ export default class Index extends Component {
   }
 
   render () {
-    const {identityId,grade,userName,avatarUrl} = this.props
+    const {authen,grade,netName,avatarUrl} = this.props
     return (
       <View>
         {
-          identityId == 0 ? 
+          authen == '管理员' ? 
           <View className='index'>
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
@@ -136,7 +128,7 @@ export default class Index extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{userName}</View>
+                  <View className='header-name'>{netName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{grade}</View>
@@ -199,7 +191,7 @@ export default class Index extends Component {
               } />
             </View>
           </View>
-          :identityId == 1 ? 
+          : authen == '老师' ? 
           <View className='index'>
             <View className='header-outer'>
               <View className='at-row at-row__align--center header'>
@@ -207,78 +199,7 @@ export default class Index extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{userName}</View>
-                  <View>
-                    <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                    <View className='afterIcon-font'>{grade}</View>
-                  </View>
-                </View>
-                <View className='at-col at-col-3'>
-                  <AtButton 
-                    size='normal' 
-                    className='editBtn'
-                    onClick={this.navigateToPage.bind(
-                      this,
-                      '/pages/showPerson/index'
-                    )}
-                  >
-                    <View className='beforeIcon-font'>个人信息</View>
-                    <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
-                  </AtButton>
-                </View>
-              </View>
-            </View>
-            <View className='service-outer'>
-              <View className='title'>服务档案</View>
-              <AtGrid 
-                className='main'
-                onClick={this.jumpPages}
-                hasBorder={false}
-                data={
-                [
-                  {
-                    image: `${schedulePng}`,
-                    value: '我的课表',
-                    url: '/pages/schedule/index'
-                  },
-                  {
-                    image: `${archivesPng}`,
-                    value: '个人档案',
-                    url: '/pages/personalProfile/index'
-                  },
-                  {
-                    image: `${addUserPng}`,
-                    value: '推荐新用户',
-                    url: '/pages/signUp/index'
-                  },
-                  {
-                    image: `${advicePng}`,
-                    value: '提供建议',
-                    url: '/pages/advice/index'
-                  },
-                  {
-                    image: `${morePng}`,
-                    value: '更多功能',
-                    url: ''
-                  },
-                  {
-                    image: `${morePng}`,
-                    value: '更多功能',
-                    url: ''
-                  }
-                ]
-              } />
-            </View>
-          </View>
-          : identityId == 2 ? 
-          <View className='index'>
-            <View className='header-outer'>
-              <View className='at-row at-row__align--center header'>
-                <View className='at-col at-col-2'>
-                  <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
-                </View>
-                <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{userName}</View>
+                  <View className='header-name'>{netName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{grade}</View>
@@ -341,7 +262,77 @@ export default class Index extends Component {
               } />
             </View>
           </View>
-          :''
+          :
+          <View className='index'>
+            <View className='header-outer'>
+              <View className='at-row at-row__align--center header'>
+                <View className='at-col at-col-2'>
+                  <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
+                </View>
+                <View className='at-col at-col-7 header-middle'>
+                  <View className='header-name'>{netName}</View>
+                  <View>
+                    <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
+                    <View className='afterIcon-font'>{grade}</View>
+                  </View>
+                </View>
+                <View className='at-col at-col-3'>
+                  <AtButton 
+                    size='normal' 
+                    className='editBtn'
+                    onClick={this.navigateToPage.bind(
+                      this,
+                      '/pages/showPerson/index'
+                    )}
+                  >
+                    <View className='beforeIcon-font'>个人信息</View>
+                    <AtIcon value='chevron-right' size='15' color='#ccc'></AtIcon>
+                  </AtButton>
+                </View>
+              </View>
+            </View>
+            <View className='service-outer'>
+              <View className='title'>服务档案</View>
+              <AtGrid 
+                className='main'
+                onClick={this.jumpPages}
+                hasBorder={false}
+                data={
+                [
+                  {
+                    image: `${schedulePng}`,
+                    value: '我的课表',
+                    url: '/pages/schedule/index'
+                  },
+                  {
+                    image: `${archivesPng}`,
+                    value: '个人档案',
+                    url: '/pages/personalProfile/index'
+                  },
+                  {
+                    image: `${addUserPng}`,
+                    value: '推荐新用户',
+                    url: '/pages/signUp/index'
+                  },
+                  {
+                    image: `${advicePng}`,
+                    value: '提供建议',
+                    url: '/pages/advice/index'
+                  },
+                  {
+                    image: `${morePng}`,
+                    value: '更多功能',
+                    url: ''
+                  },
+                  {
+                    image: `${morePng}`,
+                    value: '更多功能',
+                    url: ''
+                  }
+                ]
+              } />
+            </View>
+          </View>
         }
         {/* 用于测试 */}
         <View style={{padding:'20px'}}>

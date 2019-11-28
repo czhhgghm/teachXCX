@@ -5,8 +5,8 @@ import './index.scss'
 import { AtList, AtListItem } from "taro-ui"
 
 @connect(({ common }) => ({
-  identityId: common.identityId,
-  userName: common.userName,
+  authen: common.authen,
+  personName: common.personName,
   perPhone: common.perPhone,
   parentPhone: common.parentPhone,
   coachingCourse: common.coachingCourse,
@@ -30,7 +30,7 @@ export default class Index extends Component {
   componentWillMount () { }
 
   componentDidMount () {
-    
+
   }
 
   componentWillUnmount () { }
@@ -47,17 +47,17 @@ export default class Index extends Component {
   }
 
   render () {
-    const {identityId,userName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace} = this.props
+    const {authen,personName,perPhone,parentPhone,coachingCourse,classTime,beginProject,classPlace} = this.props
     return (
       <View className='index'>
       {
-        identityId == 0?
+        authen == '管理员'?
         <View>
           <AtList>
             <AtListItem
               arrow='right'
-              title='姓名'
-              extraText={userName}
+              title='真实姓名'
+              extraText={personName}
             />
             <AtListItem
               arrow='right'
@@ -67,17 +67,38 @@ export default class Index extends Component {
             />
           </AtList>
         </View>
-        :identityId == 1?
+        :authen == '老师'?
         <View>
           <AtList>
             <AtListItem
               arrow='right'
-              title='姓名'
-              extraText={userName}
+              title='真实姓名'
+              extraText={personName}
             />
             <AtListItem
               arrow='right'
-              title='学生电话'
+              title='电话号码'
+              extraText={perPhone}
+              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
+            />
+            <AtListItem
+              arrow='right'
+              title='辅导学科'
+              extraText={coachingCourse}
+            />
+          </AtList>
+        </View>
+        :
+        <View>
+          <AtList>
+            <AtListItem
+              arrow='right'
+              title='真实姓名'
+              extraText={personName}
+            />
+            <AtListItem
+              arrow='right'
+              title='本人电话'
               extraText={perPhone}
               onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
             />
@@ -111,28 +132,6 @@ export default class Index extends Component {
             />
           </AtList>
         </View>
-        :identityId == 2?
-        <View>
-          <AtList>
-            <AtListItem
-              arrow='right'
-              title='姓名'
-              extraText={userName}
-            />
-            <AtListItem
-              arrow='right'
-              title='电话号码'
-              extraText={perPhone}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
-            />
-            <AtListItem
-              arrow='right'
-              title='辅导学科'
-              extraText={coachingCourse}
-            />
-          </AtList>
-        </View>
-        :''
       }
       </View>
     )
