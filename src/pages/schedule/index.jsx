@@ -2,8 +2,15 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtTabs, AtTabsPane, AtDivider } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
-export default class Index extends Component {
+@connect(({ common, schedule }) => ({
+  id: common.id,
+  studentsCourse: schedule.studentsCourse,
+  teachersCourse: schedule.teachersCourse
+}))
+
+export default class Schedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +25,27 @@ export default class Index extends Component {
 
   componentWillMount () {
     this.getCurrentTime()
+    this.getCurrentSchedule()
+  }
+
+  async getCurrentSchedule() {
+    const {dispatch,id} = this.props
+    const {key} = this.$router.params
+    key == '学生' ? (
+      await dispatch({
+        type:'schedule/getStudentsCourse',
+        payload:{
+          id,
+        }
+      })
+    ) : (
+      await dispatch({
+        type:'schedule/getTeachersCourse',
+        payload:{
+          id,
+        }
+      })
+    )
   }
 
   componentDidMount () {}
@@ -54,6 +82,7 @@ export default class Index extends Component {
 
   render () {
     const {currentNum,currentDay} = this.state
+    const {studentsCourse,teachersCourse} = this.props
     return (
       <View className='index'>
         <View className='head'>

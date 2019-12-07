@@ -11,7 +11,7 @@ import { connect } from '@tarojs/redux'
   managerList: usersManage.managerList,
 }))
 
-export default class Index extends Component {
+export default class UsersManage extends Component {
   constructor(props) {
     super(props)
     this.state = {

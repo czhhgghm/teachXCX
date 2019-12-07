@@ -41,10 +41,9 @@ export default class Index extends Component {
 
   async componentDidMount () {
     const { loginCode } = this.props
-    console.log('首页查看loginCode',loginCode)
 
     if(loginCode == -1) {
-      //没有登录过的,跳登录页面
+      // 没有登录过的,跳登录页面
       Taro.reLaunch({
         url: '../../pages/authorize/index',
       })
@@ -231,7 +230,7 @@ export default class Index extends Component {
                   {
                     image: `${schedulePng}`,
                     value: '我的课表',
-                    url: '/pages/schedule/index'
+                    url: `/pages/schedule/index?key=${authen}`
                   },
                   {
                     image: `${tutoringPng}`,
@@ -302,7 +301,7 @@ export default class Index extends Component {
                   {
                     image: `${schedulePng}`,
                     value: '我的课表',
-                    url: '/pages/schedule/index'
+                    url: `/pages/schedule/index?key=${authen}`                    
                   },
                   {
                     image: `${archivesPng}`,

@@ -23,7 +23,6 @@ export default (
   return Taro.request({
     url: options.url,
     data: {
-      // ...request_data,
       ...options.data
     },
     header: {
@@ -42,7 +41,7 @@ export default (
 
       if (data.status !== 0) {
         Taro.showToast({
-          title: `${res.data.message}`,
+          title: `数据请求${res.data.msg}`,
           icon: 'none',
           mask: true
         })
