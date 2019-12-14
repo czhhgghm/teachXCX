@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { AtTabs, AtTabsPane, AtDivider } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtDivider, AtNoticebar  } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common, schedule }) => ({
@@ -16,11 +16,13 @@ export default class Schedule extends Component {
     this.state = {
       currentDay: '',
       currentNum: 0,
+      atNoticebarSpeed: 50,
+      showatNoticebar: true,
     }
   };
 
   config = {
-    navigationBarTitleText: 'schedule'
+    navigationBarTitleText: '我的课表'
   }
 
   componentWillMount () {
@@ -48,7 +50,17 @@ export default class Schedule extends Component {
     )
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    this.closeAtNoticebar()
+  }
+
+  closeAtNoticebar() {
+    setTimeout(() => {
+      this.setState({
+        showatNoticebar: false
+      })
+    }, 20000);
+  }
 
   componentWillUnmount () { }
 
@@ -81,7 +93,7 @@ export default class Schedule extends Component {
   }
 
   render () {
-    const {currentNum,currentDay} = this.state
+    const {currentNum,currentDay,atNoticebarSpeed,showatNoticebar} = this.state
     const {studentsCourse,teachersCourse} = this.props
     return (
       <View className='index'>
@@ -91,6 +103,13 @@ export default class Schedule extends Component {
             <View className='head-time'>{currentDay}</View>
           </View>
         </View>
+        {
+          showatNoticebar?(
+            <AtNoticebar marquee icon='volume-plus' speed={atNoticebarSpeed}>
+              继续点击课程,可以留下对当堂课的反馈哟~~
+            </AtNoticebar>
+          ):''
+        }
         <View className='week'>本周课表</View>
         <AtTabs
           className='main-schedule'

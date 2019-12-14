@@ -41,21 +41,21 @@ export default class Index extends Component {
           <AtListItem
             arrow='right'
             note='2019/3--2019/9'
-            title='语文'
+            title='高一语文'
             extraText={name}
             onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}
           />
           <AtListItem
             arrow='right'
             note='2019/1--2019/3'
-            title='数学'
+            title='高二数学'
             extraText={name}
             onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}
           />
           <AtListItem
             arrow='right'
             note='2018/5--2018/12'
-            title='英语'
+            title='高三英语'
             extraText={name}
             onClick={this.changeDetail.bind(this,`/pages/profileHistory/index?key=${name}`)}            
           />

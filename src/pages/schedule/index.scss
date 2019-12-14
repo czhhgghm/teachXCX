@@ -2,6 +2,7 @@
 @import "~taro-ui/dist/style/components/flex.scss";
 @import "~taro-ui/dist/style/components/divider.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/noticebar.scss";
 
 page{
     height:100%;
@@ -64,3 +65,8 @@ page{
     width: 70%;
     left: 15%;
 }
+
+.at-noticebar {
+    // background: rgb(0, 252, 0);
+}
+    

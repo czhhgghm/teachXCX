@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtCard, AtModal, AtButton } from 'taro-ui'
+import { AtCard, AtModal } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
@@ -13,9 +13,9 @@ export default class Index extends Component {
     super(props)
     this.state = {
       isOpened: true,
-      isCircle: true,
-      btnLoading: false,
-      btnDisabled: false
+      // isCircle: true,
+      // btnLoading: false,
+      // btnDisabled: false
     }
   };
 
@@ -27,7 +27,7 @@ export default class Index extends Component {
 
   componentDidMount () {
     //路由传递
-    console.log(this.$router.params)
+    console.log('路由传递:',this.$router.params)
   }
 
   componentWillUnmount () { }
@@ -47,28 +47,29 @@ export default class Index extends Component {
     })
   }
 
-  getMoreProfile() {
-    this.setState({
-      btnLoading: true
-    })
+  // getMoreProfile() {
+  //   this.setState({
+  //     btnLoading: true
+  //   })
 
-    setTimeout(() => {
-      //当没有数据了,将按钮禁用
-      this.setState({
-        btnLoading: false,
-        btnDisabled: true
-      })
-    }, 2000);
-  }
+  //   setTimeout(() => {
+  //     //当没有数据了,将按钮禁用
+  //     this.setState({
+  //       btnLoading: false,
+  //       btnDisabled: true
+  //     })
+  //   }, 2000);
+  // }
   
   render () {
-    const {isOpened,btnLoading,isCircle,btnDisabled} = this.state
+    // const {isOpened,btnLoading,isCircle,btnDisabled} = this.state
+    const {isOpened} = this.state
     const name = this.$router.params.key
     return (
       <View className='index'>
         <AtModal
           isOpened={isOpened}
-          title={name}
+          title='辅导方案'
           cancelText='取消'
           confirmText='确认'
           onCancel={ this.handleCancel.bind(this) }
@@ -78,58 +79,52 @@ export default class Index extends Component {
         <AtCard
           className="cardStyle"
           note='2019/10/17'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          学生课堂表现认真,态度值得肯定
         </AtCard>
         <AtCard
           note='2019/10/10'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
           className="cardStyle"
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          测试用例
         </AtCard>
         <AtCard
           note='2019/10/03'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
           className="cardStyle"
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          测试用例
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
           className="cardStyle"
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          测试用例
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
           className="cardStyle"
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          测试用例
         </AtCard>
         <AtCard
           note='2019/09/26'
-          extra='李阳'
-          title='评分:4'
-          thumb='https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
+          title='李阳'
+          extra='教师评价'
           className="cardStyle"
         >
-          感觉老师的上课速度偏快,有点跟不上节奏
+          测试用例
         </AtCard>
-        <View className="separate">
+        {/* <View className="separate">
         {
           btnDisabled==false?
           <AtButton 
@@ -154,7 +149,7 @@ export default class Index extends Component {
           >没有更多了
           </AtButton>
         }
-        </View>
+        </View> */}
       </View>
     )
   }

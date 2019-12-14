@@ -18,7 +18,6 @@ import userInformationPng from '../../assets/images/userInformation.png'
 
 @connect(({ common }) => ({
   authen: common.authen,
-  grade: common.grade,
   netName: common.netName,
   avatarUrl: common.avatarUrl,
   loginCode: common.loginCode,
@@ -41,22 +40,25 @@ export default class Index extends Component {
 
   async componentDidMount () {
     const { loginCode } = this.props
-
+    console.log('loginCode:',loginCode)
     if(loginCode == -1) {
       // 没有登录过的,跳登录页面
       Taro.reLaunch({
         url: '../../pages/authorize/index',
       })
-      
     }
-    else {
-      //登录成功,可以发送各种请求
+    else if(loginCode == 11) {
+      Taro.reLaunch({
+        url: '../../pages/signUp/index',
+      })
     }
   }
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    
+  }
 
   componentDidHide () { }
 
@@ -115,7 +117,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {authen,grade,netName,avatarUrl} = this.props
+    const {authen,netName,avatarUrl} = this.props
     return (
       <View>
         {
@@ -130,7 +132,7 @@ export default class Index extends Component {
                   <View className='header-name'>{netName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                    <View className='afterIcon-font'>{grade}</View>
+                    <View className='afterIcon-font'>{authen}</View>
                   </View>
                 </View>
                 <View className='at-col at-col-3'>
@@ -201,7 +203,7 @@ export default class Index extends Component {
                   <View className='header-name'>{netName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                    <View className='afterIcon-font'>{grade}</View>
+                    <View className='afterIcon-font'>{authen}</View>
                   </View>
                 </View>
                 <View className='at-col at-col-3'>
@@ -244,7 +246,7 @@ export default class Index extends Component {
                   },
                   {
                     image: `${advicePng}`,
-                    value: '提供建议',
+                    value: '意见反馈',
                     url: '/pages/advice/index'
                   },
                   {
@@ -272,7 +274,7 @@ export default class Index extends Component {
                   <View className='header-name'>{netName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
-                    <View className='afterIcon-font'>{grade}</View>
+                    <View className='afterIcon-font'>{authen}</View>
                   </View>
                 </View>
                 <View className='at-col at-col-3'>
@@ -315,7 +317,7 @@ export default class Index extends Component {
                   },
                   {
                     image: `${advicePng}`,
-                    value: '提供建议',
+                    value: '意见反馈',
                     url: '/pages/advice/index'
                   },
                   {

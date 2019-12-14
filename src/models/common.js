@@ -3,13 +3,12 @@ import { getSessionId, getPhone } from './service'
 export default {
     namespace: 'common',
     state: {
-        authen: '管理员',
+        authen: '学生',
         avatarUrl: '',
         netName: '网名',
         personName: '真实姓名',
         id: -1,
         loginCode: -1,
-        grade: '高三',
         perPhone: '15612345678',
         parentPhone: '13312345678',
         coachingCourse: '语文数学英语',
@@ -27,17 +26,31 @@ export default {
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
-            const result = response.data
-            console.log('getPhone接口的结果',result)
-            yield put({
-                type: 'savePersonDetails',
-                payload: {
-                    loginCode: response.code,
-                    id: result.id,
-                    authen: result.authen,
-                    personName: result.name
-                }
-            })
+            if(response.code == 0) {
+                const result = response.data
+                yield put({
+                    type: 'savePersonDetails',
+                    payload: {
+                        id: result.id,
+                        authen: result.authen,
+                        personName: result.name
+                    }
+                })
+                yield put({
+                    type: 'saveLoginCode',
+                    payload: {
+                        loginCode: response.code,
+                    }
+                })
+            }
+            else if(response.code == 11) {
+                yield put({
+                    type: 'saveLoginCode',
+                    payload: {
+                        loginCode: response.code,
+                    }
+                })
+            }
         },
     },
 
@@ -49,12 +62,18 @@ export default {
                 authen
             }
         },
+        saveLoginCode(state, {payload}) {
+            const {loginCode} = payload
+            return {
+                ...state,
+                loginCode
+            }
+        },
         savePersonDetails(state, {payload}) {
-            const {id,loginCode,authen,personName} = payload
+            const {id,authen,personName} = payload
             return {
                 ...state,
                 id,
-                loginCode,
                 authen,
                 personName
             }

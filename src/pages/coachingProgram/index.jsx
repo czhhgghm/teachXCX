@@ -12,7 +12,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: 'Coaching program'
+    navigationBarTitleText: '查看辅导方案'
   }
 
   componentWillMount () { }
@@ -38,20 +38,20 @@ export default class Index extends Component {
       <AtList>
         <AtListItem
           arrow='right'
-          title='张三'
-          extraText='语文'
+          title='学生1'
+          extraText='高中语文'
           onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
         />
         <AtListItem
           arrow='right'
-          title='李四'
-          extraText='数学'
+          title='学生2'
+          extraText='高中数学'
           onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
         />
         <AtListItem
           arrow='right'
-          title='王五'
-          extraText='英语'
+          title='学生3'
+          extraText='高中英语'
           onClick={this.changeDetail.bind(this,`/pages/writeCoachingProgram/index?key=姓名`)}
         />
       </AtList>

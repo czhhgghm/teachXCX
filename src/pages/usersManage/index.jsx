@@ -48,46 +48,54 @@ export default class UsersManage extends Component {
 
   async studentOnClick() {
     const {dispatch} = this.props
-    await dispatch({
-      type:'usersManage/getStudentsList',
-      payload:{}
-    })
-    this.setState({
-      select: 'studentActive'
-    })
+    if(this.state.select !== 'studentActive') {
+      await dispatch({
+        type:'usersManage/getStudentsList',
+        payload:{}
+      })
+      this.setState({
+        select: 'studentActive'
+      })
+    }
   }
 
   familyOnClick = async() => {
     const {dispatch} = this.props
-    await dispatch({
-      type:'usersManage/getFamilyList',
-      payload:{}
-    })
-    this.setState({
-      select: 'familyActive'
-    })
+    if(this.state.select !== 'familyActive') {
+      await dispatch({
+        type:'usersManage/getFamilyList',
+        payload:{}
+      })
+      this.setState({
+        select: 'familyActive'
+      })
+    }
   }
 
   async teacherOnClick() {
     const {dispatch} = this.props
-    await dispatch({
-      type:'usersManage/getTeachersList',
-      payload:{}
-    })
-    this.setState({
-      select: 'teacherActive'
-    })
+    if(this.state.select !== 'teacherActive') {
+      await dispatch({
+        type:'usersManage/getTeachersList',
+        payload:{}
+      })
+      this.setState({
+        select: 'teacherActive'
+      })
+    }
   }
 
   async managerOnClick() {
     const {dispatch} = this.props
-    await dispatch({
-      type:'usersManage/getManagersList',
-      payload:{}
-    })
-    this.setState({
-      select: 'managerActive'
-    })
+    if(this.state.select !== 'managerActive') {
+      await dispatch({
+        type:'usersManage/getManagersList',
+        payload:{}
+      })
+      this.setState({
+        select: 'managerActive'
+      })
+    }
   }
 
   onChange (value) {

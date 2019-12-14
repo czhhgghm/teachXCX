@@ -39,13 +39,13 @@ export default (
         )
       }
 
-      if (data.status !== 0) {
-        Taro.showToast({
-          title: `数据请求${res.data.msg}`,
-          icon: 'none',
-          mask: true
-        })
-      }
+      // if (data.status !== 0) {
+      //   Taro.showToast({
+      //     title: `数据请求${res.data.msg}`,
+      //     icon: 'none',
+      //     mask: true
+      //   })
+      // }
 
       return data
     } else {
