@@ -13,9 +13,6 @@ export default class Index extends Component {
     super(props)
     this.state = {
       isOpened: true,
-      // isCircle: true,
-      // btnLoading: false,
-      // btnDisabled: false
     }
   };
 
@@ -46,23 +43,8 @@ export default class Index extends Component {
       isOpened: false
     })
   }
-
-  // getMoreProfile() {
-  //   this.setState({
-  //     btnLoading: true
-  //   })
-
-  //   setTimeout(() => {
-  //     //当没有数据了,将按钮禁用
-  //     this.setState({
-  //       btnLoading: false,
-  //       btnDisabled: true
-  //     })
-  //   }, 2000);
-  // }
   
   render () {
-    // const {isOpened,btnLoading,isCircle,btnDisabled} = this.state
     const {isOpened} = this.state
     const name = this.$router.params.key
     return (
@@ -124,32 +106,6 @@ export default class Index extends Component {
         >
           测试用例
         </AtCard>
-        {/* <View className="separate">
-        {
-          btnDisabled==false?
-          <AtButton 
-            type='secondary' 
-            className="bottom-btn" 
-            size='small'
-            disabled={btnDisabled}
-            circle={isCircle}
-            onClick={this.getMoreProfile.bind(this)}
-            loading={btnLoading}
-          >查看更多
-          </AtButton>
-          :
-          <AtButton 
-            type='secondary' 
-            className="bottom-btn" 
-            size='small'
-            disabled={btnDisabled}
-            circle={isCircle}
-            onClick={this.getMoreProfile.bind(this)}
-            loading={btnLoading}
-          >没有更多了
-          </AtButton>
-        }
-        </View> */}
       </View>
     )
   }

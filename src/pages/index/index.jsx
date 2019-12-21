@@ -40,7 +40,6 @@ export default class Index extends Component {
 
   async componentDidMount () {
     const { loginCode } = this.props
-    console.log('loginCode:',loginCode)
     if(loginCode == -1) {
       // 没有登录过的,跳登录页面
       Taro.reLaunch({
@@ -175,7 +174,7 @@ export default class Index extends Component {
                   },
                   {
                     image: `${advicePng}`,
-                    value: '用户建议',
+                    value: '查看意见',
                     url: '/pages/showAdvice/index'
                   },
                   {

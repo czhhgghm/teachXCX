@@ -2,8 +2,14 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtTextarea, AtButton, AtForm } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
-export default class Index extends Component {
+@connect(({ common }) => ({
+  userId: common.userId
+}))
+
+
+export default class Advice extends Component {
   constructor(props) {
     super(props)
     this.state={
@@ -12,7 +18,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: '用户建议'
+    navigationBarTitleText: '意见反馈'
   }
 
   componentWillMount () { }
@@ -39,11 +45,20 @@ export default class Index extends Component {
       })
     }
     else {
-      Taro.showToast({
-        title: '提交成功'
-      },wx.reLaunch({
-          url: '../../pages/index/index',
-        })
+      const {dispatch,userId} = this.props
+      dispatch({
+        type:'common/submitAdvice',
+        payload:{
+          userId,
+          opinion: this.state.inputValue
+        }
+      },
+        Taro.showToast({
+          title: '提交成功'
+        },wx.reLaunch({
+            url: '../../pages/index/index',
+          })
+        )
       )
     }
   }

@@ -15,7 +15,7 @@ export default class UsersManage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      select: 'managerActive',
+      select: '',
       searchValue: ''
     }
   };
@@ -27,11 +27,7 @@ export default class UsersManage extends Component {
   componentWillMount () { }
 
   componentDidMount () {
-    const {dispatch} = this.props
-    dispatch({
-      type:'usersManage/getManagersList',
-      payload:{}
-    })
+    this.managerOnClick()
   }
 
   componentWillUnmount () { }
@@ -48,52 +44,52 @@ export default class UsersManage extends Component {
 
   async studentOnClick() {
     const {dispatch} = this.props
-    if(this.state.select !== 'studentActive') {
+    if(this.state.select !== '学生') {
       await dispatch({
         type:'usersManage/getStudentsList',
         payload:{}
       })
       this.setState({
-        select: 'studentActive'
+        select: '学生'
       })
     }
   }
 
   familyOnClick = async() => {
     const {dispatch} = this.props
-    if(this.state.select !== 'familyActive') {
+    if(this.state.select !== '家长') {
       await dispatch({
         type:'usersManage/getFamilyList',
         payload:{}
       })
       this.setState({
-        select: 'familyActive'
+        select: '家长'
       })
     }
   }
 
   async teacherOnClick() {
     const {dispatch} = this.props
-    if(this.state.select !== 'teacherActive') {
+    if(this.state.select !== '老师') {
       await dispatch({
         type:'usersManage/getTeachersList',
         payload:{}
       })
       this.setState({
-        select: 'teacherActive'
+        select: '老师'
       })
     }
   }
 
   async managerOnClick() {
     const {dispatch} = this.props
-    if(this.state.select !== 'managerActive') {
+    if(this.state.select !== '管理员') {
       await dispatch({
         type:'usersManage/getManagersList',
         payload:{}
       })
       this.setState({
-        select: 'managerActive'
+        select: '管理员'
       })
     }
   }
@@ -105,12 +101,14 @@ export default class UsersManage extends Component {
     console.log(value)
   }
 
-  onActionClick() {
-    console.log('点击搜索')
-  }
+  // onActionClick() {
+  //   console.log('点击搜索')
+  // }
 
   handleChangeUser(e) {
-    console.log(e)
+    Taro.navigateTo({
+      url: e,
+    })
   }
   
   render () {
@@ -122,7 +120,7 @@ export default class UsersManage extends Component {
           <AtTag
             className="tagStyle"
             name='manager' 
-            active={select=='managerActive'?true:false}
+            active={select=='管理员'?true:false}
             onClick={this.managerOnClick.bind(this)}
           >
             管理员
@@ -130,7 +128,7 @@ export default class UsersManage extends Component {
           <AtTag
             className="tagStyle"
             name='student' 
-            active={select=='studentActive'?true:false}
+            active={select=='学生'?true:false}
             onClick={this.studentOnClick.bind(this)}
           >
             学生
@@ -138,7 +136,7 @@ export default class UsersManage extends Component {
           <AtTag
             className="tagStyle"
             name='family' 
-            active={select=='familyActive'?true:false}
+            active={select=='家长'?true:false}
             onClick={this.familyOnClick.bind(this)}
           >
             家长
@@ -146,22 +144,22 @@ export default class UsersManage extends Component {
           <AtTag
             className="tagStyle"
             name='teacher' 
-            active={select=='teacherActive'?true:false}
+            active={select=='老师'?true:false}
             onClick={this.teacherOnClick.bind(this)}
           >
             老师
           </AtTag>
         </View>
-        <AtSearchBar
+        {/* <AtSearchBar
           value={this.state.searchValue}
           onChange={this.onChange.bind(this)}
           onActionClick={this.onActionClick.bind(this)}
-        />
+        /> */}
         
         <View>
           <AtList>
           {
-            select == 'managerActive'?(
+            select == '管理员'?(
               managerList == []?(
                 <AtListItem
                   arrow='right'
@@ -177,13 +175,13 @@ export default class UsersManage extends Component {
                       key={item.id}
                       title={item.name}
                       note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
                     />
                   )
                 })
               )
             )
-            :select == 'studentActive'?(
+            :select == '学生'?(
               studentList == []?(
                 <AtListItem
                   arrow='right'
@@ -199,13 +197,13 @@ export default class UsersManage extends Component {
                       key={item.id}
                       title={item.name}
                       note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
                     />
                   )
                 })
               )
             )
-            :select == 'teacherActive'?(
+            :select == '老师'?(
               teacherList == []?(
                 <AtListItem
                   arrow='right'
@@ -221,13 +219,13 @@ export default class UsersManage extends Component {
                       key={item.id}
                       title={item.name}
                       note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
                     />
                   )
                 })
               )
             )
-            :select == 'familyActive'?(
+            :select == '家长'?(
               familyList == []?(
                 <AtListItem
                   arrow='right'
@@ -243,7 +241,7 @@ export default class UsersManage extends Component {
                       key={item.id}
                       title={item.name}
                       note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/profileHistory/index?key=${item.id}`)}
+                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
                     />
                   )
                 })

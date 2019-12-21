@@ -45,12 +45,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/profileHistory/index",
-					"pathName": "pages/profileHistory/index",
+					"name": "pages/usersManage/index",
+					"pathName": "pages/usersManage/index",
 					"query": "",
 					"scene": null
 				}

@@ -2,6 +2,12 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
 import { AtAccordion, AtList, AtListItem, AtPagination, AtSearchBar, AtModal } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+
+@connect(({ common }) => ({
+  ...common
+}))
+
 
 export default class Index extends Component {
   constructor(props) {
@@ -21,16 +27,9 @@ export default class Index extends Component {
 
   componentWillMount () { }
 
-  showPrompt() {
-    wx.showToast({
-      title: '有3条最新的建议待查看',
-      icon: 'none',
-      duration: 2000
-    })
-  }
-
   componentDidMount () {
-    this.showPrompt()
+    // this.showPrompt()
+    this.getNewAdvice()
   }
 
   componentWillUnmount () { }
@@ -38,6 +37,21 @@ export default class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+
+  // showPrompt() {
+  //   wx.showToast({
+  //     title: '有3条最新的建议待查看',
+  //     icon: 'none',
+  //     duration: 2000
+  //   })
+  // }
+
+  getNewAdvice() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'common/getNewAdvice'
+    })
+  }
 
   toViewHandleClick (value) {
     this.setState({

@@ -1,0 +1,13 @@
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/accordion.scss";
+
+page{
+    height:100%;
+    background:#f6f7f9;
+}
+
+
+.at-accordion__arrow {
+    margin-right: 20px;
+}

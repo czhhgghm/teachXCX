@@ -1,13 +1,13 @@
-import { getSessionId, getPhone } from './service'
+import { getSessionId, getPhone, submitAdvice, getNewAdvice } from './service'
 
 export default {
     namespace: 'common',
     state: {
-        authen: '学生',
+        authen: '',
         avatarUrl: '',
         netName: '网名',
         personName: '真实姓名',
-        id: -1,
+        userId: -1,
         loginCode: -1,
         perPhone: '15612345678',
         parentPhone: '13312345678',
@@ -15,6 +15,7 @@ export default {
         beginProject: '2019-01-01',
         classTime: '周日上午',
         classPlace: '广州',
+        extraId: -1,
     },
     
     effects: {
@@ -22,7 +23,7 @@ export default {
             const response = yield call(getSessionId,payload);
             wx.setStorageSync('sessionKey', response.data.sessionKey)
             wx.setStorageSync('openid', response.data.openid)
-            console.log('用得到的code,换取服务端rdSessionId和openid,保存到Storage里面了')
+            // console.log('用得到的code,换取服务端rdSessionId和openid,保存到Storage里面了')
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
@@ -31,9 +32,10 @@ export default {
                 yield put({
                     type: 'savePersonDetails',
                     payload: {
-                        id: result.id,
+                        userId: result.userId,
                         authen: result.authen,
-                        personName: result.name
+                        personName: result.name,
+                        extraId: result.extraId
                     }
                 })
                 yield put({
@@ -51,6 +53,13 @@ export default {
                     }
                 })
             }
+        },
+        *submitAdvice({payload},{call,put}) {
+            yield call(submitAdvice,payload);
+        },
+        *getNewAdvice({call,put}) {
+            const response = yield call(getNewAdvice);
+            console.log('getNewAdvice结果', response)
         },
     },
 
@@ -70,12 +79,13 @@ export default {
             }
         },
         savePersonDetails(state, {payload}) {
-            const {id,authen,personName} = payload
+            const {userId,authen,personName,extraId} = payload
             return {
                 ...state,
-                id,
+                userId,
                 authen,
-                personName
+                personName,
+                extraId
             }
         },
         saveUserInfo(state, { payload }) {

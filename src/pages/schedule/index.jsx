@@ -5,7 +5,7 @@ import { AtTabs, AtTabsPane, AtDivider, AtNoticebar  } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common, schedule }) => ({
-  id: common.id,
+  userId: common.userId,
   studentsCourse: schedule.studentsCourse,
   teachersCourse: schedule.teachersCourse
 }))
@@ -31,20 +31,20 @@ export default class Schedule extends Component {
   }
 
   async getCurrentSchedule() {
-    const {dispatch,id} = this.props
+    const {dispatch,userId} = this.props
     const {key} = this.$router.params
     key == '学生' ? (
       await dispatch({
         type:'schedule/getStudentsCourse',
         payload:{
-          id,
+          id: userId,
         }
       })
     ) : (
       await dispatch({
         type:'schedule/getTeachersCourse',
         payload:{
-          id,
+          id:userId,
         }
       })
     )
@@ -106,7 +106,7 @@ export default class Schedule extends Component {
         {
           showatNoticebar?(
             <AtNoticebar marquee icon='volume-plus' speed={atNoticebarSpeed}>
-              继续点击课程,可以留下对当堂课的反馈哟~~
+              继续点击下列课程,可以留下对课堂反馈哟~~
             </AtNoticebar>
           ):''
         }

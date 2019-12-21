@@ -63,7 +63,6 @@ export default class Index extends Component {
               arrow='right'
               title='电话号码'
               extraText={perPhone}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
             />
           </AtList>
         </View>
@@ -79,7 +78,6 @@ export default class Index extends Component {
               arrow='right'
               title='电话号码'
               extraText={perPhone}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
             />
             <AtListItem
               arrow='right'
@@ -100,30 +98,22 @@ export default class Index extends Component {
               arrow='right'
               title='本人电话'
               extraText={perPhone}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=perPhone`)}
             />
             <AtListItem
               arrow='right'
               title='家长电话'
               extraText={parentPhone}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=parentPhone`)}
             />
             <AtListItem
               arrow='right'
-              title='辅导学科'
+              title='报名学科'
               extraText={coachingCourse}
             />
-            <AtListItem
+            {/* <AtListItem
               arrow='right'
               title='开始上课时间'
               extraText={beginProject}
-            />
-            <AtListItem
-              arrow='right'
-              title='上课时段'
-              extraText={classTime}
-              onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=classTime`)}
-            />
+            /> */}
             <AtListItem
               arrow='right'
               title='上课地区'

@@ -2,6 +2,11 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtRate, AtButton, AtTextarea } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+
+@connect(({ common }) => ({
+  authen: common.authen
+}))
 
 export default class Index extends Component {
   constructor(props) {
@@ -63,17 +68,22 @@ export default class Index extends Component {
 
   render () {
     const {gradeValue,inputValue} = this.state
+    const {authen} = this.props
     return (
       <View className='index'>
-        <View className='grade'>
-          <Text className='gradeFont'>满意度评分:</Text>
-          <AtRate
-            className='stars'
-            size={18}
-            value={gradeValue}
-            onChange={this.handleChangeGrade.bind(this)}
-          />
-        </View>
+        {
+          authen == '学生'?(
+            <View className='grade'>
+              <Text className='gradeFont'>满意度评分:</Text>
+                <AtRate
+                  className='stars'
+                  size={18}
+                  value={gradeValue}
+                  onChange={this.handleChangeGrade.bind(this)}
+                />
+              </View>
+          ):''
+        }
         <AtTextarea
           value={inputValue}
           height='200'

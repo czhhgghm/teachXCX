@@ -40,6 +40,7 @@ class App extends Component {
       'pages/viewNewUsers/index',
       'pages/showAdvice/index',
       'pages/addUsers/index',
+      'pages/usersManDetail/index',
     ],
     window: {
       backgroundTextStyle: 'light',

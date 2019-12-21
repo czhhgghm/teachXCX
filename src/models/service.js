@@ -10,6 +10,13 @@ export async function getSessionId(data) {
     }) 
 }
 
+export async function getNewAdvice() {
+    return getRequest({
+        url: 'https://m-school.mynatapp.cc/Suggestion/get',
+        method: 'GET',
+    }) 
+}
+
 export async function getPhone(data) {
     return postRrequest({
         url: '/user/phoneAndLogin',
@@ -18,7 +25,17 @@ export async function getPhone(data) {
     }) 
 }
 
+export async function submitAdvice(data) {
+    return postRrequest({
+        url: '/Suggestion/add',
+        method: 'POST',
+        data,
+    }) 
+}
+
 export default {
     getSessionId,
-    getPhone
+    getPhone,
+    submitAdvice,
+    getNewAdvice
 }
