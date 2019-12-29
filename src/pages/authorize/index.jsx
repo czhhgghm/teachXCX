@@ -27,8 +27,6 @@ export default class Authorize extends Component {
       success () {
         const sessionKey = wx.getStorageSync('sessionKey')
         if(!sessionKey) {
-          console.log('执行了success方法')
-          console.log('但是之前没保存到sessionKey,还是需要login一次')
           wx.login({
             success: res => {
               dispatch({

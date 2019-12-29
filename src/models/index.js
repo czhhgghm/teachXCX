@@ -12,7 +12,3 @@ export default [
     schedule,
     usersManDetail
 ]
-
-// export default [
-//     index, audit, common, leave
-// ]

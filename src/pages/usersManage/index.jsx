@@ -43,12 +43,10 @@ export default class UsersManage extends Component {
   }
 
   async studentOnClick() {
-    const {dispatch} = this.props
     if(this.state.select !== '学生') {
-      await dispatch({
-        type:'usersManage/getStudentsList',
-        payload:{}
-      })
+      if(this.props.studentList.length < 1) {
+        this.getStudentList()
+      }
       this.setState({
         select: '学生'
       })
@@ -56,12 +54,10 @@ export default class UsersManage extends Component {
   }
 
   familyOnClick = async() => {
-    const {dispatch} = this.props
     if(this.state.select !== '家长') {
-      await dispatch({
-        type:'usersManage/getFamilyList',
-        payload:{}
-      })
+      if(this.props.familyList.length < 1) {
+        this.getFamilyList()
+      }
       this.setState({
         select: '家长'
       })
@@ -69,12 +65,10 @@ export default class UsersManage extends Component {
   }
 
   async teacherOnClick() {
-    const {dispatch} = this.props
     if(this.state.select !== '老师') {
-      await dispatch({
-        type:'usersManage/getTeachersList',
-        payload:{}
-      })
+      if(this.props.teacherList.length < 1) {
+        this.getTeachersList()
+      }
       this.setState({
         select: '老师'
       })
@@ -82,16 +76,46 @@ export default class UsersManage extends Component {
   }
 
   async managerOnClick() {
-    const {dispatch} = this.props
     if(this.state.select !== '管理员') {
-      await dispatch({
-        type:'usersManage/getManagersList',
-        payload:{}
-      })
+      if(this.props.managerList.length < 1) {
+        this.getManagersList()
+      }
       this.setState({
         select: '管理员'
       })
     }
+  }
+
+  getStudentList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/getStudentsList',
+      payload:{}
+    })
+  }
+
+  getTeachersList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/getTeachersList',
+      payload:{}
+    })
+  }
+
+  getFamilyList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/getFamilyList',
+      payload:{}
+    })
+  }
+
+  getManagersList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/getManagersList',
+      payload:{}
+    })
   }
 
   onChange (value) {

@@ -12,7 +12,7 @@ export default class ShowAdvice extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showPreModal: false,
+      showModal: false,
       selectContent: ''
     }
   };
@@ -45,27 +45,27 @@ export default class ShowAdvice extends Component {
 
   selectPreItem = value => {
     this.setState({
-      showPreModal: true,
+      showModal: true,
       selectContent: value
     })
   }
 
   handleClosePreModal() {
     this.setState({
-      showPreModal: false
+      showModal: false
     })
   }
 
 
   handleConfirmPreModal() {
     this.setState({
-      showPreModal: false
+      showModal: false
     })
   }
 
   render () {
     const adviceData = wx.getStorageSync('adviceData')?wx.getStorageSync('adviceData'):this.props.adviceData
-    const {selectContent} = this.state
+    const {selectContent,showModal} = this.state
     return (
       <View className='index'>
         <AtList hasBorder={false}>
@@ -84,7 +84,7 @@ export default class ShowAdvice extends Component {
         }
         </AtList>
         <AtModal
-          isOpened={this.state.showPreModal}
+          isOpened={showModal}
           title='用户建议'
           confirmText='确定'
           onClose={ this.handleClosePreModal.bind(this) }

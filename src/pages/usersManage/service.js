@@ -1,6 +1,5 @@
 //执行异步请求
 import getRequest from "../../utils/get";
-import postRrequest from "../../utils/request";
 
 export async function getStudentsList(data) {
     return getRequest({
@@ -34,19 +33,27 @@ export async function getFamilyList(data) {
     }) 
 }
 
-// export async function addStudent(data) {
-//     return postRrequest({
-//         url: '/manager/addStudent',
-//         method: 'POST',
-//         data,
-//     }) 
-// }
+export async function getStudentClassFB(data) {
+    return getRequest({
+        url: 'https://m-school.mynatapp.cc/manager/getStudentCourseSuggestion',
+        method: 'GET',
+        data,
+    }) 
+}
 
-
+export async function getTeacherClassFB(data) {
+    return getRequest({
+        url: 'https://m-school.mynatapp.cc/manager/getTeacherCourseSuggestion',
+        method: 'GET',
+        data,
+    }) 
+}
 
 export default {
     getStudentsList,
     getTeachersList,
     getManagersList,
-    getFamilyList
+    getFamilyList,
+    getStudentClassFB,
+    getTeacherClassFB
 }

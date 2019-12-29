@@ -18,16 +18,8 @@ export default {
         *addTeacher({payload},{call,put}) {
             const response = yield call(addTeacher,payload);
             console.log('addTeacher得到的结果',response)
-        },
+        }
     },
 
-    reducers: {
-        // changeIdentityId(state, {payload}) {
-        //     const {identityId} = payload
-        //     return {
-        //         ...state,
-        //         identityId
-        //     }
-        // },
-    }
+    reducers: {}
 }

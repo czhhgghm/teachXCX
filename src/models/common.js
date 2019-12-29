@@ -24,7 +24,6 @@ export default {
             const response = yield call(getSessionId,payload);
             wx.setStorageSync('sessionKey', response.data.sessionKey)
             wx.setStorageSync('openid', response.data.openid)
-            // console.log('用得到的code,换取服务端rdSessionId和openid,保存到Storage里面了')
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
@@ -69,9 +68,7 @@ export default {
             })
         },
         *addClass({payload},{call,put}) {
-            console.log('用于请求后台的数据:',payload)
             const response = yield call(addClass,payload);
-            console.log('得到的结果: ',response)
         },
     },
 

@@ -2,7 +2,9 @@ import {
     getStudentsList,
     getTeachersList,
     getManagersList,
-    getFamilyList
+    getFamilyList,
+    getStudentClassFB,
+    getTeacherClassFB
  } from './service'
 
 export default {
@@ -55,6 +57,20 @@ export default {
                 }
             })
         },
+        *getStudentClassFB({payload},{call,put}) {
+            const response = yield call(getStudentClassFB,payload);
+            
+            // yield put({
+            //     type: 'saveFamilyDetail',
+            //     payload: {
+            //         familyDetail: response.data
+            //     }
+            // })
+        },
+        *getTeacherClassFB({payload},{call,put}) {
+            const response = yield call(getTeacherClassFB,payload);
+            
+        }
     },
 
     reducers: {

@@ -49,8 +49,15 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/showAdvice/index",
-					"pathName": "pages/showAdvice/index",
+					"name": "pages/showClassFB/index",
+					"pathName": "pages/showClassFB/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/usersManage/index",
+					"pathName": "pages/usersManage/index",
 					"query": "",
 					"scene": null
 				}

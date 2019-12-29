@@ -25,9 +25,7 @@ import userInformationPng from '../../assets/images/userInformation.png'
 
 export default class Index extends Component {
   constructor() {
-    this.state = {
-
-    }
+    this.state = {}
   }
 
   config = {
