@@ -55,9 +55,11 @@ export default class Advice extends Component {
       },
         Taro.showToast({
           title: '提交成功'
-        },wx.reLaunch({
+        },setTimeout(() => {
+          wx.reLaunch({
             url: '../../pages/index/index',
           })
+        }, 1500)
         )
       )
     }

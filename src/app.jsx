@@ -41,6 +41,7 @@ class App extends Component {
       'pages/showAdvice/index',
       'pages/addUsers/index',
       'pages/usersManDetail/index',
+      'pages/addClass/index',
     ],
     window: {
       backgroundTextStyle: 'light',

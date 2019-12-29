@@ -1,4 +1,4 @@
-import { getSessionId, getPhone, submitAdvice, getNewAdvice } from './service'
+import { getSessionId, getPhone, submitAdvice, getNewAdvice, addClass } from './service'
 
 export default {
     namespace: 'common',
@@ -16,6 +16,7 @@ export default {
         classTime: '周日上午',
         classPlace: '广州',
         extraId: -1,
+        adviceData: []
     },
     
     effects: {
@@ -57,13 +58,31 @@ export default {
         *submitAdvice({payload},{call,put}) {
             yield call(submitAdvice,payload);
         },
-        *getNewAdvice({call,put}) {
+        *getNewAdvice({payload},{call,put}) {
             const response = yield call(getNewAdvice);
-            console.log('getNewAdvice结果', response)
+            wx.setStorageSync('adviceData', response.data)
+            yield put({
+                type: 'saveNewAdvice',
+                payload: {
+                    adviceData: response.data
+                }
+            })
+        },
+        *addClass({payload},{call,put}) {
+            console.log('用于请求后台的数据:',payload)
+            const response = yield call(addClass,payload);
+            console.log('得到的结果: ',response)
         },
     },
 
     reducers: {
+        saveNewAdvice(state, {payload}) {
+            const {adviceData} = payload
+            return {
+                ...state,
+                adviceData
+            }
+        },
         changeAuthen(state, {payload}) {
             const {authen} = payload
             return {

@@ -49,8 +49,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/usersManage/index",
-					"pathName": "pages/usersManage/index",
+					"name": "pages/showAdvice/index",
+					"pathName": "pages/showAdvice/index",
 					"query": "",
 					"scene": null
 				}

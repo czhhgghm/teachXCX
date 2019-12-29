@@ -8,7 +8,10 @@ import {
 export default {
     namespace: 'usersManDetail',
     state: {
-        studentDetail: {families:[]},
+        studentDetail: {
+            families: [],
+            courses: []
+        },
         teacherDetail: [],
         managerDetail: [],
         familyDetail: {children:[]},

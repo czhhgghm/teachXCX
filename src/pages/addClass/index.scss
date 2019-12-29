@@ -1,0 +1,28 @@
+@import "~taro-ui/dist/style/components/input.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/drawer.scss";
+@import "~taro-ui/dist/style/components/list.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+
+.at-input__title {
+    width: 200px;
+}
+
+.at-input {
+    margin-left: 0px;
+    padding-left: 20px;
+}
+
+.at-button {
+    border-radius: 0px;
+}
+
+.at-list__item-content {
+    margin-right: 0;
+}
