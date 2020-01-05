@@ -15,18 +15,18 @@ export default {
         beginProject: '2019-01-01',
         classTime: '周日上午',
         classPlace: '广州',
-        extraId: -1,
+        id: -1,
         adviceData: []
     },
     
     effects: {
-        *getSessionId({payload},{call,put}) {
+        *getSessionId({payload},{call}) {
             const response = yield call(getSessionId,payload);
             wx.setStorageSync('sessionKey', response.data.sessionKey)
             wx.setStorageSync('openid', response.data.openid)
         },
         *getPhone({payload},{call,put}) {
-            const response = yield call(getPhone,payload);
+            const response = yield call(getPhone,payload)
             if(response.code == 0) {
                 const result = response.data
                 yield put({
@@ -35,7 +35,7 @@ export default {
                         userId: result.userId,
                         authen: result.authen,
                         personName: result.name,
-                        extraId: result.extraId
+                        id: result.id
                     }
                 })
                 yield put({
@@ -69,6 +69,7 @@ export default {
         },
         *addClass({payload},{call,put}) {
             const response = yield call(addClass,payload);
+            console.log(response)
         },
     },
 
@@ -95,13 +96,13 @@ export default {
             }
         },
         savePersonDetails(state, {payload}) {
-            const {userId,authen,personName,extraId} = payload
+            const {userId,authen,personName,id} = payload
             return {
                 ...state,
                 userId,
                 authen,
                 personName,
-                extraId
+                id
             }
         },
         saveUserInfo(state, { payload }) {

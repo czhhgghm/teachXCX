@@ -15,16 +15,6 @@ export default class Index extends Component {
     navigationBarTitleText: '查看辅导方案'
   }
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   changeDetail = url => {
     Taro.navigateTo({
       url,

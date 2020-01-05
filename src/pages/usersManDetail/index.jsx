@@ -112,12 +112,14 @@ export default class UsersManDetail extends Component {
     return (
       <View className='index'>
         {
-          select == '管理员'?
+          select == '管理员' &&
           <View>
             <Text>管理员数据</Text>
             <Text>{managerDetail}</Text>
           </View>
-          :select == '学生'?
+        }
+        {
+          select == '学生' &&
           <View>
             <AtList>
               <AtListItem title='姓名' extraText={studentDetail.name?studentDetail.name:'待补充'}/>
@@ -175,7 +177,9 @@ export default class UsersManDetail extends Component {
             </AtList>
             <AtButton type='primary' loading={btnLoading} onClick={this.addClass.bind(this)}>添加课程</AtButton>
           </View>
-          :select == '家长'?
+        }
+        {
+          select == '家长' &&
           <View>
             <AtList>
               <AtListItem title='姓名' extraText={familyDetail.name?familyDetail.name:'待补充'}/>
@@ -206,7 +210,10 @@ export default class UsersManDetail extends Component {
               }
             </AtList>
           </View>
-          :<View>
+        }
+        {
+          select == '老师' &&
+          <View>
             <Text>老师数据</Text>
             <Text>{teacherDetail}</Text>
           </View>

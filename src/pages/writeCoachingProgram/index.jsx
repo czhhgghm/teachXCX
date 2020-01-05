@@ -15,16 +15,6 @@ export default class Index extends Component {
     navigationBarTitleText: '编写方案'
   }
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   handleChangeText (event) {
     this.setState({
       inputValue: event.target.value

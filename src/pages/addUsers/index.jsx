@@ -1,11 +1,11 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
 import { AtInput, AtRadio, AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-@connect(({ common }) => ({
-  ...common
+@connect(({ addUsers }) => ({
+  ...addUsers
 }))
 
 export default class Index extends Component {
@@ -28,16 +28,6 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: '添加用户'
   }
-
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   changeStudentName = value => {
     this.setState({
@@ -98,10 +88,24 @@ export default class Index extends Component {
     })
   }
 
+  // addStudent() {
+  //   const {dispatch} = this.props
+  //   dispatch({
+  //     type:'addUsers/addStudent',
+  //     payload:{
+  //       beginDate,
+  //       endDate,
+  //       name: studentName,
+  //       phone: studentPhone,
+  //       place: classPlace
+  //     }
+  //   }
+  // }
+
   async addNumbers() {
     const {dispatch} = this.props
     const {optionValue,beginDate,endDate,studentName,studentPhone,classPlace,parentName,parentPhone,perName,perPhone} = this.state
-    let phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
+    const phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
     if(optionValue == 'student') {
       phoneReg.test(studentPhone)?(

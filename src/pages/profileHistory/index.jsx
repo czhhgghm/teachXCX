@@ -23,14 +23,8 @@ export default class Index extends Component {
   componentWillMount () { }
 
   componentDidMount () {
-    console.log('路由传递:',this.$router.params)
+    
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   handleConfirm() {
     this.setState({

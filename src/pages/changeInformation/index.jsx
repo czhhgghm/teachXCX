@@ -27,32 +27,28 @@ export default class ChangeInformation extends Component {
     navigationBarTitleText: '修改个人信息'
   }
 
-  componentWillMount () {
-    
-  }
-
   componentDidMount () {
     const {params} = this.$router
     const {perPhone,parentPhone,classTime,classPlace} = this.props
-    let key = 
+    const key = 
       params.key == 'perPhone'? '学生电话'
       :params.key == 'parentPhone'? '家长电话'
       :params.key == 'classTime'? '上课时段'
       :params.key == 'classPlace'? '上课地区'
       : ''
-    let value = 
+    const value = 
       params.key == 'perPhone'? perPhone
       :params.key == 'parentPhone'? parentPhone
       :params.key == 'classTime'? classTime
       :params.key == 'classPlace'? classPlace
       :''
-    let type = 
+    const type = 
       params.key == 'perPhone'? 'phone'
       :params.key == 'parentPhone'? 'phone'
       :params.key == 'classTime'? 'text'
       :params.key == 'classPlace'? 'text'
       : ''
-    let maxLength = 
+    const maxLength = 
       params.key == 'perPhone'? '11'
       :params.key == 'parentPhone'? '11'
       :params.key == 'classTime'? '9'
@@ -69,18 +65,12 @@ export default class ChangeInformation extends Component {
 
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   submitHandle () {
     //点击提交按钮,把key和最新值发送给后台,同时在前端进行相应
     //此时还没后台,直接在前端响应
     const {select,value} = this.state
     const {dispatch} = this.props
-    let phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
+    const phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
     select == 'perPhone'?(
       phoneReg.test(value)?(
@@ -140,6 +130,7 @@ export default class ChangeInformation extends Component {
       })
     )
   }
+  
   render () {
     const {key,value,type,maxLength} = this.state
     return (

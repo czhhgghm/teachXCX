@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { AtFab, AtTag, AtSearchBar, AtList, AtListItem } from 'taro-ui'
+import { AtFab, AtTag, AtList, AtListItem } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ usersManage }) => ({
@@ -24,17 +24,9 @@ export default class UsersManage extends Component {
     navigationBarTitleText: '用户管理'
   }
 
-  componentWillMount () { }
-
   componentDidMount () {
     this.managerOnClick()
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   onButtonClick() {
     Taro.navigateTo({
@@ -42,9 +34,9 @@ export default class UsersManage extends Component {
     })
   }
 
-  async studentOnClick() {
+  studentOnClick() {
     if(this.state.select !== '学生') {
-      if(this.props.studentList.length < 1) {
+      if(!this.props.studentList.length) {
         this.getStudentList()
       }
       this.setState({
@@ -55,7 +47,7 @@ export default class UsersManage extends Component {
 
   familyOnClick = async() => {
     if(this.state.select !== '家长') {
-      if(this.props.familyList.length < 1) {
+      if(!this.props.familyList.length) {
         this.getFamilyList()
       }
       this.setState({
@@ -64,9 +56,9 @@ export default class UsersManage extends Component {
     }
   }
 
-  async teacherOnClick() {
+  teacherOnClick() {
     if(this.state.select !== '老师') {
-      if(this.props.teacherList.length < 1) {
+      if(!this.props.teacherList.length) {
         this.getTeachersList()
       }
       this.setState({
@@ -75,9 +67,9 @@ export default class UsersManage extends Component {
     }
   }
 
-  async managerOnClick() {
+  managerOnClick() {
     if(this.state.select !== '管理员') {
-      if(this.props.managerList.length < 1) {
+      if(!this.props.managerList.length) {
         this.getManagersList()
       }
       this.setState({
@@ -117,17 +109,6 @@ export default class UsersManage extends Component {
       payload:{}
     })
   }
-
-  onChange (value) {
-    this.setState({
-      searchValue: value
-    })
-    console.log(value)
-  }
-
-  // onActionClick() {
-  //   console.log('点击搜索')
-  // }
 
   handleChangeUser(e) {
     Taro.navigateTo({
@@ -174,12 +155,6 @@ export default class UsersManage extends Component {
             老师
           </AtTag>
         </View>
-        {/* <AtSearchBar
-          value={this.state.searchValue}
-          onChange={this.onChange.bind(this)}
-          onActionClick={this.onActionClick.bind(this)}
-        /> */}
-        
         <View>
           <AtList>
           {

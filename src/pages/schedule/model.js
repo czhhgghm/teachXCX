@@ -8,22 +8,30 @@ export default {
     state: {
         studentsCourse: [],
         teachersCourse: [],
+        showCourse: [false,false,false,false,false,false,false]
     },
-    
     effects: {
         *getStudentsCourse({payload},{call,put}) {
-            const response = yield call(getStudentsCourse,payload);
-            console.log('getStudentsCourse接口数据:',response)
+            const response = yield call(getStudentsCourse,payload)
+            response.data.unshift(response.data.pop())
+            const showCourse = [false,false,false,false,false,false,false]
+            response.data.forEach((item,index) => {
+                item.forEach((ele)=>{
+                    if(ele !== null) {                       
+                        showCourse[index] = true
+                    }
+                })
+            })
             yield put({
                 type: 'saveStudentsCourse',
                 payload: {
-                    studentsCourse: response.data
+                    studentsCourse: response.data,
+                    showCourse
                 }
             })
         },
         *getTeachersCourse({payload},{call,put}) {
             const response = yield call(getTeachersCourse,payload);
-            console.log('getTeachersCourse接口数据:',response)
             yield put({
                 type: 'saveTeachersCourse',
                 payload: {
@@ -35,10 +43,11 @@ export default {
 
     reducers: {
         saveStudentsCourse(state, {payload}) {
-            const {studentsCourse} = payload
+            const {studentsCourse,showCourse} = payload
             return {
                 ...state,
-                studentsCourse
+                studentsCourse,
+                showCourse
             }
         },
         saveTeachersCourse(state, {payload}) {

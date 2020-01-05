@@ -21,16 +21,6 @@ export default class Index extends Component {
     navigationBarTitleText: '评分反馈'
   }
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   handleChangeGrade (gradeValue) {
     this.setState({
       gradeValue

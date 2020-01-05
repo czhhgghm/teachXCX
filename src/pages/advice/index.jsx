@@ -21,16 +21,6 @@ export default class Advice extends Component {
     navigationBarTitleText: '意见反馈'
   }
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   handleChangeText (event) {
     this.setState({
       inputValue: event.target.value

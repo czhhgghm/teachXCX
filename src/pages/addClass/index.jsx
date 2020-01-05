@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
 import { AtInput, AtForm, AtButton, AtDrawer } from 'taro-ui'
 import { connect } from '@tarojs/redux'
@@ -30,19 +30,9 @@ export default class Index extends Component {
     navigationBarTitleText: '添加课程'
   }
 
-  componentWillMount () {
-    
-  }
-
   componentDidMount () {
     this.getTeacher()
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   handleChangeCourseBeginTime = value => {
     this.setState({
@@ -81,10 +71,10 @@ export default class Index extends Component {
     const dayTime = ['上午','下午','晚上']
     const res = {}
     for(let i=0;i<dateArr.length;i++) {
-      let font = dateArr[i].substring(0,2)
-      let end = dateArr[i].substring(2)
-      let value = [dayTime.indexOf(end)+1]
-      let key = week.indexOf(font) + 1
+      const font = dateArr[i].substring(0,2)
+      const end = dateArr[i].substring(2)
+      const value = [dayTime.indexOf(end)+1]
+      const key = week.indexOf(font) + 1
       if(res[key]) {
         res[key] = res[key].concat(value)
       }
@@ -159,8 +149,6 @@ export default class Index extends Component {
     })
   }
 
-
-
   render () {
     const checkTeacher = this.state.selectTeacherName == '' ? '选择老师' : this.state.selectTeacherName
     return (
@@ -195,7 +183,7 @@ export default class Index extends Component {
             name='courseBeginTime'
             title='开始上课时间'
             type='text'
-            placeholder='例如2019-12-21'
+            placeholder='例如2020-01-01'
             value={this.state.courseBeginTime}
             onChange={this.handleChangeCourseBeginTime.bind(this)}
           />
@@ -203,7 +191,7 @@ export default class Index extends Component {
             name='courseEndTime'
             title='结束上课时间'
             type='text'
-            placeholder='例如2020-6-21'
+            placeholder='例如2020-10-10'
             value={this.state.courseEndTime}
             onChange={this.handleChangeCourseEndTime.bind(this)}
           />

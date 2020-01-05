@@ -27,12 +27,6 @@ export default class ShowAdvice extends Component {
     this.getNewAdvice()
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   getNewAdvice() {
     const adviceData = wx.getStorageSync('adviceData')
     if(!adviceData) {

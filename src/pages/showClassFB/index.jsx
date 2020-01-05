@@ -28,12 +28,6 @@ export default class ShowClassFB extends Component {
     this.studentOnClick()
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   studentOnClick() {
     if(this.props.studentList.length < 1) {
       this.getStudentList()
@@ -89,7 +83,6 @@ export default class ShowClassFB extends Component {
       }
     })
   }
-
 
   render () {
     const {studentActive,teacherActive} = this.state

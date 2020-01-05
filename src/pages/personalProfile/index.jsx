@@ -16,16 +16,8 @@ export default class Index extends Component {
     navigationBarTitleText: '个人档案'
   }
 
-  componentWillMount () { }
-
   //按照时间顺序,返回给我这个学生的 课程和授课老师列表
   componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   changeDetail = url => {
     Taro.navigateTo({

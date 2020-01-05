@@ -17,15 +17,7 @@ export default class Index extends Component {
     navigationBarTitleText: '新用户报名'
   }
 
-  componentWillMount () { }
-
   componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   handleChangeName (value) {
     this.setState({

@@ -33,12 +33,6 @@ export default class Index extends Component {
     this.showPrompt()
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   toViewHandleClick (value) {
     this.setState({
       toView: value

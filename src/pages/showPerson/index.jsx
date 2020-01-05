@@ -27,18 +27,10 @@ export default class Index extends Component {
     navigationBarTitleText: '用户信息'
   }
 
-  componentWillMount () { }
 
   componentDidMount () {
-
+    
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
 
   changeDetail = url => {
     Taro.navigateTo({
