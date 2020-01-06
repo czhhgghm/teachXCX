@@ -49,15 +49,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/showClassFB/index",
-					"pathName": "pages/showClassFB/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "pages/schedule/index",
-					"pathName": "pages/schedule/index",
+					"name": "pages/addClass/index",
+					"pathName": "pages/addClass/index",
 					"query": "",
 					"scene": null
 				}

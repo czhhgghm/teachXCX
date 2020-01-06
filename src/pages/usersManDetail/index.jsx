@@ -17,7 +17,7 @@ export default class UsersManDetail extends Component {
     this.state = {
       openFamily: false,
       openCourses: false,
-      btnLoading: false,
+      btnLoading: false
     }
   };
 
@@ -162,7 +162,7 @@ export default class UsersManDetail extends Component {
                         studentDetail.courses.map((item,index)=>{
                           return (
                             <AtListItem
-                              key={index}
+                              key={index + item.courseName}
                               title={'课程名称: '+item.courseName}
                               note={'授课老师: '+item.teacherName}
                             />

@@ -17,11 +17,10 @@ export default class Index extends Component {
       perPhone: '',
       studentName: '',
       studentPhone: '',
-      beginDate: '',
-      endDate: '',
-      classPlace: '',
       parentName: '',
       parentPhone: '',
+      schoolName: '',
+      livePlace: ''
     }
   };
 
@@ -41,23 +40,6 @@ export default class Index extends Component {
     })
   }
 
-  changeBeginDate = value => {
-    this.setState({
-      beginDate: value
-    })
-  }
-
-  changeEndDate = value => {
-    this.setState({
-      endDate: value
-    })
-  }
-
-  changeClassPlace = value => {
-    this.setState({
-      classPlace: value
-    })
-  }
   changeParentName = value => {
     this.setState({
       parentName: value
@@ -82,29 +64,41 @@ export default class Index extends Component {
     })
   }
 
+  changeLivePlace = value => {
+    this.setState({
+      livePlace: value
+    })
+  }
+
   handleChangeOption = value => {
     this.setState({
       optionValue: value
     })
   }
 
-  // addStudent() {
-  //   const {dispatch} = this.props
-  //   dispatch({
-  //     type:'addUsers/addStudent',
-  //     payload:{
-  //       beginDate,
-  //       endDate,
-  //       name: studentName,
-  //       phone: studentPhone,
-  //       place: classPlace
-  //     }
-  //   }
-  // }
+  changeSchoolName = value => {
+    this.setState({
+      schoolName: value
+    })
+  }
+
+  clearUsers() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManage/clearUsers',
+      payload:{
+        studentList: [],
+        teacherList: [],
+        managerList: [],
+        familyList: []
+      }
+    })
+  }
+
 
   async addNumbers() {
     const {dispatch} = this.props
-    const {optionValue,beginDate,endDate,studentName,studentPhone,classPlace,parentName,parentPhone,perName,perPhone} = this.state
+    const {optionValue,studentName,studentPhone,parentName,parentPhone,perName,perPhone,livePlace,schoolName} = this.state
     const phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
     if(optionValue == 'student') {
@@ -112,11 +106,10 @@ export default class Index extends Component {
         await dispatch({
           type:'addUsers/addStudent',
           payload:{
-            beginDate,
-            endDate,
             name: studentName,
             phone: studentPhone,
-            place: classPlace
+            school: schoolName,
+            place: livePlace
           }
         },
           Taro.showToast({
@@ -179,17 +172,16 @@ export default class Index extends Component {
         icon: 'none'
       })
     }
+    this.clearUsers()
     this.setState({
       optionValue: '',
       perName: '',
       perPhone: '',
       studentName: '',
       studentPhone: '',
-      beginDate: '',
-      endDate: '',
-      classPlace: '',
       parentName: '',
-      parentPhone: ''
+      parentPhone: '',
+      livePlace: ''
     })
   }
 
@@ -213,7 +205,7 @@ export default class Index extends Component {
             optionValue == 'manager'?
             <View>
               <AtInput
-                name='value'
+                name='perName'
                 title='姓名'
                 maxLength='10'
                 type='text'
@@ -222,9 +214,9 @@ export default class Index extends Component {
                 onChange={this.changePerName.bind(this)}
               />
               <AtInput
-                name='value'
+                name='perPhone'
                 title='手机号码'
-                type='text'
+                type='phone'
                 maxLength='11'
                 placeholder='请输入手机号码'
                 value={this.state.perPhone}
@@ -235,7 +227,7 @@ export default class Index extends Component {
             :optionValue == 'student'?
             <View>
               <AtInput
-                name='value'
+                name='studentName'
                 title='姓名'
                 maxLength='10'
                 type='text'
@@ -244,47 +236,38 @@ export default class Index extends Component {
                 onChange={this.changeStudentName.bind(this)}
               />
               <AtInput
-                name='value'
+                name='studentPhone'
                 title='手机号码'
-                type='text'
+                type='phone'
                 placeholder='请输入学生手机号码'
                 maxLength='11'
                 value={this.state.studentPhone}
                 onChange={this.changeStudentPhone.bind(this)}
               />
               <AtInput
-                name='value'
-                title='开始上课时间'
+                name='studentName'
+                title='住址'
                 maxLength='10'
                 type='text'
-                placeholder='示例:2019-01-01'
-                value={this.state.beginDate}
-                onChange={this.changeBeginDate.bind(this)}
+                placeholder='请输入学生常住地址'
+                value={this.state.livePlace}
+                onChange={this.changeLivePlace.bind(this)}
               />
               <AtInput
-                name='value'
-                title='结束上课时间'
+                name='schoolName'
+                title='学校'
                 maxLength='10'
                 type='text'
-                placeholder='示例:2019-01-01'
-                value={this.state.endDate}
-                onChange={this.changeEndDate.bind(this)}
-              />
-              <AtInput
-                name='value'
-                title='上课地区'
-                maxLength='6'
-                type='text'
-                placeholder='请输入上课地区'
-                value={this.state.classPlace}
-                onChange={this.changeClassPlace.bind(this)}
+                placeholder='请输入学生所在学校名称'
+                value={this.state.schoolName}
+                onChange={this.changeSchoolName.bind(this)}
               />
               <AtButton type='primary' onClick={this.addNumbers.bind(this)}>确认添加</AtButton>
             </View>
             :optionValue == 'parent'?
             <View>
               <AtInput
-                name='value'
+                name='parentName'
                 title='家长姓名'
                 maxLength='10'
                 type='text'
@@ -293,16 +276,16 @@ export default class Index extends Component {
                 onChange={this.changeParentName.bind(this)}
               />
               <AtInput
-                name='value'
+                name='parentPhone'
                 title='手机号码'
-                type='text'
+                type='phone'
                 placeholder='请输入手机号码'
                 maxLength='11'
                 value={this.state.parentPhone}
                 onChange={this.changeParentPhone.bind(this)}
               />
               <AtInput
-                name='value'
+                name='studentName'
                 title='孩子姓名'
                 maxLength='10'
                 type='text'
@@ -311,9 +294,9 @@ export default class Index extends Component {
                 onChange={this.changeStudentName.bind(this)}
               />
               <AtInput
-                name='value'
+                name='studentPhone'
                 title='孩子手机号码'
-                type='text'
+                type='phone'
                 maxLength='11'
                 placeholder='请输入孩子手机号码'
                 value={this.state.studentPhone}
@@ -324,7 +307,7 @@ export default class Index extends Component {
             :optionValue == 'teacher'?
             <View>
               <AtInput
-                name='value'
+                name='perName'
                 title='姓名'
                 maxLength='10'
                 type='text'
@@ -333,10 +316,10 @@ export default class Index extends Component {
                 onChange={this.changePerName.bind(this)}
               />
               <AtInput
-                name='value'
+                name='perPhone'
                 title='手机号码'
                 maxLength='11'
-                type='text'
+                type='phone'
                 placeholder='请输入手机号码'
                 value={this.state.perPhone}
                 onChange={this.changePerPhone.bind(this)}

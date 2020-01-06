@@ -5,14 +5,15 @@ import { AtRate, AtButton, AtTextarea } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
-  authen: common.authen
+  authen: common.authen,
+  userId: common.userId
 }))
 
-export default class Index extends Component {
+export default class ClassFeedBack extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      gradeValue: 0,
+      pointValue: 0,
       inputValue: '',
     }
   };
@@ -21,9 +22,13 @@ export default class Index extends Component {
     navigationBarTitleText: '评分反馈'
   }
 
-  handleChangeGrade (gradeValue) {
+  componentDidMount() {
+    
+  }
+
+  handleChangeGrade (pointValue) {
     this.setState({
-      gradeValue
+      pointValue
     })
   }
 
@@ -34,7 +39,7 @@ export default class Index extends Component {
   }
 
   submitHandle() {
-    if(this.state.gradeValue == 0) {
+    if(this.state.pointValue == 0) {
       Taro.showToast({
         title: '请先进行满意度评分',
         icon: 'none',
@@ -47,33 +52,61 @@ export default class Index extends Component {
       })
     }
     else {
-      Taro.showToast({
-        title: '提交成功'
-      },wx.reLaunch({
-          url: '../../pages/index/index',
-        })
-      )
+      const { dispatch, userId, authen } = this.props
+      const { pointValue, inputValue } = this.state
+      const { id } = this.$router.params
+      if( authen == '学生' ) {
+        dispatch({
+          type:'schedule/postStudentFB',
+          payload:{
+            courseId: Number(id),
+            fromUserId: userId,
+            idea: inputValue,
+            pointValue,
+          }
+        },
+          Taro.showToast({
+            title: '提交成功'
+          },wx.reLaunch({
+              url: '../../pages/index/index',
+            })
+          )
+        )
+      }
+      else {
+        ispatch({
+          type:'schedule/postTeacherFB',
+          payload:{
+            courseId: Number(id),
+            fromUserId: userId,
+            idea: inputValue,
+            pointValue,
+          }
+        },
+          Taro.showToast({
+            title: '提交成功'
+          },wx.reLaunch({
+              url: '../../pages/index/index',
+            })
+          )
+        )
+      }
     }
   }
 
   render () {
-    const {gradeValue,inputValue} = this.state
-    const {authen} = this.props
+    const {pointValue,inputValue} = this.state
     return (
       <View className='index'>
-        {
-          authen == '学生'?(
-            <View className='grade'>
-              <Text className='gradeFont'>满意度评分:</Text>
-                <AtRate
-                  className='stars'
-                  size={18}
-                  value={gradeValue}
-                  onChange={this.handleChangeGrade.bind(this)}
-                />
-              </View>
-          ):''
-        }
+        <View className='grade'>
+          <Text className='gradeFont'>满意度评分:</Text>
+          <AtRate
+            className='stars'
+            size={18}
+            value={pointValue}
+            onChange={this.handleChangeGrade.bind(this)}
+          />
+        </View>
         <AtTextarea
           value={inputValue}
           height='200'

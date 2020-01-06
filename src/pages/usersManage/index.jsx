@@ -24,8 +24,8 @@ export default class UsersManage extends Component {
     navigationBarTitleText: '用户管理'
   }
 
-  componentDidMount () {
-    this.managerOnClick()
+  componentDidShow() {
+    this.managerOnClick()    
   }
 
   onButtonClick() {

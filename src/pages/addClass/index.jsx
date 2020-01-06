@@ -149,8 +149,52 @@ export default class Index extends Component {
     })
   }
 
+  beginTimeBlur() {
+    const {courseBeginTime} = this.state
+    if(!courseBeginTime) {
+      wx.showToast({
+        title: '开始上课时间为空,请按要求输入',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    else {
+      const res = courseBeginTime.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+      if(res == null) {
+        wx.showToast({
+          title: '输入格式有误,请按要求输入',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
+  }
+
+  endTimeBlur() {
+    const {courseEndTime} = this.state
+    if(!courseEndTime) {
+      wx.showToast({
+        title: '结束上课时间为空,请按要求输入',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    else {
+      const res = courseEndTime.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+      if(res == null) {
+        wx.showToast({
+          title: '输入格式有误,请按要求输入',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
+  }
+
   render () {
     const checkTeacher = this.state.selectTeacherName == '' ? '选择老师' : this.state.selectTeacherName
+    const { courseName, coursePlace, courseDetail, courseBeginTime, courseEndTime, showDrawer, teacherItems } = this.state
+
     return (
       <View className='index'>
         <AtForm>
@@ -159,7 +203,7 @@ export default class Index extends Component {
             title='课程名称'
             type='text'
             placeholder='请输入课程名称'
-            value={this.state.courseName}
+            value={courseName}
             onChange={this.handleChangeCourseName.bind(this)}
           />
           <AtInput
@@ -167,7 +211,7 @@ export default class Index extends Component {
             title='上课地点'
             type='text'
             placeholder='请输入上课地点'
-            value={this.state.coursePlace}
+            value={coursePlace}
             onChange={this.handleChangeCoursePlace.bind(this)}
           />
           <AtInput
@@ -175,7 +219,7 @@ export default class Index extends Component {
             title='每周上课时间'
             type='number'
             placeholder='周*上午/周*下午/周*晚上'
-            value={this.state.courseDetail}
+            value={courseDetail}
             onChange={this.handleChangeCourseDetail.bind(this)}
             onBlur={this.handleCompute.bind(this)}
           />
@@ -184,15 +228,17 @@ export default class Index extends Component {
             title='开始上课时间'
             type='text'
             placeholder='例如2020-01-01'
-            value={this.state.courseBeginTime}
+            value={courseBeginTime}
+            onBlur={this.beginTimeBlur.bind(this)}
             onChange={this.handleChangeCourseBeginTime.bind(this)}
           />
           <AtInput
             name='courseEndTime'
             title='结束上课时间'
             type='text'
-            placeholder='例如2020-10-10'
-            value={this.state.courseEndTime}
+            placeholder='例如2020-09-09'
+            value={courseEndTime}
+            onBlur={this.endTimeBlur.bind(this)}
             onChange={this.handleChangeCourseEndTime.bind(this)}
           />
           
@@ -200,11 +246,11 @@ export default class Index extends Component {
           <AtButton type='primary' onClick={this.addClass.bind(this)}>确认添加</AtButton>
         </AtForm>
         <AtDrawer 
-          show={this.state.showDrawer} 
+          show={showDrawer} 
           mask
           onItemClick={this.clickItem.bind(this)}
           onClose={this.closeDrawer.bind(this)} 
-          items={this.state.teacherItems}
+          items={teacherItems}
         ></AtDrawer>
       </View>
     )

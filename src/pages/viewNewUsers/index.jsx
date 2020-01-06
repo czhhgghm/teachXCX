@@ -16,7 +16,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: '查看新用户'
+    navigationBarTitleText: '查看新用户(静态)'
   }
 
   componentWillMount () {}

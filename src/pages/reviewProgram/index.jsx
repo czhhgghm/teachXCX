@@ -16,7 +16,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: '审核辅导方案'
+    navigationBarTitleText: '审核辅导方案(静态)'
   }
 
   componentWillMount () {}

@@ -166,7 +166,7 @@ export default class Schedule extends Component {
                                   `/pages/classFeedback/index?id=${ele.id}`
                             )}>
                               <View className='at-col  at-col-3'>{ele.courseName}</View>
-                              <View className='at-col  at-col-2'>{ele.time}</View>
+                              <View className='at-col  at-col-2'>{ele.timeDes}</View>
                               <View className='at-col  at-col-3'>{ele.teacherName}</View>
                               <View className='at-col  at-col-4'>{ele.place}</View>
                             </View>
@@ -210,7 +210,7 @@ export default class Schedule extends Component {
                                   `/pages/classFeedback/index?id=${ele.id}`
                             )}>
                               <View className='at-col  at-col-3'>{ele.courseName}</View>
-                              <View className='at-col  at-col-2'>{ele.time}</View>
+                              <View className='at-col  at-col-2'>{ele.timeDes}</View>
                               <View className='at-col  at-col-3'>{ele.teacherName}</View>
                               <View className='at-col  at-col-4'>{ele.place}</View>
                             </View>

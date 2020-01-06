@@ -13,7 +13,7 @@ export default class Index extends Component {
   };
 
   config = {
-    navigationBarTitleText: '个人档案'
+    navigationBarTitleText: '个人档案(静态)'
   }
 
   //按照时间顺序,返回给我这个学生的 课程和授课老师列表

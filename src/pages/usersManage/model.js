@@ -14,12 +14,13 @@ export default {
         teacherList: [],
         managerList: [],
         familyList: [],
+        studentFB: [],
+        teacherFB: []
     },
     
     effects: {
         *getStudentsList({payload},{call,put}) {
-            const response = yield call(getStudentsList,payload);
-
+            const response = yield call(getStudentsList,payload)
             yield put({
                 type: 'saveStudentList',
                 payload: {
@@ -28,8 +29,7 @@ export default {
             })
         },
         *getTeachersList({payload},{call,put}) {
-            const response = yield call(getTeachersList,payload);
-
+            const response = yield call(getTeachersList,payload)
             yield put({
                 type: 'saveTeacherList',
                 payload: {
@@ -38,8 +38,7 @@ export default {
             })
         },
         *getManagersList({payload},{call,put}) {
-            const response = yield call(getManagersList,payload);
-
+            const response = yield call(getManagersList,payload)
             yield put({
                 type: 'saveManagerList',
                 payload: {
@@ -48,8 +47,7 @@ export default {
             })
         },
         *getFamilyList({payload},{call,put}) {
-            const response = yield call(getFamilyList,payload);
-            
+            const response = yield call(getFamilyList,payload)
             yield put({
                 type: 'saveFamilyList',
                 payload: {
@@ -58,22 +56,50 @@ export default {
             })
         },
         *getStudentClassFB({payload},{call,put}) {
-            const response = yield call(getStudentClassFB,payload);
-            
-            // yield put({
-            //     type: 'saveFamilyDetail',
-            //     payload: {
-            //         familyDetail: response.data
-            //     }
-            // })
+            const response = yield call(getStudentClassFB,payload)
+            yield put({
+                type: 'saveStudentClassFB',
+                payload: {
+                    studentFB: response.data
+                }
+            })
         },
         *getTeacherClassFB({payload},{call,put}) {
-            const response = yield call(getTeacherClassFB,payload);
-            
+            const response = yield call(getTeacherClassFB,payload)
+            yield put({
+                type: 'saveTeacherClassFB',
+                payload: {
+                    teacherFB: response.data
+                }
+            })        
         }
     },
 
     reducers: {
+        saveStudentClassFB(state, {payload}) {
+            const {studentFB} = payload
+            return {
+                ...state,
+                studentFB
+            }
+        },
+        saveTeacherClassFB(state, {payload}) {
+            const {teacherFB} = payload
+            return {
+                ...state,
+                teacherFB
+            }
+        },
+        clearUsers(state, {payload}) {
+            const { studentList, teacherList, managerList, familyList } = payload
+            return {
+                ...state,
+                studentList,
+                teacherList,
+                managerList,
+                familyList
+            }
+        },
         saveStudentList(state, {payload}) {
             const {studentList} = payload
             return {
@@ -101,6 +127,6 @@ export default {
                 ...state,
                 familyList
             }
-        },
+        }
     }
 }

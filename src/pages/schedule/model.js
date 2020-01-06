@@ -1,6 +1,8 @@
 import { 
     getStudentsCourse,
-    getTeachersCourse
+    getTeachersCourse,
+    postStudentFB,
+    postTeacherFB
  } from './service'
 
 export default {
@@ -11,6 +13,12 @@ export default {
         showCourse: [false,false,false,false,false,false,false]
     },
     effects: {
+        *postStudentFB({payload},{call,put}) {
+            const response = yield call(postStudentFB,payload)
+        },
+        *postTeacherFB({payload},{call,put}) {
+            const response = yield call(postTeacherFB,payload)
+        },
         *getStudentsCourse({payload},{call,put}) {
             const response = yield call(getStudentsCourse,payload)
             response.data.unshift(response.data.pop())
@@ -31,19 +39,28 @@ export default {
             })
         },
         *getTeachersCourse({payload},{call,put}) {
-            const response = yield call(getTeachersCourse,payload);
+            const response = yield call(getTeachersCourse,payload)
+            response.data.unshift(response.data.pop())
+            const showCourse = [false,false,false,false,false,false,false]
+            response.data.forEach((item,index) => {
+                item.forEach((ele)=>{
+                    if(ele !== null) {                       
+                        showCourse[index] = true
+                    }
+                })
+            })
             yield put({
                 type: 'saveTeachersCourse',
                 payload: {
-                    teachersCourse: response.data
+                    teachersCourse: response.data,
+                    showCourse
                 }
             })
-        },
+        }
     },
-
     reducers: {
         saveStudentsCourse(state, {payload}) {
-            const {studentsCourse,showCourse} = payload
+            const { studentsCourse, showCourse } = payload
             return {
                 ...state,
                 studentsCourse,
@@ -51,11 +68,12 @@ export default {
             }
         },
         saveTeachersCourse(state, {payload}) {
-            const {teachersCourse} = payload
+            const { teachersCourse, showCourse } = payload
             return {
                 ...state,
-                teachersCourse
+                teachersCourse,
+                showCourse
             }
-        },
+        }
     }
 }
