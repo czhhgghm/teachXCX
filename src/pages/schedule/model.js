@@ -21,7 +21,7 @@ export default {
         },
         *getStudentsCourse({payload},{call,put}) {
             const response = yield call(getStudentsCourse,payload)
-            response.data.unshift(response.data.pop())
+            // response.data.unshift(response.data.pop())
             const showCourse = [false,false,false,false,false,false,false]
             response.data.forEach((item,index) => {
                 item.forEach((ele)=>{

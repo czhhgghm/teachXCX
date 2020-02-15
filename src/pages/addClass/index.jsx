@@ -31,6 +31,7 @@ export default class Index extends Component {
   }
 
   componentDidMount () {
+    this.clearView()
     this.getTeacher()
   }
 
@@ -87,11 +88,11 @@ export default class Index extends Component {
     })
   }
 
-  addClass() {
+  async addClass() {
     const {dispatch} = this.props
     const { courseBeginTime, courseName, daysAndTimes, courseEndTime, coursePlace, selectTeacherId } = this.state
     const {id} = this.$router.params
-    dispatch({
+    await dispatch({
       type:'common/addClass',
       payload:{
         begin: courseBeginTime,
@@ -102,7 +103,19 @@ export default class Index extends Component {
         studentId: Number(id),
         teacherId: selectTeacherId
       }
-    },this.clearView())
+    },this.closeView())
+  }
+
+  closeView() {
+    Taro.showToast({
+      title: '添加成功'
+    },
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '../../pages/index/index',
+        })
+      }, 1500)
+    )
   }
 
   clearView() {
@@ -217,7 +230,7 @@ export default class Index extends Component {
           <AtInput
             name='coursePlace'
             title='每周上课时间'
-            type='number'
+            type='text'
             placeholder='周*上午/周*下午/周*晚上'
             value={courseDetail}
             onChange={this.handleChangeCourseDetail.bind(this)}

@@ -6,7 +6,9 @@ import { connect } from '@tarojs/redux'
 
 @connect(({ usersManage }) => ({
   studentList: usersManage.studentList,
-  teacherList: usersManage.teacherList
+  teacherList: usersManage.teacherList,
+  studentFB: usersManage.studentFB,
+  teacherFB: usersManage.teacherFB
 }))
 
 export default class ShowClassFB extends Component {
@@ -64,23 +66,29 @@ export default class ShowClassFB extends Component {
     })
   }
   
-  getStudentClassFB(id) {
+  async getStudentClassFB(id) {
     const {dispatch} = this.props
-    dispatch({
+    await dispatch({
       type:'usersManage/getStudentClassFB',
       payload:{
         studentId: id
       }
     })
+    await Taro.navigateTo({
+      url: '../showFBDetail/index?key=studentGetTeacherFB',      
+    })
   }
 
-  getTeacherClassFB(id) {
+  async getTeacherClassFB(id) {
     const {dispatch} = this.props
-    dispatch({
+    await dispatch({
       type:'usersManage/getTeacherClassFB',
       payload:{
         teacherId: id
       }
+    })
+    await Taro.navigateTo({
+      url: '../showFBDetail/index?key=teacherGetStudentFB',
     })
   }
 
@@ -96,7 +104,7 @@ export default class ShowClassFB extends Component {
             active={studentActive}
             onClick={this.studentOnClick.bind(this)}
           >
-            学生反馈信息
+            学生得到反馈
           </AtTag>
           <AtTag
             className="tagStyle"
@@ -104,7 +112,7 @@ export default class ShowClassFB extends Component {
             active={teacherActive}
             onClick={this.teacherOnClick.bind(this)}
           >
-            老师反馈信息
+            老师得到反馈
           </AtTag>
         </View>
         <View>

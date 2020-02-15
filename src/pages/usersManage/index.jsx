@@ -15,8 +15,7 @@ export default class UsersManage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      select: '',
-      searchValue: ''
+      select: ''
     }
   };
 
@@ -24,8 +23,34 @@ export default class UsersManage extends Component {
     navigationBarTitleText: '用户管理'
   }
 
+  componentWillMount() {
+    this.judgePage()
+  }
+
   componentDidShow() {
-    this.managerOnClick()    
+    const {studentList,familyList,teacherList,managerList} = this.props
+    const {select} = this.state
+    if(select == '管理员' && managerList.length == 0) {
+      this.getManagersList()
+    }
+    if(select == '学生' && studentList.length == 0) {
+      this.getStudentList()
+    }
+    if(select == '老师' && teacherList.length == 0) {
+      this.getTeachersList()
+    }
+    if(select == '家长' && familyList.length == 0) {
+      this.getFamilyList()
+    }
+  }
+
+  judgePage() {
+    let pageHistory = getCurrentPages()
+    let pageLength = pageHistory.length
+    if(pageHistory[pageLength-1].route == "pages/usersManage/index") {
+      //优化点,当添加用户以后,判断页面,重新进行数据请求!!
+      this.managerOnClick() 
+    }
   }
 
   onButtonClick() {

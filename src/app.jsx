@@ -42,6 +42,7 @@ class App extends Component {
       'pages/addUsers/index',
       'pages/usersManDetail/index',
       'pages/addClass/index',
+      'pages/showFBDetail/index'
     ],
     window: {
       backgroundTextStyle: 'light',

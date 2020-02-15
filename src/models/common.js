@@ -59,7 +59,7 @@ export default {
         },
         *getNewAdvice({payload},{call,put}) {
             const response = yield call(getNewAdvice);
-            wx.setStorageSync('adviceData', response.data)
+            wx.setStorageSync('adviceData', response.data);
             yield put({
                 type: 'saveNewAdvice',
                 payload: {
@@ -68,8 +68,9 @@ export default {
             })
         },
         *addClass({payload},{call,put}) {
+            console.log('payload',payload);
             const response = yield call(addClass,payload);
-            console.log(response)
+            console.log(response);
         },
     },
 

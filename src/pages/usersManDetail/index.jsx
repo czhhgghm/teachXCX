@@ -17,7 +17,8 @@ export default class UsersManDetail extends Component {
     this.state = {
       openFamily: false,
       openCourses: false,
-      btnLoading: false
+      btnLoading: false,
+      removeId: []
     }
   };
 
@@ -104,6 +105,13 @@ export default class UsersManDetail extends Component {
     })
   }
 
+  removeClass = ids => {
+    this.setState({
+
+    })
+    console.log(idsArray)
+  }
+
   
   render () {
     const {select} = this.$router.params
@@ -140,7 +148,7 @@ export default class UsersManDetail extends Component {
                             <AtListItem
                               key={item.id}
                               title={item.name}
-                              note={item.phone}
+                              extraText={item.phone}
                             />
                           )
                         })
@@ -164,7 +172,8 @@ export default class UsersManDetail extends Component {
                             <AtListItem
                               key={index + item.courseName}
                               title={'课程名称: '+item.courseName}
-                              note={'授课老师: '+item.teacherName}
+                              extraText={item.teacherName}
+                              onClick={this.removeClass.bind(this,item.coureseIds)}
                             />
                           )
                         })

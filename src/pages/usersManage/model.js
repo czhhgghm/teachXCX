@@ -60,7 +60,7 @@ export default {
             yield put({
                 type: 'saveStudentClassFB',
                 payload: {
-                    studentFB: response.data
+                    studentFB: response.data.reverse()
                 }
             })
         },
@@ -69,7 +69,7 @@ export default {
             yield put({
                 type: 'saveTeacherClassFB',
                 payload: {
-                    teacherFB: response.data
+                    teacherFB: response.data.reverse()
                 }
             })        
         }
@@ -88,16 +88,6 @@ export default {
             return {
                 ...state,
                 teacherFB
-            }
-        },
-        clearUsers(state, {payload}) {
-            const { studentList, teacherList, managerList, familyList } = payload
-            return {
-                ...state,
-                studentList,
-                teacherList,
-                managerList,
-                familyList
             }
         },
         saveStudentList(state, {payload}) {
@@ -125,6 +115,16 @@ export default {
             const {familyList} = payload
             return {
                 ...state,
+                familyList
+            }
+        },
+        clearUsers(state, {payload}) {
+            const { studentList, teacherList, managerList, familyList } = payload
+            return {
+                ...state,
+                studentList,
+                teacherList,
+                managerList,
                 familyList
             }
         }

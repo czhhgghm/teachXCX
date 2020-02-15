@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtAccordion, AtList, AtListItem, AtPagination, AtSearchBar, AtModal } from 'taro-ui'
+import { AtList, AtListItem, AtModal } from 'taro-ui'
 
 export default class Index extends Component {
   constructor(props) {
@@ -21,46 +21,8 @@ export default class Index extends Component {
 
   componentWillMount () {}
 
-  showPrompt() {
-    wx.showToast({
-      title: '有3份新用户报名表单待处理',
-      icon: 'none',
-      duration: 2000
-    })
-  }
-
-  componentDidMount () {
-    this.showPrompt()
-  }
-
-  toViewHandleClick (value) {
-    this.setState({
-      toView: value
-    })
-  }
-
-  viewedHandleClick (value) {
-    this.setState({
-      viewed: value
-    })
-  }
-
-  changePage = e => {
-    console.log(e)
-  }
-
-  changeInputValue (value) {
-    this.setState({
-      searchValue: value
-    })
-    console.log(value)
-  }
-
-  onActionClick() {
-    console.log('点击搜索')
-  }
-
   selectPreItem = value => {
+    console.log('value',value)
     this.setState({
       showPreModal: true
     })
@@ -87,11 +49,11 @@ export default class Index extends Component {
     })
   }
 
-  selectItemed() {
-    this.setState({
-      showModaled: true
-    })
-  }
+  // selectItemed() {
+  //   this.setState({
+  //     showModaled: true
+  //   })
+  // }
 
   handleCloseModaled() {
     this.setState({
@@ -109,106 +71,27 @@ export default class Index extends Component {
     const content = '学生姓名:李云龙'+'\n'+'学生电话:13354687155'+'\n'+'家长电话:15623865478'
     return (
       <View className='index'>
-        <AtAccordion
-          open={this.state.toView}
-          onClick={this.toViewHandleClick.bind(this)}
-          title='待处理'
-        >
-          <AtList hasBorder={false}>
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/31'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'1')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/25'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'2')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/24'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'3')}
-            />
-          </AtList>
-        </AtAccordion>
-        <AtAccordion
-          open={this.state.viewed}
-          onClick={this.viewedHandleClick.bind(this)}
-          title='已处理'
-        >
-          <AtSearchBar
-            value={this.state.searchValue}
-            onChange={this.changeInputValue.bind(this)}
-            onActionClick={this.onActionClick.bind(this)}
+        <AtList hasBorder={false}>
+          <AtListItem
+            title='新用户'
+            extraText='2019/10/31'
+            arrow='right'
+            onClick={this.selectPreItem.bind(this,'1')}
           />
-          <AtList hasBorder={false}>
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/31'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/30'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/28'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/25'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/22'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/21'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/20'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/18'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='新用户'
-              extraText='2019/10/15'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-          </AtList>
-          <AtPagination 
-            total={50} 
-            pageSize={10}
-            current={1}
-            onPageChange={this.changePage.bind(this)}
-          >
-          </AtPagination>
-        </AtAccordion>
+          <AtListItem
+            title='新用户'
+            extraText='2019/10/25'
+            arrow='right'
+            onClick={this.selectPreItem.bind(this,'2')}
+          />
+          <AtListItem
+            title='新用户'
+            extraText='2019/10/24'
+            arrow='right'
+            onClick={this.selectPreItem.bind(this,'3')}
+          />
+        </AtList>
+        
         <AtModal
           isOpened={this.state.showPreModal}
           title='新用户信息'

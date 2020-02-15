@@ -20,7 +20,10 @@ export default class Index extends Component {
     navigationBarTitleText: '辅导方案与历史评价'
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    const name = this.$router.params.key
+    console.log('name',name)    
+  }
 
   componentDidMount () {
     
@@ -39,7 +42,6 @@ export default class Index extends Component {
   
   render () {
     const {isOpened} = this.state
-    const name = this.$router.params.key
     return (
       <View className='index'>
         <AtModal
