@@ -54,20 +54,19 @@ export default {
                 })
             }
         },
-        *submitAdvice({payload},{call,put}) {
+        *submitAdvice({payload},{call}) {
             yield call(submitAdvice,payload);
         },
         *getNewAdvice({payload},{call,put}) {
             const response = yield call(getNewAdvice);
-            wx.setStorageSync('adviceData', response.data);
             yield put({
                 type: 'saveNewAdvice',
                 payload: {
-                    adviceData: response.data
+                    adviceData: response.data.reverse()
                 }
             })
         },
-        *addClass({payload},{call,put}) {
+        *addClass({payload},{call}) {
             console.log('payload',payload);
             const response = yield call(addClass,payload);
             console.log(response);

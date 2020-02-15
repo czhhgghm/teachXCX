@@ -28,13 +28,10 @@ export default class ShowAdvice extends Component {
   }
 
   getNewAdvice() {
-    const adviceData = wx.getStorageSync('adviceData')
-    if(!adviceData) {
-      const {dispatch} = this.props
-      dispatch({
-        type:'common/getNewAdvice'
-      })
-    }
+    const {dispatch} = this.props
+    dispatch({
+      type:'common/getNewAdvice'
+    })
   }
 
   selectPreItem = value => {
