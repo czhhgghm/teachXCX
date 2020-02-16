@@ -1,4 +1,11 @@
-import { getSessionId, getPhone, submitAdvice, getNewAdvice, addClass } from './service'
+import {
+    getSessionId,
+    getPhone,
+    submitAdvice,
+    getNewAdvice,
+    addCourse,
+    removeCourse
+} from './service'
 
 export default {
     namespace: 'common',
@@ -66,10 +73,11 @@ export default {
                 }
             })
         },
-        *addClass({payload},{call}) {
-            console.log('payload',payload);
-            const response = yield call(addClass,payload);
-            console.log(response);
+        *addCourse({payload},{call}) {
+            const response = yield call(addCourse,payload);
+        },
+        *removeCourse({payload},{call}) {
+            const response = yield call(removeCourse,payload);
         },
     },
 

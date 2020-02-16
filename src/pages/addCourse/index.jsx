@@ -88,12 +88,12 @@ export default class Index extends Component {
     })
   }
 
-  async addClass() {
+  async addCourse() {
     const {dispatch} = this.props
     const { courseBeginTime, courseName, daysAndTimes, courseEndTime, coursePlace, selectTeacherId } = this.state
     const {id} = this.$router.params
     await dispatch({
-      type:'common/addClass',
+      type:'common/addCourse',
       payload:{
         begin: courseBeginTime,
         courseName,
@@ -256,7 +256,7 @@ export default class Index extends Component {
           />
           
           <AtButton type='secondary' onClick={this.showTeacher.bind(this)}>{checkTeacher}</AtButton>
-          <AtButton type='primary' onClick={this.addClass.bind(this)}>确认添加</AtButton>
+          <AtButton type='primary' onClick={this.addCourse.bind(this)}>确认添加</AtButton>
         </AtForm>
         <AtDrawer 
           show={showDrawer} 

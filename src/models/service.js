@@ -34,11 +34,18 @@ export async function submitAdvice(data) {
     }) 
 }
 
-export async function addClass(data) {
+export async function addCourse(data) {
     return postRrequest({
         url: '/manager/addCourse',
         method: 'POST',
         data,
+    }) 
+}
+
+export async function removeCourse(data) {
+    return postRrequest({
+        url: `/manager/removeCourse?id=${data.id}`,
+        method: 'POST'
     }) 
 }
 
@@ -47,5 +54,5 @@ export default {
     getPhone,
     submitAdvice,
     getNewAdvice,
-    addClass
+    addCourse
 }

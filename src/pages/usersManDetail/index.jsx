@@ -17,7 +17,6 @@ export default class UsersManDetail extends Component {
     this.state = {
       openFamily: false,
       openCourses: false,
-      btnLoading: false,
       removeId: []
     }
   };
@@ -98,25 +97,39 @@ export default class UsersManDetail extends Component {
 
   componentDidHide () { }
 
-  addClass() {
+  addCourse() {
     const {id} = this.$router.params
     Taro.navigateTo({
-      url: `/pages/addClass/index?id=${id}`
+      url: `/pages/addCourse/index?id=${id}`
     })
   }
 
-  removeClass = ids => {
-    this.setState({
-
+  removeClass = coureseIds => {
+    const {dispatch} = this.props
+    Taro.showModal({
+      title: '提示',
+      content: '你确定要删除该课程吗?',
+      success: function(res) {
+        if (res.confirm) {
+          coureseIds.forEach(element => {
+            dispatch({
+              type:'common/removeCourse',
+              payload:{
+                id: element
+              }
+            })
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
-    console.log(idsArray)
   }
-
   
   render () {
     const {select} = this.$router.params
     const {studentDetail,teacherDetail,managerDetail,familyDetail} = this.props
-    const {btnLoading,openFamily,openCourses} = this.state
+    const {openFamily,openCourses} = this.state
     return (
       <View className='index'>
         {
@@ -184,7 +197,7 @@ export default class UsersManDetail extends Component {
                 <AtListItem title='课程情况' extraText='待补充'/>
               }
             </AtList>
-            <AtButton type='primary' loading={btnLoading} onClick={this.addClass.bind(this)}>添加课程</AtButton>
+            <AtButton type='primary' onClick={this.addCourse.bind(this)}>添加课程</AtButton>
           </View>
         }
         {
