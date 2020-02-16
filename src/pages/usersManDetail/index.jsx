@@ -118,14 +118,23 @@ export default class UsersManDetail extends Component {
                 id: element
               }
             })
-          })
+          },
+            Taro.showToast({
+              title: '删除成功'
+            },setTimeout(() => {
+              wx.reLaunch({
+                url: '../index/index',
+              })
+            }, 1500)
+            )
+          )
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
   }
-  
+
   render () {
     const {select} = this.$router.params
     const {studentDetail,teacherDetail,managerDetail,familyDetail} = this.props
