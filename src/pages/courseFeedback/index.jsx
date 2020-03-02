@@ -9,7 +9,7 @@ import { connect } from '@tarojs/redux'
   userId: common.userId
 }))
 
-export default class ClassFeedBack extends Component {
+export default class CourseFeedback extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -67,9 +67,11 @@ export default class ClassFeedBack extends Component {
         },
           Taro.showToast({
             title: '提交成功'
-          },wx.reLaunch({
-              url: '../../pages/index/index',
+          },setTimeout(() => {
+            wx.reLaunch({
+              url: '../index/index',
             })
+          }, 1500)
           )
         )
       }
@@ -85,9 +87,11 @@ export default class ClassFeedBack extends Component {
         },
           Taro.showToast({
             title: '提交成功'
-          },wx.reLaunch({
-              url: '../../pages/index/index',
+          },setTimeout(() => {
+            wx.reLaunch({
+              url: '../index/index',
             })
+          }, 1500)
           )
         )
       }

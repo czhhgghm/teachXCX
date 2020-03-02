@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import './index.scss'
 import { AtTabs, AtTabsPane, AtDivider, AtNoticebar  } from 'taro-ui'
 import { connect } from '@tarojs/redux'
+import {getCurrentTime} from '../../utils/api'
 
 @connect(({ common, schedule }) => ({
   id: common.id,
@@ -27,7 +28,7 @@ export default class Schedule extends Component {
   }
 
   componentWillMount () {
-    this.getCurrentTime()
+    this.getTime()
     this.closeAtNoticebar()
   }
 
@@ -79,16 +80,11 @@ export default class Schedule extends Component {
   }
 
   //得到当天的时间
-  getCurrentTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-	  const month = now.getMonth()+1;
-    const date = now.getDate();
-    const day = now.getDay()
-    const currentDay = year + '-' + month + '-' + date
+  getTime() {
+    let res = getCurrentTime();
     this.setState({
-      currentDay:currentDay,
-      currentNum: day
+      currentDay: res.currentDay,
+      currentNum: res.day
     })
   }
 
@@ -163,7 +159,7 @@ export default class Schedule extends Component {
                               className='current-schedule at-row' 
                               onClick={this.navigateToPage.bind(
                                   this,
-                                  `/pages/classFeedback/index?id=${ele.id}`
+                                  `/pages/courseFeedback/index?id=${ele.id}`
                             )}>
                               <View className='at-col  at-col-3'>{ele.courseName}</View>
                               <View className='at-col  at-col-2'>{ele.timeDes}</View>
@@ -207,7 +203,7 @@ export default class Schedule extends Component {
                               className='current-schedule at-row' 
                               onClick={this.navigateToPage.bind(
                                   this,
-                                  `/pages/classFeedback/index?id=${ele.id}`
+                                  `/pages/courseFeedback/index?id=${ele.id}`
                             )}>
                               <View className='at-col  at-col-3'>{ele.courseName}</View>
                               <View className='at-col  at-col-2'>{ele.timeDes}</View>

@@ -47,7 +47,7 @@ export default class Index extends Component {
                     return (
                         <AtCard
                             className="cardStyle"
-                            note={item.pointValue + '颗星'}
+                            note={item.pointValue + '分 (满分5分)'}
                             title={item.courseName}
                             extra={item.from.name + '(' + item.from.phone + ')'}
                         >{item.idea}</AtCard>

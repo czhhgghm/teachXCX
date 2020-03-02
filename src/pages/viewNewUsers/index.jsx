@@ -2,29 +2,43 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
 import { AtList, AtListItem, AtModal } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
-export default class Index extends Component {
+@connect(({ signUp }) => ({
+  recommandList: signUp.recommandList
+}))
+
+export default class ViewNewUsers extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      toView: false,
-      viewed: false,
-      searchValue: '',
       showPreModal: false,
       showModaled: false,
+      userDetail: ''
     }
   };
 
   config = {
-    navigationBarTitleText: '查看新用户(静态)'
+    navigationBarTitleText: '查看新用户'
   }
 
-  componentWillMount () {}
+  componentWillMount () {
+    this.recommandList()
+  }
 
-  selectPreItem = value => {
-    console.log('value',value)
+  recommandList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'signUp/getRecommandList'
+    })
+  }
+
+  selectPreItem = item => {
+    const { name, parentPhone, studentPhone } = item
+    const userDetail = `学生姓名:${name}`+'\n'+`学生电话:${parentPhone}`+'\n'+`家长电话:${studentPhone}` 
     this.setState({
-      showPreModal: true
+      showPreModal: true,
+      userDetail
     })
   }
 
@@ -49,12 +63,6 @@ export default class Index extends Component {
     })
   }
 
-  // selectItemed() {
-  //   this.setState({
-  //     showModaled: true
-  //   })
-  // }
-
   handleCloseModaled() {
     this.setState({
       showModaled: false
@@ -68,47 +76,33 @@ export default class Index extends Component {
   }
   
   render () {
-    const content = '学生姓名:李云龙'+'\n'+'学生电话:13354687155'+'\n'+'家长电话:15623865478'
+    const { recommandList } = this.props
+    const { userDetail } = this.state
     return (
       <View className='index'>
         <AtList hasBorder={false}>
-          <AtListItem
-            title='新用户'
-            extraText='2019/10/31'
-            arrow='right'
-            onClick={this.selectPreItem.bind(this,'1')}
-          />
-          <AtListItem
-            title='新用户'
-            extraText='2019/10/25'
-            arrow='right'
-            onClick={this.selectPreItem.bind(this,'2')}
-          />
-          <AtListItem
-            title='新用户'
-            extraText='2019/10/24'
-            arrow='right'
-            onClick={this.selectPreItem.bind(this,'3')}
-          />
+        {
+          recommandList.length > 0 ? recommandList.map((item) => {
+            return (
+              <AtListItem
+                title={item.name}
+                arrow='right'
+                onClick={this.selectPreItem.bind(this,item)}
+              />  
+            )
+          })
+          :<Text>暂无新用户</Text>
+        }
         </AtList>
-        
         <AtModal
           isOpened={this.state.showPreModal}
           title='新用户信息'
-          cancelText='等候处理'
+          cancelText='人工处理'
           confirmText='处理完成'
           onClose={ this.handleClosePreModal.bind(this) }
           onCancel={ this.handleCancelPreModal.bind(this) }
           onConfirm={ this.handleConfirmPreModal.bind(this) }
-          content={content}
-        />
-        <AtModal
-          isOpened={this.state.showModaled}
-          title='新用户信息'
-          confirmText='确定'
-          onClose={ this.handleCloseModaled.bind(this) }
-          onConfirm={ this.handleConfirmModaled.bind(this) }
-          content={content}
+          content={userDetail}
         />
       </View>
     )

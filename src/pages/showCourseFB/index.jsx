@@ -11,7 +11,7 @@ import { connect } from '@tarojs/redux'
   teacherFB: usersManage.teacherFB
 }))
 
-export default class ShowClassFB extends Component {
+export default class ShowCourseFB extends Component {
   constructor(props) {
     super(props)
     this.state = {

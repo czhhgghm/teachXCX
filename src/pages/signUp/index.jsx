@@ -2,6 +2,11 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
 import { AtInput, AtForm, AtButton } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+
+@connect(({ signUp }) => ({
+  ...signUp
+}))
 
 export default class Index extends Component {
   constructor(props) {
@@ -63,11 +68,23 @@ export default class Index extends Component {
         })
       }
       else {
-        Taro.showToast({
-          title: '提交成功'
-        },wx.reLaunch({
-            url: '../../pages/index/index',
-          })
+        const {dispatch} = this.props
+        dispatch({
+          type:'signUp/addRecommand',
+          payload:{
+            name,
+            studentPhone,
+            parentPhone
+          }
+        },
+          Taro.showToast({
+            title: '提交成功'
+          },setTimeout(() => {
+            wx.reLaunch({
+              url: '../index/index',
+            })
+          }, 1500)
+          )
         )
       }
     }

@@ -3,6 +3,7 @@ import addUsers from '../pages/addUsers/model'
 import usersManage from '../pages/usersManage/model'
 import schedule from '../pages/schedule/model'
 import usersManDetail from '../pages/usersManDetail/model'
+import signUp from '../pages/signUp/model'
 
 
 export default [
@@ -10,5 +11,6 @@ export default [
     addUsers,
     usersManage,
     schedule,
-    usersManDetail
+    usersManDetail,
+    signUp
 ]

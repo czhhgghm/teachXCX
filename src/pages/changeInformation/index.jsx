@@ -125,9 +125,11 @@ export default class ChangeInformation extends Component {
   jumpTab() {
     Taro.showToast({
       title: '保存成功'
-    },wx.reLaunch({
-        url: '../../pages/index/index',
+    },setTimeout(() => {
+      wx.reLaunch({
+        url: '../index/index',
       })
+    }, 1500)
     )
   }
   

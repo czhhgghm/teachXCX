@@ -168,7 +168,7 @@ export default class Index extends Component {
                   {
                     image: `${checkClassPng}`,
                     value: '师生课堂反馈',
-                    url: '/pages/showClassFB/index'
+                    url: '/pages/showCourseFB/index'
                   },
                   {
                     image: `${advicePng}`,

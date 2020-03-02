@@ -31,9 +31,11 @@ export default class Index extends Component {
     else {
       Taro.showToast({
         title: '提交成功'
-      },wx.reLaunch({
-          url: '../../pages/index/index',
+      },setTimeout(() => {
+        wx.reLaunch({
+          url: '../index/index',
         })
+      }, 1500)
       )
     }
   }
