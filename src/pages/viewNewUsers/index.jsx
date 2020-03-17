@@ -14,7 +14,8 @@ export default class ViewNewUsers extends Component {
     this.state = {
       showPreModal: false,
       showModaled: false,
-      userDetail: ''
+      userDetail: '',
+      selectId: 0
     }
   };
 
@@ -38,29 +39,34 @@ export default class ViewNewUsers extends Component {
     const userDetail = `学生姓名:${name}`+'\n'+`学生电话:${parentPhone}`+'\n'+`家长电话:${studentPhone}` 
     this.setState({
       showPreModal: true,
+      selectId: item.id,
       userDetail
     })
   }
 
   handleClosePreModal() {
-    console.log('点击了屏幕外,弹框消失即可')
     this.setState({
       showPreModal: false
     })
   }
 
   handleCancelPreModal() {
-    console.log('执行"等候处理"的请求')
     this.setState({
       showPreModal: false
     })
   }
 
   handleConfirmPreModal() {
-    console.log('执行"已处理"的请求')
-    this.setState({
+    const {dispatch} = this.props
+    const {selectId} = this.state
+    dispatch({
+      type:'signUp/reviewRecommand',
+      payload:{
+        id: selectId
+      }
+    },this.setState({
       showPreModal: false
-    })
+    }))
   }
 
   handleCloseModaled() {
@@ -86,6 +92,7 @@ export default class ViewNewUsers extends Component {
             return (
               <AtListItem
                 title={item.name}
+                key={item.id}
                 arrow='right'
                 onClick={this.selectPreItem.bind(this,item)}
               />  

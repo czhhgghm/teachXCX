@@ -10,6 +10,7 @@ const dvaApp = dva.createApp({
   initialState: {},
   models: models
 })
+
 const store = dvaApp.getStore()
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -19,7 +20,6 @@ const store = dvaApp.getStore()
 // }
 
 class App extends Component {
-
   config = {
     pages: [
       'pages/index/index',
@@ -30,7 +30,6 @@ class App extends Component {
       'pages/personalProfile/index',
       'pages/signUp/index',
       'pages/advice/index',
-      'pages/changeInformation/index',
       'pages/coachingProgram/index',
       'pages/reviewProgram/index',
       'pages/showCourseFB/index',
@@ -53,19 +52,6 @@ class App extends Component {
     }
   }
 
-  async componentDidMount () {
-
-    
-  }
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
-  // 在 App 类中的 render() 函数没有实际作用
-  // 请勿修改此函数
   render () {
     return (
       <Provider store={store}>

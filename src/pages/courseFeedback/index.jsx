@@ -76,7 +76,7 @@ export default class CourseFeedback extends Component {
         )
       }
       else {
-        ispatch({
+        dispatch({
           type:'schedule/postTeacherFB',
           payload:{
             courseId: Number(id),

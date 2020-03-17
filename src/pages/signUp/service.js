@@ -18,7 +18,16 @@ export async function getRecommandList(data) {
     }) 
 }
 
+export async function reviewRecommand(data) {
+    return postRrequest({
+        url: `/Recommand/reviewRecommand?id=${data.id}`,
+        method: 'POST',
+        data
+    }) 
+}
+
 export default {
     addRecommand,
-    getRecommandList
+    getRecommandList,
+    reviewRecommand
 }

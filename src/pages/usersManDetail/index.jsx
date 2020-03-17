@@ -65,14 +65,14 @@ export default class UsersManDetail extends Component {
         }
       })
     }
-    // else if(select == '老师') {
-    //   await dispatch({
-    //     type:'usersManDetail/getTeachersDetail',
-    //     payload:{
-    //       id,
-    //     }
-    //   })
-    // }
+    else if(select == '老师') {
+      await dispatch({
+        type:'usersManDetail/getTeachersDetail',
+        payload:{
+          id,
+        }
+      })
+    }
     else if(select == '家长'){
       await dispatch({
         type:'usersManDetail/getFamilyDetail',
@@ -89,13 +89,6 @@ export default class UsersManDetail extends Component {
       })
     }
   }
-
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   addCourse() {
     const {id} = this.$router.params

@@ -7,8 +7,7 @@ import { AtList, AtListItem, AtAccordion } from "taro-ui"
 @connect(({ common, usersManDetail }) => ({
   authen: common.authen,
   id: common.id,
-  personName: common.personName,
-  perPhone: common.perPhone,
+  teacherDetail: usersManDetail.teacherDetail,
   studentDetail: usersManDetail.studentDetail,
   familyDetail: usersManDetail.familyDetail
 }))
@@ -34,11 +33,11 @@ export default class Index extends Component {
   getDetail() {
     const {authen} = this.props
     authen == '学生' && this.getStudentsDetail()
+    authen == '老师' && this.getTeachersDetail()
     authen == '家长' && this.getFamilyDetail()
   }
 
   getStudentsDetail() {
-    console.log('xuesheng')
     const {dispatch} = this.props
     dispatch({
       type:'usersManDetail/getStudentsDetail',
@@ -48,8 +47,17 @@ export default class Index extends Component {
     })
   }
 
+  getTeachersDetail() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'usersManDetail/getTeachersDetail',
+      payload:{
+        id: this.props.id
+      }
+    })
+  }
+
   getFamilyDetail() {
-    console.log('jiazhang未处理')
     const {dispatch} = this.props
     dispatch({
       type:'usersManDetail/getFamilyDetail',
@@ -58,12 +66,6 @@ export default class Index extends Component {
       }
     })
   }
-
-  // changeDetail = url => {
-  //   Taro.navigateTo({
-  //     url,
-  //   })
-  // }
 
   showFamily (value) {
     this.setState({
@@ -78,8 +80,8 @@ export default class Index extends Component {
   }
 
   render () {
-    const  {authen, personName, perPhone } = this.props
-    const {studentDetail,teacherDetail,managerDetail,familyDetail} = this.props
+    const  { authen } = this.props
+    const {studentDetail,teacherDetail} = this.props
     const { openFamily, openCourses } = this.state
 
     return (
@@ -90,11 +92,11 @@ export default class Index extends Component {
           <AtList>
             <AtListItem
               title='真实姓名'
-              extraText={personName}
+              extraText='真实姓名'
             />
             <AtListItem
               title='电话号码'
-              extraText={perPhone}
+              extraText='电话号码'
             />
           </AtList>
         </View>
@@ -105,11 +107,11 @@ export default class Index extends Component {
           <AtList>
             <AtListItem
               title='真实姓名'
-              extraText={personName}
+              extraText={teacherDetail.name?teacherDetail.name:'待补充'}
             />
             <AtListItem
               title='电话号码'
-              extraText={perPhone}
+              extraText={teacherDetail.phone?teacherDetail.phone:'待补充'}
             />
           </AtList>
         </View>
@@ -146,67 +148,8 @@ export default class Index extends Component {
               ):
                 <AtListItem title='家人信息' extraText='待补充'/>
             }
-            {
-              studentDetail.courses.length > 0 ?(
-                <AtAccordion
-                  open={openCourses}
-                  onClick={this.showCourses.bind(this)}
-                  title='课程情况'
-                >
-                  <AtList hasBorder={false}>
-                    {
-                      studentDetail.courses.map((item,index)=>{
-                        return (
-                          <AtListItem
-                            key={index + item.courseName}
-                            title={'课程名称: '+item.courseName}
-                            note={'授课老师: '+item.teacherName}
-                          />
-                        )
-                      })
-                    }
-                  </AtList>
-                </AtAccordion>
-              ):
-              <AtListItem title='课程情况' extraText='待补充'/>
-            }
           </AtList>
         </View>
-        // <View>
-        //   <AtList>
-        //     <AtListItem
-        //       arrow='right'
-        //       title='真实姓名'
-        //       extraText={personName}
-        //     />
-        //     <AtListItem
-        //       arrow='right'
-        //       title='本人电话'
-        //       extraText={perPhone}
-        //     />
-        //     <AtListItem
-        //       arrow='right'
-        //       title='家长电话'
-        //       extraText={parentPhone}
-        //     />
-        //     <AtListItem
-        //       arrow='right'
-        //       title='报名学科'
-        //       extraText={coachingCourse}
-        //     />
-        //     {/* <AtListItem
-        //       arrow='right'
-        //       title='开始上课时间'
-        //       extraText={beginProject}
-        //     /> */}
-        //     <AtListItem
-        //       arrow='right'
-        //       title='上课地区'
-        //       extraText={classPlace}
-        //       onClick={this.changeDetail.bind(this,`/pages/changeInformation/index?key=classPlace`)}
-        //     />
-        //   </AtList>
-        // </View>
       }
       </View>
     )

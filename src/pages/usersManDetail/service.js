@@ -11,7 +11,7 @@ export async function getStudentsDetail(data) {
 
 export async function getTeachersDetail(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/user/teacherList',
+        url: 'https://m-school.mynatapp.cc/teacher/teacherDetail',
         method: 'GET',
         data,
     }) 

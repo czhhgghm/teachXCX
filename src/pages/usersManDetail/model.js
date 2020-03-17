@@ -5,6 +5,7 @@ import {
     getFamilyDetail
  } from './service'
 
+
 export default {
     namespace: 'usersManDetail',
     state: {
@@ -20,6 +21,11 @@ export default {
     effects: {
         *getStudentsDetail({payload},{call,put}) {
             const response = yield call(getStudentsDetail,payload);
+            response.data.courses.forEach(element => {
+                element.begin = element.begin.substring(0,10)
+                element.end = element.end.substring(0,10)
+            });
+            console.log('response',response)
             yield put({
                 type: 'saveStudentDetail',
                 payload: {

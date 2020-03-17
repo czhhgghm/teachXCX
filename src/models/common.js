@@ -16,12 +16,6 @@ export default {
         personName: '真实姓名',
         userId: -1,
         loginCode: -1,
-        perPhone: '15612345678',
-        parentPhone: '13312345678',
-        coachingCourse: '语文数学英语',
-        beginProject: '2019-01-01',
-        classTime: '周日上午',
-        classPlace: '广州',
         id: -1,
         adviceData: []
     },
@@ -119,34 +113,6 @@ export default {
               ...state,
               netName,
               avatarUrl
-            }
-        },
-        changePerPhone(state,{payload}) {
-            const {perPhone} = payload
-            return {
-                ...state,
-                perPhone
-            }
-        },
-        changeParentPhone(state,{payload}) {
-            const {parentPhone} = payload
-            return {
-                ...state,
-                parentPhone
-            }
-        },
-        changeClassTime(state,{payload}) {
-            const {classTime} = payload
-            return {
-                ...state,
-                classTime
-            }
-        },
-        changeClassPlace(state,{payload}) {
-            const {classPlace} = payload
-            return {
-                ...state,
-                classPlace
             }
         },
     }

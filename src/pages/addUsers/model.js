@@ -1,4 +1,4 @@
-import { addStudent, addFamily, addTeacher } from './service'
+import { addStudent, addFamily, addTeacher, addManager } from './service'
 
 export default {
     namespace: 'addUsers',
@@ -15,8 +15,12 @@ export default {
 
         *addTeacher({payload},{call,put}) {
             const response = yield call(addTeacher,payload);
+        },
+
+        *addManager({payload},{call,put}) {
+            const response = yield call(addManager,payload);
         }
     },
-
+    
     reducers: {}
 }

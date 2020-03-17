@@ -82,8 +82,9 @@ export default class Schedule extends Component {
   //得到当天的时间
   getTime() {
     let res = getCurrentTime();
+    const currentDay = res.year + '-' + res.month + '-' + res.date;
     this.setState({
-      currentDay: res.currentDay,
+      currentDay: currentDay,
       currentNum: res.day
     })
   }
@@ -192,7 +193,7 @@ export default class Schedule extends Component {
                       >
                         <View className='at-col  at-col-3'>科目</View>
                         <View className='at-col  at-col-2'>时间</View>
-                        <View className='at-col  at-col-3'>教师</View>
+                        <View className='at-col  at-col-3'>学生</View>
                         <View className='at-col  at-col-4'>上课地点</View>
                       </View>
                       {
@@ -207,7 +208,7 @@ export default class Schedule extends Component {
                             )}>
                               <View className='at-col  at-col-3'>{ele.courseName}</View>
                               <View className='at-col  at-col-2'>{ele.timeDes}</View>
-                              <View className='at-col  at-col-3'>{ele.teacherName}</View>
+                              <View className='at-col  at-col-3'>{ele.studentName}</View>
                               <View className='at-col  at-col-4'>{ele.place}</View>
                             </View>
                           )

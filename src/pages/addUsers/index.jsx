@@ -8,7 +8,7 @@ import { connect } from '@tarojs/redux'
   ...addUsers
 }))
 
-export default class Index extends Component {
+export default class AddUsers extends Component {
   constructor(props) {
     super(props)
     this.state={
@@ -156,6 +156,26 @@ export default class Index extends Component {
       phoneReg.test(perPhone)?(
         await dispatch({
           type:'addUsers/addTeacher',
+          payload:{
+            name: perName,
+            phone: perPhone,
+          }
+        },
+          Taro.showToast({
+            title: '添加成功',
+            icon: 'success'
+          })
+        )
+      )
+      :Taro.showToast({
+        title: '输入手机号码格式不正确',
+        icon: 'none'
+      })
+    }
+    else if(optionValue == 'manager') {
+      phoneReg.test(perPhone)?(
+        await dispatch({
+          type:'addUsers/addManager',
           payload:{
             name: perName,
             phone: perPhone,

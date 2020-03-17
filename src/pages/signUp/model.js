@@ -1,6 +1,7 @@
 import { 
     addRecommand,
-    getRecommandList
+    getRecommandList,
+    reviewRecommand
  } from './service'
 
 export default {
@@ -13,9 +14,7 @@ export default {
             const response = yield call(addRecommand,payload)
         },
         *getRecommandList({payload},{call,put}) {
-            console.log('payload',payload)
             const response = yield call(getRecommandList,payload)
-            console.log('response',response)
             yield put({
                 type: 'saveRecommandList',
                 payload: {
@@ -23,6 +22,11 @@ export default {
                 }
             })
         },
+        *reviewRecommand({payload},{call,put}) {
+            console.log('payload',payload)
+            const response = yield call(reviewRecommand,payload)
+            console.log('response',response)
+        }
     },
 
     reducers: {
