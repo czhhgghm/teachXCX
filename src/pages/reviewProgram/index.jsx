@@ -1,7 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import './index.scss'
-import { AtAccordion, AtList, AtListItem, AtPagination, AtSearchBar, AtModal } from 'taro-ui'
+import { AtAccordion, AtList, AtListItem, AtModal } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+
+@connect(({ writeCoachingProgram }) => ({
+  pendingList: writeCoachingProgram.pendingList,
+  passList: writeCoachingProgram.passList
+}))
 
 export default class Index extends Component {
   constructor(props) {
@@ -9,28 +15,36 @@ export default class Index extends Component {
     this.state = {
       toView: false,
       viewed: false,
-      searchValue: '',
       showPreModal: false,
       showModaled: false,
+      guidanceText: '',
+      guidanceId: ''
     }
   };
 
   config = {
-    navigationBarTitleText: '审核辅导方案(静态)'
+    navigationBarTitleText: '审核辅导方案'
   }
 
-  componentWillMount () {}
+  componentWillMount () {
+    this.getPendingList()
+    this.getPassList()
+  }
 
-  showPrompt() {
-    wx.showToast({
-      title: '有3份辅导方案待审核',
-      icon: 'none',
-      duration: 2000
+  getPendingList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'writeCoachingProgram/getPendingList',
+      payload:{}
     })
   }
 
-  componentDidMount () {
-    this.showPrompt()
+  getPassList() {
+    const {dispatch} = this.props
+    dispatch({
+      type:'writeCoachingProgram/getPassList',
+      payload:{}
+    })
   }
 
   toViewHandleClick (value) {
@@ -39,9 +53,11 @@ export default class Index extends Component {
     })
   }
 
-  selectPreItem = value => {
+  selectPreItem = e => {
     this.setState({
-      showPreModal: true
+      showPreModal: true,
+      guidanceText: e.text,
+      guidanceId: e.id
     })
   }
 
@@ -51,22 +67,7 @@ export default class Index extends Component {
     })
   }
 
-  changePage = e => {
-    console.log(e)
-  }
-
-  changeInputValue (value) {
-    this.setState({
-      searchValue: value
-    })
-  }
-
-  onActionClick() {
-    console.log('点击搜索')
-  }
-
   handleClosePreModal() {
-    console.log('点击了屏幕外,弹框消失即可')
     this.setState({
       showPreModal: false
     })
@@ -80,15 +81,23 @@ export default class Index extends Component {
   }
 
   handleConfirmPreModal() {
-    console.log('执行通过的请求')
+    const {dispatch} = this.props
+    const {guidanceId} = this.state
+    dispatch({
+      type:'writeCoachingProgram/passGuidance',
+      payload:{
+        guidanceId: guidanceId
+      }
+    })
     this.setState({
       showPreModal: false
     })
   }
 
-  selectItemed() {
+  selectItemed = e => {
     this.setState({
-      showModaled: true
+      showModaled: true,
+      guidanceText: e.text,
     })
   }
 
@@ -105,6 +114,8 @@ export default class Index extends Component {
   }
   
   render () {
+    const { pendingList, passList } = this.props
+    const { guidanceText } = this.state
     return (
       <View className='index'>
         <AtAccordion
@@ -113,27 +124,22 @@ export default class Index extends Component {
           title='待审核'
         >
           <AtList hasBorder={false}>
-            <AtListItem
-              title='李强1'
-              note='2019/10/31'
-              extraText='学生1'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'1')}
-            />
-            <AtListItem
-              title='李强2'
-              note='2019/10/28'
-              extraText='学生2'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'2')}
-            />
-            <AtListItem
-              title='李强3'
-              note='2019/10/25'
-              extraText='学生3'
-              arrow='right'
-              onClick={this.selectPreItem.bind(this,'3')}
-            />
+          {
+            pendingList.length > 0 && (
+              pendingList.map((item)=>{
+                return (
+                  <AtListItem
+                    title={item.teacherName}
+                    note={item.time.substring(0,10)}
+                    extraText={item.studentName}
+                    key={item.id}
+                    arrow='right'
+                    onClick={this.selectPreItem.bind(this,item)}
+                  />
+                )
+              })
+            )
+          }
           </AtList>
         </AtAccordion>
         <AtAccordion
@@ -141,69 +147,24 @@ export default class Index extends Component {
           onClick={this.viewedHandleClick.bind(this)}
           title='已通过'
         >
-          <AtSearchBar
-            value={this.state.searchValue}
-            onChange={this.changeInputValue.bind(this)}
-            onActionClick={this.onActionClick.bind(this)}
-          />
           <AtList hasBorder={false}>
-            <AtListItem
-              title='李强'
-              note='2019/10/31'
-              extraText='学生1'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'1')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/28'
-              extraText='学生2'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'2')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/25'
-              extraText='学生3'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'3')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/22'
-              extraText='学生4'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'4')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/20'
-              extraText='学生5'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'5')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/18'
-              extraText='学生6'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'6')}
-            />
-            <AtListItem
-              title='李强'
-              note='2019/10/15'
-              extraText='学生7'
-              arrow='right'
-              onClick={this.selectItemed.bind(this,'7')}
-            />
+          {
+            passList.length > 0 && (
+              passList.map((item)=>{
+                return (
+                  <AtListItem
+                    title={item.teacherName}
+                    note={item.time.substring(0,10)}
+                    extraText={item.studentName}
+                    key={item.id}
+                    arrow='right'
+                    onClick={this.selectItemed.bind(this,item)}
+                  />
+                )
+              })
+            )
+          }
           </AtList>
-          <AtPagination 
-            total={50} 
-            pageSize={10}
-            current={1}
-            onPageChange={this.changePage.bind(this)}
-          >
-          </AtPagination>
         </AtAccordion>
         <AtModal
           isOpened={this.state.showPreModal}
@@ -213,7 +174,7 @@ export default class Index extends Component {
           onClose={ this.handleClosePreModal.bind(this) }
           onCancel={ this.handleCancelPreModal.bind(this) }
           onConfirm={ this.handleConfirmPreModal.bind(this) }
-          content='该生基础薄弱,更加注重基本功的训练'
+          content={guidanceText}
         />
         <AtModal
           isOpened={this.state.showModaled}
@@ -221,7 +182,7 @@ export default class Index extends Component {
           confirmText='确定'
           onClose={ this.handleCloseModaled.bind(this) }
           onConfirm={ this.handleConfirmModaled.bind(this) }
-          content='该生基础薄弱,更加注重基本功的训练'
+          content={guidanceText}
         />
       </View>
     )
