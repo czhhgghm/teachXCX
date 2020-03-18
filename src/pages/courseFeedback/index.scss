@@ -1,0 +1,37 @@
+@import "~taro-ui/dist/style/components/rate.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/loading.scss";
+@import "~taro-ui/dist/style/components/textarea.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+.index {
+    padding: 20px;
+
+    .grade {
+        padding: 20px 0;
+        text-indent: 10px;
+        background-color: #fff;
+        border: 1px solid #d6e4ef;
+        border-radius: 10px;
+
+        .gradeFont {
+            display: inline-block;
+            font-size: 32px;
+        }
+
+        .stars {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .btn {
+        margin-top: 30px;
+    }
+}

@@ -1,0 +1,11 @@
+@import "~taro-ui/dist/style/components/textarea.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/loading.scss";
+
+.index {
+    padding: 20px;
+
+    .btn {
+        margin-top: 30px;
+    }
+}

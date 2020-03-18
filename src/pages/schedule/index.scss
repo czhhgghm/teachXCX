@@ -1,4 +1,8 @@
 @import "~taro-ui/dist/style/components/tabs.scss";
+@import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/divider.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/noticebar.scss";
 
 page{
     height:100%;
@@ -6,7 +10,7 @@ page{
 }
 
 .head {
-    padding: 100px 0;
+    padding: 80px 0;
     background-color: #fff;
 
     .head-outer {
@@ -29,15 +33,40 @@ page{
     text-align: center;
     color: #1ccc22;
     font-size: 35px;
-    padding: 20px 0;
-    // border: 1px solid #ccc;
+    padding: 30px 0;
     font-weight: 550;
 }
 .main-schedule {
     background-color: #fff;
 
-    .current-schedule {
-        padding: 20px;
-        font-size: 35px;
+    .current-schedule-title {
+        background-color: #d9d9d9;
+        font-weight: 700;
     }
+
+    .current-schedule {
+        padding: 30px 0;
+        text-align: center;
+        font-size: 30px;
+    }
+
 }
+
+.at-tabs__item {
+    color: #888;
+    font-weight: 700;
+}
+
+.at-divider__content {
+    font-weight: 500;
+}
+
+.at-divider__line {
+    width: 70%;
+    left: 15%;
+}
+
+.at-noticebar {
+    // background: rgb(0, 252, 0);
+}
+    

@@ -20,6 +20,11 @@ page{
 
         .header-middle {
             padding-left: 20px;
+
+            .header-name {
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
         }
     
         .afterIcon-font {
@@ -32,6 +37,7 @@ page{
         .header-Img {
             width: 125px;
             height: 125px;
+            border-radius: 50%;
             display: flex;
         }
     

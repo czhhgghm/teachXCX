@@ -2,12 +2,24 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "myApp",
 	"description": "教育",
-	"appid": "wx38ba3494b3963ba6",
+	"appid": "wxb606392a692583e6",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
+		"enhance": false,
 		"postcss": false,
-		"minified": false
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
@@ -28,20 +40,18 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 1,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
-					"name": "用户信息展示页",
+					"name": "pages/showPerson/index",
 					"pathName": "pages/showPerson/index",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "课程表",
-					"pathName": "pages/schedule/index",
 					"scene": null
 				}
 			]

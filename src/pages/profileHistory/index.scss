@@ -1,0 +1,18 @@
+@import "~taro-ui/dist/style/components/card.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/loading.scss";
+
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
+.index {
+    margin-bottom: 20px;
+
+    .cardStyle {
+        box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
+        margin-top: 20px;
+    }
+}

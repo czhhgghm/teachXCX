@@ -1,0 +1,9 @@
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/accordion.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+
+.at-list__item {
+    line-height: 2;
+    padding-right: 0;
+}

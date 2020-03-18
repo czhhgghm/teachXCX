@@ -1,98 +1,230 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import './index.scss'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtDivider, AtNoticebar  } from 'taro-ui'
+import { connect } from '@tarojs/redux'
+import {getCurrentTime} from '../../utils/api'
 
-export default class Index extends Component {
+@connect(({ common, schedule }) => ({
+  id: common.id,
+  studentsCourse: schedule.studentsCourse,
+  teachersCourse: schedule.teachersCourse,
+  showCourse: schedule.showCourse
+}))
+
+export default class Schedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentDay: '',
-      current: 0,
+      currentNum: 0,
+      atNoticebarSpeed: 50,
+      showatNoticebar: true,
     }
   };
 
   config = {
-    navigationBarTitleText: 'schedule'
+    navigationBarTitleText: '我的课表'
   }
 
-  componentWillMount () {}
+  componentWillMount () {
+    this.getTime()
+    this.closeAtNoticebar()
+  }
 
   componentDidMount () {
-    this.getCurrentTime()
+    this.getCurrentSchedule()
   }
 
-  componentWillUnmount () { }
+  async getCurrentSchedule() {
+    const {key} = this.$router.params
+    key == '学生' ? (
+        this.getStudentsCourse()
+    ) : (
+        this.getTeachersCourse()
+    )
+  }
 
-  componentDidShow () { }
+  getStudentsCourse() {
+    const { studentsCourse } = this.props
+    if(!studentsCourse.length) {
+      const { dispatch, id } = this.props
+      dispatch({
+        type:'schedule/getStudentsCourse',
+        payload:{
+          id: id
+        }
+      })
+    }
+  }
 
-  componentDidHide () {}
+  getTeachersCourse() {
+    const { teachersCourse } = this.props
+    if(!teachersCourse.length) {
+      const { dispatch, id } = this.props
+      dispatch({
+        type:'schedule/getTeachersCourse',
+        payload:{
+          id: id
+        }
+      })
+    }
+  }
+
+  closeAtNoticebar() {
+    setTimeout(() => {
+      this.setState({
+        showatNoticebar: false
+      })
+    }, 20000);
+  }
 
   //得到当天的时间
-  getCurrentTime() {
-    let now = new Date();
-    let year = now.getFullYear();
-	  let month = now.getMonth()+1;
-	  let date = now.getDate();
-    let currentDay = year + '-' + month + '-' + date
+  getTime() {
+    let res = getCurrentTime();
+    const currentDay = res.year + '-' + res.month + '-' + res.date;
     this.setState({
-      currentDay:currentDay
+      currentDay: currentDay,
+      currentNum: res.day
     })
   }
 
-  handleClick = value => {
+  clickChangeDays = value => {
     this.setState({
-      current: value
+      currentNum: value
+    })
+  }
+
+  navigateToPage = url => {
+    Taro.navigateTo({
+      url,
     })
   }
 
   render () {
+    const {currentNum,currentDay,atNoticebarSpeed,showatNoticebar} = this.state
+    const {studentsCourse,teachersCourse,showCourse} = this.props
+    const {key} = this.$router.params
+    const tabList = [
+      { title: '日' },
+      { title: '一' },
+      { title: '二' },
+      { title: '三' },
+      { title: '四' },
+      { title: '五' },
+      { title: '六' }
+    ]
+
     return (
       <View className='index'>
         <View className='head'>
           <View className='head-outer'>
             <View className='head-schedule'>我的课表</View>
-            <View className='head-time'>{this.state.currentDay}</View>
+            <View className='head-time'>{currentDay}</View>
           </View>
         </View>
+        {
+          showatNoticebar?(
+            <AtNoticebar marquee icon='volume-plus' speed={atNoticebarSpeed}>
+              继续点击下列课程,可以留下对课堂反馈哟~~
+            </AtNoticebar>
+          ):''
+        }
         <View className='week'>本周课表</View>
         <AtTabs
           className='main-schedule'
           animated={false}
-          current={this.state.current}
-          tabList={[
-            { title: '一' },
-            { title: '二' },
-            { title: '三' },
-            { title: '四' },
-            { title: '五' },
-            { title: '六' },
-            { title: '日' }
-          ]}
-          onClick={this.handleClick.bind(this)}>
-          <AtTabsPane current={this.state.current} index={0}>
-            <View className='current-schedule'>星期一的课程</View>
-            <View className='current-schedule'>星期一的课程</View>
-            <View className='current-schedule'>星期一的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={1}>
-            <View className='current-schedule'>星期二的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={2}>
-            <View className='current-schedule'>星期三的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={3}>
-            <View className='current-schedule'>星期四的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={4}>
-            <View className='current-schedule'>星期五的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={5}>
-            <View className='current-schedule'>星期六的课程</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={6}>
-            <View className='current-schedule'>星期日的课程</View>
-          </AtTabsPane>
+          current={currentNum}
+          tabList={tabList}
+          onClick={this.clickChangeDays.bind(this)}>
+          {
+            key == '学生' && studentsCourse.map((item,index)=>{
+              return (
+                <AtTabsPane current={currentNum} index={index}>
+                {
+                  showCourse[index]?(
+                    <View>
+                      <View 
+                        className='current-schedule at-row current-schedule-title' 
+                      >
+                        <View className='at-col  at-col-3'>科目</View>
+                        <View className='at-col  at-col-2'>时间</View>
+                        <View className='at-col  at-col-3'>教师</View>
+                        <View className='at-col  at-col-4'>上课地点</View>
+                      </View>
+                      {
+                        item.map((ele)=>{
+                          return (
+                            ele == null?'':
+                            <View 
+                              className='current-schedule at-row' 
+                              onClick={this.navigateToPage.bind(
+                                  this,
+                                  `/pages/courseFeedback/index?id=${ele.id}`
+                            )}>
+                              <View className='at-col  at-col-3'>{ele.courseName}</View>
+                              <View className='at-col  at-col-2'>{ele.timeDes}</View>
+                              <View className='at-col  at-col-3'>{ele.teacherName}</View>
+                              <View className='at-col  at-col-4'>{ele.place}</View>
+                            </View>
+                          )
+                        })
+                      }
+                    </View>
+                  ):(
+                    <AtTabsPane current={currentNum} index={index}>
+                      <AtDivider content='今日无课' fontColor='#999' lineColor='#e5e5e5' />
+                    </AtTabsPane>
+                  )
+                }
+                </AtTabsPane>
+              )
+            })
+          }
+          {
+            key == '老师' && teachersCourse.map((item,index)=>{
+              return (
+                <AtTabsPane current={currentNum} index={index}>
+                {
+                  showCourse[index]?(
+                    <View>
+                      <View 
+                        className='current-schedule at-row current-schedule-title' 
+                      >
+                        <View className='at-col  at-col-3'>科目</View>
+                        <View className='at-col  at-col-2'>时间</View>
+                        <View className='at-col  at-col-3'>学生</View>
+                        <View className='at-col  at-col-4'>上课地点</View>
+                      </View>
+                      {
+                        item.map((ele)=>{
+                          return (
+                            ele == null?'':
+                            <View 
+                              className='current-schedule at-row' 
+                              onClick={this.navigateToPage.bind(
+                                  this,
+                                  `/pages/courseFeedback/index?id=${ele.id}`
+                            )}>
+                              <View className='at-col  at-col-3'>{ele.courseName}</View>
+                              <View className='at-col  at-col-2'>{ele.timeDes}</View>
+                              <View className='at-col  at-col-3'>{ele.studentName}</View>
+                              <View className='at-col  at-col-4'>{ele.place}</View>
+                            </View>
+                          )
+                        })
+                      }
+                    </View>
+                  ):(
+                    <AtTabsPane current={currentNum} index={index}>
+                      <AtDivider content='今日无课' fontColor='#999' lineColor='#e5e5e5' />
+                    </AtTabsPane>
+                  )
+                }
+                </AtTabsPane>
+              )
+            })
+          }
         </AtTabs>
       </View>
     )
