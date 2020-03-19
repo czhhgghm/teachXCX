@@ -9,7 +9,8 @@ import { AtList, AtListItem, AtAccordion } from "taro-ui"
   id: common.id,
   teacherDetail: usersManDetail.teacherDetail,
   studentDetail: usersManDetail.studentDetail,
-  familyDetail: usersManDetail.familyDetail
+  familyDetail: usersManDetail.familyDetail,
+  managerDetail: usersManDetail.managerDetail
 }))
 
 export default class Index extends Component {
@@ -35,34 +36,45 @@ export default class Index extends Component {
     authen == '学生' && this.getStudentsDetail()
     authen == '老师' && this.getTeachersDetail()
     authen == '家长' && this.getFamilyDetail()
+    authen == '管理员' && this.getManagerDetail()
   }
 
   getStudentsDetail() {
-    const {dispatch} = this.props
+    const {dispatch,id} = this.props
     dispatch({
       type:'usersManDetail/getStudentsDetail',
       payload:{
-        id: this.props.id
+        id
       }
     })
   }
 
   getTeachersDetail() {
-    const {dispatch} = this.props
+    const {dispatch,id} = this.props
     dispatch({
       type:'usersManDetail/getTeachersDetail',
       payload:{
-        id: this.props.id
+        id
       }
     })
   }
 
   getFamilyDetail() {
-    const {dispatch} = this.props
+    const {dispatch,id} = this.props
     dispatch({
       type:'usersManDetail/getFamilyDetail',
       payload:{
-        id: this.props.id
+        id
+      }
+    })
+  }
+
+  getManagerDetail() {
+    const {dispatch,id} = this.props
+    dispatch({
+      type:'usersManDetail/getManagerDetail',
+      payload:{
+        id
       }
     })
   }
@@ -81,7 +93,7 @@ export default class Index extends Component {
 
   render () {
     const  { authen } = this.props
-    const {studentDetail,teacherDetail} = this.props
+    const { studentDetail, teacherDetail, managerDetail } = this.props
     const { openFamily, openCourses } = this.state
 
     return (
@@ -92,11 +104,11 @@ export default class Index extends Component {
           <AtList>
             <AtListItem
               title='真实姓名'
-              extraText='真实姓名'
+              extraText={managerDetail.name?managerDetail.name:'待补充'}
             />
             <AtListItem
               title='电话号码'
-              extraText='电话号码'
+              extraText={managerDetail.phone?managerDetail.phone:'待补充'}
             />
           </AtList>
         </View>
@@ -146,7 +158,7 @@ export default class Index extends Component {
                   </AtList>
                 </AtAccordion>
               ):
-                <AtListItem title='家人信息' extraText='待补充'/>
+                <AtListItem title='家长信息' extraText='待补充'/>
             }
           </AtList>
         </View>

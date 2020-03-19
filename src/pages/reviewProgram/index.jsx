@@ -1,15 +1,15 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import './index.scss'
-import { AtAccordion, AtList, AtListItem, AtModal } from 'taro-ui'
-import { connect } from '@tarojs/redux'
+import Taro, { Component } from '@tarojs/taro';
+import { View } from '@tarojs/components';
+import './index.scss';
+import { AtAccordion, AtList, AtListItem, AtModal } from 'taro-ui';
+import { connect } from '@tarojs/redux';
 
 @connect(({ writeCoachingProgram }) => ({
   pendingList: writeCoachingProgram.pendingList,
   passList: writeCoachingProgram.passList
 }))
 
-export default class Index extends Component {
+export default class ReviewProgram extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -32,7 +32,7 @@ export default class Index extends Component {
   }
 
   getPendingList() {
-    const {dispatch} = this.props
+    const {dispatch} = this.props;
     dispatch({
       type:'writeCoachingProgram/getPendingList',
       payload:{}
@@ -40,7 +40,7 @@ export default class Index extends Component {
   }
 
   getPassList() {
-    const {dispatch} = this.props
+    const {dispatch} = this.props;
     dispatch({
       type:'writeCoachingProgram/getPassList',
       payload:{}
@@ -74,21 +74,46 @@ export default class Index extends Component {
   }
 
   handleCancelPreModal() {
-    console.log('执行不通过的请求')
+    const {dispatch} = this.props;
+    const {guidanceId} = this.state;
+    dispatch({
+      type:'writeCoachingProgram/rejectGuidance',
+      payload:{
+        guidanceId: guidanceId
+      }
+    },
+      Taro.showToast({
+        title: '处理成功'
+      },setTimeout(() => {
+        wx.reLaunch({
+          url: '../home/index',
+        })
+      }, 500)
+      )
+    )
     this.setState({
       showPreModal: false
     })
   }
 
   handleConfirmPreModal() {
-    const {dispatch} = this.props
-    const {guidanceId} = this.state
+    const {dispatch} = this.props;
+    const {guidanceId} = this.state;
     dispatch({
       type:'writeCoachingProgram/passGuidance',
       payload:{
         guidanceId: guidanceId
       }
-    })
+    },
+      Taro.showToast({
+        title: '处理成功'
+      },setTimeout(() => {
+        wx.reLaunch({
+          url: '../home/index',
+        })
+      }, 500)
+      )
+    )
     this.setState({
       showPreModal: false
     })
@@ -114,8 +139,8 @@ export default class Index extends Component {
   }
   
   render () {
-    const { pendingList, passList } = this.props
-    const { guidanceText } = this.state
+    const { pendingList, passList } = this.props;
+    const { guidanceText } = this.state;
     return (
       <View className='index'>
         <AtAccordion

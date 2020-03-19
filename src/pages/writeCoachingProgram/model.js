@@ -3,7 +3,9 @@ import {
     addGuidance,
     getPendingList,
     getPassList,
-    passGuidance
+    passGuidance,
+    rejectGuidance,
+    updateGuidance
  } from './service'
 
 export default {
@@ -17,15 +19,25 @@ export default {
     effects: {
         *checkGuidance({payload},{call,put}) {
             const response = yield call(checkGuidance,payload);
+            console.log('response',response)
+            const guidanceResponse = {
+                guidanceID: response.data.state !== 0 ? response.data.guidance.id : '',
+                state: response.data.state,
+                text: response.data.state !== 0 ? response.data.guidance.text : ''
+            }
             yield put({
                 type: 'saveGuidance',
                 payload: {
-                    guidanceResponse: response.data
+                    guidanceResponse
                 }
             })
         },
         *addGuidance({payload},{call,put}) {
             const response = yield call(addGuidance,payload);
+        },
+        *updateGuidance({payload},{call,put}) {
+            const response = yield call(updateGuidance,payload);
+
         },
         *getPendingList({payload},{call,put}) {
             const response = yield call(getPendingList,payload);
@@ -47,6 +59,10 @@ export default {
         },
         *passGuidance({payload},{call,put}) {
             const response = yield call(passGuidance,payload);
+        },
+        *rejectGuidance({payload},{call,put}) {
+            const response = yield call(rejectGuidance,payload);
+            console.log('response',response)
         }
     },
 

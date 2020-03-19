@@ -112,7 +112,7 @@ export default class Index extends Component {
     },
       setTimeout(() => {
         wx.reLaunch({
-          url: '../../pages/index/index',
+          url: '../../pages/home/index',
         })
       }, 1500)
     )

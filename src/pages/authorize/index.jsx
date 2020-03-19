@@ -1,31 +1,30 @@
-import { View, Button, Image } from "@tarojs/components"
-import Taro, { Component } from '@tarojs/taro'
-import nullJPG from '../../assets/images/null.jpg'
-import "./index.scss"
-import { connect } from '@tarojs/redux'
+import { View, Button, Image } from "@tarojs/components";
+import Taro, { Component } from '@tarojs/taro';
+import nullJPG from '../../assets/images/null.jpg';
+import "./index.scss";
+import { connect } from '@tarojs/redux';
 
 @connect(({ common }) => ({
   ...common
 }))
 
-
 export default class Authorize extends Component {
-  config = {
-    navigationBarTitleText: "授权登录"
-  };
   constructor(props) {
     super(props)
-    this.state={
-      showFirst: 0
+    this.state = {
+      showUserInfo: true
     }
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props
+  config = {
+    navigationBarTitleText: "授权登录"
+  };
 
+  componentDidMount() {
+    const { dispatch } = this.props;
     wx.checkSession({
       success () {
-        const sessionKey = wx.getStorageSync('sessionKey')
+        const sessionKey = wx.getStorageSync('sessionKey');
         if(!sessionKey) {
           wx.login({
             success: res => {
@@ -53,16 +52,15 @@ export default class Authorize extends Component {
         })
       }
     })
-  };
+  }
 
-
-  //点击授权登录按钮,
-  getUserInfo = (e) => {
-    const { dispatch }=this.props
+  //点击授权登录按钮
+  getUserInfo = e => {
+    const { dispatch } = this.props;
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
-        //把 微信用户名netName和头像地址avatarUrl 缓存到本地
-        const result = res.userInfo
+        //把 微信用户名netName 和 头像地址avatarUrl 保存到数据仓库并缓存到本地
+        const result = res.userInfo;
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -70,41 +68,40 @@ export default class Authorize extends Component {
             avatarUrl: result.avatarUrl
           }
         })
+        wx.setStorageSync('netName', result.netName);
+        wx.setStorageSync('avatarUrl', result.avatarUrl);
         this.setState({
-          showFirst: 1
+          showUserInfo: false
         })
       })
     }else {
-      //用户按了拒绝按钮
       wx.showModal({
         title: '提示',
         content: '您拒绝了登录授权，将无法使用小程序，请授权后进入',
         showCancel: false,
         confirmText: '返回授权',
-        success: function(res) {
-          
-        }
+        success: function(res) {}
       })
     }
   }
 
   handleGetPhone = async(e) => {
-    const { dispatch }=this.props
-    const result = e.detail
+    const { dispatch }=this.props;
+    const result = e.detail;
     if(result.encryptedData) {
-      const sessionKey = wx.getStorageSync('sessionKey')
-      const openid = wx.getStorageSync('openid')
+      const sessionKey = wx.getStorageSync('sessionKey');
+      const openid = wx.getStorageSync('openid');
       await dispatch({
         type:'common/getPhone',
         payload:{
-          sessionKey: sessionKey,
+          sessionKey,
           encryptedData: result.encryptedData,
           iv:result.iv,
           openid: openid
         }
       })
       Taro.reLaunch({
-        url: '../../pages/index/index',
+        url: '../../pages/home/index'
       })
     }
     else {
@@ -128,7 +125,7 @@ export default class Authorize extends Component {
             小程序申请获取权限
           </View>
           {
-            showFirst == 0?
+            showUserInfo == true ?
             <View>
               <Text className='authorize_description'>
                 获得你的公开信息（昵称、头像、地区及性别等）

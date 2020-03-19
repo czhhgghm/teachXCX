@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import Index from './pages/index'
+import Index from './pages/home'
 import '@tarojs/async-await'
 import { Provider } from '@tarojs/redux'
 import dva from './utils/dva'
@@ -22,7 +22,7 @@ const store = dvaApp.getStore()
 class App extends Component {
   config = {
     pages: [
-      'pages/index/index',
+      'pages/home/index',
       'pages/authorize/index',
       'pages/showPerson/index',
       'pages/schedule/index',

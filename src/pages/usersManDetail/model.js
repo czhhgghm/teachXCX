@@ -1,10 +1,9 @@
 import { 
     getStudentsDetail,
     getTeachersDetail,
-    getManagersDetail,
+    getManagerDetail,
     getFamilyDetail
- } from './service'
-
+ } from './service';
 
 export default {
     namespace: 'usersManDetail',
@@ -25,7 +24,6 @@ export default {
                 element.begin = element.begin.substring(0,10)
                 element.end = element.end.substring(0,10)
             });
-            console.log('response',response)
             yield put({
                 type: 'saveStudentDetail',
                 payload: {
@@ -35,6 +33,7 @@ export default {
         },
         *getTeachersDetail({payload},{call,put}) {
             const response = yield call(getTeachersDetail,payload);
+            console.log('response',response)
             yield put({
                 type: 'saveTeacherDetail',
                 payload: {
@@ -42,8 +41,8 @@ export default {
                 }
             })
         },
-        *getManagersDetail({payload},{call,put}) {
-            const response = yield call(getManagersDetail,payload);
+        *getManagerDetail({payload},{call,put}) {
+            const response = yield call(getManagerDetail,payload);
             yield put({
                 type: 'saveManagerDetail',
                 payload: {
@@ -59,8 +58,7 @@ export default {
                     familyDetail: response.data
                 }
             })
-        },
-        
+        }
     },
 
     reducers: {
@@ -91,6 +89,6 @@ export default {
                 ...state,
                 familyDetail
             }
-        },
+        }
     }
 }

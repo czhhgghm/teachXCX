@@ -26,6 +26,14 @@ export async function passGuidance(data) {
     }) 
 }
 
+export async function rejectGuidance(data) {
+    return postRrequest({
+        url: `/guidance/reject?guidanceId=${data.guidanceId}`,
+        method: 'POST',
+        data
+    }) 
+}
+
 export async function getPendingList(data) {
     return getRequest({
         url: 'https://m-school.mynatapp.cc/guidance/pendingList',
@@ -42,10 +50,20 @@ export async function getPassList(data) {
     }) 
 }
 
+export async function updateGuidance(data) {
+    return postRrequest({
+        url: '/guidance/updateGuidance',
+        method: 'POST',
+        data
+    }) 
+}
+
 export default {
     checkGuidance,
     addGuidance,
     getPendingList,
     passGuidance,
-    getPassList
+    rejectGuidance,
+    getPassList,
+    updateGuidance
 }

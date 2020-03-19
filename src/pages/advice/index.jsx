@@ -47,7 +47,7 @@ export default class Advice extends Component {
           title: '提交成功'
         },setTimeout(() => {
           wx.reLaunch({
-            url: '../../pages/index/index',
+            url: '../../pages/home/index',
           })
         }, 1500)
         )

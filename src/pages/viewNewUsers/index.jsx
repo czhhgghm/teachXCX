@@ -64,9 +64,19 @@ export default class ViewNewUsers extends Component {
       payload:{
         id: selectId
       }
-    },this.setState({
+    },
+      Taro.showToast({
+        title: '处理成功'
+      },setTimeout(() => {
+        wx.reLaunch({
+          url: '../home/index',
+        })
+      }, 500)
+      )
+    )
+    this.setState({
       showPreModal: false
-    }))
+    })
   }
 
   handleCloseModaled() {

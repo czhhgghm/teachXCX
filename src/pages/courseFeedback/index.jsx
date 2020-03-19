@@ -69,7 +69,7 @@ export default class CourseFeedback extends Component {
             title: '提交成功'
           },setTimeout(() => {
             wx.reLaunch({
-              url: '../index/index',
+              url: '../home/index',
             })
           }, 1500)
           )
@@ -89,7 +89,7 @@ export default class CourseFeedback extends Component {
             title: '提交成功'
           },setTimeout(() => {
             wx.reLaunch({
-              url: '../index/index',
+              url: '../home/index',
             })
           }, 1500)
           )

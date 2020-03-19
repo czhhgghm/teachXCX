@@ -1,63 +1,50 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import './index.scss'
-import { AtIcon, AtButton, AtGrid } from 'taro-ui'
-import personPng from '../../assets/images/person.png'
-import schedulePng from '../../assets/images/schedule.png'
-import archivesPng from '../../assets/images/archives.png'
-import userManagementPng from '../../assets/images/userManagement.png'
-import addUserPng from '../../assets/images/addUser.png'
-import advicePng from '../../assets/images/advice.png'
-import morePng from '../../assets/images/more.png'
-import tutoringPng from '../../assets/images/tutoring.png'
-import checkPng from '../../assets/images/check.png'
-import checkClassPng from '../../assets/images/checkClass.png'
-import userInformationPng from '../../assets/images/userInformation.png'
-
+import Taro, { Component } from '@tarojs/taro';
+import { View, Image } from '@tarojs/components';
+import { connect } from '@tarojs/redux';
+import './index.scss';
+import { AtIcon, AtButton, AtGrid } from 'taro-ui';
+import personPng from '../../assets/images/person.png';
+import schedulePng from '../../assets/images/schedule.png';
+import archivesPng from '../../assets/images/archives.png';
+import userManagementPng from '../../assets/images/userManagement.png';
+import addUserPng from '../../assets/images/addUser.png';
+import advicePng from '../../assets/images/advice.png';
+import morePng from '../../assets/images/more.png';
+import tutoringPng from '../../assets/images/tutoring.png';
+import checkPng from '../../assets/images/check.png';
+import checkClassPng from '../../assets/images/checkClass.png';
+import userInformationPng from '../../assets/images/userInformation.png';
 
 @connect(({ common }) => ({
   authen: common.authen,
   netName: common.netName,
   avatarUrl: common.avatarUrl,
-  loginCode: common.loginCode,
+  loginCode: common.loginCode
 }))
 
-export default class Index extends Component {
-  constructor() {
-    this.state = {}
-  }
+export default class Home extends Component {
+  constructor() {}
 
   config = {
     navigationBarTitleText: '行之'
   }
 
-  async componentWillMount () {
-    
-  }
+  async componentWillMount () {}
 
   async componentDidMount () {
-    const { loginCode } = this.props
+    const { loginCode } = this.props;
     if(loginCode == -1) {
       // 没有登录过的,跳登录页面
       Taro.reLaunch({
-        url: '../../pages/authorize/index',
+        url: '../../pages/authorize/index'
       })
     }
     else if(loginCode == 11) {
       Taro.reLaunch({
-        url: '../../pages/signUp/index',
+        url: '../../pages/signUp/index'
       })
     }
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () {
-    
-  }
-
-  componentDidHide () { }
 
   navigateToPage = url => {
     if(url) {
@@ -114,7 +101,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {authen,netName,avatarUrl} = this.props
+    const { authen, netName, avatarUrl } = this.props;
     return (
       <View>
         {

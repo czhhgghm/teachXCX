@@ -75,7 +75,7 @@ export default async (
     } else {
       if(data.code === '05'){
         Taro.navigateTo({
-          url: `/pages/index/index`
+          url: `/pages/home/index`
         })
       }
       return data

@@ -5,15 +5,15 @@ import {
     getNewAdvice,
     addCourse,
     removeCourse
-} from './service'
+} from './service';
 
 export default {
     namespace: 'common',
     state: {
         authen: '',
         avatarUrl: '',
-        netName: '网名',
-        personName: '真实姓名',
+        netName: '',
+        personName: '',
         userId: -1,
         loginCode: -1,
         id: -1,
@@ -23,13 +23,14 @@ export default {
     effects: {
         *getSessionId({payload},{call}) {
             const response = yield call(getSessionId,payload);
-            wx.setStorageSync('sessionKey', response.data.sessionKey)
-            wx.setStorageSync('openid', response.data.openid)
+            wx.setStorageSync('sessionKey', response.data.sessionKey);
+            wx.setStorageSync('openid', response.data.openid);
         },
         *getPhone({payload},{call,put}) {
-            const response = yield call(getPhone,payload)
+            const response = yield call(getPhone,payload);
+            console.log('login',response)
             if(response.code == 0) {
-                const result = response.data
+                const result = response.data;
                 yield put({
                     type: 'savePersonDetails',
                     payload: {
@@ -42,7 +43,7 @@ export default {
                 yield put({
                     type: 'saveLoginCode',
                     payload: {
-                        loginCode: response.code,
+                        loginCode: response.code
                     }
                 })
             }
@@ -50,7 +51,7 @@ export default {
                 yield put({
                     type: 'saveLoginCode',
                     payload: {
-                        loginCode: response.code,
+                        loginCode: response.code
                     }
                 })
             }
@@ -77,28 +78,28 @@ export default {
 
     reducers: {
         saveNewAdvice(state, {payload}) {
-            const {adviceData} = payload
+            const { adviceData } = payload;
             return {
                 ...state,
                 adviceData
             }
         },
         changeAuthen(state, {payload}) {
-            const {authen} = payload
+            const { authen } = payload;
             return {
                 ...state,
                 authen
             }
         },
         saveLoginCode(state, {payload}) {
-            const {loginCode} = payload
+            const { loginCode } = payload;
             return {
                 ...state,
                 loginCode
             }
         },
         savePersonDetails(state, {payload}) {
-            const {userId,authen,personName,id} = payload
+            const { userId, authen, personName, id } = payload;
             return {
                 ...state,
                 userId,
