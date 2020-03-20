@@ -42,7 +42,6 @@ export default {
             const response = yield call(getTeachersCourse,payload)
             response.data.unshift(response.data.pop())
             const showCourse = [false,false,false,false,false,false,false]
-            console.log('response',response)
             response.data.forEach((item,index) => {
                 item.forEach((ele)=>{
                     if(ele !== null) {                       

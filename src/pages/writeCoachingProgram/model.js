@@ -3,6 +3,7 @@ import {
     addGuidance,
     getPendingList,
     getPassList,
+    getPersonGuidance,
     passGuidance,
     rejectGuidance,
     updateGuidance
@@ -13,13 +14,13 @@ export default {
     state: {
         guidanceResponse: '',
         pendingList: [],
-        passList: []
+        passList: [],
+        personGuidance: []
     },
     
     effects: {
         *checkGuidance({payload},{call,put}) {
             const response = yield call(checkGuidance,payload);
-            console.log('response',response)
             const guidanceResponse = {
                 guidanceID: response.data.state !== 0 ? response.data.guidance.id : '',
                 state: response.data.state,
@@ -37,7 +38,6 @@ export default {
         },
         *updateGuidance({payload},{call,put}) {
             const response = yield call(updateGuidance,payload);
-
         },
         *getPendingList({payload},{call,put}) {
             const response = yield call(getPendingList,payload);
@@ -57,12 +57,20 @@ export default {
                 }
             })
         },
+        *getPersonGuidance({payload},{call,put}) {
+            const response = yield call(getPersonGuidance,payload);
+            yield put({
+                type: 'savePersonGuidance',
+                payload: {
+                    personGuidance: response.data
+                }
+            })
+        },
         *passGuidance({payload},{call,put}) {
             const response = yield call(passGuidance,payload);
         },
         *rejectGuidance({payload},{call,put}) {
             const response = yield call(rejectGuidance,payload);
-            console.log('response',response)
         }
     },
 
@@ -86,6 +94,13 @@ export default {
             return {
                 ...state,
                 passList
+            }
+        },
+        savePersonGuidance(state, {payload}) {
+            const {personGuidance} = payload
+            return {
+                ...state,
+                personGuidance
             }
         }
     }

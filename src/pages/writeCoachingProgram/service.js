@@ -50,6 +50,14 @@ export async function getPassList(data) {
     }) 
 }
 
+export async function getPersonGuidance(data) {
+    return getRequest({
+        url: `https://m-school.mynatapp.cc/guidance/studentGuidanceList?id=${data.id}`,
+        method: 'GET',
+        data
+    }) 
+}
+
 export async function updateGuidance(data) {
     return postRrequest({
         url: '/guidance/updateGuidance',
@@ -65,5 +73,6 @@ export default {
     passGuidance,
     rejectGuidance,
     getPassList,
+    getPersonGuidance,
     updateGuidance
 }

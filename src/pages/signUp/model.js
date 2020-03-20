@@ -23,9 +23,7 @@ export default {
             })
         },
         *reviewRecommand({payload},{call,put}) {
-            console.log('payload',payload)
             const response = yield call(reviewRecommand,payload)
-            console.log('response',response)
         }
     },
 

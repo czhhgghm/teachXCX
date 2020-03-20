@@ -17,31 +17,75 @@ import userInformationPng from '../../assets/images/userInformation.png';
 
 @connect(({ common }) => ({
   authen: common.authen,
-  netName: common.netName,
+  nickName: common.nickName,
   avatarUrl: common.avatarUrl,
   loginCode: common.loginCode
 }))
 
 export default class Home extends Component {
-  constructor() {}
+  constructor(props) {
+    super(props)
+  }
 
   config = {
     navigationBarTitleText: '行之'
   }
 
-  async componentWillMount () {}
+  async componentWillMount () {
+    this.login()
+  }
 
-  async componentDidMount () {
+  checkLogin() {
+    //检查是否有缓存登陆信息
+    let loginCode = wx.getStorageSync('code');
+    if(loginCode) {
+      //10为正常登陆 11为游客状态登陆
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'common/saveLoginCode',
+        payload: {
+          loginCode: loginCode
+        }
+      })
+      if(loginCode == 10) {
+        const nickName = wx.getStorageSync('nickName');
+        const avatarUrl = wx.getStorageSync('avatarUrl');
+        const userId = wx.getStorageSync('userId');
+        const authen = wx.getStorageSync('authen');
+        const name = wx.getStorageSync('name');
+        const id = wx.getStorageSync('id');
+        dispatch({
+          type: 'common/savePersonDetails',
+          payload: {
+            userId: userId,
+            authen: authen,
+            personName: name,
+            id: id
+          }
+        })
+        dispatch({
+          type:'common/saveUserInfo',
+          payload:{
+            nickName: nickName,
+            avatarUrl: avatarUrl
+          }
+        })
+      }
+    }
+  }
+
+  async login() {
+    await this.checkLogin();
     const { loginCode } = this.props;
     if(loginCode == -1) {
-      // 没有登录过的,跳登录页面
+      //loginCode默认值为-1,表示身份信息不明,此时重定向到登录页面
       Taro.reLaunch({
-        url: '../../pages/authorize/index'
+        url: '../authorize/index'
       })
     }
     else if(loginCode == 11) {
       Taro.reLaunch({
-        url: '../../pages/signUp/index'
+        url: '../signUp/index'
       })
     }
   }
@@ -101,7 +145,7 @@ export default class Home extends Component {
   }
 
   render () {
-    const { authen, netName, avatarUrl } = this.props;
+    const { authen, nickName, avatarUrl } = this.props;
     return (
       <View>
         {
@@ -113,7 +157,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{netName}</View>
+                  <View className='header-name'>{nickName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>
@@ -184,7 +228,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{netName}</View>
+                  <View className='header-name'>{nickName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>
@@ -255,7 +299,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{netName}</View>
+                  <View className='header-name'>{nickName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>

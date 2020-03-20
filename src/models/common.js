@@ -12,7 +12,7 @@ export default {
     state: {
         authen: '',
         avatarUrl: '',
-        netName: '',
+        nickName: '',
         personName: '',
         userId: -1,
         loginCode: -1,
@@ -28,9 +28,15 @@ export default {
         },
         *getPhone({payload},{call,put}) {
             const response = yield call(getPhone,payload);
-            console.log('login',response)
+            console.log('response',response)
+            //将登陆信息全部保存到数据仓库并且做一次本地缓存
             if(response.code == 0) {
                 const result = response.data;
+                wx.setStorageSync('userId', result.userId);
+                wx.setStorageSync('authen', result.authen);
+                wx.setStorageSync('name', result.name);
+                wx.setStorageSync('id', result.id);
+                wx.setStorageSync('code', response.code + 10);
                 yield put({
                     type: 'savePersonDetails',
                     payload: {
@@ -43,7 +49,7 @@ export default {
                 yield put({
                     type: 'saveLoginCode',
                     payload: {
-                        loginCode: response.code
+                        loginCode: response.code + 10
                     }
                 })
             }
@@ -51,7 +57,7 @@ export default {
                 yield put({
                     type: 'saveLoginCode',
                     payload: {
-                        loginCode: response.code
+                        loginCode: response.code + 10
                     }
                 })
             }
@@ -109,10 +115,10 @@ export default {
             }
         },
         saveUserInfo(state, { payload }) {
-            const { netName, avatarUrl }=payload;
+            const { nickName, avatarUrl }=payload;
             return {
               ...state,
-              netName,
+              nickName,
               avatarUrl
             }
         },

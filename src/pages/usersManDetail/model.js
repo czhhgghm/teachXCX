@@ -33,7 +33,6 @@ export default {
         },
         *getTeachersDetail({payload},{call,put}) {
             const response = yield call(getTeachersDetail,payload);
-            console.log('response',response)
             yield put({
                 type: 'saveTeacherDetail',
                 payload: {

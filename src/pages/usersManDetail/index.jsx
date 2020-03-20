@@ -27,10 +27,6 @@ export default class UsersManDetail extends Component {
     navigationBarTitleText: '用户详情'
   }
 
-  componentWillMount () {
-
-  }
-
   async componentDidMount () {
     this.getPersonDetail()
   }
@@ -111,7 +107,7 @@ export default class UsersManDetail extends Component {
   }
 
   removeClass = coureseIds => {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     Taro.showModal({
       title: '提示',
       content: '你确定要删除该课程吗?',
@@ -135,7 +131,7 @@ export default class UsersManDetail extends Component {
             )
           )
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -151,8 +147,8 @@ export default class UsersManDetail extends Component {
           select == '管理员' &&
           <View>
             <AtList>
-              <AtListItem title='姓名' extraText={managerDetail.name?managerDetail.name:'待补充'}/>
-              <AtListItem title='电话' extraText={managerDetail.phone?managerDetail.phone:'待补充'}/>
+              <AtListItem title='姓名' extraText={managerDetail.name?managerDetail.name:'数据请求中'}/>
+              <AtListItem title='电话' extraText={managerDetail.phone?managerDetail.phone:'数据请求中'}/>
             </AtList>
           </View>
         }
@@ -160,10 +156,10 @@ export default class UsersManDetail extends Component {
           select == '学生' &&
           <View>
             <AtList>
-              <AtListItem title='姓名' extraText={studentDetail.name?studentDetail.name:'待补充'}/>
-              <AtListItem title='电话' extraText={studentDetail.phone?studentDetail.phone:'待补充'}/>
-              <AtListItem title='上课地区' extraText={studentDetail.place?studentDetail.place:'待补充'}/>
-              <AtListItem title='学校' extraText={studentDetail.school?studentDetail.school:'待补充'}/>
+              <AtListItem title='姓名' extraText={studentDetail.name?studentDetail.name:'数据请求中'}/>
+              <AtListItem title='电话' extraText={studentDetail.phone?studentDetail.phone:'数据请求中'}/>
+              <AtListItem title='上课地区' extraText={studentDetail.place?studentDetail.place:'数据请求中'}/>
+              <AtListItem title='学校' extraText={studentDetail.school?studentDetail.school:'数据请求中'}/>
               {
                 studentDetail.families.length > 0 ?(
                   <AtAccordion
@@ -173,7 +169,7 @@ export default class UsersManDetail extends Component {
                   >
                     <AtList hasBorder={false}>
                       {
-                        studentDetail.families.map((item,index)=>{
+                        studentDetail.families.map((item)=>{
                           return (
                             <AtListItem
                               key={item.id}
@@ -186,7 +182,7 @@ export default class UsersManDetail extends Component {
                     </AtList>
                   </AtAccordion>
                 ):
-                <AtListItem title='家人信息' extraText='待补充'/>
+                <AtListItem title='家人信息' extraText='暂无'/>
               }
               {
                 studentDetail.courses.length > 0 ?(
@@ -211,7 +207,7 @@ export default class UsersManDetail extends Component {
                     </AtList>
                   </AtAccordion>
                 ):
-                <AtListItem title='课程情况' extraText='待补充'/>
+                <AtListItem title='课程情况' extraText='暂无'/>
               }
             </AtList>
             <AtButton type='primary' onClick={this.addCourse.bind(this)}>添加课程</AtButton>
@@ -221,8 +217,8 @@ export default class UsersManDetail extends Component {
           select == '家长' &&
           <View>
             <AtList>
-              <AtListItem title='姓名' extraText={familyDetail.name?familyDetail.name:'待补充'}/>
-              <AtListItem title='电话' extraText={familyDetail.phone?familyDetail.phone:'待补充'}/>
+              <AtListItem title='姓名' extraText={familyDetail.name?familyDetail.name:'数据请求中'}/>
+              <AtListItem title='电话' extraText={familyDetail.phone?familyDetail.phone:'数据请求中'}/>
               {
                 familyDetail.children.length > 0 ?(
                   <AtAccordion
@@ -245,7 +241,7 @@ export default class UsersManDetail extends Component {
                     </AtList>
                   </AtAccordion>
                 ):
-                <AtListItem title='孩子信息' extraText='待补充'/>
+                <AtListItem title='孩子信息' extraText='数据请求中'/>
               }
             </AtList>
           </View>
@@ -254,8 +250,8 @@ export default class UsersManDetail extends Component {
           select == '老师' &&
           <View>
             <AtList>
-              <AtListItem title='姓名' extraText={teacherDetail.name?teacherDetail.name:'待补充'}/>
-              <AtListItem title='电话' extraText={teacherDetail.phone?teacherDetail.phone:'待补充'}/>
+              <AtListItem title='姓名' extraText={teacherDetail.name?teacherDetail.name:'数据请求中'}/>
+              <AtListItem title='电话' extraText={teacherDetail.phone?teacherDetail.phone:'数据请求中'}/>
               {
                 studentList.length > 0 ? (
                   <AtAccordion
