@@ -1,11 +1,10 @@
-//执行异步请求
-import getRequest from "../../utils/get";
+import getRequest from "../../utils/get"
 
 export async function getStudentsList(data) {
     return getRequest({
         url: 'https://m-school.mynatapp.cc/user/studentList',
         method: 'GET',
-        data,
+        data
     }) 
 }
 
@@ -13,7 +12,7 @@ export async function getTeachersList(data) {
     return getRequest({
         url: 'https://m-school.mynatapp.cc/user/teacherList',
         method: 'GET',
-        data,
+        data
     }) 
 }
 
@@ -29,7 +28,7 @@ export async function getFamilyList(data) {
     return getRequest({
         url: 'https://m-school.mynatapp.cc/user/familyList',
         method: 'GET',
-        data,
+        data
     }) 
 }
 
@@ -45,7 +44,7 @@ export async function getTeacherClassFB(data) {
     return getRequest({
         url: 'https://m-school.mynatapp.cc/manager/getTeacherCourseSuggestion',
         method: 'GET',
-        data,
+        data
     }) 
 }
 

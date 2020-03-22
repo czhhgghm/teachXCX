@@ -57,8 +57,8 @@ export default class ViewNewUsers extends Component {
   }
 
   handleConfirmPreModal() {
-    const {dispatch} = this.props
-    const {selectId} = this.state
+    const { dispatch } = this.props
+    const { selectId } = this.state
     dispatch({
       type:'signUp/reviewRecommand',
       payload:{
@@ -69,7 +69,7 @@ export default class ViewNewUsers extends Component {
         title: '处理成功'
       },setTimeout(() => {
         wx.reLaunch({
-          url: '../home/index',
+          url: '../home/index'
         })
       }, 500)
       )

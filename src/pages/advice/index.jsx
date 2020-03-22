@@ -31,7 +31,7 @@ export default class Advice extends Component {
     if(this.state.inputValue == '') {
       Taro.showToast({
         title: '输入内容为空,请留下您的宝贵建议',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else {
@@ -47,7 +47,7 @@ export default class Advice extends Component {
           title: '提交成功'
         },setTimeout(() => {
           wx.reLaunch({
-            url: '../../pages/home/index',
+            url: '../../pages/home/index'
           })
         }, 1500)
         )

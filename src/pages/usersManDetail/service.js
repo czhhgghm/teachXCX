@@ -1,4 +1,4 @@
-import getRequest from "../../utils/get";
+import getRequest from "../../utils/get"
 
 export async function getStudentsDetail(data) {
     return getRequest({

@@ -9,10 +9,10 @@ import { connect } from '@tarojs/redux'
   ...common
 }))
 
-export default class Index extends Component {
+export default class AddCourse extends Component {
   constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       showDrawer: false,
       teacherItems: [],
       selectTeacherId: -1,
@@ -24,7 +24,7 @@ export default class Index extends Component {
       courseName: '',
       coursePlace: '',
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '添加课程'
@@ -89,9 +89,9 @@ export default class Index extends Component {
   }
 
   async addCourse() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     const { courseBeginTime, courseName, daysAndTimes, courseEndTime, coursePlace, selectTeacherId } = this.state
-    const {id} = this.$router.params
+    const { id } = this.$router.params
     await dispatch({
       type:'common/addCourse',
       payload:{
@@ -124,12 +124,12 @@ export default class Index extends Component {
       coursePlace: '',
       courseDetail: '',
       courseBeginTime: '',
-      courseEndTime: '',
+      courseEndTime: ''
     })
   }
 
   getTeacher() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getTeachersList',
       payload:{}
@@ -137,7 +137,7 @@ export default class Index extends Component {
   }
 
   showTeacher() {
-    const {teacherList} = this.props
+    const { teacherList } = this.props
     const teacherItems = []
     teacherList.forEach((item) => {
       teacherItems.push(item.name)
@@ -163,7 +163,7 @@ export default class Index extends Component {
   }
 
   beginTimeBlur() {
-    const {courseBeginTime} = this.state
+    const { courseBeginTime } = this.state
     if(!courseBeginTime) {
       wx.showToast({
         title: '开始上课时间为空,请按要求输入',
@@ -184,7 +184,7 @@ export default class Index extends Component {
   }
 
   endTimeBlur() {
-    const {courseEndTime} = this.state
+    const { courseEndTime } = this.state
     if(!courseEndTime) {
       wx.showToast({
         title: '结束上课时间为空,请按要求输入',

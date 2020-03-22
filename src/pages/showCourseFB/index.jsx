@@ -24,8 +24,6 @@ export default class ShowCourseFB extends Component {
     navigationBarTitleText: '查看反馈'
   }
 
-  componentWillMount () { }
-
   componentDidMount () {
     this.studentOnClick()
   }
@@ -51,7 +49,7 @@ export default class ShowCourseFB extends Component {
   }
 
   getStudentList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getStudentsList',
       payload:{}
@@ -59,7 +57,7 @@ export default class ShowCourseFB extends Component {
   }
 
   getTeachersList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getTeachersList',
       payload:{}
@@ -67,7 +65,7 @@ export default class ShowCourseFB extends Component {
   }
   
   async getStudentClassFB(id) {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     await dispatch({
       type:'usersManage/getStudentClassFB',
       payload:{
@@ -80,7 +78,7 @@ export default class ShowCourseFB extends Component {
   }
 
   async getTeacherClassFB(id) {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     await dispatch({
       type:'usersManage/getTeacherClassFB',
       payload:{
@@ -93,8 +91,8 @@ export default class ShowCourseFB extends Component {
   }
 
   render () {
-    const {studentActive,teacherActive} = this.state
-    const {studentList,teacherList} = this.props
+    const { studentActive, teacherActive } = this.state
+    const { studentList, teacherList } = this.props
     return (
       <View>
         <View>

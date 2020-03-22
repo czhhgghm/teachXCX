@@ -137,13 +137,13 @@ export default class UsersManage extends Component {
 
   handleChangeUser(e) {
     Taro.navigateTo({
-      url: e,
+      url: e
     })
   }
   
   render () {
-    const {select} = this.state
-    const {studentList,familyList,teacherList,managerList} = this.props
+    const { select } = this.state
+    const { studentList, familyList, teacherList, managerList } = this.props
     return (
       <View className='index'>
         <View>

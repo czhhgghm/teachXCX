@@ -1,19 +1,19 @@
-import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
-import { connect } from '@tarojs/redux';
-import './index.scss';
-import { AtIcon, AtButton, AtGrid } from 'taro-ui';
-import personPng from '../../assets/images/person.png';
-import schedulePng from '../../assets/images/schedule.png';
-import archivesPng from '../../assets/images/archives.png';
-import userManagementPng from '../../assets/images/userManagement.png';
-import addUserPng from '../../assets/images/addUser.png';
-import advicePng from '../../assets/images/advice.png';
-import morePng from '../../assets/images/more.png';
-import tutoringPng from '../../assets/images/tutoring.png';
-import checkPng from '../../assets/images/check.png';
-import checkClassPng from '../../assets/images/checkClass.png';
-import userInformationPng from '../../assets/images/userInformation.png';
+import Taro, { Component } from '@tarojs/taro'
+import { View, Image } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import './index.scss'
+import { AtIcon, AtButton, AtGrid } from 'taro-ui'
+import personPng from '../../assets/images/person.png'
+import schedulePng from '../../assets/images/schedule.png'
+import archivesPng from '../../assets/images/archives.png'
+import userManagementPng from '../../assets/images/userManagement.png'
+import addUserPng from '../../assets/images/addUser.png'
+import advicePng from '../../assets/images/advice.png'
+import morePng from '../../assets/images/more.png'
+import tutoringPng from '../../assets/images/tutoring.png'
+import checkPng from '../../assets/images/check.png'
+import checkClassPng from '../../assets/images/checkClass.png'
+import userInformationPng from '../../assets/images/userInformation.png'
 
 @connect(({ common }) => ({
   authen: common.authen,
@@ -37,10 +37,10 @@ export default class Home extends Component {
 
   checkLogin() {
     //检查是否有缓存登陆信息
-    let loginCode = wx.getStorageSync('code');
+    let loginCode = wx.getStorageSync('code')
     if(loginCode) {
       //10为正常登陆 11为游客状态登陆
-      const { dispatch } = this.props;
+      const { dispatch } = this.props
       dispatch({
         type: 'common/saveLoginCode',
         payload: {
@@ -48,12 +48,12 @@ export default class Home extends Component {
         }
       })
       if(loginCode == 10) {
-        const nickName = wx.getStorageSync('nickName');
-        const avatarUrl = wx.getStorageSync('avatarUrl');
-        const userId = wx.getStorageSync('userId');
-        const authen = wx.getStorageSync('authen');
-        const name = wx.getStorageSync('name');
-        const id = wx.getStorageSync('id');
+        const nickName = wx.getStorageSync('nickName')
+        const avatarUrl = wx.getStorageSync('avatarUrl')
+        const userId = wx.getStorageSync('userId')
+        const authen = wx.getStorageSync('authen')
+        const name = wx.getStorageSync('name')
+        const id = wx.getStorageSync('id')
         dispatch({
           type: 'common/savePersonDetails',
           payload: {
@@ -75,8 +75,8 @@ export default class Home extends Component {
   }
 
   async login() {
-    await this.checkLogin();
-    const { loginCode } = this.props;
+    await this.checkLogin()
+    const { loginCode } = this.props
     if(loginCode == -1) {
       //loginCode默认值为-1,表示身份信息不明,此时重定向到登录页面
       Taro.reLaunch({
@@ -93,7 +93,7 @@ export default class Home extends Component {
   navigateToPage = url => {
     if(url) {
       Taro.navigateTo({
-        url,
+        url
       })
     }
     else {
@@ -109,27 +109,27 @@ export default class Home extends Component {
   }
 
   changeSF0() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'common/changeAuthen',
       payload:{
-        authen: '管理员',
+        authen: '管理员'
       }
     })
   }
 
   changeSF1() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'common/changeAuthen',
       payload:{
-        authen: '学生',
+        authen: '学生'
       }
     })
   }
 
   changeSF2() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'common/changeAuthen',
       payload:{
@@ -145,7 +145,7 @@ export default class Home extends Component {
   }
 
   render () {
-    const { authen, nickName, avatarUrl } = this.props;
+    const { authen, nickName, avatarUrl } = this.props
     return (
       <View>
         {

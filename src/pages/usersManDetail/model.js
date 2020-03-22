@@ -3,7 +3,7 @@ import {
     getTeachersDetail,
     getManagerDetail,
     getFamilyDetail
- } from './service';
+ } from './service'
 
 export default {
     namespace: 'usersManDetail',
@@ -19,7 +19,7 @@ export default {
     
     effects: {
         *getStudentsDetail({payload},{call,put}) {
-            const response = yield call(getStudentsDetail,payload);
+            const response = yield call(getStudentsDetail,payload)
             response.data.courses.forEach(element => {
                 element.begin = element.begin.substring(0,10)
                 element.end = element.end.substring(0,10)
@@ -32,7 +32,7 @@ export default {
             })
         },
         *getTeachersDetail({payload},{call,put}) {
-            const response = yield call(getTeachersDetail,payload);
+            const response = yield call(getTeachersDetail,payload)
             yield put({
                 type: 'saveTeacherDetail',
                 payload: {
@@ -41,7 +41,7 @@ export default {
             })
         },
         *getManagerDetail({payload},{call,put}) {
-            const response = yield call(getManagerDetail,payload);
+            const response = yield call(getManagerDetail,payload)
             yield put({
                 type: 'saveManagerDetail',
                 payload: {
@@ -50,7 +50,7 @@ export default {
             })
         },
         *getFamilyDetail({payload},{call,put}) {
-            const response = yield call(getFamilyDetail,payload);
+            const response = yield call(getFamilyDetail,payload)
             yield put({
                 type: 'saveFamilyDetail',
                 payload: {
@@ -62,28 +62,28 @@ export default {
 
     reducers: {
         saveStudentDetail(state, {payload}) {
-            const {studentDetail} = payload
+            const { studentDetail } = payload
             return {
                 ...state,
                 studentDetail
             }
         },
         saveTeacherDetail(state, {payload}) {
-            const {teacherDetail} = payload
+            const { teacherDetail } = payload
             return {
                 ...state,
                 teacherDetail
             }
         },
         saveManagerDetail(state, {payload}) {
-            const {managerDetail} = payload
+            const { managerDetail } = payload
             return {
                 ...state,
                 managerDetail
             }
         },
         saveFamilyDetail(state, {payload}) {
-            const {familyDetail} = payload
+            const { familyDetail } = payload
             return {
                 ...state,
                 familyDetail

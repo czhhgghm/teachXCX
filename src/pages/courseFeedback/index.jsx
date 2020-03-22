@@ -14,16 +14,12 @@ export default class CourseFeedback extends Component {
     super(props)
     this.state = {
       pointValue: 0,
-      inputValue: '',
+      inputValue: ''
     }
   };
 
   config = {
     navigationBarTitleText: '评分反馈'
-  }
-
-  componentDidMount() {
-    
   }
 
   handleChangeGrade (pointValue) {
@@ -42,13 +38,13 @@ export default class CourseFeedback extends Component {
     if(this.state.pointValue == 0) {
       Taro.showToast({
         title: '请先进行满意度评分',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else if(this.state.inputValue == '') {
       Taro.showToast({
         title: '请留下您的反馈意见',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else {
@@ -82,7 +78,7 @@ export default class CourseFeedback extends Component {
             courseId: Number(id),
             fromUserId: userId,
             idea: inputValue,
-            pointValue,
+            pointValue
           }
         },
           Taro.showToast({
@@ -99,7 +95,7 @@ export default class CourseFeedback extends Component {
   }
 
   render () {
-    const {pointValue,inputValue} = this.state
+    const { pointValue, inputValue } = this.state
     return (
       <View className='index'>
         <View className='grade'>

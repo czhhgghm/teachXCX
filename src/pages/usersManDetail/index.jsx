@@ -1,8 +1,8 @@
-import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
-import { AtList, AtListItem, AtAccordion, AtButton } from "taro-ui";
-import './index.scss';
-import { connect } from '@tarojs/redux';
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
+import { AtList, AtListItem, AtAccordion, AtButton } from "taro-ui"
+import './index.scss'
+import { connect } from '@tarojs/redux'
 
 @connect(({ usersManDetail, coachingProgram }) => ({
   studentDetail: usersManDetail.studentDetail,
@@ -21,7 +21,7 @@ export default class UsersManDetail extends Component {
       openStudent: false,
       removeId: []
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '用户详情'
@@ -50,8 +50,8 @@ export default class UsersManDetail extends Component {
   }
 
   async getPersonDetail() {
-    const {select,id} = this.$router.params
-    const {dispatch} = this.props
+    const { select, id } = this.$router.params
+    const { dispatch } = this.props
     if(select == '管理员') {
       await dispatch({
         type:'usersManDetail/getManagerDetail',
@@ -138,9 +138,9 @@ export default class UsersManDetail extends Component {
   }
 
   render () {
-    const { select } = this.$router.params;
-    const { studentDetail, teacherDetail, managerDetail, familyDetail, studentList } = this.props;
-    const { openFamily, openCourses, openStudent } = this.state;
+    const { select } = this.$router.params
+    const { studentDetail, teacherDetail, managerDetail, familyDetail, studentList } = this.props
+    const { openFamily, openCourses, openStudent } = this.state
     return (
       <View className='index'>
         {

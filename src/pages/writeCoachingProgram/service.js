@@ -1,6 +1,5 @@
-//执行异步请求
-import getRequest from "../../utils/get";
-import postRrequest from "../../utils/request";
+import getRequest from "../../utils/get"
+import postRrequest from "../../utils/request"
 
 export async function checkGuidance(data) {
     return postRrequest({

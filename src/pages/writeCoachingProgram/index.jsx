@@ -1,8 +1,8 @@
-import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
-import './index.scss';
-import { AtTextarea, AtButton, AtForm } from 'taro-ui';
-import { connect } from '@tarojs/redux';
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
+import './index.scss'
+import { AtTextarea, AtButton, AtForm } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
 @connect(({ writeCoachingProgram, common }) => ({
   id: common.id,
@@ -57,7 +57,7 @@ export default class WriteCoachingProgram extends Component {
     if(this.state.inputValue == '') {
       Taro.showToast({
         title: '输入内容为空,请留下您的辅导方案',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else {
@@ -73,7 +73,7 @@ export default class WriteCoachingProgram extends Component {
         title: '提交成功'
       },setTimeout(() => {
         wx.reLaunch({
-          url: '../home/index',
+          url: '../home/index'
         })
       }, 1500)
       )
@@ -86,7 +86,7 @@ export default class WriteCoachingProgram extends Component {
     if(this.state.inputValue == '') {
       Taro.showToast({
         title: '输入内容为空,请留下您的辅导方案',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else {
@@ -101,7 +101,7 @@ export default class WriteCoachingProgram extends Component {
         title: '提交成功'
       },setTimeout(() => {
         wx.reLaunch({
-          url: '../home/index',
+          url: '../home/index'
         })
       }, 1500)
       )

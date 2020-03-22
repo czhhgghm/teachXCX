@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import './index.scss'
 import { AtTabs, AtTabsPane, AtDivider, AtNoticebar  } from 'taro-ui'
 import { connect } from '@tarojs/redux'
-import {getCurrentTime} from '../../utils/api'
+import { getCurrentTime } from '../../utils/api'
 
 @connect(({ common, schedule }) => ({
   id: common.id,
@@ -21,7 +21,7 @@ export default class Schedule extends Component {
       atNoticebarSpeed: 50,
       showatNoticebar: true,
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '我的课表'
@@ -37,7 +37,7 @@ export default class Schedule extends Component {
   }
 
   async getCurrentSchedule() {
-    const {key} = this.$router.params
+    const { key } = this.$router.params
     key == '学生' ? (
         this.getStudentsCourse()
     ) : (
@@ -76,13 +76,13 @@ export default class Schedule extends Component {
       this.setState({
         showatNoticebar: false
       })
-    }, 20000);
+    }, 20000)
   }
 
   //得到当天的时间
   getTime() {
-    let res = getCurrentTime();
-    const currentDay = res.year + '-' + res.month + '-' + res.date;
+    let res = getCurrentTime()
+    const currentDay = res.year + '-' + res.month + '-' + res.date
     this.setState({
       currentDay: currentDay,
       currentNum: res.day
@@ -97,14 +97,14 @@ export default class Schedule extends Component {
 
   navigateToPage = url => {
     Taro.navigateTo({
-      url,
+      url
     })
   }
 
   render () {
-    const {currentNum,currentDay,atNoticebarSpeed,showatNoticebar} = this.state
-    const {studentsCourse,teachersCourse,showCourse} = this.props
-    const {key} = this.$router.params
+    const { currentNum, currentDay, atNoticebarSpeed, showatNoticebar } = this.state
+    const { studentsCourse, teachersCourse, showCourse } = this.props
+    const { key } = this.$router.params
     const tabList = [
       { title: '日' },
       { title: '一' },
@@ -126,7 +126,7 @@ export default class Schedule extends Component {
         {
           showatNoticebar?(
             <AtNoticebar marquee icon='volume-plus' speed={atNoticebarSpeed}>
-              继续点击下列课程,可以留下对课堂反馈哟~~
+              继续点击下列课程,可以留下对该课堂的反馈哟~~
             </AtNoticebar>
           ):''
         }

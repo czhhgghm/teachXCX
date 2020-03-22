@@ -1,17 +1,17 @@
-import Taro, { Component } from '@tarojs/taro';
-import Index from './pages/home';
-import '@tarojs/async-await';
-import { Provider } from '@tarojs/redux';
-import dva from './utils/dva';
-import models from './models';
-import './app.scss';
+import Taro, { Component } from '@tarojs/taro'
+import Index from './pages/home'
+import '@tarojs/async-await'
+import { Provider } from '@tarojs/redux'
+import dva from './utils/dva'
+import models from './models'
+import './app.scss'
 
 const dvaApp = dva.createApp({
   initialState: {},
   models: models
 })
 
-const store = dvaApp.getStore();
+const store = dvaApp.getStore()
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -46,8 +46,7 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#289ff0',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black',
-      enablePullDownRefresh: true
+      navigationBarTextStyle: 'black'
     }
   }
 
@@ -60,4 +59,4 @@ class App extends Component {
   }
 }
 
-Taro.render(<App />, document.getElementById('app'));
+Taro.render(<App />, document.getElementById('app'))

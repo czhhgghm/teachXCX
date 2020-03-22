@@ -22,7 +22,7 @@ export default class AddUsers extends Component {
       schoolName: '',
       livePlace: ''
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '添加用户'
@@ -206,7 +206,7 @@ export default class AddUsers extends Component {
   }
 
   render () {
-    const {optionValue} = this.state
+    const { optionValue } = this.state
     return (
       <View className='index'>
         <View className='formStyle'>

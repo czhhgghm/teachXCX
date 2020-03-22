@@ -28,7 +28,7 @@ export default class ShowAdvice extends Component {
   }
 
   getNewAdvice() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'common/getNewAdvice'
     })
@@ -56,7 +56,7 @@ export default class ShowAdvice extends Component {
 
   render () {
     const adviceData = wx.getStorageSync('adviceData')?wx.getStorageSync('adviceData'):this.props.adviceData
-    const {selectContent,showModal} = this.state
+    const { selectContent, showModal } = this.state
     return (
       <View className='index'>
         <AtList hasBorder={false}>

@@ -13,7 +13,7 @@ export default class CoachingProgram extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: '',
+      value: ''
     }
   };
 
@@ -27,7 +27,7 @@ export default class CoachingProgram extends Component {
 
   changeDetail = url => {
     Taro.navigateTo({
-      url,
+      url
     })
   }
 
@@ -36,7 +36,7 @@ getStudents() {
   dispatch({
     type:'coachingProgram/getStudents',
     payload:{
-      id,
+      id
     }
   })
 }

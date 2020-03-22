@@ -1,6 +1,5 @@
-//执行异步请求
-import getRequest from "../utils/get";
-import postRrequest from "../utils/request";
+import getRequest from "../utils/get"
+import postRrequest from "../utils/request"
 
 export async function getSessionId(data) {
     return getRequest({
@@ -22,7 +21,7 @@ export async function getPhone(data) {
     return postRrequest({
         url: '/user/phoneAndLogin',
         method: 'POST',
-        data,
+        data
     }) 
 }
 
@@ -30,7 +29,7 @@ export async function submitAdvice(data) {
     return postRrequest({
         url: '/Suggestion/add',
         method: 'POST',
-        data,
+        data
     }) 
 }
 
@@ -38,7 +37,7 @@ export async function addCourse(data) {
     return postRrequest({
         url: '/manager/addCourse',
         method: 'POST',
-        data,
+        data
     }) 
 }
 

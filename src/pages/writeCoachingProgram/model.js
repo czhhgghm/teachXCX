@@ -20,7 +20,7 @@ export default {
     
     effects: {
         *checkGuidance({payload},{call,put}) {
-            const response = yield call(checkGuidance,payload);
+            const response = yield call(checkGuidance,payload)
             const guidanceResponse = {
                 guidanceID: response.data.state !== 0 ? response.data.guidance.id : '',
                 state: response.data.state,
@@ -34,10 +34,10 @@ export default {
             })
         },
         *addGuidance({payload},{call,put}) {
-            const response = yield call(addGuidance,payload);
+            const response = yield call(addGuidance,payload)
         },
         *updateGuidance({payload},{call,put}) {
-            const response = yield call(updateGuidance,payload);
+            const response = yield call(updateGuidance,payload)
         },
         *getPendingList({payload},{call,put}) {
             const response = yield call(getPendingList,payload);
@@ -49,7 +49,7 @@ export default {
             })
         },
         *getPassList({payload},{call,put}) {
-            const response = yield call(getPassList,payload);
+            const response = yield call(getPassList,payload)
             yield put({
                 type: 'savePassList',
                 payload: {
@@ -58,7 +58,7 @@ export default {
             })
         },
         *getPersonGuidance({payload},{call,put}) {
-            const response = yield call(getPersonGuidance,payload);
+            const response = yield call(getPersonGuidance,payload)
             yield put({
                 type: 'savePersonGuidance',
                 payload: {
@@ -67,37 +67,37 @@ export default {
             })
         },
         *passGuidance({payload},{call,put}) {
-            const response = yield call(passGuidance,payload);
+            const response = yield call(passGuidance,payload)
         },
         *rejectGuidance({payload},{call,put}) {
-            const response = yield call(rejectGuidance,payload);
+            const response = yield call(rejectGuidance,payload)
         }
     },
 
     reducers: {
         saveGuidance(state, {payload}) {
-            const {guidanceResponse} = payload
+            const { guidanceResponse } = payload
             return {
                 ...state,
                 guidanceResponse
             }
         },
         savePendingList(state, {payload}) {
-            const {pendingList} = payload
+            const { pendingList } = payload
             return {
                 ...state,
                 pendingList
             }
         },
         savePassList(state, {payload}) {
-            const {passList} = payload
+            const { passList } = payload
             return {
                 ...state,
                 passList
             }
         },
         savePersonGuidance(state, {payload}) {
-            const {personGuidance} = payload
+            const { personGuidance } = payload
             return {
                 ...state,
                 personGuidance

@@ -13,7 +13,7 @@ import { AtList, AtListItem, AtAccordion } from "taro-ui"
   managerDetail: usersManDetail.managerDetail
 }))
 
-export default class Index extends Component {
+export default class ShowPerson extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +25,6 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: '用户信息'
   }
-
 
   componentDidMount () {
     this.getDetail()

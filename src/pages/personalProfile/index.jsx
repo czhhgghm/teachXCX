@@ -1,8 +1,8 @@
-import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
-import './index.scss';
-import { AtList, AtListItem } from "taro-ui";
-import { connect } from '@tarojs/redux';
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
+import './index.scss'
+import { AtList, AtListItem } from "taro-ui"
+import { connect } from '@tarojs/redux'
 
 @connect(({ common, usersManDetail, writeCoachingProgram }) => ({
   studentDetail: usersManDetail.studentDetail,

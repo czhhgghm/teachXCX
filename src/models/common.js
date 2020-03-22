@@ -5,7 +5,7 @@ import {
     getNewAdvice,
     addCourse,
     removeCourse
-} from './service';
+} from './service'
 
 export default {
     namespace: 'common',
@@ -22,21 +22,20 @@ export default {
     
     effects: {
         *getSessionId({payload},{call}) {
-            const response = yield call(getSessionId,payload);
-            wx.setStorageSync('sessionKey', response.data.sessionKey);
-            wx.setStorageSync('openid', response.data.openid);
+            const response = yield call(getSessionId,payload)
+            wx.setStorageSync('sessionKey', response.data.sessionKey)
+            wx.setStorageSync('openid', response.data.openid)
         },
         *getPhone({payload},{call,put}) {
-            const response = yield call(getPhone,payload);
-            console.log('response',response)
+            const response = yield call(getPhone,payload)
             //将登陆信息全部保存到数据仓库并且做一次本地缓存
             if(response.code == 0) {
-                const result = response.data;
-                wx.setStorageSync('userId', result.userId);
-                wx.setStorageSync('authen', result.authen);
-                wx.setStorageSync('name', result.name);
-                wx.setStorageSync('id', result.id);
-                wx.setStorageSync('code', response.code + 10);
+                const result = response.data
+                wx.setStorageSync('userId', result.userId)
+                wx.setStorageSync('authen', result.authen)
+                wx.setStorageSync('name', result.name)
+                wx.setStorageSync('id', result.id)
+                wx.setStorageSync('code', response.code + 10)
                 yield put({
                     type: 'savePersonDetails',
                     payload: {
@@ -63,10 +62,10 @@ export default {
             }
         },
         *submitAdvice({payload},{call}) {
-            yield call(submitAdvice,payload);
+            yield call(submitAdvice,payload)
         },
         *getNewAdvice({payload},{call,put}) {
-            const response = yield call(getNewAdvice);
+            const response = yield call(getNewAdvice)
             yield put({
                 type: 'saveNewAdvice',
                 payload: {
@@ -75,37 +74,37 @@ export default {
             })
         },
         *addCourse({payload},{call}) {
-            const response = yield call(addCourse,payload);
+            const response = yield call(addCourse,payload)
         },
         *removeCourse({payload},{call}) {
-            const response = yield call(removeCourse,payload);
+            const response = yield call(removeCourse,payload)
         },
     },
 
     reducers: {
         saveNewAdvice(state, {payload}) {
-            const { adviceData } = payload;
+            const { adviceData } = payload
             return {
                 ...state,
                 adviceData
             }
         },
         changeAuthen(state, {payload}) {
-            const { authen } = payload;
+            const { authen } = payload
             return {
                 ...state,
                 authen
             }
         },
         saveLoginCode(state, {payload}) {
-            const { loginCode } = payload;
+            const { loginCode } = payload
             return {
                 ...state,
                 loginCode
             }
         },
         savePersonDetails(state, {payload}) {
-            const { userId, authen, personName, id } = payload;
+            const { userId, authen, personName, id } = payload
             return {
                 ...state,
                 userId,
@@ -115,12 +114,12 @@ export default {
             }
         },
         saveUserInfo(state, { payload }) {
-            const { nickName, avatarUrl }=payload;
+            const { nickName, avatarUrl }=payload
             return {
               ...state,
               nickName,
               avatarUrl
             }
-        },
+        }
     }
 }

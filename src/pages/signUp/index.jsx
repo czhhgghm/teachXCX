@@ -8,7 +8,7 @@ import { connect } from '@tarojs/redux'
   ...signUp
 }))
 
-export default class Index extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +16,7 @@ export default class Index extends Component {
       studentPhone: '',
       parentPhone: ''
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '新用户报名'
@@ -41,34 +41,34 @@ export default class Index extends Component {
   }
 
   submitHandle() {
-    const {name,studentPhone,parentPhone} = this.state
+    const { name, studentPhone, parentPhone } = this.state
     if(name == '') {
       Taro.showToast({
         icon: 'none',
-        title: '姓名为空，请重新编辑',
+        title: '姓名为空，请重新编辑'
       })
     }
     else if(studentPhone == '' && parentPhone == '') {
       Taro.showToast({
         title: '请至少留下一个的手机号码',
-        icon: 'none',
+        icon: 'none'
       })
     }
     else {
       if(studentPhone && !(/^1[3456789]\d{9}$/.test(studentPhone))) {
         Taro.showToast({
           icon: 'none',
-          title: '学生手机号格式不正确',
+          title: '学生手机号格式不正确'
         })
       }
       else if(parentPhone && !(/^1[3456789]\d{9}$/.test(parentPhone))) {
         Taro.showToast({
           icon: 'none',
-          title: '家长手机号格式不正确',
+          title: '家长手机号格式不正确'
         })
       }
       else {
-        const {dispatch} = this.props
+        const { dispatch } = this.props
         dispatch({
           type:'signUp/addRecommand',
           payload:{
@@ -81,7 +81,7 @@ export default class Index extends Component {
             title: '提交成功'
           },setTimeout(() => {
             wx.reLaunch({
-              url: '../home/index',
+              url: '../home/index'
             })
           }, 1500)
           )
@@ -91,7 +91,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {name,studentPhone,parentPhone} = this.state
+    const { name, studentPhone, parentPhone } = this.state
     return (
       <View className='index'>
         <AtForm 

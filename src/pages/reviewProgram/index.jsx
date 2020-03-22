@@ -1,8 +1,8 @@
-import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
-import './index.scss';
-import { AtAccordion, AtList, AtListItem, AtModal } from 'taro-ui';
-import { connect } from '@tarojs/redux';
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
+import './index.scss'
+import { AtAccordion, AtList, AtListItem, AtModal } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
 @connect(({ writeCoachingProgram }) => ({
   pendingList: writeCoachingProgram.pendingList,
@@ -32,7 +32,7 @@ export default class ReviewProgram extends Component {
   }
 
   getPendingList() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type:'writeCoachingProgram/getPendingList',
       payload:{}
@@ -40,14 +40,14 @@ export default class ReviewProgram extends Component {
   }
 
   getPassList() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type:'writeCoachingProgram/getPassList',
       payload:{}
     })
   }
 
-  toViewHandleClick (value) {
+  toViewHandleClick(value) {
     this.setState({
       toView: value
     })
@@ -61,7 +61,7 @@ export default class ReviewProgram extends Component {
     })
   }
 
-  viewedHandleClick (value) {
+  viewedHandleClick(value) {
     this.setState({
       viewed: value
     })
@@ -74,8 +74,8 @@ export default class ReviewProgram extends Component {
   }
 
   handleCancelPreModal() {
-    const {dispatch} = this.props;
-    const {guidanceId} = this.state;
+    const { dispatch } = this.props
+    const { guidanceId } = this.state
     dispatch({
       type:'writeCoachingProgram/rejectGuidance',
       payload:{
@@ -97,8 +97,8 @@ export default class ReviewProgram extends Component {
   }
 
   handleConfirmPreModal() {
-    const {dispatch} = this.props;
-    const {guidanceId} = this.state;
+    const { dispatch } = this.props
+    const { guidanceId } = this.state
     dispatch({
       type:'writeCoachingProgram/passGuidance',
       payload:{
@@ -122,7 +122,7 @@ export default class ReviewProgram extends Component {
   selectItemed = e => {
     this.setState({
       showModaled: true,
-      guidanceText: e.text,
+      guidanceText: e.text
     })
   }
 
@@ -139,8 +139,8 @@ export default class ReviewProgram extends Component {
   }
   
   render () {
-    const { pendingList, passList } = this.props;
-    const { guidanceText } = this.state;
+    const { pendingList, passList } = this.props
+    const { guidanceText } = this.state
     return (
       <View className='index'>
         <AtAccordion

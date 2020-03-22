@@ -1,8 +1,8 @@
-import { View, Button, Image } from "@tarojs/components";
-import Taro, { Component } from '@tarojs/taro';
-import nullJPG from '../../assets/images/null.jpg';
-import "./index.scss";
-import { connect } from '@tarojs/redux';
+import { View, Button, Image } from "@tarojs/components"
+import Taro, { Component } from '@tarojs/taro'
+import nullJPG from '../../assets/images/null.jpg'
+import "./index.scss"
+import { connect } from '@tarojs/redux'
 
 @connect(({ common }) => ({
   ...common
@@ -18,13 +18,13 @@ export default class Authorize extends Component {
 
   config = {
     navigationBarTitleText: "授权登录"
-  };
+  }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     wx.checkSession({
       success () {
-        const sessionKey = wx.getStorageSync('sessionKey');
+        const sessionKey = wx.getStorageSync('sessionKey')
         if(!sessionKey) {
           wx.login({
             success: res => {
@@ -56,13 +56,13 @@ export default class Authorize extends Component {
 
   //点击授权登录按钮
   getUserInfo = e => {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
         //把 微信用户名nickName 和 头像地址avatarUrl 保存到数据仓库并缓存到本地
-        const result = res.userInfo;
-        wx.setStorageSync('nickName', result.nickName);
-        wx.setStorageSync('avatarUrl', result.avatarUrl);
+        const result = res.userInfo
+        wx.setStorageSync('nickName', result.nickName)
+        wx.setStorageSync('avatarUrl', result.avatarUrl)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
@@ -86,11 +86,11 @@ export default class Authorize extends Component {
   }
 
   handleGetPhone = async(e) => {
-    const { dispatch }=this.props;
-    const result = e.detail;
+    const { dispatch }=this.props
+    const result = e.detail
     if(result.encryptedData) {
-      const sessionKey = wx.getStorageSync('sessionKey');
-      const openid = wx.getStorageSync('openid');
+      const sessionKey = wx.getStorageSync('sessionKey')
+      const openid = wx.getStorageSync('openid')
       await dispatch({
         type:'common/getPhone',
         payload:{

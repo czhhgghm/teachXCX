@@ -1,4 +1,4 @@
-import postRrequest from "../../utils/request";
+import postRrequest from "../../utils/request"
 
 export async function addStudent(data) {
     return postRrequest({

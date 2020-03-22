@@ -9,7 +9,7 @@ import { connect } from '@tarojs/redux'
   teacherFB: usersManage.teacherFB
 }))
 
-export default class Index extends Component {
+export default class ShowFBDetail extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,21 +39,21 @@ export default class Index extends Component {
   }
 
   render () {
-    const {allClassFB} = this.state
+    const { allClassFB } = this.state
     return (
         <View className='index'>
             {
-                allClassFB.length > 0 ? allClassFB.map((item)=>{
-                    return (
-                        <AtCard
-                            className="cardStyle"
-                            note={item.pointValue + '分 (满分5分)'}
-                            title={item.courseName}
-                            extra={item.from.name + '(' + item.from.phone + ')'}
-                        >{item.idea}</AtCard>
-                    )
-                })
-                :<Text>暂无收到反馈信息</Text>
+              allClassFB.length > 0 ? allClassFB.map((item)=>{
+                  return (
+                      <AtCard
+                          className="cardStyle"
+                          note={item.pointValue + '分 (满分5分)'}
+                          title={item.courseName}
+                          extra={item.from.name + '(' + item.from.phone + ')'}
+                      >{item.idea}</AtCard>
+                  )
+              })
+              :<Text>暂无收到反馈信息</Text>
             }
       </View>
     )
