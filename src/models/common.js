@@ -78,7 +78,7 @@ export default {
         },
         *removeCourse({payload},{call}) {
             const response = yield call(removeCourse,payload)
-        },
+        }
     },
 
     reducers: {

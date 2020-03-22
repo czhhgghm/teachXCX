@@ -8,7 +8,6 @@ import { connect } from '@tarojs/redux'
   userId: common.userId
 }))
 
-
 export default class Advice extends Component {
   constructor(props) {
     super(props)
