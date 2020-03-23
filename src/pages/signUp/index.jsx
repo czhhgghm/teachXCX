@@ -5,9 +5,8 @@ import { AtInput, AtForm, AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import '@tarojs/async-await'
 
-@connect(({ signUp, common }) => ({
-  loginCode: common.loginCode,
-  addRecommandCode: signUp.addRecommandCode
+@connect(({ common }) => ({
+  loginCode: common.loginCode
 }))
 
 export default class SignUp extends Component {
@@ -143,10 +142,12 @@ export default class SignUp extends Component {
         }
       })
       Taro.showToast({
-        title: '提交中'
-      },setTimeout(() => {
-        wx.showModal({
-          title: '提交成功'
+        title: '提交中',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.showToast({
+          icon: 'success'
         })
         if(this.props.loginCode !== 11) {
           wx.reLaunch({
@@ -160,7 +161,7 @@ export default class SignUp extends Component {
             parentPhone: ''
           })
         }
-      }, 1500))
+      }, 1500)
     }
     else {
       if(!studentNamePass) {

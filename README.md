@@ -4,7 +4,7 @@
 - [下载微信开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 
 ## 安装项目依赖
-npm install
+npm install(npm版本为6.10.3)
 
 ## 打开微信开发者工具
 * 目录指向 `dist`

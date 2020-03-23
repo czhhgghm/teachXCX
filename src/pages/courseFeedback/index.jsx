@@ -16,7 +16,7 @@ export default class CourseFeedback extends Component {
       pointValue: 0,
       inputValue: ''
     }
-  };
+  }
 
   config = {
     navigationBarTitleText: '评分反馈'
@@ -60,16 +60,19 @@ export default class CourseFeedback extends Component {
             idea: inputValue,
             pointValue,
           }
-        },
-          Taro.showToast({
-            title: '提交成功'
-          },setTimeout(() => {
-            wx.reLaunch({
-              url: '../home/index',
-            })
-          }, 1500)
-          )
-        )
+        })
+        Taro.showToast({
+          title: '提交中',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          wx.showToast({
+            icon: 'success'
+          })
+          wx.reLaunch({
+            url: '../home/index'
+          })
+        }, 1500)
       }
       else {
         dispatch({
@@ -80,16 +83,19 @@ export default class CourseFeedback extends Component {
             idea: inputValue,
             pointValue
           }
-        },
-          Taro.showToast({
-            title: '提交成功'
-          },setTimeout(() => {
-            wx.reLaunch({
-              url: '../home/index',
-            })
-          }, 1500)
-          )
-        )
+        })
+        Taro.showToast({
+          title: '提交中',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          wx.showToast({
+            icon: 'success'
+          })
+          wx.reLaunch({
+            url: '../home/index'
+          })
+        }, 1500)
       }
     }
   }
