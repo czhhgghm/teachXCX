@@ -56,7 +56,6 @@ function isCnNewID(cid) {
     }
 }
 
-
 module.exports = {
     getCurrentTime,
     formatTime,

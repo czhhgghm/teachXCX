@@ -7,11 +7,18 @@ import {
 export default {
     namespace: 'signUp',
     state: {
-        recommandList: []
+        recommandList: [],
+        addRecommandCode: -1
     },
     effects: {
         *addRecommand({payload},{call,put}) {
             const response = yield call(addRecommand,payload)
+            yield put({
+                type: 'saveAddRecommandCode',
+                payload: {
+                    addRecommandCode: response.code
+                }
+            })
         },
         *getRecommandList({payload},{call,put}) {
             const response = yield call(getRecommandList,payload)
@@ -33,6 +40,13 @@ export default {
             return {
                 ...state,
                 recommandList
+            }
+        },
+        saveAddRecommandCode(state, {payload}) {
+            const { addRecommandCode } = payload
+            return {
+                ...state,
+                addRecommandCode
             }
         }
     }

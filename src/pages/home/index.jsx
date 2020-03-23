@@ -84,6 +84,7 @@ export default class Home extends Component {
       })
     }
     else if(loginCode == 11) {
+      //loginCode值为11,表示该用户还未经过注册,判断为游客,此时重定向到推荐新用户页面
       Taro.reLaunch({
         url: '../signUp/index'
       })
