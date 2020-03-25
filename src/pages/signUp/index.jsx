@@ -47,11 +47,10 @@ export default class SignUp extends Component {
   checkStudentName() {
     const { studentName } = this.state
     if(!studentName) {
-      wx.showModal({
-        title: '提示',
-        content: '该项不能为空,请登记学生姓名',
-        showCancel: false,
-        confirmText: '重新输入'
+      wx.showToast({
+        title: '该项不能为空,请登记学生姓名',
+        icon: 'none',
+        duration: 2000
       })
       this.setState({
         studentNamePass: false
@@ -66,11 +65,10 @@ export default class SignUp extends Component {
   checkStudentPhone() {
     const { studentPhone } = this.state
     if(!studentPhone) {
-      wx.showModal({
-        title: '提示',
-        content: '该项不能为空,若学生没有电话,可登记家长电话',
-        showCancel: false,
-        confirmText: '重新输入'
+      wx.showToast({
+        title: '该项不能为空,若学生没有电话,可登记家长电话',
+        icon: 'none',
+        duration: 2000
       })
       this.setState({
         studentPhonePass: false
@@ -99,11 +97,10 @@ export default class SignUp extends Component {
   checkParentPhone() {
     const { parentPhone } = this.state
     if(!parentPhone) {
-      wx.showModal({
-        title: '提示',
-        content: '该项不能为空,请登记家长电话',
-        showCancel: false,
-        confirmText: '重新输入'
+      wx.showToast({
+        title: '该项不能为空,请登记家长电话',
+        icon: 'none',
+        duration: 2000
       })
       this.setState({
         parentPhonePass: false
