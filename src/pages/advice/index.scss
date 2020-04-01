@@ -3,6 +3,11 @@
 @import "~taro-ui/dist/style/components/loading.scss";
 @import "~taro-ui/dist/style/components/form.scss";
 
+page{
+    height:100%;
+    background:#f6f6f6;
+}
+
 .index {
     padding: 20px;
 

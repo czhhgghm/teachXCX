@@ -2,6 +2,7 @@ import {
     getSessionId,
     getPhone,
     submitAdvice,
+    deleteAdvice,
     getNewAdvice,
     addCourse,
     removeCourse
@@ -64,8 +65,11 @@ export default {
         *submitAdvice({payload},{call}) {
             yield call(submitAdvice,payload)
         },
+        *deleteAdvice({payload},{call}) {
+            const response = yield call(deleteAdvice,payload)
+        },
         *getNewAdvice({payload},{call,put}) {
-            const response = yield call(getNewAdvice)
+            const response = yield call(getNewAdvice,payload)
             yield put({
                 type: 'saveNewAdvice',
                 payload: {

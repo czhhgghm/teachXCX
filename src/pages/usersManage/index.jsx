@@ -15,7 +15,7 @@ export default class UsersManage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      select: ''
+      select: '管理员'
     }
   };
 
@@ -49,6 +49,7 @@ export default class UsersManage extends Component {
     let pageLength = pageHistory.length
     if(pageHistory[pageLength-1].route == "pages/usersManage/index") {
       //优化点,当添加用户以后,判断页面,重新进行数据请求!!
+      // console.log('pageHistory[pageLength-1].route',pageHistory[pageLength-1].route)
       this.managerOnClick() 
     }
   }
@@ -186,9 +187,7 @@ export default class UsersManage extends Component {
             select == '管理员'?(
               managerList == []?(
                 <AtListItem
-                  arrow='right'
-                  title='管理员用例'
-                  note='123456789'
+                  title='暂无用户'
                 />
               )
               :(
@@ -208,9 +207,7 @@ export default class UsersManage extends Component {
             :select == '学生'?(
               studentList == []?(
                 <AtListItem
-                  arrow='right'
-                  title='学生用例'
-                  note='123456789'
+                  title='暂无用户'
                 />
               )
               :(
@@ -230,9 +227,7 @@ export default class UsersManage extends Component {
             :select == '老师'?(
               teacherList == []?(
                 <AtListItem
-                  arrow='right'
-                  title='老师用例'
-                  note='123456789'
+                  title='暂无用户'
                 />
               )
               :(
@@ -252,9 +247,7 @@ export default class UsersManage extends Component {
             :select == '家长'?(
               familyList == []?(
                 <AtListItem
-                  arrow='right'
-                  title='家长用例'
-                  note='123456789'
+                  title='暂无用户'
                 />
               )
               :(

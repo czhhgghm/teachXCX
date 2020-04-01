@@ -13,7 +13,8 @@ export default class ShowAdvice extends Component {
     super(props)
     this.state = {
       showModal: false,
-      selectContent: ''
+      selectContent: '',
+      deleteId: -1
     }
   };
 
@@ -34,21 +35,45 @@ export default class ShowAdvice extends Component {
     })
   }
 
-  selectPreItem = value => {
+  selectPreItem = item => {
     this.setState({
       showModal: true,
-      selectContent: value
+      selectContent: item.opinion,
+      deleteId: item.id
     })
   }
 
-  handleClosePreModal() {
+  handleCloseModal() {
+    this.setState({
+      showModal: false
+    })
+  }
+
+  handleCancelModal() {
     this.setState({
       showModal: false
     })
   }
 
 
-  handleConfirmPreModal() {
+  handleConfirmModal() {
+    const { dispatch } = this.props
+    const { deleteId } = this.state
+    dispatch({
+      type:'common/deleteAdvice',
+      payload:{
+        id: deleteId
+      }
+    },
+      Taro.showToast({
+        title: '删除成功'
+      },setTimeout(() => {
+        wx.reLaunch({
+          url: '../home/index'
+        })
+      }, 500)
+      )
+    )
     this.setState({
       showModal: false
     })
@@ -61,14 +86,14 @@ export default class ShowAdvice extends Component {
       <View className='index'>
         <AtList hasBorder={false}>
         {
-          adviceData.map((item,index)=>{
+          adviceData.map((item)=>{
             return (
               <AtListItem
-                key={index}
+                key={item.id}
                 title={item.name}
                 extraText={item.authen}
                 note={item.phone}
-                onClick={this.selectPreItem.bind(this,item.opinion)}
+                onClick={this.selectPreItem.bind(this,item)}
               />
             )
           })
@@ -77,9 +102,11 @@ export default class ShowAdvice extends Component {
         <AtModal
           isOpened={showModal}
           title='用户建议'
-          confirmText='确定'
-          onClose={ this.handleClosePreModal.bind(this) }
-          onConfirm={ this.handleConfirmPreModal.bind(this) }
+          cancelText='取消'
+          confirmText='删除建议'
+          onClose={ this.handleCloseModal.bind(this) }
+          onCancel={ this.handleCancelModal.bind(this) }
+          onConfirm={ this.handleConfirmModal.bind(this) }
           content={selectContent}
         />
       </View>

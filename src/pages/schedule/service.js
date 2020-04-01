@@ -1,5 +1,5 @@
 import getRequest from "../../utils/get"
-import postRrequest from "../../utils/request"
+import postRrequest from "../../utils/post"
 
 export async function postStudentFB(data) {
     return postRrequest({
@@ -19,7 +19,7 @@ export async function postTeacherFB(data) {
 
 export async function getStudentsCourse(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/student/courseList',
+        url: '/student/courseList',
         method: 'GET',
         data
     }) 
@@ -27,7 +27,7 @@ export async function getStudentsCourse(data) {
 
 export async function getTeachersCourse(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/teacher/courseList',
+        url: '/teacher/courseList',
         method: 'GET',
         data
     }) 

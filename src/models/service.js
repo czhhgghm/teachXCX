@@ -1,9 +1,9 @@
 import getRequest from "../utils/get"
-import postRrequest from "../utils/request"
+import postRrequest from "../utils/post"
 
 export async function getSessionId(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/user/login',
+        url: '/user/login',
         method: 'GET',
         data
     }) 
@@ -11,7 +11,7 @@ export async function getSessionId(data) {
 
 export async function getNewAdvice(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/Suggestion/get',
+        url: '/Suggestion/get',
         method: 'GET',
         data
     }) 
@@ -28,6 +28,14 @@ export async function getPhone(data) {
 export async function submitAdvice(data) {
     return postRrequest({
         url: '/Suggestion/add',
+        method: 'POST',
+        data
+    }) 
+}
+
+export async function deleteAdvice(data) {
+    return postRrequest({
+        url: `/Suggestion/delete?id=${data.id}`,
         method: 'POST',
         data
     }) 
@@ -52,6 +60,7 @@ export default {
     getSessionId,
     getPhone,
     submitAdvice,
+    deleteAdvice,
     getNewAdvice,
     addCourse
 }

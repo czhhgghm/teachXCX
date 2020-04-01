@@ -1,5 +1,5 @@
 import getRequest from "../../utils/get"
-import postRrequest from "../../utils/request"
+import postRrequest from "../../utils/post"
 
 export async function checkGuidance(data) {
     return postRrequest({
@@ -35,7 +35,7 @@ export async function rejectGuidance(data) {
 
 export async function getPendingList(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/guidance/pendingList',
+        url: '/guidance/pendingList',
         method: 'GET',
         data
     }) 
@@ -43,7 +43,7 @@ export async function getPendingList(data) {
 
 export async function getPassList(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/guidance/reviewList',
+        url: '/guidance/reviewList',
         method: 'GET',
         data
     }) 
@@ -51,7 +51,7 @@ export async function getPassList(data) {
 
 export async function getPersonGuidance(data) {
     return getRequest({
-        url: `https://m-school.mynatapp.cc/guidance/studentGuidanceList?id=${data.id}`,
+        url: `/guidance/studentGuidanceList?id=${data.id}`,
         method: 'GET',
         data
     }) 

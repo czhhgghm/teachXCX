@@ -1,9 +1,9 @@
 import Taro from '@tarojs/taro'
 import { baseUrl, consoleDetail } from '../config'
 
-export default (
+export default async (
   options = {
-    method: 'GET',
+    method: 'POST',
     data: {}
   }
 ) => {
@@ -14,7 +14,7 @@ export default (
   if(consoleDetail) {
     console.log(
       `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(
-        options.data
+        options
       )}`
     )
   }
@@ -29,7 +29,7 @@ export default (
     data: {
       ...options.data
     },
-    header,
+    header: header,
     method: options.method.toUpperCase()
   }).then(res => {
     const { statusCode, data } = res
@@ -37,14 +37,22 @@ export default (
       if(res.cookies.length > 0) {
         wx.setStorageSync('Set-Cookie', res.cookies[0])
       }
-      if (consoleDetail) {
+      if(consoleDetail) {
         console.log(
           `${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,
           res
         )
       }
+      // if (data.code !== '0') {
+      //   Taro.showToast({
+      //     title: `${data.msg}~` || data.code,
+      //     icon: 'none',
+      //     mask: true
+      //   })
+      // }
+
       return data
-    } 
+    }
     else {
       throw new Error(`网络请求错误，状态码${statusCode}`)
     }

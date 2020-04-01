@@ -1,5 +1,5 @@
 import getRequest from "../../utils/get";
-import postRrequest from "../../utils/request";
+import postRrequest from "../../utils/post";
 
 export async function addRecommand(data) {
     return postRrequest({
@@ -11,7 +11,7 @@ export async function addRecommand(data) {
 
 export async function getRecommandList(data) {
     return getRequest({
-        url: 'https://m-school.mynatapp.cc/Recommand/recommandList',
+        url: '/Recommand/recommandList',
         method: 'GET',
         data
     }) 
