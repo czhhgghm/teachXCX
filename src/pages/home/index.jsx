@@ -17,7 +17,7 @@ import userInformationPng from '../../assets/images/userInformation.png'
 
 @connect(({ common }) => ({
   authen: common.authen,
-  nickName: common.nickName,
+  personName: common.personName,
   avatarUrl: common.avatarUrl,
   loginCode: common.loginCode
 }))
@@ -48,7 +48,6 @@ export default class Home extends Component {
         }
       })
       if(loginCode == 10) {
-        const nickName = wx.getStorageSync('nickName')
         const avatarUrl = wx.getStorageSync('avatarUrl')
         const userId = wx.getStorageSync('userId')
         const authen = wx.getStorageSync('authen')
@@ -66,7 +65,6 @@ export default class Home extends Component {
         dispatch({
           type:'common/saveUserInfo',
           payload:{
-            nickName: nickName,
             avatarUrl: avatarUrl
           }
         })
@@ -146,7 +144,7 @@ export default class Home extends Component {
   }
 
   render () {
-    const { authen, nickName, avatarUrl } = this.props
+    const { authen, personName, avatarUrl } = this.props
     return (
       <View>
         {
@@ -158,7 +156,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{nickName}</View>
+                  <View className='header-name'>{personName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>
@@ -229,7 +227,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{nickName}</View>
+                  <View className='header-name'>{personName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>
@@ -300,7 +298,7 @@ export default class Home extends Component {
                   <Image className='header-Img' src={avatarUrl?avatarUrl:personPng} />
                 </View>
                 <View className='at-col at-col-7 header-middle'>
-                  <View className='header-name'>{nickName}</View>
+                  <View className='header-name'>{personName}</View>
                   <View>
                     <AtIcon value='shuffle-play' size='15' color='#ccc'></AtIcon>
                     <View className='afterIcon-font'>{authen}</View>

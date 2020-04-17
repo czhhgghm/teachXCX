@@ -6,6 +6,7 @@ import usersManDetail from '../pages/usersManDetail/model'
 import signUp from '../pages/signUp/model'
 import coachingProgram from '../pages/coachingProgram/model'
 import writeCoachingProgram from '../pages/writeCoachingProgram/model'
+import changeUserInformation from '../pages/changeUserInformation/model'
 
 
 export default [
@@ -16,5 +17,6 @@ export default [
     usersManDetail,
     signUp,
     coachingProgram,
-    writeCoachingProgram
+    writeCoachingProgram,
+    changeUserInformation
 ]

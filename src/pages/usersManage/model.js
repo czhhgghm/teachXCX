@@ -118,6 +118,34 @@ export default {
                 familyList
             }
         },
+        clearManagersList(state, {payload}) {
+            const { managerList } = payload
+            return {
+                ...state,
+                managerList
+            }
+        },
+        clearFamilyList(state, {payload}) {
+            const { familyList } = payload
+            return {
+                ...state,
+                familyList
+            }
+        },
+        clearTeachersList(state, {payload}) {
+            const { teacherList } = payload
+            return {
+                ...state,
+                teacherList
+            }
+        },
+        clearStudentsList(state, {payload}) {
+            const { studentList } = payload
+            return {
+                ...state,
+                studentList
+            }
+        },
         clearUsers(state, {payload}) {
             const { studentList, teacherList, managerList, familyList } = payload
             return {

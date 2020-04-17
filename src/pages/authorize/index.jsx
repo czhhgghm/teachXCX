@@ -59,14 +59,12 @@ export default class Authorize extends Component {
     const { dispatch } = this.props
     if(e.detail.userInfo) {
       Taro.getUserInfo().then(res=>{
-        //把 微信用户名nickName 和 头像地址avatarUrl 保存到数据仓库并缓存到本地
+        //把 头像地址avatarUrl 保存到数据仓库并缓存到本地
         const result = res.userInfo
-        wx.setStorageSync('nickName', result.nickName)
         wx.setStorageSync('avatarUrl', result.avatarUrl)
         dispatch({
           type:'common/saveUserInfo',
           payload:{
-            nickName: result.nickName,
             avatarUrl: result.avatarUrl
           }
         })

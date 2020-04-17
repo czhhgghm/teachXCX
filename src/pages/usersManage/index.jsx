@@ -8,7 +8,7 @@ import { connect } from '@tarojs/redux'
   studentList: usersManage.studentList,
   familyList: usersManage.familyList,
   teacherList: usersManage.teacherList,
-  managerList: usersManage.managerList,
+  managerList: usersManage.managerList
 }))
 
 export default class UsersManage extends Component {

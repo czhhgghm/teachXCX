@@ -18,8 +18,7 @@ export default class UsersManDetail extends Component {
     this.state = {
       openFamily: false,
       openCourses: false,
-      openStudent: false,
-      removeId: []
+      openStudent: false
     }
   }
 
@@ -106,6 +105,15 @@ export default class UsersManDetail extends Component {
     })
   }
 
+  changeMessage() {
+    const { select, id } = this.$router.params
+    console.log('select',select)
+    console.log('id',id)
+    Taro.navigateTo({
+      url: `/pages/changeUserInformation/index?id=${id}&select=${select}`
+    })
+  }
+
   removeClass = coureseIds => {
     const { dispatch } = this.props
     Taro.showModal({
@@ -149,6 +157,7 @@ export default class UsersManDetail extends Component {
             <AtList>
               <AtListItem title='姓名' extraText={managerDetail.name?managerDetail.name:'数据请求中'}/>
               <AtListItem title='电话' extraText={managerDetail.phone?managerDetail.phone:'数据请求中'}/>
+              <AtButton type='secondary' onClick={this.changeMessage.bind(this)}>修改信息</AtButton>
             </AtList>
           </View>
         }
@@ -210,6 +219,7 @@ export default class UsersManDetail extends Component {
                 <AtListItem title='课程情况' extraText='暂无'/>
               }
             </AtList>
+            <AtButton type='secondary' onClick={this.changeMessage.bind(this)}>修改信息</AtButton>
             <AtButton type='primary' onClick={this.addCourse.bind(this)}>添加课程</AtButton>
           </View>
         }
@@ -243,6 +253,7 @@ export default class UsersManDetail extends Component {
                 ):
                 <AtListItem title='孩子信息' extraText='数据请求中'/>
               }
+              <AtButton type='secondary' onClick={this.changeMessage.bind(this)}>修改信息</AtButton>
             </AtList>
           </View>
         }
@@ -276,6 +287,7 @@ export default class UsersManDetail extends Component {
                 ):
                 <AtListItem title='学生信息' extraText='暂无'/>
               }
+              <AtButton type='secondary' onClick={this.changeMessage.bind(this)}>修改信息</AtButton>
             </AtList>
           </View>
         }

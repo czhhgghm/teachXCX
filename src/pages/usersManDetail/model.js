@@ -12,8 +12,8 @@ export default {
             families: [],
             courses: []
         },
-        teacherDetail: [],
-        managerDetail: [],
+        teacherDetail: {},
+        managerDetail: {},
         familyDetail: {children:[]},
     },
     

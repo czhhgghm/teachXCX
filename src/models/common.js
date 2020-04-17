@@ -13,7 +13,6 @@ export default {
     state: {
         authen: '',
         avatarUrl: '',
-        nickName: '',
         personName: '',
         userId: -1,
         loginCode: -1,
@@ -57,7 +56,7 @@ export default {
                 yield put({
                     type: 'saveLoginCode',
                     payload: {
-                        loginCode: response.code + 10
+                        loginCode: response.code
                     }
                 })
             }
@@ -118,10 +117,9 @@ export default {
             }
         },
         saveUserInfo(state, { payload }) {
-            const { nickName, avatarUrl }=payload
+            const {  avatarUrl }=payload
             return {
               ...state,
-              nickName,
               avatarUrl
             }
         }

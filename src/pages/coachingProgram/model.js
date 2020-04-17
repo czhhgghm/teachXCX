@@ -8,7 +8,7 @@ export default {
     
     effects: {
         *getStudents({payload},{call,put}) {
-            const response = yield call(getStudents,payload);
+            const response = yield call(getStudents,payload)
             yield put({
                 type: 'saveStudents',
                 payload: {

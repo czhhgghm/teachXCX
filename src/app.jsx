@@ -27,6 +27,7 @@ class App extends Component {
       'pages/showPerson/index',
       'pages/schedule/index',
       'pages/courseFeedback/index',
+      'pages/changeUserInformation/index',
       'pages/personalProfile/index',
       'pages/signUp/index',
       'pages/advice/index',

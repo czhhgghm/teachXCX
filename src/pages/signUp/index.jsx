@@ -153,7 +153,7 @@ export default class SignUp extends Component {
         }
         else {
           this.setState({
-            studentPhone: '',
+            studentName: '',
             studentPhone: '',
             parentPhone: ''
           })
