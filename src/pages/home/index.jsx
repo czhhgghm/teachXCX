@@ -32,10 +32,27 @@ export default class Home extends Component {
   }
 
   async componentWillMount () {
-    this.login()
+    this.checkLogin()
   }
 
-  checkLogin() {
+  async checkLogin() {
+    await this.checkStorage()
+    const { loginCode } = this.props
+    if(loginCode == -1) {
+      //loginCode默认值为-1,表示身份信息不明,此时重定向到登录页面
+      Taro.reLaunch({
+        url: '../authorize/index'
+      })
+    }
+    else if(loginCode == 11) {
+      //loginCode值为11,表示该用户还未经过注册,判断为游客,此时重定向到推荐新用户页面
+      Taro.reLaunch({
+        url: '../signUp/index'
+      })
+    }
+  }
+
+  checkStorage() {
     //检查是否有缓存登陆信息
     let loginCode = wx.getStorageSync('code')
     if(loginCode) {
@@ -72,23 +89,6 @@ export default class Home extends Component {
     }
   }
 
-  async login() {
-    await this.checkLogin()
-    const { loginCode } = this.props
-    if(loginCode == -1) {
-      //loginCode默认值为-1,表示身份信息不明,此时重定向到登录页面
-      Taro.reLaunch({
-        url: '../authorize/index'
-      })
-    }
-    else if(loginCode == 11) {
-      //loginCode值为11,表示该用户还未经过注册,判断为游客,此时重定向到推荐新用户页面
-      Taro.reLaunch({
-        url: '../signUp/index'
-      })
-    }
-  }
-
   navigateToPage = url => {
     if(url) {
       Taro.navigateTo({
@@ -107,44 +107,9 @@ export default class Home extends Component {
     this.navigateToPage(e.url)
   }
 
-  changeSF0() {
-    const { dispatch } = this.props
-    dispatch({
-      type:'common/changeAuthen',
-      payload:{
-        authen: '管理员'
-      }
-    })
-  }
-
-  changeSF1() {
-    const { dispatch } = this.props
-    dispatch({
-      type:'common/changeAuthen',
-      payload:{
-        authen: '学生'
-      }
-    })
-  }
-
-  changeSF2() {
-    const { dispatch } = this.props
-    dispatch({
-      type:'common/changeAuthen',
-      payload:{
-        authen: '老师',
-      }
-    })
-  }
-
-  changeSF3() {
-    Taro.navigateTo({
-      url: '/pages/signUp/index'
-    })
-  }
-
   render () {
     const { authen, personName, avatarUrl } = this.props
+    const columnNum = 2
     return (
       <View>
         {
@@ -183,6 +148,7 @@ export default class Home extends Component {
                 className='main'
                 onClick={this.jumpPages}
                 hasBorder={false}
+                columnNum={columnNum}
                 data={
                 [
                   {
@@ -254,6 +220,7 @@ export default class Home extends Component {
                 className='main'
                 onClick={this.jumpPages}
                 hasBorder={false}
+                columnNum={columnNum}
                 data={
                 [
                   {
@@ -325,6 +292,7 @@ export default class Home extends Component {
                 className='main'
                 onClick={this.jumpPages}
                 hasBorder={false}
+                columnNum={columnNum}
                 data={
                 [
                   {
@@ -362,13 +330,6 @@ export default class Home extends Component {
             </View>
           </View>
         }
-        {/* 用于测试 */}
-        <View style={{padding:'20px'}}>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF0.bind(this)}>管理员模式</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF1.bind(this)}>学生/家长模式</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF2.bind(this)}>老师模式</AtButton>
-          <AtButton type='secondary' size='normal' onClick={this.changeSF3.bind(this)}>游客模式</AtButton>
-        </View>
       </View>
     )
   }

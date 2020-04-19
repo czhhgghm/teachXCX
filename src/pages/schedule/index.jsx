@@ -38,7 +38,7 @@ export default class Schedule extends Component {
 
   async getCurrentSchedule() {
     const { key } = this.$router.params
-    key == '学生' ? (
+    key == '学生' || key == '家长' ? (
         this.getStudentsCourse()
     ) : (
         this.getTeachersCourse()
@@ -138,7 +138,7 @@ export default class Schedule extends Component {
           tabList={tabList}
           onClick={this.clickChangeDays.bind(this)}>
           {
-            key == '学生' && studentsCourse.map((item,index)=>{
+            key == '学生' || key == '家长' && studentsCourse.map((item,index)=>{
               return (
                 <AtTabsPane current={currentNum} index={index}>
                 {

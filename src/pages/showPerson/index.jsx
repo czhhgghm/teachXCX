@@ -9,7 +9,6 @@ import { AtList, AtListItem, AtAccordion } from "taro-ui"
   id: common.id,
   teacherDetail: usersManDetail.teacherDetail,
   studentDetail: usersManDetail.studentDetail,
-  familyDetail: usersManDetail.familyDetail,
   managerDetail: usersManDetail.managerDetail
 }))
 
@@ -34,7 +33,7 @@ export default class ShowPerson extends Component {
     const {authen} = this.props
     authen == '学生' && this.getStudentsDetail()
     authen == '老师' && this.getTeachersDetail()
-    authen == '家长' && this.getFamilyDetail()
+    authen == '家长' && this.getStudentsDetail()
     authen == '管理员' && this.getManagerDetail()
   }
 
@@ -52,16 +51,6 @@ export default class ShowPerson extends Component {
     const {dispatch,id} = this.props
     dispatch({
       type:'usersManDetail/getTeachersDetail',
-      payload:{
-        id
-      }
-    })
-  }
-
-  getFamilyDetail() {
-    const {dispatch,id} = this.props
-    dispatch({
-      type:'usersManDetail/getFamilyDetail',
       payload:{
         id
       }
@@ -93,7 +82,7 @@ export default class ShowPerson extends Component {
   render () {
     const  { authen } = this.props
     const { studentDetail, teacherDetail, managerDetail } = this.props
-    const { openFamily, openCourses } = this.state
+    const { openFamily } = this.state
 
     return (
       <View className='index'>
@@ -131,10 +120,10 @@ export default class ShowPerson extends Component {
         (authen == '学生' || authen == '家长') &&
         <View>
           <AtList>
-            <AtListItem title='姓名' extraText={studentDetail.name?studentDetail.name:'数据请求中'}/>
-            <AtListItem title='电话' extraText={studentDetail.phone?studentDetail.phone:'数据请求中'}/>
+            <AtListItem title={authen == '家长'?'孩子姓名':'姓名'} extraText={studentDetail.name?studentDetail.name:'数据请求中'}/>
+            <AtListItem title={authen == '家长'?'孩子电话':'电话'} extraText={studentDetail.phone?studentDetail.phone:'数据请求中'}/>
             <AtListItem title='上课地区' extraText={studentDetail.place?studentDetail.place:'数据请求中'}/>
-            <AtListItem title='学校' extraText={studentDetail.school?studentDetail.school:'数据请求中'}/>
+            <AtListItem title={authen == '家长'?'孩子学校':'学校'} extraText={studentDetail.school?studentDetail.school:'数据请求中'}/>
             {
               studentDetail.families.length > 0 ?(
                 <AtAccordion
@@ -144,7 +133,7 @@ export default class ShowPerson extends Component {
                 >
                   <AtList hasBorder={false}>
                   {
-                    studentDetail.families.map((item,index)=>{
+                    studentDetail.families.map((item)=>{
                       return (
                         <AtListItem
                           key={item.id}

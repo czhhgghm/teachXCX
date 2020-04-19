@@ -31,6 +31,9 @@ export default {
             //将登陆信息全部保存到数据仓库并且做一次本地缓存
             if(response.code == 0) {
                 const result = response.data
+                if(result.authen == '家人') {
+                    result.authen = '家长'
+                }
                 wx.setStorageSync('userId', result.userId)
                 wx.setStorageSync('authen', result.authen)
                 wx.setStorageSync('name', result.name)
@@ -90,13 +93,6 @@ export default {
             return {
                 ...state,
                 adviceData
-            }
-        },
-        changeAuthen(state, {payload}) {
-            const { authen } = payload
-            return {
-                ...state,
-                authen
             }
         },
         saveLoginCode(state, {payload}) {

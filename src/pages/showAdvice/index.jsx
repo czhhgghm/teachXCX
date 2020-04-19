@@ -19,7 +19,7 @@ export default class ShowAdvice extends Component {
   };
 
   config = {
-    navigationBarTitleText: '查看建议'
+    navigationBarTitleText: '查看意见'
   }
 
   componentWillMount () { }

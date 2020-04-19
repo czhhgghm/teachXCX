@@ -20,7 +20,7 @@ export default class Authorize extends Component {
     navigationBarTitleText: "授权登录"
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { dispatch } = this.props
     wx.checkSession({
       success () {
