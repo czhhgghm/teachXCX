@@ -28,7 +28,7 @@ export async function getFamilyDetail(data) {
     return getRequest({
         url: '/family/familyDetail',
         method: 'GET',
-        data
+        data: data
     }) 
 }
 

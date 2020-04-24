@@ -18,8 +18,7 @@ export default class Schedule extends Component {
     this.state = {
       currentDay: '',
       currentNum: 0,
-      atNoticebarSpeed: 50,
-      showatNoticebar: true,
+      showatNoticebar: true
     }
   }
 
@@ -37,8 +36,11 @@ export default class Schedule extends Component {
   }
 
   async getCurrentSchedule() {
-    const { key } = this.$router.params
-    key == '学生' || key == '家长' ? (
+    let { key } = this.$router.params
+    if(key == '家长') {
+      key = '学生'
+    }
+    key == '学生' ? (
         this.getStudentsCourse()
     ) : (
         this.getTeachersCourse()
@@ -102,9 +104,10 @@ export default class Schedule extends Component {
   }
 
   render () {
-    const { currentNum, currentDay, atNoticebarSpeed, showatNoticebar } = this.state
+    const { currentNum, currentDay, showatNoticebar } = this.state
     const { studentsCourse, teachersCourse, showCourse } = this.props
     const { key } = this.$router.params
+    const atNoticebarSpeed = 50
     const tabList = [
       { title: '日' },
       { title: '一' },
@@ -138,7 +141,7 @@ export default class Schedule extends Component {
           tabList={tabList}
           onClick={this.clickChangeDays.bind(this)}>
           {
-            key == '学生' || key == '家长' && studentsCourse.map((item,index)=>{
+            key == '学生' && studentsCourse.map((item,index)=>{
               return (
                 <AtTabsPane current={currentNum} index={index}>
                 {

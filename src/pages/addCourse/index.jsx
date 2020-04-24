@@ -272,8 +272,8 @@ export default class AddCourse extends Component {
   }
 
   render () {
-    const selectTeacher = this.state.selectTeacherName == '' ? '选择老师' : this.state.selectTeacherName
-    const { courseName, coursePlace, weeklyTimeStr, inputBeginTime, inputEndTime, showDrawer, teacherItems } = this.state
+    const { courseName, coursePlace, weeklyTimeStr, inputBeginTime, inputEndTime, showDrawer, teacherItems, selectTeacherName } = this.state
+    const selectTeacher = selectTeacherName == '' ? '选择老师' : selectTeacherName
 
     return (
       <View className='index'>

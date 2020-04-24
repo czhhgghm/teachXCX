@@ -24,7 +24,7 @@ export default {
             yield put({
                 type: 'saveStudentList',
                 payload: {
-                    studentList: response.data
+                    studentList: response.data.reverse()
                 }
             })
         },
@@ -33,7 +33,7 @@ export default {
             yield put({
                 type: 'saveTeacherList',
                 payload: {
-                    teacherList: response.data
+                    teacherList: response.data.reverse()
                 }
             })
         },
@@ -42,7 +42,7 @@ export default {
             yield put({
                 type: 'saveManagerList',
                 payload: {
-                    managerList: response.data
+                    managerList: response.data.reverse()
                 }
             })
         },
@@ -51,7 +51,7 @@ export default {
             yield put({
                 type: 'saveFamilyList',
                 payload: {
-                    familyList: response.data
+                    familyList: response.data.reverse()
                 }
             })
         },

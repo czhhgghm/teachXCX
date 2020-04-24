@@ -9,12 +9,26 @@ export default {
     namespace: 'usersManDetail',
     state: {
         studentDetail: {
+            name: '数据请求中',
+            phone: '数据请求中',
+            place: '数据请求中',
+            school: '数据请求中',
             families: [],
             courses: []
         },
-        teacherDetail: {},
-        managerDetail: {},
-        familyDetail: {children:[]},
+        teacherDetail: {
+            name: '数据请求中',
+            phone: '数据请求中'
+        },
+        managerDetail: {
+            name: '数据请求中',
+            phone: '数据请求中'
+        },
+        familyDetail: {
+            name: '数据请求中',
+            phone: '数据请求中',
+            children:[]
+        },
     },
     
     effects: {
