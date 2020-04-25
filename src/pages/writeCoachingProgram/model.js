@@ -33,11 +33,11 @@ export default {
                 }
             })
         },
-        *addGuidance({payload},{call,put}) {
-            const response = yield call(addGuidance,payload)
+        *addGuidance({payload},{call}) {
+            yield call(addGuidance,payload)
         },
-        *updateGuidance({payload},{call,put}) {
-            const response = yield call(updateGuidance,payload)
+        *updateGuidance({payload},{call}) {
+            yield call(updateGuidance,payload)
         },
         *getPendingList({payload},{call,put}) {
             const response = yield call(getPendingList,payload);
@@ -50,6 +50,7 @@ export default {
         },
         *getPassList({payload},{call,put}) {
             const response = yield call(getPassList,payload)
+            wx.setStorageSync('passList', response.data.reverse())
             yield put({
                 type: 'savePassList',
                 payload: {
@@ -66,11 +67,11 @@ export default {
                 }
             })
         },
-        *passGuidance({payload},{call,put}) {
-            const response = yield call(passGuidance,payload)
+        *passGuidance({payload},{call}) {
+            yield call(passGuidance,payload)
         },
-        *rejectGuidance({payload},{call,put}) {
-            const response = yield call(rejectGuidance,payload)
+        *rejectGuidance({payload},{call}) {
+            yield call(rejectGuidance,payload)
         }
     },
 
@@ -90,6 +91,13 @@ export default {
             }
         },
         savePassList(state, {payload}) {
+            const { passList } = payload
+            return {
+                ...state,
+                passList
+            }
+        },
+        clearPassList(state, {payload}) {
             const { passList } = payload
             return {
                 ...state,

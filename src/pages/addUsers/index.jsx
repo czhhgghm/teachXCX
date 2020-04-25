@@ -83,7 +83,7 @@ export default class AddUsers extends Component {
   }
 
   clearUsers() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/clearUsers',
       payload:{
@@ -97,8 +97,8 @@ export default class AddUsers extends Component {
 
 
   async addNumbers() {
-    const {dispatch} = this.props
-    const {optionValue,studentName,studentPhone,parentName,parentPhone,perName,perPhone,livePlace,schoolName} = this.state
+    const { dispatch } = this.props
+    const { optionValue, studentName, studentPhone, parentName, parentPhone, perName, perPhone, livePlace, schoolName } = this.state
     const phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
 
     if(optionValue == 'student') {
@@ -205,7 +205,7 @@ export default class AddUsers extends Component {
     })
   }
 
-  render () {
+  render() {
     const { optionValue } = this.state
     return (
       <View className='index'>

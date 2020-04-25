@@ -28,7 +28,7 @@ export default class UsersManage extends Component {
   }
 
   componentDidShow() {
-    const {studentList,familyList,teacherList,managerList} = this.props
+    const { studentList, familyList, teacherList, managerList } = this.props
     const {select} = this.state
     if(select == '管理员' && managerList.length == 0) {
       this.getManagersList()
@@ -105,7 +105,7 @@ export default class UsersManage extends Component {
   }
 
   getStudentList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getStudentsList',
       payload:{}
@@ -113,7 +113,7 @@ export default class UsersManage extends Component {
   }
 
   getTeachersList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getTeachersList',
       payload:{}
@@ -121,7 +121,7 @@ export default class UsersManage extends Component {
   }
 
   getFamilyList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getFamilyList',
       payload:{}
@@ -129,7 +129,7 @@ export default class UsersManage extends Component {
   }
 
   getManagersList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'usersManage/getManagersList',
       payload:{}
@@ -142,7 +142,7 @@ export default class UsersManage extends Component {
     })
   }
   
-  render () {
+  render() {
     const { select } = this.state
     const { studentList, familyList, teacherList, managerList } = this.props
     return (

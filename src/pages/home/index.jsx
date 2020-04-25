@@ -31,7 +31,7 @@ export default class Home extends Component {
     navigationBarTitleText: '行之'
   }
 
-  async componentWillMount () {
+  async componentWillMount() {
     this.checkLogin()
   }
 

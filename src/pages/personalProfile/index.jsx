@@ -15,7 +15,7 @@ export default class PersonalProfile extends Component {
     navigationBarTitleText: '课程情况'
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getStudentsDetail()
     this.getPersonGuidance()
   }

@@ -7,7 +7,10 @@ import signUp from '../pages/signUp/model'
 import coachingProgram from '../pages/coachingProgram/model'
 import writeCoachingProgram from '../pages/writeCoachingProgram/model'
 import changeUserInformation from '../pages/changeUserInformation/model'
-
+import addCourse from '../pages/addCourse/model'
+import advice from '../pages/advice/model'
+import showAdvice from '../pages/showAdvice/model'
+import showCourseFB from '../pages/showCourseFB/model'
 
 export default [
     common,
@@ -18,5 +21,9 @@ export default [
     signUp,
     coachingProgram,
     writeCoachingProgram,
-    changeUserInformation
+    changeUserInformation,
+    addCourse,
+    advice,
+    showAdvice,
+    showCourseFB
 ]

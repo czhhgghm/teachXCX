@@ -29,8 +29,8 @@ export default {
                 }
             })
         },
-        *reviewRecommand({payload},{call,put}) {
-            const response = yield call(reviewRecommand,payload)
+        *reviewRecommand({payload},{call}) {
+            yield call(reviewRecommand,payload)
         }
     },
 

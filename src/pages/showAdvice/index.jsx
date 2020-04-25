@@ -4,8 +4,8 @@ import './index.scss'
 import { AtList, AtListItem, AtModal } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-@connect(({ common }) => ({
-  adviceData: common.adviceData
+@connect(({ showAdvice }) => ({
+  adviceData: showAdvice.adviceData
 }))
 
 export default class ShowAdvice extends Component {
@@ -22,16 +22,14 @@ export default class ShowAdvice extends Component {
     navigationBarTitleText: '查看意见'
   }
 
-  componentWillMount () { }
-
-  componentDidMount () {
+  componentDidMount() {
     this.getNewAdvice()
   }
 
   getNewAdvice() {
     const { dispatch } = this.props
     dispatch({
-      type:'common/getNewAdvice'
+      type:'showAdvice/getNewAdvice'
     })
   }
 
@@ -55,12 +53,11 @@ export default class ShowAdvice extends Component {
     })
   }
 
-
   handleConfirmModal() {
     const { dispatch } = this.props
     const { deleteId } = this.state
     dispatch({
-      type:'common/deleteAdvice',
+      type:'showAdvice/deleteAdvice',
       payload:{
         id: deleteId
       }
@@ -79,7 +76,7 @@ export default class ShowAdvice extends Component {
     })
   }
 
-  render () {
+  render() {
     const adviceData = wx.getStorageSync('adviceData')?wx.getStorageSync('adviceData'):this.props.adviceData
     const { selectContent, showModal } = this.state
     return (

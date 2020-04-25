@@ -12,10 +12,7 @@ import { connect } from '@tarojs/redux'
 export default class CoachingProgram extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      value: ''
-    }
-  };
+  }
 
   config = {
     navigationBarTitleText: '查看辅导方案'
@@ -41,7 +38,7 @@ getStudents() {
   })
 }
 
-  render () {
+  render() {
     const { studentList } = this.props
     return (
       <View>

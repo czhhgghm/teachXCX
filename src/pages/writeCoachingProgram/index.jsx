@@ -27,7 +27,7 @@ export default class WriteCoachingProgram extends Component {
   }
 
   async checkGuidance() {
-    const { dispatch, id, guidanceResponse } = this.props;
+    const { dispatch, id } = this.props;
     const { studentId } = this.$router.params;
     dispatch({
       type:'writeCoachingProgram/checkGuidance',
@@ -108,7 +108,7 @@ export default class WriteCoachingProgram extends Component {
     }
   }
   
-  render () {
+  render() {
     const { state, text } = this.props.guidanceResponse;
     const { changeGuidance } = this.state;
     return (

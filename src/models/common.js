@@ -1,12 +1,4 @@
-import {
-    getSessionId,
-    getPhone,
-    submitAdvice,
-    deleteAdvice,
-    getNewAdvice,
-    addCourse,
-    removeCourse
-} from './service'
+import { getSessionId, getPhone } from './service'
 
 export default {
     namespace: 'common',
@@ -16,8 +8,7 @@ export default {
         personName: '',
         userId: -1,
         loginCode: -1,
-        id: -1,
-        adviceData: []
+        id: -1
     },
     
     effects: {
@@ -63,38 +54,10 @@ export default {
                     }
                 })
             }
-        },
-        *submitAdvice({payload},{call}) {
-            yield call(submitAdvice,payload)
-        },
-        *deleteAdvice({payload},{call}) {
-            const response = yield call(deleteAdvice,payload)
-        },
-        *getNewAdvice({payload},{call,put}) {
-            const response = yield call(getNewAdvice,payload)
-            yield put({
-                type: 'saveNewAdvice',
-                payload: {
-                    adviceData: response.data.reverse()
-                }
-            })
-        },
-        *addCourse({payload},{call}) {
-            const response = yield call(addCourse,payload)
-        },
-        *removeCourse({payload},{call}) {
-            const response = yield call(removeCourse,payload)
         }
     },
 
     reducers: {
-        saveNewAdvice(state, {payload}) {
-            const { adviceData } = payload
-            return {
-                ...state,
-                adviceData
-            }
-        },
         saveLoginCode(state, {payload}) {
             const { loginCode } = payload
             return {

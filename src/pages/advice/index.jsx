@@ -34,9 +34,9 @@ export default class Advice extends Component {
       })
     }
     else {
-      const {dispatch,userId} = this.props
+      const { dispatch, userId } = this.props
       dispatch({
-        type:'common/submitAdvice',
+        type:'advice/submitAdvice',
         payload:{
           userId,
           opinion: this.state.inputValue
@@ -54,7 +54,7 @@ export default class Advice extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <View className='index'>
         <AtForm

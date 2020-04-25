@@ -6,9 +6,7 @@ import { connect } from '@tarojs/redux'
 
 @connect(({ usersManage }) => ({
   studentList: usersManage.studentList,
-  teacherList: usersManage.teacherList,
-  studentFB: usersManage.studentFB,
-  teacherFB: usersManage.teacherFB
+  teacherList: usersManage.teacherList
 }))
 
 export default class ShowCourseFB extends Component {
@@ -24,7 +22,7 @@ export default class ShowCourseFB extends Component {
     navigationBarTitleText: '查看反馈'
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.studentOnClick()
   }
 
@@ -67,7 +65,7 @@ export default class ShowCourseFB extends Component {
   async getStudentClassFB(id) {
     const { dispatch } = this.props
     await dispatch({
-      type:'usersManage/getStudentClassFB',
+      type:'classFeedback/getStudentClassFB',
       payload:{
         studentId: id
       }
@@ -80,7 +78,7 @@ export default class ShowCourseFB extends Component {
   async getTeacherClassFB(id) {
     const { dispatch } = this.props
     await dispatch({
-      type:'usersManage/getTeacherClassFB',
+      type:'classFeedback/getTeacherClassFB',
       payload:{
         teacherId: id
       }
@@ -90,7 +88,7 @@ export default class ShowCourseFB extends Component {
     })
   }
 
-  render () {
+  render() {
     const { studentActive, teacherActive } = this.state
     const { studentList, teacherList } = this.props
     return (

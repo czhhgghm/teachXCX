@@ -26,7 +26,7 @@ export default class ReviewProgram extends Component {
     navigationBarTitleText: '审核辅导方案'
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.getPendingList()
     this.getPassList()
   }
@@ -40,11 +40,14 @@ export default class ReviewProgram extends Component {
   }
 
   getPassList() {
-    const { dispatch } = this.props;
-    dispatch({
-      type:'writeCoachingProgram/getPassList',
-      payload:{}
-    })
+    const passList = wx.getStorageSync('passList')
+    if(!passList) {
+      const { dispatch } = this.props;
+      dispatch({
+        type:'writeCoachingProgram/getPassList',
+        payload:{}
+      })
+    }
   }
 
   toViewHandleClick(value) {
@@ -99,6 +102,13 @@ export default class ReviewProgram extends Component {
   handleConfirmPreModal() {
     const { dispatch } = this.props
     const { guidanceId } = this.state
+    wx.removeStorageSync('passList')
+    dispatch({
+      type:'writeCoachingProgram/clearPassList',
+      payload:{
+        passList: []
+      }
+    })
     dispatch({
       type:'writeCoachingProgram/passGuidance',
       payload:{
@@ -138,7 +148,7 @@ export default class ReviewProgram extends Component {
     })
   }
   
-  render () {
+  render() {
     const { pendingList, passList } = this.props
     const { guidanceText } = this.state
     return (

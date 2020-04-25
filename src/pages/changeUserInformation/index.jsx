@@ -29,7 +29,7 @@ export default class ChangeUserInformation extends Component {
     navigationBarTitleText: '修改信息'
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.initializeState()
   }
 
@@ -70,9 +70,6 @@ export default class ChangeUserInformation extends Component {
         childName: familyDetail.children[0].name,
         childPhone: familyDetail.children[0].phone
       })
-    }
-    else {
-      console.log('报错')
     }
   }
 
@@ -188,9 +185,6 @@ export default class ChangeUserInformation extends Component {
           familyList: []
         }
       })
-    }
-    else {
-      console.log('报错')
     }
     Taro.showToast({
       title: '处理成功'

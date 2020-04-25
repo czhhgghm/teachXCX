@@ -13,11 +13,11 @@ export default {
         showCourse: [false,false,false,false,false,false,false]
     },
     effects: {
-        *postStudentFB({payload},{call,put}) {
-            const response = yield call(postStudentFB,payload)
+        *postStudentFB({payload},{call}) {
+            yield call(postStudentFB,payload)
         },
-        *postTeacherFB({payload},{call,put}) {
-            const response = yield call(postTeacherFB,payload)
+        *postTeacherFB({payload},{call}) {
+            yield call(postTeacherFB,payload)
         },
         *getStudentsCourse({payload},{call,put}) {
             const response = yield call(getStudentsCourse,payload)

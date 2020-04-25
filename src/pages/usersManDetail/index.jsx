@@ -26,7 +26,7 @@ export default class UsersManDetail extends Component {
     navigationBarTitleText: '用户详情'
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     this.getPersonDetail()
   }
 
@@ -107,8 +107,6 @@ export default class UsersManDetail extends Component {
 
   changeMessage() {
     const { select, id } = this.$router.params
-    console.log('select',select)
-    console.log('id',id)
     Taro.navigateTo({
       url: `/pages/changeUserInformation/index?id=${id}&select=${select}`
     })
@@ -123,7 +121,7 @@ export default class UsersManDetail extends Component {
         if (res.confirm) {
           coureseIds.forEach(element => {
             dispatch({
-              type:'common/removeCourse',
+              type:'course/removeCourse',
               payload:{
                 id: element
               }
@@ -145,7 +143,7 @@ export default class UsersManDetail extends Component {
     })
   }
 
-  render () {
+  render() {
     const { select } = this.$router.params
     const { studentDetail, teacherDetail, managerDetail, familyDetail, studentList } = this.props
     const { openFamily, openCourses, openStudent } = this.state

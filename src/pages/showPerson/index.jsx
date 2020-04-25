@@ -25,7 +25,7 @@ export default class ShowPerson extends Component {
     navigationBarTitleText: '用户信息'
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getDetail()
   }
 
@@ -38,7 +38,7 @@ export default class ShowPerson extends Component {
   }
 
   getStudentsDetail() {
-    const {dispatch,id} = this.props
+    const { dispatch, id } = this.props
     dispatch({
       type:'usersManDetail/getStudentsDetail',
       payload:{
@@ -48,7 +48,7 @@ export default class ShowPerson extends Component {
   }
 
   getTeachersDetail() {
-    const {dispatch,id} = this.props
+    const { dispatch, id } = this.props
     dispatch({
       type:'usersManDetail/getTeachersDetail',
       payload:{
@@ -58,7 +58,7 @@ export default class ShowPerson extends Component {
   }
 
   getManagerDetail() {
-    const {dispatch,id} = this.props
+    const { dispatch, id } = this.props
     dispatch({
       type:'usersManDetail/getManagerDetail',
       payload:{
@@ -67,19 +67,19 @@ export default class ShowPerson extends Component {
     })
   }
 
-  showFamily (value) {
+  showFamily(value) {
     this.setState({
       openFamily: value
     })
   }
 
-  showCourses (value) {
+  showCourses(value) {
     this.setState({
       openCourses: value
     })
   }
 
-  render () {
+  render() {
     const  { authen } = this.props
     const { studentDetail, teacherDetail, managerDetail } = this.props
     const { openFamily } = this.state

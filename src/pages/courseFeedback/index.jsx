@@ -22,13 +22,13 @@ export default class CourseFeedback extends Component {
     navigationBarTitleText: '评分反馈'
   }
 
-  handleChangeGrade (pointValue) {
+  handleChangeGrade(pointValue) {
     this.setState({
       pointValue
     })
   }
 
-  handleChangeText (event) {
+  handleChangeText(event) {
     this.setState({
       inputValue: event.target.value
     })
@@ -100,7 +100,7 @@ export default class CourseFeedback extends Component {
     }
   }
 
-  render () {
+  render() {
     const { pointValue, inputValue } = this.state
     return (
       <View className='index'>

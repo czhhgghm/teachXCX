@@ -34,15 +34,20 @@ export default (
   }).then(res => {
     const { statusCode, data } = res
     if (statusCode == 200) {
-      if(res.cookies.length > 0) {
-        wx.setStorageSync('Set-Cookie', res.cookies[0])
+      //测试情况下,查看接口响应
+      if (consoleDetail) {
+        console.log(
+          `${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,
+          res
+        )
       }
-      //接口报错
+      //接口报错处理
       if(data.code !== 0 && data.code !== 11) {
         Taro.showToast({
           title: data.msg,
           duration: 2000
         })
+        //单独处理登录超时的情况,此时跳转到授权登录页重新登录
         if(data.code == 28) {
           wx.removeStorageSync('sessionKey')
           wx.removeStorageSync('openid')
@@ -53,15 +58,7 @@ export default (
           },1500)
         }
       }
-      else {
-        if (consoleDetail) {
-          console.log(
-            `${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,
-            res
-          )
-        }
-        return data
-      }
+      return data
     }
     else {
       throw new Error(`网络请求错误，状态码${statusCode}`)

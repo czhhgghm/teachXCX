@@ -4,9 +4,9 @@ import './index.scss'
 import { AtCard } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
-@connect(({ usersManage }) => ({
-  studentFB: usersManage.studentFB,
-  teacherFB: usersManage.teacherFB
+@connect(({ classFeedback }) => ({
+  studentFeedback: classFeedback.studentFeedback,
+  teacherFeedback: classFeedback.teacherFeedback
 }))
 
 export default class ShowFBDetail extends Component {
@@ -28,17 +28,17 @@ export default class ShowFBDetail extends Component {
   selectToShow() {
     if(this.$router.params.key == 'studentGetTeacherFB') {
         this.setState({
-            allClassFB: this.props.studentFB
+            allClassFB: this.props.studentFeedback
         })
     }
     if(this.$router.params.key == 'teacherGetStudentFB') {
         this.setState({
-            allClassFB: this.props.teacherFB
+            allClassFB: this.props.teacherFeedback
         })
     }
   }
 
-  render () {
+  render() {
     const { allClassFB } = this.state
     return (
         <View className='index'>

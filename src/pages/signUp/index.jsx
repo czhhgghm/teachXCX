@@ -191,7 +191,7 @@ export default class SignUp extends Component {
     }
   }
 
-  render () {
+  render() {
     const { studentName, studentPhone, parentPhone } = this.state
     return (
       <View className='index'>

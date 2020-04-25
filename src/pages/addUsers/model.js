@@ -5,20 +5,20 @@ export default {
     state: {},
     
     effects: {
-        *addStudent({payload},{call,put}) {
-            const response = yield call(addStudent,payload)
+        *addStudent({payload},{call}) {
+            yield call(addStudent,payload)
         },
 
-        *addFamily({payload},{call,put}) {
-            const response = yield call(addFamily,payload)
+        *addFamily({payload},{call}) {
+            yield call(addFamily,payload)
         },
 
-        *addTeacher({payload},{call,put}) {
-            const response = yield call(addTeacher,payload)
+        *addTeacher({payload},{call}) {
+            yield call(addTeacher,payload)
         },
 
-        *addManager({payload},{call,put}) {
-            const response = yield call(addManager,payload)
+        *addManager({payload},{call}) {
+            yield call(addManager,payload)
         }
     },
     

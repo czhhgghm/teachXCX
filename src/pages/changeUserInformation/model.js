@@ -5,18 +5,17 @@ export default {
     state: {},
     
     effects: {
-        *updateManager({payload},{call,put}) {
-            const response = yield call(updateManager,payload)
+        *updateManager({payload},{call}) {
+            yield call(updateManager,payload)
         },
-        *updateFamily({payload},{call,put}) {
-            const response = yield call(updateFamily,payload)
+        *updateFamily({payload},{call}) {
+            yield call(updateFamily,payload)
         },
-        *updateStudent({payload},{call,put}) {
-            console.log('payload',payload)
-            const response = yield call(updateStudent,payload)
+        *updateStudent({payload},{call}) {
+            yield call(updateStudent,payload)
         },
-        *updateTeacher({payload},{call,put}) {
-            const response = yield call(updateTeacher,payload)
+        *updateTeacher({payload},{call}) {
+            yield call(updateTeacher,payload)
         }
     },
     

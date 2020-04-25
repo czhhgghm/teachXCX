@@ -241,7 +241,7 @@ export default class AddCourse extends Component {
     const { id } = this.$router.params
     if(courseBeginTime && courseName && daysAndTimes && courseEndTime && coursePlace && selectTeacherId !== -1) {
       dispatch({
-        type:'common/addCourse',
+        type:'course/addCourse',
         payload:{
           begin: courseBeginTime,
           courseName,
@@ -271,7 +271,7 @@ export default class AddCourse extends Component {
     }
   }
 
-  render () {
+  render() {
     const { courseName, coursePlace, weeklyTimeStr, inputBeginTime, inputEndTime, showDrawer, teacherItems, selectTeacherName } = this.state
     const selectTeacher = selectTeacherName == '' ? '选择老师' : selectTeacherName
 

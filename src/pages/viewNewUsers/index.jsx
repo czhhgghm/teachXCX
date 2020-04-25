@@ -23,12 +23,12 @@ export default class ViewNewUsers extends Component {
     navigationBarTitleText: '查看新用户'
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.recommandList()
   }
 
   recommandList() {
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     dispatch({
       type:'signUp/getRecommandList'
     })
@@ -91,7 +91,7 @@ export default class ViewNewUsers extends Component {
     })
   }
   
-  render () {
+  render() {
     const { recommandList } = this.props
     const { userDetail } = this.state
     return (
@@ -108,7 +108,7 @@ export default class ViewNewUsers extends Component {
               />  
             )
           })
-          :<Text>暂无新用户</Text>
+          :<Text>数据请求中</Text>
         }
         </AtList>
         <AtModal

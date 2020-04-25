@@ -26,12 +26,12 @@ export default class Schedule extends Component {
     navigationBarTitleText: '我的课表'
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.getTime()
     this.closeAtNoticebar()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getCurrentSchedule()
   }
 
@@ -103,7 +103,7 @@ export default class Schedule extends Component {
     })
   }
 
-  render () {
+  render() {
     const { currentNum, currentDay, showatNoticebar } = this.state
     const { studentsCourse, teachersCourse, showCourse } = this.props
     const { key } = this.$router.params

@@ -32,27 +32,9 @@ export async function getFamilyList(data) {
     }) 
 }
 
-export async function getStudentClassFB(data) {
-    return getRequest({
-        url: '/manager/getStudentCourseSuggestion',
-        method: 'GET',
-        data,
-    }) 
-}
-
-export async function getTeacherClassFB(data) {
-    return getRequest({
-        url: '/manager/getTeacherCourseSuggestion',
-        method: 'GET',
-        data
-    }) 
-}
-
 export default {
     getStudentsList,
     getTeachersList,
     getManagersList,
-    getFamilyList,
-    getStudentClassFB,
-    getTeacherClassFB
+    getFamilyList
 }
