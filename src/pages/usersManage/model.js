@@ -1,17 +1,33 @@
 import { 
     getStudentsList,
+    getStudentsListPage,
     getTeachersList,
+    getTeachersListPage,
     getManagersList,
-    getFamilyList
+    getManagersListPage,
+    getFamilyList,
+    getFamilyListPage
  } from './service'
 
 export default {
     namespace: 'usersManage',
     state: {
         studentList: [],
+        studentPage: [],
         teacherList: [],
+        teacherPage: [],
         managerList: [],
-        familyList: []
+        managerPage: [],
+        familyList: [],
+        familyPage: [],
+        managerTotal: 80,
+        studentTotal: 80,
+        familyTotal: 80,
+        teacherTotal: 80,
+        managerCurrent: 1,
+        studentCurrent: 1,
+        familyCurrent: 1,
+        teacherCurrent: 1
     },
     
     effects: {
@@ -20,7 +36,17 @@ export default {
             yield put({
                 type: 'saveStudentList',
                 payload: {
-                    studentList: response.data.reverse()
+                    studentList: response.data,
+                    studentTotal: response.data.length
+                }
+            })
+        },
+        *getStudentsListPage({payload},{call,put}) {
+            const response = yield call(getStudentsListPage,payload)
+            yield put({
+                type: 'saveStudentListPage',
+                payload: {
+                    studentPage: response.data,
                 }
             })
         },
@@ -29,7 +55,17 @@ export default {
             yield put({
                 type: 'saveTeacherList',
                 payload: {
-                    teacherList: response.data.reverse()
+                    teacherList: response.data,
+                    teacherTotal: response.data.length
+                }
+            })
+        },
+        *getTeachersListPage({payload},{call,put}) {
+            const response = yield call(getTeachersListPage,payload)
+            yield put({
+                type: 'saveTeacherListPage',
+                payload: {
+                    teacherPage: response.data
                 }
             })
         },
@@ -38,7 +74,17 @@ export default {
             yield put({
                 type: 'saveManagerList',
                 payload: {
-                    managerList: response.data.reverse()
+                    managerList: response.data,
+                    managerTotal: response.data.length
+                }
+            })
+        },
+        *getManagersListPage({payload},{call,put}) {
+            const response = yield call(getManagersListPage,payload)
+            yield put({
+                type: 'saveManagerListPage',
+                payload: {
+                    managerPage: response.data
                 }
             })
         },
@@ -47,7 +93,17 @@ export default {
             yield put({
                 type: 'saveFamilyList',
                 payload: {
-                    familyList: response.data.reverse()
+                    familyList: response.data,
+                    familyTotal: response.data.length
+                }
+            })
+        },
+        *getFamilyListPage({payload},{call,put}) {
+            const response = yield call(getFamilyListPage,payload)
+            yield put({
+                type: 'saveFamilyListPage',
+                payload: {
+                    familyPage: response.data
                 }
             })
         }
@@ -55,69 +111,123 @@ export default {
 
     reducers: {
         saveStudentList(state, {payload}) {
-            const { studentList } = payload
-            return {
-                ...state,
-                studentList
-            }
-        },
-        saveTeacherList(state, {payload}) {
-            const { teacherList } = payload
-            return {
-                ...state,
-                teacherList
-            }
-        },
-        saveManagerList(state, {payload}) {
-            const { managerList } = payload
-            return {
-                ...state,
-                managerList
-            }
-        },
-        saveFamilyList(state, {payload}) {
-            const { familyList } = payload
-            return {
-                ...state,
-                familyList
-            }
-        },
-        clearManagersList(state, {payload}) {
-            const { managerList } = payload
-            return {
-                ...state,
-                managerList
-            }
-        },
-        clearFamilyList(state, {payload}) {
-            const { familyList } = payload
-            return {
-                ...state,
-                familyList
-            }
-        },
-        clearTeachersList(state, {payload}) {
-            const { teacherList } = payload
-            return {
-                ...state,
-                teacherList
-            }
-        },
-        clearStudentsList(state, {payload}) {
-            const { studentList } = payload
-            return {
-                ...state,
-                studentList
-            }
-        },
-        clearUsers(state, {payload}) {
-            const { studentList, teacherList, managerList, familyList } = payload
+            const { studentList, studentTotal } = payload
             return {
                 ...state,
                 studentList,
+                studentTotal
+            }
+        },
+        saveStudentListPage(state, {payload}) {
+            const { studentPage } = payload
+            return {
+                ...state,
+                studentPage
+            }
+        },
+        saveTeacherList(state, {payload}) {
+            const { teacherList, teacherTotal } = payload
+            return {
+                ...state,
                 teacherList,
+                teacherTotal
+            }
+        },
+        saveTeacherListPage(state, {payload}) {
+            const { teacherPage } = payload
+            return {
+                ...state,
+                teacherPage
+            }
+        },
+        saveManagerList(state, {payload}) {
+            const { managerList, managerTotal } = payload
+            return {
+                ...state,
                 managerList,
-                familyList
+                managerTotal
+            }
+        },
+        saveManagerListPage(state, {payload}) {
+            const { managerPage } = payload
+            return {
+                ...state,
+                managerPage
+            }
+        },
+        saveFamilyList(state, {payload}) {
+            const { familyList, familyTotal } = payload
+            return {
+                ...state,
+                familyList,
+                familyTotal
+            }
+        },
+        saveFamilyListPage(state, {payload}) {
+            const { familyPage } = payload
+            return {
+                ...state,
+                familyPage
+            }
+        },
+        clearManagersList(state, {payload}) {
+            const { managerList, managerPage } = payload
+            return {
+                ...state,
+                managerList,
+                managerPage
+            }
+        },
+        clearFamilyList(state, {payload}) {
+            const { familyList, familyPage } = payload
+            return {
+                ...state,
+                familyList,
+                familyPage
+            }
+        },
+        clearTeachersList(state, {payload}) {
+            const { teacherList, teacherPage } = payload
+            return {
+                ...state,
+                teacherList,
+                teacherPage
+            }
+        },
+        clearStudentsList(state, {payload}) {
+            const { studentList, studentPage } = payload
+            return {
+                ...state,
+                studentList,
+                studentPage
+            }
+        },
+        changeStudentCurrent(state, {payload}) {
+            const { studentCurrent } = payload
+            return {
+                ...state,
+                studentCurrent
+            }
+        },
+        changeManagerCurrent(state, {payload}) {
+            const { managerCurrent } = payload
+            return {
+                ...state,
+                managerCurrent
+            }
+        },
+        changeFamilyCurrent(state, {payload}) {
+            const { familyCurrent } = payload
+            return {
+                ...state,
+                familyCurrent
+            }
+        },
+        changeTeacherCurrent(state, {payload}) {
+            const { teacherCurrent } = payload
+            return {
+                ...state,
+                teacherCurrent
             }
         }
     }

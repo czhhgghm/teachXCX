@@ -131,7 +131,8 @@ export default class ChangeUserInformation extends Component {
       dispatch({
         type:'usersManage/clearManagersList',
         payload:{
-          managerList: []
+          managerList: [],
+          managerPage: []
         }
       })
     }
@@ -147,7 +148,8 @@ export default class ChangeUserInformation extends Component {
       dispatch({
         type:'usersManage/clearTeachersList',
         payload:{
-          teacherList: []
+          teacherList: [],
+          teacherPage: []
         }
       })
     }
@@ -166,7 +168,8 @@ export default class ChangeUserInformation extends Component {
       dispatch({
         type:'usersManage/clearStudentsList',
         payload:{
-          studentList: []
+          studentList: [],
+          studentPage: []
         }
       })
     }
@@ -182,7 +185,8 @@ export default class ChangeUserInformation extends Component {
       dispatch({
         type:'usersManage/clearFamilyList',
         payload:{
-          familyList: []
+          familyList: [],
+          familyPage: []
         }
       })
     }

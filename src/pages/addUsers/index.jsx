@@ -82,41 +82,12 @@ export default class AddUsers extends Component {
     })
   }
 
-  clearUsers() {
-    const { dispatch } = this.props
-    dispatch({
-      type:'usersManage/clearUsers',
-      payload:{
-        studentList: [],
-        teacherList: [],
-        managerList: [],
-        familyList: []
-      }
-    })
-  }
-
-
   async addNumbers() {
-    const { dispatch } = this.props
-    const { optionValue, studentName, studentPhone, parentName, parentPhone, perName, perPhone, livePlace, schoolName } = this.state
+    const { optionValue, studentPhone, parentPhone, perPhone } = this.state
     const phoneReg = /^(13[0-9]{9})|(15[0-9][0-9]{8})|(18[0-9][0-9]{8})$/
-
     if(optionValue == 'student') {
       phoneReg.test(studentPhone)?(
-        await dispatch({
-          type:'addUsers/addStudent',
-          payload:{
-            name: studentName,
-            phone: studentPhone,
-            school: schoolName,
-            place: livePlace
-          }
-        },
-          Taro.showToast({
-            title: '添加成功',
-            icon: 'success'
-          })
-        )
+        this.addStudent()
       )
       :Taro.showToast({
         title: '输入手机号码格式不正确',
@@ -126,20 +97,7 @@ export default class AddUsers extends Component {
     else if(optionValue == 'parent') {
       phoneReg.test(parentPhone)?(
         phoneReg.test(studentPhone)?(
-          await dispatch({
-            type:'addUsers/addFamily',
-            payload:{
-              childName: studentName,
-              childPhone: studentPhone,
-              name: parentName,
-              phone: parentPhone
-            }
-          },
-            Taro.showToast({
-              title: '添加成功',
-              icon: 'success'
-            })
-          )
+          this.addFamily()
         )
         :Taro.showToast({
           title: '学生手机号码格式不正确',
@@ -154,18 +112,7 @@ export default class AddUsers extends Component {
     }
     else if(optionValue == 'teacher') {
       phoneReg.test(perPhone)?(
-        await dispatch({
-          type:'addUsers/addTeacher',
-          payload:{
-            name: perName,
-            phone: perPhone,
-          }
-        },
-          Taro.showToast({
-            title: '添加成功',
-            icon: 'success'
-          })
-        )
+        this.addTeacher()
       )
       :Taro.showToast({
         title: '输入手机号码格式不正确',
@@ -174,25 +121,16 @@ export default class AddUsers extends Component {
     }
     else if(optionValue == 'manager') {
       phoneReg.test(perPhone)?(
-        await dispatch({
-          type:'addUsers/addManager',
-          payload:{
-            name: perName,
-            phone: perPhone,
-          }
-        },
-          Taro.showToast({
-            title: '添加成功',
-            icon: 'success'
-          })
-        )
+        this.addManager()
       )
       :Taro.showToast({
         title: '输入手机号码格式不正确',
         icon: 'none'
       })
     }
-    this.clearUsers()
+  }
+
+  clearCurrentPageState() {
     this.setState({
       optionValue: '',
       perName: '',
@@ -201,8 +139,149 @@ export default class AddUsers extends Component {
       studentPhone: '',
       parentName: '',
       parentPhone: '',
+      schoolName: '',
       livePlace: ''
     })
+  }
+
+  leadToHome() {
+    setTimeout(() => {
+      wx.reLaunch({
+        url: '../home/index'
+      })
+    }, 1500)
+  }
+
+  addStudent() {
+    const { studentName, studentPhone, livePlace, schoolName } = this.state
+    const { dispatch } = this.props
+    dispatch({
+      type:'addUsers/addStudent',
+      payload:{
+        name: studentName,
+        phone: studentPhone,
+        school: schoolName,
+        place: livePlace
+      }
+    },
+      Taro.showToast({
+        title: '添加成功',
+        icon: 'success'
+      })
+    )
+    dispatch({
+      type:'usersManage/clearStudentsList',
+      payload:{
+        studentList: [],
+        studentPage: []
+      }
+    })
+    dispatch({
+      type:'usersManage/changeStudentCurrent',
+      payload:{
+        studentCurrent: 1
+      }
+    })
+    this.clearCurrentPageState()
+    this.leadToHome()
+  }
+  
+  addFamily() {
+    const { studentName, studentPhone, parentName, parentPhone } = this.state
+    const { dispatch } = this.props
+    dispatch({
+      type:'addUsers/addFamily',
+      payload:{
+        childName: studentName,
+        childPhone: studentPhone,
+        name: parentName,
+        phone: parentPhone
+      }
+    },
+      Taro.showToast({
+        title: '添加成功',
+        icon: 'success'
+      })
+    )
+    dispatch({
+      type:'usersManage/clearFamilyList',
+      payload:{
+        familyList: [],
+        familyPage: []
+      }
+    })
+    dispatch({
+      type:'usersManage/changeFamilyCurrent',
+      payload:{
+        familyCurrent: 1
+      }
+    })
+    this.clearCurrentPageState()
+    this.leadToHome()
+  }
+
+  addTeacher() {
+    const { perName, perPhone } = this.state
+    const { dispatch } = this.props
+    dispatch({
+      type:'addUsers/addTeacher',
+      payload:{
+        name: perName,
+        phone: perPhone,
+      }
+    },
+      Taro.showToast({
+        title: '添加成功',
+        icon: 'success'
+      })
+    )
+    dispatch({
+      type:'usersManage/clearTeachersList',
+      payload:{
+        teacherList: [],
+        teacherPage: []
+      }
+    })
+    dispatch({
+      type:'usersManage/changeTeacherCurrent',
+      payload:{
+        teacherCurrent: 1
+      }
+    })
+    this.clearCurrentPageState()
+    this.leadToHome()
+  }
+
+  addManager() {
+    const { perName, perPhone } = this.state
+    const { dispatch } = this.props
+    dispatch({
+      type:'addUsers/addManager',
+      payload:{
+        name: perName,
+        phone: perPhone,
+      }
+    },
+      Taro.showToast({
+        title: '添加成功',
+        icon: 'success'
+      })
+    )
+    dispatch({
+      type:'usersManage/clearManagersList',
+      payload:{
+        managerList: [],
+        managerPage: []
+      }
+    })
+    dispatch({
+      type:'usersManage/changeManagerCurrent',
+      payload:{
+        managerCurrent: 1
+      }
+    })
+    this.clearCurrentPageState()
+    this.leadToHome()
   }
 
   render() {

@@ -1,21 +1,36 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
-import { AtFab, AtTag, AtList, AtListItem } from 'taro-ui'
+import { AtFab, AtTag, AtList, AtListItem, AtPagination, AtSearchBar } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 
 @connect(({ usersManage }) => ({
   studentList: usersManage.studentList,
   familyList: usersManage.familyList,
   teacherList: usersManage.teacherList,
-  managerList: usersManage.managerList
+  managerList: usersManage.managerList,
+  studentPage: usersManage.studentPage,
+  familyPage: usersManage.familyPage,
+  teacherPage: usersManage.teacherPage,
+  managerPage: usersManage.managerPage,
+  managerTotal: usersManage.managerTotal,
+  studentTotal: usersManage.studentTotal,
+  familyTotal: usersManage.familyTotal,
+  teacherTotal: usersManage.teacherTotal,
+  managerCurrent: usersManage.managerCurrent,
+  studentCurrent: usersManage.studentCurrent,
+  familyCurrent: usersManage.familyCurrent,
+  teacherCurrent: usersManage.teacherCurrent
 }))
 
 export default class UsersManage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      select: '管理员'
+      select: '',
+      searchValue: '',
+      searchResult: false,
+      searchArr: []
     }
   };
 
@@ -24,33 +39,9 @@ export default class UsersManage extends Component {
   }
 
   componentWillMount() {
-    this.judgePage()
-  }
-
-  componentDidShow() {
-    const { studentList, familyList, teacherList, managerList } = this.props
-    const {select} = this.state
-    if(select == '管理员' && managerList.length == 0) {
-      this.getManagersList()
-    }
-    if(select == '学生' && studentList.length == 0) {
-      this.getStudentList()
-    }
-    if(select == '老师' && teacherList.length == 0) {
-      this.getTeachersList()
-    }
-    if(select == '家长' && familyList.length == 0) {
-      this.getFamilyList()
-    }
-  }
-
-  judgePage() {
-    let pageHistory = getCurrentPages()
-    let pageLength = pageHistory.length
-    if(pageHistory[pageLength-1].route == "pages/usersManage/index") {
-      //优化点,当添加用户以后,判断页面,重新进行数据请求!!
-      // console.log('pageHistory[pageLength-1].route',pageHistory[pageLength-1].route)
-      this.managerOnClick() 
+    //进入这个页面时判断,如果之前没有相关的身份状态,就将这个状态值设置为管理员
+    if(this.state.select == '') {
+      this.managerOnClick()
     }
   }
 
@@ -60,11 +51,101 @@ export default class UsersManage extends Component {
     })
   }
 
+  clearSearchArr() {
+    this.setState({
+      searchArr: [],
+      searchResult: false
+    })
+  }
+
+  changeSearchValue(value) {
+    this.setState({
+      searchValue: value
+    })
+    this.clearSearchArr()
+  }
+
+  onActionClick() {
+    const { searchValue, select } = this.state
+    if(select == '管理员') {
+      const { managerList } = this.props
+      managerList.forEach(item => {
+        if(searchValue == item.name) {
+          let res = []
+          res.push(item)
+          this.setState({
+            searchArr: res,
+            searchResult: true
+          })
+        }
+        return
+      });
+    }
+    if(select == '学生') {
+      const { studentList } = this.props
+      studentList.forEach(item => {
+        if(searchValue == item.name) {
+          let res = []
+          res.push(item)
+          this.setState({
+            searchArr: res,
+            searchResult: true
+          })
+        }
+        return
+      });
+    }
+    if(select == '家长') {
+      const { familyList } = this.props
+      familyList.forEach(item => {
+        if(searchValue == item.name) {
+          let res = []
+          res.push(item)
+          this.setState({
+            searchArr: res,
+            searchResult: true
+          })
+        }
+        return
+      });
+    }
+    if(select == '老师') {
+      const { teacherList } = this.props
+      teacherList.forEach(item => {
+        if(searchValue == item.name) {
+          let res = []
+          res.push(item)
+          this.setState({
+            searchArr: res,
+            searchResult: true
+          })
+        }
+        return
+      });
+    }
+    setTimeout(() => {
+      const { searchArr } = this.state
+      if(searchArr.length == 0) {
+        Taro.showToast({
+          title: '搜索的用户不存在,请重新输入',
+          icon: 'none'
+        })
+      }
+    }, 1000)
+  }
+
+  //每次切换身份的时候,得到这类用户的所有信息
   studentOnClick() {
+    //保证有一个切换的过程,而不是在每次点击的时候都做一次判断
     if(this.state.select !== '学生') {
-      if(!this.props.studentList.length) {
+      const { studentList, studentPage } = this.props
+      if(!studentList.length) {
         this.getStudentList()
       }
+      if(!studentPage.length) {
+        this.getStudentsListPage(0)
+      }
+      this.clearSearchArr()
       this.setState({
         select: '学生'
       })
@@ -73,9 +154,14 @@ export default class UsersManage extends Component {
 
   familyOnClick = async() => {
     if(this.state.select !== '家长') {
-      if(!this.props.familyList.length) {
+      const { familyList, familyPage } = this.props
+      if(!familyList.length) {
         this.getFamilyList()
       }
+      if(!familyPage.length) {
+        this.getFamilyListPage(0)
+      }
+      this.clearSearchArr()
       this.setState({
         select: '家长'
       })
@@ -84,9 +170,14 @@ export default class UsersManage extends Component {
 
   teacherOnClick() {
     if(this.state.select !== '老师') {
-      if(!this.props.teacherList.length) {
+      const { teacherList, teacherPage } = this.props
+      if(!teacherList.length) {
         this.getTeachersList()
       }
+      if(!teacherPage.length) {
+        this.getTeachersListPage(0)
+      }
+      this.clearSearchArr()
       this.setState({
         select: '老师'
       })
@@ -95,9 +186,14 @@ export default class UsersManage extends Component {
 
   managerOnClick() {
     if(this.state.select !== '管理员') {
-      if(!this.props.managerList.length) {
+      const { managerList, managerPage } = this.props
+      if(!managerList.length) {
         this.getManagersList()
       }
+      if(!managerPage.length) {
+        this.getManagersListPage(0)
+      }
+      this.clearSearchArr()
       this.setState({
         select: '管理员'
       })
@@ -141,10 +237,94 @@ export default class UsersManage extends Component {
       url: e
     })
   }
+
+  getManagersListPage(page) {
+    const { dispatch } = this.props
+    dispatch({
+      type:'usersManage/getManagersListPage',
+      payload:{
+        page: page
+      }
+    })
+  }
+
+  getStudentsListPage(page) {
+    const { dispatch } = this.props
+    dispatch({
+      type:'usersManage/getStudentsListPage',
+      payload:{
+        page: page
+      }
+    })
+  }
+
+  getTeachersListPage(page) {
+    const { dispatch } = this.props
+    dispatch({
+      type:'usersManage/getTeachersListPage',
+      payload:{
+        page: page
+      }
+    })
+  }
+
+  getFamilyListPage(page) {
+    const { dispatch } = this.props
+    dispatch({
+      type:'usersManage/getFamilyListPage',
+      payload:{
+        page: page
+      }
+    })
+  }
+
+  handleChangePage(e) {
+    const { select } = this.state
+    const { dispatch } = this.props
+    const current = e.current
+    if(select == '学生') {
+      this.getStudentsListPage(e.current-1)
+      dispatch({
+        type:'usersManage/changeStudentCurrent',
+        payload:{
+          studentCurrent: current
+        }
+      })
+    }
+    else if(select == '管理员') {
+      this.getManagersListPage(e.current-1)
+      dispatch({
+        type:'usersManage/changeManagerCurrent',
+        payload:{
+          managerCurrent: current
+        }
+      })
+    }
+    else if(select == '家长') {
+      this.getFamilyListPage(e.current-1)
+      dispatch({
+        type:'usersManage/changeFamilyCurrent',
+        payload:{
+          familyCurrent: current
+        }
+      })
+    }
+    else if(select == '老师') {
+      this.getTeachersListPage(e.current-1)
+      dispatch({
+        type:'usersManage/changeTeacherCurrent',
+        payload:{
+          teacherCurrent: current
+        }
+      })
+    }
+  }
   
   render() {
-    const { select } = this.state
-    const { studentList, familyList, teacherList, managerList } = this.props
+    const { select, searchValue, searchArr, searchResult } = this.state
+    const { studentPage, familyPage, teacherPage, managerPage, managerTotal, studentTotal, familyTotal, teacherTotal, managerCurrent, studentCurrent, familyCurrent, teacherCurrent } = this.props
+    const page = select == '管理员' ? managerPage : select == '学生' ? studentPage : select == '老师' ? teacherPage : select == '家长' ? familyPage : []
+    const pageSize = 8
     return (
       <View className='index'>
         <View>
@@ -183,15 +363,15 @@ export default class UsersManage extends Component {
         </View>
         <View>
           <AtList>
-          {
-            select == '管理员'?(
-              managerList == []?(
-                <AtListItem
-                  title='暂无用户'
-                />
-              )
-              :(
-                managerList.map((item)=>{
+            <AtSearchBar
+              actionName='搜名字'
+              value={searchValue}
+              onChange={this.changeSearchValue.bind(this)}
+              onActionClick={this.onActionClick.bind(this)}
+            />
+            {
+              searchResult ? (
+                searchArr.map((item)=>{
                   return(
                     <AtListItem
                       arrow='right'
@@ -202,70 +382,69 @@ export default class UsersManage extends Component {
                     />
                   )
                 })
+              ) : (
+                page == []?(
+                  <AtListItem
+                    title='暂无用户'
+                  />
+                ):(
+                  page.map((item)=>{
+                    return(
+                      <AtListItem
+                        arrow='right'
+                        key={item.id}
+                        title={item.name}
+                        note={item.phone}
+                        onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
+                      />
+                    )
+                  })
+                )
               )
-            )
-            :select == '学生'?(
-              studentList == []?(
-                <AtListItem
-                  title='暂无用户'
-                />
+            }
+            {
+              !searchResult && select == '管理员'?(
+                <AtPagination 
+                  icon 
+                  total={managerTotal}
+                  pageSize={pageSize}
+                  current={managerCurrent}
+                  onPageChange={this.handleChangePage.bind(this)}
+                >
+                </AtPagination>
               )
-              :(
-                studentList.map((item)=>{
-                  return(
-                    <AtListItem
-                      arrow='right'
-                      key={item.id}
-                      title={item.name}
-                      note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
-                    />
-                  )
-                })
+              :!searchResult && select == '学生'?(
+                <AtPagination 
+                  icon 
+                  total={studentTotal}
+                  pageSize={pageSize}
+                  current={studentCurrent}
+                  onPageChange={this.handleChangePage.bind(this)}
+                >
+                </AtPagination>
               )
-            )
-            :select == '老师'?(
-              teacherList == []?(
-                <AtListItem
-                  title='暂无用户'
-                />
+              :!searchResult && select == '家长'?(
+                <AtPagination 
+                  icon 
+                  total={familyTotal}
+                  pageSize={pageSize}
+                  current={familyCurrent}
+                  onPageChange={this.handleChangePage.bind(this)}
+                >
+                </AtPagination>
               )
-              :(
-                teacherList.map((item)=>{
-                  return(
-                    <AtListItem
-                      arrow='right'
-                      key={item.id}
-                      title={item.name}
-                      note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
-                    />
-                  )
-                })
+              :!searchResult && select == '老师'?(
+                <AtPagination 
+                  icon 
+                  total={teacherTotal}
+                  pageSize={pageSize}
+                  current={teacherCurrent}
+                  onPageChange={this.handleChangePage.bind(this)}
+                >
+                </AtPagination>
               )
-            )
-            :select == '家长'?(
-              familyList == []?(
-                <AtListItem
-                  title='暂无用户'
-                />
-              )
-              :(
-                familyList.map((item)=>{
-                  return(
-                    <AtListItem
-                      arrow='right'
-                      key={item.id}
-                      title={item.name}
-                      note={item.phone}
-                      onClick={this.handleChangeUser.bind(this,`/pages/usersManDetail/index?select=${select}&id=${item.id}`)}
-                    />
-                  )
-                })
-              )
-            )
-            :<Text>获取数据异常</Text>
-          }
+              :''
+            }
           </AtList>
         </View>
         <AtFab onClick={this.onButtonClick.bind(this)}>

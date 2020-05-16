@@ -172,14 +172,6 @@ export default class WriteCoachingProgram extends Component {
         )
         :<Text>等待数据请求结果{state}</Text>
       }
-        {/* <AtModal
-          isOpened={this.state.showModaled}
-          title='审核未通过'
-          confirmText='确定'
-          onClose={ this.handleCloseModaled.bind(this) }
-          onConfirm={ this.handleConfirmModaled.bind(this) }
-          content={'内容:'+text}
-        /> */}
       </View>
     )
   }

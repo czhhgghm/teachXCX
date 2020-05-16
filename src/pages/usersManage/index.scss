@@ -2,6 +2,9 @@
 @import "~taro-ui/dist/style/components/tag.scss";
 @import "~taro-ui/dist/style/components/list.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/pagination.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/search-bar.scss";
 
 page{
     height:100%;
@@ -32,4 +35,8 @@ page{
     position: fixed;
     bottom: 250px;
     right: 80px;
+}
+
+.at-pagination {
+    margin: 0;
 }
